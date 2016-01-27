@@ -1,0 +1,30 @@
+permalink: /:year/:month/:day/:title.html
+markdown: kramdown
+pygments: true
+
+kramdown:
+  input: GFM
+
+# 作者信息
+author: 
+  name: 三秋
+  email: fankcoder@gmail.com
+  link: http://fankcoder.github.io/
+  weibo: http://weibo.com/
+  github: http://github.com/fankcoder
+
+# 站点信息
+title: 三秋的博客 
+description: 三秋的博客
+url: http://fankcoder.github.io/
+rss_url: /pages/atom.xml
+
+# avatar头像及Favicon
+avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
+favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+
+# google analytics 设置
+
+
+# disqus 设置
+
