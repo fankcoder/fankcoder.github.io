@@ -20,8 +20,8 @@ url: http://fankcoder.github.io/
 rss_url: /pages/atom.xml
 
 # avatar头像及Favicon
-avatar: http://7u2ho6.com1.z0.glb.clouddn.com/site-avatar.png
-favicon: http://7u2ho6.com1.z0.glb.clouddn.com/site-favicon.ico
+avatar: https://raw.githubusercontent.com/fankcoder/fankcoder.github.io/master/assets/img/onepiece.jpg
+favicon: 
 
 # google analytics 设置
 
