@@ -1,6 +1,6 @@
 ### 我的博客
 
-地址：[http://fankcoder.github.io/](http://fankcoder.github.io/)
+地址：[http://fankcoder.com](http://fankcoder.com)
 
 ### 安装说明
 
