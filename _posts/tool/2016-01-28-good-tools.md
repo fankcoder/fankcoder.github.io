@@ -8,7 +8,6 @@ description: 神器
 
 ## 编辑器 & IDE
 
-
 * VIM
   * gmarik/vundle
   * rizzatti/funcoo.vim
@@ -68,21 +67,25 @@ description: 神器
    * Octotree
    * Print GitHub markdown: GitPrint.com
 
- #### 文档 & 代码片段管理
+#### 文档 & 代码片段管理
+
  * CodeBox
  * Dash
  * iDocument Plus
  * Sparkbox
  
- #### 调试工具 & 代码生成
+#### 调试工具 & 代码生成
+
   * CodeRunner
   * PAW
   * PaintCode
 
 #### 窗口管理
+
  * Slate
  
- #### 取色 & 度量
+#### 取色 & 度量
+
  * Sip
  * ColorSchemer Studio
  * xScope
@@ -96,6 +99,7 @@ description: 神器
  * GrabIt
 
 #### 图像处理
+
  * Adobe Photoshop
    * PNG Hat
    * CSS Hat
@@ -111,11 +115,13 @@ description: 神器
  * Mark Man
 
 #### 版本管理 & 比对
+
 * Tower
 * Github
 * Kaleidoscope
 
 #### 脑图 & 任务
+
 * OmniPlan
 * OmniGraffle
 * MindNode Pro
@@ -127,7 +133,7 @@ description: 神器
 * VMWare Fusion
 * Jump Desktop
 
-效率
+#### 效率
 
 * Alfred
 * PopClip
