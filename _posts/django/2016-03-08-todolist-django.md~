@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Todolist 应用
-category: django
+category: Django
 tags: python,django
 keywords: django
 description: django webapp
