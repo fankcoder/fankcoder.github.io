@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Todolist 应用
-category: Django
+category: Python
 tags: python,django
 keywords: django
 description: django webapp
@@ -27,6 +27,7 @@ https://github.com/fankcoder/django-todolist
 
 ##安装&运行
 在用户目录下执行,将代码clone到本地
+
 ```
 git clone https://github.com/fankcoder/django-todolist.git
 ```
