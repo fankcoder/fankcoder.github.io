@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux 常用资源
-category: 资源
+category: 备忘
 tags: Linux
 keywords: Linux
 description: 
