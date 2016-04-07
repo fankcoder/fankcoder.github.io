@@ -1,4 +1,12 @@
-# TodoList说明文档
+---
+layout: post
+title: Todolist 应用
+category: django
+tags: python,django
+keywords: django
+description: django webapp
+---
+# TodoList
 
 ## 介绍
 TodoList是一个便捷的事项管理应用,它帮助我们管理待办任务,梳理工作思路,来提高工作效率
