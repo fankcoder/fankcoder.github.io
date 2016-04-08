@@ -3,7 +3,7 @@ layout: post
 title: Bootstrap常用资源
 category: 备忘
 tags: Bootstrap
-description: [转]Bootstrap资源
+description: Bootstrap资源
 ---
 
 ### 官方资源
