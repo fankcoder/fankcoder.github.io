@@ -57,7 +57,8 @@ Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ /
 短期: 全栈工程师
 长期:  CTO
 ```
-
+<span style="color:#8ba7bd">F</span>
+<span style="color:#8ba7bd">a</span>
 
 ## 博客平台
 
