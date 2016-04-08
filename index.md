@@ -3,7 +3,6 @@ layout: post
 title: Welcome
 ---
 
-## 博客
 有朋自远方来,不亦乐乎?
 
 欢迎~这里是fankcoder的博客~
