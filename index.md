@@ -9,20 +9,20 @@ title: Welcome
 欢迎~这里是fankcoder的博客~
 
 ## 关于我
-因年少好奇心驱动修电脑,才与计算机结下了不解之缘.
 
 标签
 
 ```
-Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ / 
+Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ 
 ```
 
 技能体系
 
 ```
-操作系统:  Ubuntu(日常开发), Fedora(折腾), CentOS(折腾,配置LNMP),OSX(入门)
+操作系统:  Ubuntu(日常开发) / Fedora(折腾) / CentOS(折腾,配置LNMP) / OSX(入门)
 
-语言:  Python(熟练,主力)
+语言:  
+       Python(熟练,主力)
        Shell(辅助)
        JavaScript(辅助)
        Java(学生时期)
@@ -57,8 +57,6 @@ Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ /
 短期: 全栈工程师
 长期:  CTO
 ```
-<span style="color:#8ba7bd">F</span>
-<span style="color:#8ba7bd">a</span>
 
 ## 博客平台
 
