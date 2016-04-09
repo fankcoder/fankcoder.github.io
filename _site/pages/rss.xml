@@ -1,0 +1,2028 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>三秋的博客</title>
+    <link>http://fankcoder.github.io/</link>
+    <description>三秋的博客</description>
+    
+      <item>
+        <title>screen工具</title>
+        <link>http://fankcoder.github.io//2016/03/10/screen-linux.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/03/10/screen-linux.html</guid>
+        <pubDate>Thu, 10 Mar 2016 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;screen-&quot;&gt;screen 多窗口工具&lt;/h2&gt;
+&lt;p&gt;远程到服务器，通常情况下我们会为每一个长时间任务开一个远程终端窗口，操作下载东西或者Print十几万行数据，等待，是一件让人非常痛苦的事情，而且在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉了，screen把我们从痛苦中解救出来。&lt;/p&gt;
+
+&lt;p&gt;screen是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。当断开或关闭终端时，只要不杀死screen的进程，待重新连接后任能继续断开前的操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;screen&quot;&gt;screen命令&lt;/h2&gt;
+&lt;p&gt;查看会话：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;### screen -ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;There is a screen on:
+19393.test      (Detached)
+1 Socket in /var/run/screen/S-root.&lt;/p&gt;
+
+&lt;p&gt;选择会话&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;### screen -r test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;### screen -r 19393
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建一个新会话&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;### screen -dmS test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;快捷键&lt;/h2&gt;
+
+&lt;p&gt;C-a d 暂时断开screen会话&lt;/p&gt;
+
+&lt;p&gt;C-a ?	显示所有键绑定信息&lt;/p&gt;
+
+&lt;p&gt;C-a w	显示所有窗口列表&lt;/p&gt;
+
+&lt;p&gt;C-a C-a	切换到之前显示的窗口&lt;/p&gt;
+
+&lt;p&gt;C-a c	创建一个新的运行shell的窗口并切换到该窗口&lt;/p&gt;
+
+&lt;p&gt;C-a n	切换到下一个窗口&lt;/p&gt;
+
+&lt;p&gt;C-a p	切换到前一个窗口(与C-a n相对)&lt;/p&gt;
+
+&lt;p&gt;C-a 0..9	切换到窗口0..9&lt;/p&gt;
+
+&lt;p&gt;C-a a	发送 C-a到当前窗口&lt;/p&gt;
+
+&lt;p&gt;C-a k	杀掉当前窗口&lt;/p&gt;
+
+&lt;p&gt;C-a [	进入拷贝/回滚模式&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Todolist 应用</title>
+        <link>http://fankcoder.github.io//2016/03/08/todolist-django-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/03/08/todolist-django-python.html</guid>
+        <pubDate>Tue, 08 Mar 2016 00:00:00 +0800</pubDate>
+        <description>&lt;h1 id=&quot;todolist&quot;&gt;TodoList&lt;/h1&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;介绍&lt;/h2&gt;
+&lt;p&gt;TodoList是一个便捷的事项管理应用,它帮助我们管理待办任务,梳理工作思路,来提高工作效率&lt;/p&gt;
+
+&lt;p&gt;TodoList包含账户注册登录等功能,来方便记录管理你的任务事项&lt;/p&gt;
+
+&lt;h2 id=&quot;introduce&quot;&gt;Introduce&lt;/h2&gt;
+&lt;p&gt;Todolist,a quick and convenient management application for items that are about to be done,which helps us manage the to-do tasks, combine working train of thought and improve work efficency.&lt;/p&gt;
+
+&lt;p&gt;Todolist consists of kinds of functions,including the registration and login for an account,so that it can make your tasks record and items management much easier.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;项目地址&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;https://github.com/fankcoder/django-todolist
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;##安装&amp;amp;运行
+在用户目录下执行,将代码clone到本地&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/fankcoder/django-todolist.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所需环境,请看 django-todolist/doc/requirements.txt&lt;/p&gt;
+
+&lt;p&gt;注:为了部署方便应用默认采用了sqlite3数据库,需更换为MySQL数据库,请更改settings.py如下代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&#39;&#39;&#39;
+#use mysql databases
+DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,
+        &#39;NAME&#39;: &#39;todolist&#39;,
+        &#39;USER&#39;: &#39;root&#39;,    #replace your mysql username
+        &#39;PASSWORD&#39;: &#39;xxxxx&#39;,  #replace your mysql password
+        &#39;HOST&#39;: &#39;127.0.0.1&#39;,
+        &#39;PROT&#39;: &#39;3306&#39;,
+    }
+}
+&#39;&#39;&#39;
+DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为,请注意替换为自己的MySQL用户密码.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#use mysql databases
+DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,
+        &#39;NAME&#39;: &#39;todolist&#39;,
+        &#39;USER&#39;: &#39;root&#39;,    #replace your mysql username
+        &#39;PASSWORD&#39;: &#39;xxxxx&#39;,  #replace your mysql password
+        &#39;HOST&#39;: &#39;127.0.0.1&#39;,
+        &#39;PROT&#39;: &#39;3306&#39;,
+    }
+}
+&#39;&#39;&#39;
+DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),
+    }
+}
+&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;##安装&amp;amp;配置完成后&lt;/p&gt;
+
+&lt;p&gt;建立本地数据库,在django-todo/todo/目录下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py makemigrations
+python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py runserver 127.0.0.1:8001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果没有报错,打开浏览器并访问&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;127.0.0.1:8001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;即可看到应用已经部署成功!&lt;/p&gt;
+
+&lt;p&gt;##目录说明
+doc 为文档目录 &lt;br /&gt;
+todolist 为应用目录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;django-todo/
+├── doc
+│   ├── index.png
+│   ├── login.png
+│   ├── register.png
+│   ├── user_done.png
+│   └── user_index.png
+├── README.md
+├── requirements.txt
+├── requirements.txt~
+└── todo
+    ├── db.sqlite3
+    ├── manage.py
+    ├── test.py
+    ├── test.py~
+    ├── todo
+    │   ├── __init__.py
+    │   ├── __init__.pyc
+    │   ├── settings.py
+    │   ├── settings.pyc
+    │   ├── urls.py
+    │   ├── urls.pyc
+    │   ├── wsgi.py
+    │   └── wsgi.pyc
+    └── todolist
+        ├── admin.py
+        ├── admin.pyc
+        ├── forms.py
+        ├── forms.pyc
+        ├── __init__.py
+        ├── __init__.pyc
+        ├── models.py
+        ├── models.pyc
+        ├── static
+        │   ├── css
+        │   │   ├── create_sytle.css
+        │   │   └── style.css
+        │   └── js
+        ├── templates
+        │   ├── complete.html
+        │   ├── create.html
+        │   ├── index.html
+        │   ├── login.html
+        │   ├── nav.html
+        │   └── register.html
+        ├── tests.py
+        ├── views.py
+        └── views.pyc
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Linux 常用资源</title>
+        <link>http://fankcoder.github.io//2016/03/04/general-linux-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/03/04/general-linux-resources.html</guid>
+        <pubDate>Fri, 04 Mar 2016 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用指令&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;遍历创建&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;当前目录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;pwd 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;上次目录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;cd -
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;f&quot;&gt;删除目录 -f强制&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;rm -rf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;a&quot;&gt;复制目录 -a与源文件一模一样&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;cp -r
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;剪切/改名&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mv
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;find&quot;&gt;find搜索&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;find /root -iname install.log  #-i不区分大小写
+find /root -user root  #按照所有者搜索
+find /var/log/ -mtime +10 #查找10天前修改的文件
+-10 10天内修改文件
+10 10天当天修改的文件
++10 10天前修改的文件
+atime 文件访问时间
+ctime 改变文件属性
+mtime 修改文件内容
+
+find . -size 25k
++25k 大于25k
+-小于25k
+M大写
+
+find /etc -size +20k -a -size -50k
+-a and 和
+-o or 或
+
+-exec ls -lh {} \;
+find /etc -size +20k -a -size -50k -exec ls -lh {} \;
+将第一个结果放入第二个在处理一遍
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;grep&quot;&gt;grep&lt;/h3&gt;
+&lt;p&gt;grep是包含匹配搜索文件内容,find是完全匹配搜索文件名&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grep &quot;size&quot; anaconda-ks.cfg
+-v 取返
+-i 不分大小写
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;帮助命令&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;	man -f 查看级别相当于whatis
+	whereis passwd
+	ls --help选项帮助命令
+	info 命令
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;zip-gz-bz2-targz-tarbz2&quot;&gt;常用压缩格式 .zip .gz .bz2 .tar.gz .tar.bz2&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;zip 压缩文件名 源文件 #压缩文件
+zip -r 压缩文件名 源文件 #压缩目录
+
+unzip 压缩文件 #解压缩
+
+gzip 源文件 #压缩为.gz的文件,源文件会消失
+gzip -c 源文件 &amp;gt; 压缩文件 #源文件保留
+gzip -r 目录 #压缩目录下所有子文件,不压缩目录
+gzip -d 压缩文件 #解压
+gunzip 压缩文件 #解压
+
+打包tar
+tar -cvf 打包文件名 源文件
+tar -xvf 解打包
+tar -zcvf 压缩包名.tar.gz 源文件
+tar -zxvf 压缩包名.tar.gz #解压缩
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;shutdown--&quot;&gt;shutdown [选项] 时间&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;-c 取消前一个关机命令
+-h 关机
+-r 重启
+rboot  重启
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;mount--a-etcfatab&quot;&gt;mount -a 自动挂载/etc/fatab&lt;/h3&gt;
+
+&lt;h3 id=&quot;w&quot;&gt;w&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;查看用户登录信息 who类似 ### last 
+所有用户登录信息 /var/log/wtmp ### lastlog 
+最后登录时间
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>神器收藏</title>
+        <link>http://fankcoder.github.io//2016/01/28/good-tools.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/01/28/good-tools.html</guid>
+        <pubDate>Thu, 28 Jan 2016 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;ide&quot;&gt;编辑器 &amp;amp; IDE&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;VIM
+    &lt;ul&gt;
+      &lt;li&gt;gmarik/vundle&lt;/li&gt;
+      &lt;li&gt;rizzatti/funcoo.vim&lt;/li&gt;
+      &lt;li&gt;https://github.com/scrooloose/nerdtree.git&lt;/li&gt;
+      &lt;li&gt;Modeliner&lt;/li&gt;
+      &lt;li&gt;DrawIt&lt;/li&gt;
+      &lt;li&gt;vim-scripts/Align&lt;/li&gt;
+      &lt;li&gt;https://github.com/Lokaltog/vim-powerline.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/vim-scripts/taglist.vim.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/scrooloose/nerdcommenter.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/kien/ctrlp.vim.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/nelstrom/vim-visual-star-search.git&lt;/li&gt;
+      &lt;li&gt;junegunn/goyo.vim&lt;/li&gt;
+      &lt;li&gt;https://github.com/vim-scripts/Visual-Mark.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/mattn/emmet-vim.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/Shougo/neocomplcache.vim.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/terryma/vim-multiple-cursors.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/ervandew/supertab.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/sjl/vitality.vim.git&lt;/li&gt;
+      &lt;li&gt;https://github.com/Lokaltog/vim-easymotion.git&lt;/li&gt;
+      &lt;li&gt;rking/ag.vim&lt;/li&gt;
+      &lt;li&gt;Valloric/YouCompleteMe&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Sublime Text
+    &lt;ul&gt;
+      &lt;li&gt;Abacus&lt;/li&gt;
+      &lt;li&gt;ASCII Decorator&lt;/li&gt;
+      &lt;li&gt;BracketHighlighter&lt;/li&gt;
+      &lt;li&gt;DocBlockr&lt;/li&gt;
+      &lt;li&gt;Emmet&lt;/li&gt;
+      &lt;li&gt;FileDiffs&lt;/li&gt;
+      &lt;li&gt;Goto-CSS-Declaration&lt;/li&gt;
+      &lt;li&gt;Laravel 4 Facades&lt;/li&gt;
+      &lt;li&gt;Laravel Blade Highlighter&lt;/li&gt;
+      &lt;li&gt;Live CSS&lt;/li&gt;
+      &lt;li&gt;Open URL&lt;/li&gt;
+      &lt;li&gt;Package Control&lt;/li&gt;
+      &lt;li&gt;Theme-Soda&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;PhpStorm&lt;/li&gt;
+  &lt;li&gt;Intellij IDEA&lt;/li&gt;
+  &lt;li&gt;PyCharm&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;浏览器&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Chrome
+    &lt;ul&gt;
+      &lt;li&gt;Visual Event&lt;/li&gt;
+      &lt;li&gt;Web Developer&lt;/li&gt;
+      &lt;li&gt;XPather&lt;/li&gt;
+      &lt;li&gt;Tampermonkey&lt;/li&gt;
+      &lt;li&gt;Pesticide for Chrome&lt;/li&gt;
+      &lt;li&gt;EditThisCookie&lt;/li&gt;
+      &lt;li&gt;Clockwork&lt;/li&gt;
+      &lt;li&gt;AlloyDesigner&lt;/li&gt;
+      &lt;li&gt;jQuery Audit&lt;/li&gt;
+      &lt;li&gt;JSONView&lt;/li&gt;
+      &lt;li&gt;Octosplit&lt;/li&gt;
+      &lt;li&gt;Octotree&lt;/li&gt;
+      &lt;li&gt;Print GitHub markdown: GitPrint.com&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;文档 &amp;amp; 代码片段管理&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CodeBox&lt;/li&gt;
+  &lt;li&gt;Dash&lt;/li&gt;
+  &lt;li&gt;iDocument Plus&lt;/li&gt;
+  &lt;li&gt;Sparkbox&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;调试工具 &amp;amp; 代码生成&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CodeRunner&lt;/li&gt;
+  &lt;li&gt;PAW&lt;/li&gt;
+  &lt;li&gt;PaintCode&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-3&quot;&gt;窗口管理&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Slate&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-4&quot;&gt;取色 &amp;amp; 度量&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sip&lt;/li&gt;
+  &lt;li&gt;ColorSchemer Studio&lt;/li&gt;
+  &lt;li&gt;xScope&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;数据库管理&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Sequel Pro&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-6&quot;&gt;屏幕录制 &amp;amp; 演示&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;ScreenFlow&lt;/li&gt;
+  &lt;li&gt;Zoom It&lt;/li&gt;
+  &lt;li&gt;GrabIt&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-7&quot;&gt;图像处理&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Adobe Photoshop
+    &lt;ul&gt;
+      &lt;li&gt;PNG Hat&lt;/li&gt;
+      &lt;li&gt;CSS Hat&lt;/li&gt;
+      &lt;li&gt;Renamy&lt;/li&gt;
+      &lt;li&gt;Random User Generator&lt;/li&gt;
+      &lt;li&gt;Ink&lt;/li&gt;
+      &lt;li&gt;GuideGuide&lt;/li&gt;
+      &lt;li&gt;Griddify&lt;/li&gt;
+      &lt;li&gt;FlatIcon&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Slicy&lt;/li&gt;
+  &lt;li&gt;iconKit&lt;/li&gt;
+  &lt;li&gt;LilyView&lt;/li&gt;
+  &lt;li&gt;Mark Man&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-8&quot;&gt;版本管理 &amp;amp; 比对&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Tower&lt;/li&gt;
+  &lt;li&gt;Github&lt;/li&gt;
+  &lt;li&gt;Kaleidoscope&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-9&quot;&gt;脑图 &amp;amp; 任务&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;OmniPlan&lt;/li&gt;
+  &lt;li&gt;OmniGraffle&lt;/li&gt;
+  &lt;li&gt;MindNode Pro&lt;/li&gt;
+  &lt;li&gt;Things&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;vnc&quot;&gt;虚拟机 &amp;amp; VNC&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;VirtualBox&lt;/li&gt;
+  &lt;li&gt;VMWare Fusion&lt;/li&gt;
+  &lt;li&gt;Jump Desktop&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-10&quot;&gt;效率&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Alfred&lt;/li&gt;
+  &lt;li&gt;PopClip&lt;/li&gt;
+  &lt;li&gt;Soulver&lt;/li&gt;
+  &lt;li&gt;Caffeine&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;section-11&quot;&gt;其他&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Sdef Editor&lt;/li&gt;
+  &lt;li&gt;HopperDisassembler&lt;/li&gt;
+  &lt;li&gt;Leaf&lt;/li&gt;
+  &lt;li&gt;iTerm&lt;/li&gt;
+  &lt;li&gt;ForkLift&lt;/li&gt;
+  &lt;li&gt;GoAgentX&lt;/li&gt;
+  &lt;li&gt;MPlayerX&lt;/li&gt;
+  &lt;li&gt;GIFBrewery&lt;/li&gt;
+  &lt;li&gt;Fritzing&lt;/li&gt;
+  &lt;li&gt;Debookee&lt;/li&gt;
+  &lt;li&gt;BetterZip&lt;/li&gt;
+  &lt;li&gt;Cactus Beta&lt;/li&gt;
+  &lt;li&gt;Bartender&lt;/li&gt;
+  &lt;li&gt;AppCleaner&lt;/li&gt;
+  &lt;li&gt;Adobe Effects&lt;/li&gt;
+  &lt;li&gt;Adobe Illustrator&lt;/li&gt;
+  &lt;li&gt;Adobe Reader&lt;/li&gt;
+  &lt;li&gt;Airmail&lt;/li&gt;
+  &lt;li&gt;The Unachiver&lt;/li&gt;
+  &lt;li&gt;Charles&lt;/li&gt;
+  &lt;li&gt;Macaw&lt;/li&gt;
+  &lt;li&gt;Poedit&lt;/li&gt;
+  &lt;li&gt;MacDown&lt;/li&gt;
+  &lt;li&gt;Vox&lt;/li&gt;
+  &lt;li&gt;TotalFinder&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>Django命令备忘录</title>
+        <link>http://fankcoder.github.io//2016/01/27/general-django-resource.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/01/27/general-django-resource.html</guid>
+        <pubDate>Wed, 27 Jan 2016 00:00:00 +0800</pubDate>
+        <description>&lt;h3 id=&quot;django-project&quot;&gt;新建一个 django project&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; django-admin.py startproject project-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;app&quot;&gt;新建 app&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py startapp app-name
+ #或
+ django-admin.py startapp app-name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;同步数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py syncdb 
+ #注意：Django 1.7.1及以上的版本需要用以下命令
+ python manage.py makemigrations
+ python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这种方法可以创建表，当你在models.py中新增了类时，运行它就可以自动在数据库中创建表了，不用手动创建。&lt;/p&gt;
+
+&lt;p&gt;备注：对已有的 models 进行修改，Django 1.7之前的版本的Django都是无法自动更改表结构的，不过有第三方工具 south,详见 Django 数据库迁移&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;使用开发服务器&lt;/h3&gt;
+
+&lt;p&gt;开发服务器，即开发时使用，一般修改代码后会自动重启，方便调试和开发，但是由于性能问题，建议只用来测试，不要用在生产环境。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py runserver
+ python manage.py runserver 8001
+ python manage.py runserver 0.0.0.0:8000
+ # 如果是外网或者局域网电脑上可以用其它电脑查看开发服务器
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;清空数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py flush
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;此命令会询问是 yes 还是 no, 选择 yes 会把数据全部清空掉，只留下空表。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;创建超级管理员&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py createsuperuser
+  
+ # 按照提示输入用户名和对应的密码就好了邮箱可以留空，用户名和密码必填
+  
+ # 修改 用户密码可以用：
+ python manage.py changepassword username
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;导出数据 导入数据&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py dumpdata appname &amp;gt; appname.json
+ python manage.py loaddata appname.json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;django-&quot;&gt;Django 项目环境终端&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py shell
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你安装了 bpython 或 ipython 会自动用它们的界面，推荐安装 bpython。&lt;/p&gt;
+
+&lt;p&gt;这个命令和 直接运行 python 或 bpython 进入 shell 的区别是：你可以在这个 shell 里面调用当前项目的 models.py 中的 API，对于操作数据，还有一些小测试非常方便。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;数据库命令行&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; python manage.py dbshell
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Django 会自动进入在settings.py中设置的数据库，如果是 MySQL 或 postgreSQL,会要求输入数据库用户密码。
+在这个终端可以执行数据库的SQL语句。如果您对SQL比较熟悉，可能喜欢这种方式。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;更多命令&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt; 终端上输入 python manage.py 可以看到详细的列表，在忘记子名称的时候特别有用。
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>爬虫防屏蔽</title>
+        <link>http://fankcoder.github.io//2016/01/25/amazon-spider-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/01/25/amazon-spider-python.html</guid>
+        <pubDate>Mon, 25 Jan 2016 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;##介绍&lt;/p&gt;
+
+&lt;p&gt;最近爬了amazon,发现amazon服务器,连续访问100多次后爬虫就会经常失败了,&lt;/p&gt;
+
+&lt;p&gt;查找了下失败的原因,发现amazon会检测Ip一旦发现请求次数过多,就会跳转到输入验证码的网页&lt;/p&gt;
+
+&lt;p&gt;需要输入正确验证码才可继续愉快的访问,搞掉验证码是个麻烦活,执意研究验证码就跨到图像分析那个学科了(不过据说某些库识别率还行)。。&lt;/p&gt;
+
+&lt;p&gt;Gg整理正常的防屏蔽方法,总结一下比较好的解决方案.&lt;/p&gt;
+
+&lt;h4 id=&quot;adsl&quot;&gt;ADSL重启拨号&lt;/h4&gt;
+
+&lt;p&gt;大家都知道adsl重拨号的话,会换一个新的ip地址,那就可以写脚本设置时间重拨adsl,或者先用爬虫爬着,发现开始跳转到验证码页面了,再调用重拨adsl的脚本&lt;/p&gt;
+
+&lt;h4 id=&quot;section&quot;&gt;爬代理服务器地址&lt;/h4&gt;
+
+&lt;p&gt;很机智的解决办法，代理服务器可以很好的解决ip被屏蔽的问题&lt;/p&gt;
+
+&lt;p&gt;不过代理服务器的网站域名经常更换,我就不提供了,大家自行Gg吧,百度说不定也会有惊喜&lt;/p&gt;
+
+&lt;p&gt;要注意的是爬下来的代理服务器,最好检测一下是否可用!&lt;/p&gt;
+
+&lt;p&gt;参照下面篇博客的checkProxy()函数&lt;/p&gt;
+
+&lt;p&gt;https://blog.linuxeye.com/410.html&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/env python
+#coding:utf-8
+#BLOG: blog.linuxeye.com
+import urllib2
+import re
+import threading
+import time
+import MySQLdb
+rawProxyList = []
+checkedProxyList = []
+#抓取代理网站
+targets = []
+for i in xrange(1,42):
+        target = r&quot;http://www.proxy.com.ru/list_%d.html&quot; % i
+        targets.append(target)
+#抓取代理服务器正则
+p = re.compile(r&#39;&#39;&#39;&amp;lt;tr&amp;gt;&amp;lt;b&amp;gt;&amp;lt;td&amp;gt;(\d+)&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;(.+?)&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;(\d+)&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;(.+?)&amp;lt;/td&amp;gt;&amp;lt;td&amp;gt;(.+?)&amp;lt;/td&amp;gt;&amp;lt;/b&amp;gt;&amp;lt;/tr&amp;gt;&#39;&#39;&#39;)
+#获取代理的类
+class ProxyGet(threading.Thread):
+    def __init__(self,target):
+        threading.Thread.__init__(self)
+        self.target = target
+    def getProxy(self):
+        print &quot;代理服务器目标网站： &quot; + self.target
+        req = urllib2.urlopen(self.target)
+        result = req.read()
+        #print chardet.detect(result)
+        matchs = p.findall(result)
+#       print matchs
+        for row in matchs:
+            ip=row[1]
+            port =row[2]
+            addr = row[4].decode(&quot;cp936&quot;).encode(&quot;utf-8&quot;)
+            proxy = [ip,port,addr]
+            print proxy
+            rawProxyList.append(proxy)
+    def run(self):
+        self.getProxy()
+#检验代理的类
+class ProxyCheck(threading.Thread):
+    def __init__(self,proxyList):
+        threading.Thread.__init__(self)
+        self.proxyList = proxyList
+        self.timeout = 5
+        self.testUrl = &quot;http://www.baidu.com/&quot;
+        self.testStr = &quot;030173&quot;
+    def checkProxy(self):
+        cookies = urllib2.HTTPCookieProcessor()
+        for proxy in self.proxyList:
+            proxyHandler = urllib2.ProxyHandler({&quot;http&quot; : r&#39;http://%s:%s&#39; %(proxy[0],proxy[1])})
+            #print r&#39;http://%s:%s&#39; %(proxy[0],proxy[1])
+            opener = urllib2.build_opener(cookies,proxyHandler)
+            opener.addheaders = [(&#39;User-agent&#39;, &#39;Mozilla/5.0 (Windows NT 6.2; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0&#39;)]
+            #urllib2.install_opener(opener)
+            t1 = time.time()
+            try:
+                #req = urllib2.urlopen(&quot;http://www.baidu.com&quot;, timeout=self.timeout)
+                req = opener.open(self.testUrl, timeout=self.timeout)
+                #print &quot;urlopen is ok....&quot;
+                result = req.read()
+                #print &quot;read html....&quot;
+                timeused = time.time() - t1
+                pos = result.find(self.testStr)
+                #print &quot;pos is %s&quot; %pos
+                if pos &amp;gt; 1:
+                    checkedProxyList.append((proxy[0],proxy[1],proxy[2],timeused))
+                    #print &quot;ok ip: %s %s %s %s&quot; %(proxy[0],proxy[1],proxy[2],timeused)
+                else:
+                     continue
+            except Exception,e:
+                #print e.message
+                continue
+    def run(self):
+        self.checkProxy()
+if __name__ == &quot;__main__&quot;:
+    getThreads = []
+    checkThreads = []
+#对每个目标网站开启一个线程负责抓取代理
+for i in range(len(targets)):
+    t = ProxyGet(targets[i])
+    getThreads.append(t)
+for i in range(len(getThreads)):
+    getThreads[i].start()
+for i in range(len(getThreads)):
+    getThreads[i].join()
+print &#39;.&#39;*10+&quot;总共抓取了%s个代理&quot; %len(rawProxyList) +&#39;.&#39;*10
+#开启20个线程负责校验，将抓取到的代理分成20份，每个线程校验一份
+for i in range(20):
+    t = ProxyCheck(rawProxyList[((len(rawProxyList)+19)/20) * i:((len(rawProxyList)+19)/20) * (i+1)])
+    checkThreads.append(t)
+for i in range(len(checkThreads)):
+    checkThreads[i].start()
+for i in range(len(checkThreads)):
+    checkThreads[i].join()
+print &#39;.&#39;*10+&quot;总共有%s个代理通过校验&quot; %len(checkedProxyList) +&#39;.&#39;*10
+#插入数据库，表结构自己创建，四个字段ip,port,speed,address
+def db_insert(insert_list):
+    try:
+        conn = MySQLdb.connect(host=&quot;localhost&quot;, user=&quot;root&quot;, passwd=&quot;admin&quot;,db=&quot;m_common&quot;,charset=&#39;utf8&#39;)
+        cursor = conn.cursor()
+        cursor.execute(&#39;delete from proxy&#39;)
+        cursor.execute(&#39;alter table proxy AUTO_INCREMENT=1&#39;)
+        cursor.executemany(&quot;INSERT INTO proxy(ip,port,speed,address) VALUES (%s,%s,%s,%s)&quot;,insert_list)
+        conn.commit()
+        cursor.close()
+        conn.close()
+    except MySQLdb.Error,e:
+        print &quot;Mysql Error %d: %s&quot; % (e.args[0], e.args[1])
+#代理排序持久化
+proxy_ok = []
+f= open(&quot;proxy_list.txt&quot;,&#39;w+&#39;)
+for proxy in sorted(checkedProxyList,cmp=lambda x,y:cmp(x[3],y[3])):
+    if proxy[3] &amp;lt; 8:
+        #print &quot;checked proxy is: %s:%s\t%s\t%s&quot; %(proxy[0],proxy[1],proxy[2],proxy[3])
+        proxy_ok.append((proxy[0],proxy[1],proxy[3],proxy[2]))
+        f.write(&quot;%s:%s\t%s\t%s\n&quot;%(proxy[0],proxy[1],proxy[2],proxy[3]))
+f.close()
+db_insert(proxy_ok)
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;想了解我的amazon爬虫?&lt;/p&gt;
+
+&lt;p&gt;代码在github spider-comments项目下的amazon-spider-comments&lt;/p&gt;
+
+&lt;p&gt;https://github.com/fankcoder/spider-comments&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Django添加静态文件</title>
+        <link>http://fankcoder.github.io//2016/01/20/add-static-django-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/01/20/add-static-django-python.html</guid>
+        <pubDate>Wed, 20 Jan 2016 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;最近做了一个todolist webapp,需要添加css时候忘记添加方法了,查看了以前的项目才想起来,所以记录一下.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;settings.py 将以下代码放到最下面&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt;STATIC_URL = &#39;/static/&#39;
+ 
+STATICFILES_DIRS = ( 
+    os.path.join(BASE_DIR),
+)
+ 
+STATICFILES_FINDERS = (
+    &quot;django.contrib.staticfiles.finders.FileSystemFinder&quot;,
+    &quot;django.contrib.staticfiles.finders.AppDirectoriesFinder&quot;,
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;给html添加静态文件&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;首行加入(一定要放在首行)，这里和Jekyll冲突了在需要代码前后添加的是“大括号和百分号”&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/\{\%/load staticfiles/\%\}/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后按照jinjia2或者djagno template的语法加上css等静态文件的路径,如&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/\{\%/ static &#39;css/style.css&#39; /\%\}/&quot; /&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;搞定&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>科学上网列表</title>
+        <link>http://fankcoder.github.io//2015/11/10/vpn-tools.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/11/10/vpn-tools.html</guid>
+        <pubDate>Tue, 10 Nov 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;付费vpn列表，流量计费约4G，不包月，平时翻基本不用这个，作为临时或救急使用&lt;/p&gt;
+
+&lt;p&gt;防止被监测，使用”X”代替了”.”&lt;/p&gt;
+
+&lt;p&gt;所以使用方法，将”X”全部替换为”.”&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;浏览网页&lt;/h3&gt;
+
+&lt;p&gt;74X126X180X61&lt;/p&gt;
+
+&lt;p&gt;74X126X180X62&lt;/p&gt;
+
+&lt;p&gt;74X126X180X58&lt;/p&gt;
+
+&lt;p&gt;74X126X180X60&lt;/p&gt;
+
+&lt;p&gt;74X126X180X59&lt;/p&gt;
+
+&lt;p&gt;192X210X48X213&lt;/p&gt;
+
+&lt;p&gt;192X210X48X214&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;下载&lt;/h3&gt;
+
+&lt;p&gt;98X126X10X10&lt;/p&gt;
+
+&lt;p&gt;98X126X10X11&lt;/p&gt;
+
+&lt;p&gt;98X126X10X13&lt;/p&gt;
+
+&lt;p&gt;98X126X10X14&lt;/p&gt;
+
+&lt;p&gt;74X126X176X138&lt;/p&gt;
+
+&lt;p&gt;74X126X176X139&lt;/p&gt;
+
+&lt;p&gt;74X126X176X140&lt;/p&gt;
+
+&lt;p&gt;74X126X176X142&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;视频专线&lt;/h3&gt;
+
+&lt;p&gt;104X238X156X110&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;游戏&lt;/h3&gt;
+
+&lt;p&gt;23X247X65X12&lt;/p&gt;
+
+&lt;p&gt;23X247X65X33&lt;/p&gt;
+
+&lt;p&gt;23X247X65X37&lt;/p&gt;
+
+&lt;p&gt;23X247X65X38&lt;/p&gt;
+
+&lt;p&gt;107X179X92X78&lt;/p&gt;
+
+&lt;p&gt;107X179X92X93&lt;/p&gt;
+
+&lt;p&gt;174X139X118X53&lt;/p&gt;
+
+&lt;p&gt;174X139X118X54&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;海淘&lt;/h3&gt;
+
+&lt;p&gt;98X126X222X147&lt;/p&gt;
+
+&lt;p&gt;98X126X222X149&lt;/p&gt;
+
+&lt;p&gt;98X126X222X150&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;日本网页&lt;/h3&gt;
+
+&lt;p&gt;133X130X62X172&lt;/p&gt;
+
+&lt;p&gt;133X130X55X57&lt;/p&gt;
+
+&lt;p&gt;133X130X52X67&lt;/p&gt;
+
+&lt;p&gt;106X185X47X87&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;下载&lt;/h3&gt;
+
+&lt;p&gt;27X120X113X154&lt;/p&gt;
+
+&lt;p&gt;106X185X35X12&lt;/p&gt;
+
+&lt;p&gt;106X185X41X7&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;日海淘&lt;/h3&gt;
+&lt;p&gt;106X185X49X209&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Shell每日发邮件</title>
+        <link>http://fankcoder.github.io//2015/10/26/email-shell-linux.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/10/26/email-shell-linux.html</guid>
+        <pubDate>Mon, 26 Oct 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;很是好奇运维工作，刚好有幸接触到，每日发邮件脚本，多用来发送服务器日志，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LOGFILE=&quot;$fank/&quot;`date +&quot;%Y%m%d&quot;`&quot;data&quot;#每日文件
+
+from=&quot;abc@123.com&quot;#发件人
+
+recipients=&quot;fank@123.com&quot;#收件人
+
+
+subject=&quot;[REPORT]every day check&quot; #主题
+content=&quot;$(cat ${LOGFILE})&quot;  #内容
+
+/usr/sbin/sendmail &quot;${recipients}&quot; &amp;lt;&amp;lt;EOF
+subject:${subject}
+from:${from}
+${content}
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;*该脚本需要部署在服务器定时任务crontab上&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>2016阅读书单</title>
+        <link>http://fankcoder.github.io//2015/10/01/book-list-of-2015.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/10/01/book-list-of-2015.html</guid>
+        <pubDate>Thu, 01 Oct 2015 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;程序员的呐喊&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;status: 已读&lt;/li&gt;
+  &lt;li&gt;author: steve yegge&lt;/li&gt;
+  &lt;li&gt;publisher: 人民邮电出版社&lt;/li&gt;
+  &lt;li&gt;language: 中文&lt;/li&gt;
+  &lt;li&gt;link: https://book.douban.com/subject/25884108/&lt;/li&gt;
+  &lt;li&gt;notes:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;小学和中学里教的绝大部分数学都是连续的，也就是实数上的数学。而对计算机科学家来说，95％有趣的数学都是离散的，也就是整数上的数学。
+
+我在招人的时候有一个诀窍。就是在寻找优秀的软件工程师“通才”的时候，通常在简历上你可以看到到各种让你觉得不行的关键字和词，但“编译器”是我唯一感兴趣的词。
+
+ C是必修课
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;comment:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;作者先将各个语言都批评了一遍,最被嫌弃的语言是C++(多大仇&amp;gt;.&amp;lt;),作者最爱用的语言是Ruby,作者作为一个在IT界驰骋多年的老将,这个细节确实让我思考了一些东西,首先语言只是作为一种工具,工具虽分好用与否,但是永远陷入工具之间的选择、争辩是非常不明智的,就好像这几年特别流行的一句&quot;PHP是最好的语言&quot;这个梗,辩论工具是没有太大实际意义的,至少对我来说是这样,选择一个大趋势,提高自己编程思想才是核心竞争力.而且欧美国计算机技术比其他国家领先很多年,作者最喜欢的语言却是日本人松本行弘开发的Ruby,我觉得欧美思想确实比我们先进,我还看到过技术群里有人说自己不会去学日本人的语言..以后看到这种程序员就默默拉黑吧.
+
+作者强调了学习编译器的重要,这也给我一个很好的深入方向,以后要安排研究编译器了,感觉很棒.
+
+以前C学的比较浅,要在linux再玩一把C,最好能做些有意思的东西放github上.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;开源软件之道&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;status: 已读&lt;/li&gt;
+  &lt;li&gt;author: 蔡俊杰&lt;/li&gt;
+  &lt;li&gt;publisher: 电子工业出版社&lt;/li&gt;
+  &lt;li&gt;language: 中文&lt;/li&gt;
+  &lt;li&gt;link: https://book.douban.com/subject/4747758/&lt;/li&gt;
+  &lt;li&gt;comment:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;抱着对开源软件的崇拜去读这书,但是读了一半就没有太大兴趣往下读了,感觉费了不少力气说明了开源软件是open不是free,但是说到不免费我就莫名奇妙对如何make money感兴趣,但是教如何赚钱的书也没法写啊..
+
+看这本书后给自己定了个目标就是有朝一日也要向开源社区提交pull request,让自己体会一下全世界程序员一起努力的感觉~~
+with the code ,change the world.
+
+更值得一提的是github,这个网站的创建真是大大推动了开源软件的进步,注册了github帐号后,感觉到真是方便,无论是找好用的工具,还是学习别人的代码,给提高自己能力创造了及其便利的条件.
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>Django练习项目之搭建博客</title>
+        <link>http://fankcoder.github.io//2015/07/24/blog-django-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/07/24/blog-django-python.html</guid>
+        <pubDate>Fri, 24 Jul 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;一,环境&lt;/p&gt;
+
+&lt;p&gt;1.Python&lt;/p&gt;
+
+&lt;p&gt;2.Django&lt;/p&gt;
+
+&lt;p&gt;二,安装&lt;/p&gt;
+
+&lt;p&gt;1.Python&lt;/p&gt;
+
+&lt;p&gt;2.Django安装,推荐先装个pip吧,easyinstall也可以,然后终端下输入:
+　　
+&lt;code&gt;
+pip install Django
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;强烈推荐用新的Django版本,我用的是1.8.1&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install Django==1.8.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;测试一下安装成功否&lt;/p&gt;
+
+&lt;p&gt;终端下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python
+
+import django
+
+django.VERSION
+
+(1, 8, 1, &#39;final&#39;, 0) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;三,开始&lt;/p&gt;
+
+&lt;p&gt;1.创建博客项目&lt;/p&gt;
+
+&lt;p&gt;找个干净的文件夹,终端下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;django-admin.py startproject nameblog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里nameblog是示例,自己记得换哦&lt;/p&gt;
+
+&lt;p&gt;打开文件夹,或者cd nameblog/  输入 ls&lt;/p&gt;
+
+&lt;p&gt;发现项目创建好了&lt;/p&gt;
+
+&lt;p&gt;2.创建博客app&lt;/p&gt;
+
+&lt;p&gt;终端下:cd nameblog/  刚才已经cd进去的同学这步省了&lt;/p&gt;
+
+&lt;p&gt;然后输入:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py startapp blog
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;打开文件夹瞅一眼,发现多了个blog文件夹,&lt;/p&gt;
+
+&lt;p&gt;这时候blog项目app就创建好了&lt;/p&gt;
+
+&lt;p&gt;3.简单设置一下&lt;/p&gt;
+
+&lt;p&gt;打开nameblog/nameblog/settings.py&lt;/p&gt;
+
+&lt;p&gt;进行如下设置,也就是加上一条blog:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;INSTALLED_APPS = (
+    &#39;django.contrib.admin&#39;,
+    &#39;django.contrib.auth&#39;,
+    &#39;django.contrib.contenttypes&#39;,
+    &#39;django.contrib.sessions&#39;,
+    &#39;django.contrib.messages&#39;,
+    &#39;django.contrib.staticfiles&#39;,
+    &#39;blog&#39;,
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;顺便换下Django默认语言把,你要是英文大神,请别鸟我,第二句是换时区,不换你就自个倒时差吧,好像永远差8小时~&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;LANGUAGE_CODE = &#39;zh_CN&#39;
+ 
+TIME_ZONE = &#39;Asia/Shanghai&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;四,测试Django运行成功否&lt;/p&gt;
+
+&lt;p&gt;终端下输入,&lt;/p&gt;
+
+&lt;p&gt;注意现在的终端目录还应该是nameblog/下,而不是nameblog/nameblog下,请参考有manage.py的这层目录&lt;/p&gt;
+
+&lt;p&gt;好的,终端下输入:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;打开浏览器,访问地址:127.0.0.1:8000或者localhost:8000&lt;/p&gt;
+
+&lt;p&gt;看到淡蓝色提示,Django工作了，项目搭建成功~&lt;/p&gt;
+
+&lt;p&gt;如果 python manage.py runserver跑不起来&lt;/p&gt;
+
+&lt;p&gt;可能是8000端口被占用了？输入:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py runserver 8001
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;五,博客数据库&lt;/p&gt;
+
+&lt;p&gt;首先要知道&lt;/p&gt;
+
+&lt;p&gt;Django是一个基于MVC构造的框架,模型M，视图V和控制器C。
+但是在Django中，控制器接受用户输入的部分由框架自行处理，
+所以 Django 里更关注的是模型（Model）、模板(Template)和视图（Views），称为 MTV模式。
+它们各自的职责如下：&lt;/p&gt;
+
+&lt;p&gt;层次，职责，模型（Model），即数据存取层处理与数据相关的所有事务： 如何存取、如何验证有效性、包含哪些行为以及数据之间的关系等。模板(Template)，即表现层处理与表现相关的决定： 如何在页面或其他类型文档中进行显示。视图（View），即业务逻辑层存取模型及调取恰当模板的相关逻辑。模型与模板之间的桥梁。&lt;/p&gt;
+
+&lt;p&gt;了解了Django先进的框架结构,就需要一层一层的进行操作,&lt;/p&gt;
+
+&lt;p&gt;这里注意一下,我们并没有配置数据库,Django高级一点的版本会默认配置一个sqlite3,在settings.py下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DATABASES = {
+    &#39;default&#39;: {
+        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+        &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),
+    }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;配置模型,首先打开模型文件nameblog/blog/models.py&lt;/p&gt;
+
+&lt;p&gt;models.py是博客数据库的模型,每个类都是数据库中的一张表,&lt;/p&gt;
+
+&lt;p&gt;配置如下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Tag(models.Model):
+    tag_name = models.CharField(max_length=20)
+    create_time = models.DateTimeField(auto_now_add=True)
+ 
+    def __unicode__(self):
+        return self.tag_name
+ 
+class Classification(models.Model):
+    name = models.CharField(max_length=20)
+ 
+    def __unicode__(self):
+        return self.name
+ 
+class Author(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(blank=True)
+    website = models.URLField(blank=True)
+ 
+    def __unicode__(self):
+        return u&#39;%s&#39; % (self.name)
+ 
+class Article(models.Model):
+    caption = models.CharField(max_length=30)
+    subcaption = models.CharField(max_length=50,blank=True)
+    publish_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now = True)
+    author = models.ForeignKey(Author)
+    classification = models.ForeignKey(Classification)
+    tags = models.ManyToManyField(Tag, blank=True)
+    content = models.TextField()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们要做博客app,就要写文章,文章需要的一些基本信息,这里基本都涵盖了（标签,分类,作者信息,发布时间等）,当然也可以加入自己想要的表,&lt;/p&gt;
+
+&lt;p&gt;保存退出,&lt;/p&gt;
+
+&lt;p&gt;同步数据库,进入 manage.py 所在的文件夹，在终端输入下:&lt;/p&gt;
+
+&lt;p&gt;注意：Django 1.7 及以上的版本需要用以下命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py makemigrations
+python manage.py migrate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意：非Django 1.7 及以上的版本需要用以下命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py syncdb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一次同步数据库会让用户输入管理员帐号密码&lt;/p&gt;
+
+&lt;p&gt;六,配置视图&lt;/p&gt;
+
+&lt;p&gt;打开nameblog/blog/views.py&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from django.shortcuts import render
+from blog.models import Article, Tag, Classification
+from django.template import RequestContext
+ 
+def blog_list(request):
+    blogs = Article.objects.all().order_by(&#39;-publish_time&#39;)
+    return render(request,&#39;index.html&#39;,{&quot;blogs&quot;:blogs})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里可以看到视图函数返回index.html,现在我们需要创建html首页&lt;/p&gt;
+
+&lt;p&gt;七,创建模板首页&lt;/p&gt;
+
+&lt;p&gt;模板在app中默认没有这个文件夹,需要手动创建blog/templates/*.html&lt;/p&gt;
+
+&lt;p&gt;注意：文件最好放在blog/templates/下&lt;/p&gt;
+
+&lt;p&gt;简单写点html欢迎代码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;
+ 
+&amp;lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;title&amp;gt;fank&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;欢迎光临xx的博客&amp;lt;/h1&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样就可以显示博客页面了，但这是静态页面还用Django搭建起来未必太Low了吧?&lt;/p&gt;
+
+&lt;p&gt;加上我们将会发布的博客文章&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&amp;gt;
+ 
+&amp;lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;title&amp;gt;fank&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;h1&amp;gt;欢迎光临xx的博客&amp;lt;/h1&amp;gt;
+&amp;lt;div&amp;gt;
+
+&amp;lt;/div&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存退出.&lt;/p&gt;
+
+&lt;p&gt;八,配置url&lt;/p&gt;
+
+&lt;p&gt;现在我们重新启动项目&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会发现,还是萌萌哒Django欢迎界面,说好的博客app呢?!&lt;/p&gt;
+
+&lt;p&gt;这是因为我们还没配置Url&lt;/p&gt;
+
+&lt;p&gt;打开nameblog/nameblog/urls.py&lt;/p&gt;
+
+&lt;p&gt;配置:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;urlpatterns = [
+    url(r&#39;^admin/&#39;, include(admin.site.urls)),
+    url(r&#39;^$&#39;,&#39;blog.views.blog_list&#39;,name=&#39;blog_list&#39;),
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这时候,再把项目跑起来&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你会发现,&lt;/p&gt;
+
+&lt;p&gt;欢迎光临xx的博客&lt;/p&gt;
+
+&lt;p&gt;成功了~&lt;/p&gt;
+
+&lt;p&gt;九,美化网页&lt;/p&gt;
+
+&lt;p&gt;没有css,js的网站不是好网站&lt;/p&gt;
+
+&lt;p&gt;创建blog/static/images; blog/static/css; blog/static/js&lt;/p&gt;
+
+&lt;p&gt;美化html,自己折腾吧,或者可以下载现成的模板,大家各有品味,这里就不上我的例子了&lt;/p&gt;
+
+&lt;p&gt;注意:静态文件加载需要设置settings.py&lt;/p&gt;
+
+&lt;p&gt;详情看我的另一篇博客&lt;a href=&quot;http://fankcoder.com/2016/01/20/add-static-django.html&quot;&gt;django添加静态文件&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;收集静态文件,终端下:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py collectstatic
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次打开漂亮的首页,眼前一亮～&lt;/p&gt;
+
+&lt;p&gt;十,Django后台&lt;/p&gt;
+
+&lt;p&gt;博客app做好了,可是到现在一篇文章都木有啊&lt;/p&gt;
+
+&lt;p&gt;Django给我们提供了一个强大的后台管理,我们通过它来管理文章&lt;/p&gt;
+
+&lt;p&gt;打开blog/admin.py,没有则新建&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;from django.contrib import admin
+from .models import Article
+  
+ 
+admin.site.register(Article)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只需要这三行代码，我们就可以拥有一个强大的后台！&lt;/p&gt;
+
+&lt;p&gt;提示：urls.py中关于 admin的已经默认开启&lt;/p&gt;
+
+&lt;p&gt;运行服务器,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python manage.py runserver
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;访问 http://localhost:8000/admin/ 输入设定的帐号和密码&lt;/p&gt;
+
+&lt;p&gt;点击 Articles，动手输入 添加几篇文章,&lt;/p&gt;
+
+&lt;p&gt;再访问首页&lt;/p&gt;
+
+&lt;p&gt;发现文章出现在首页了~&lt;/p&gt;
+
+&lt;p&gt;十一,代码托管到Github&lt;/p&gt;
+
+&lt;p&gt;在nameblog/目录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git init    //初始化
+
+$ git add  ./
+
+$ git commit -m &#39;first commit&#39;   //提交更新，并注释信息“first commit”
+
+$ git remote add origin git@github.com:yourproject/nameblog.git   //连接远程github项目  
+
+$ git push -u origin master   //将本地项目更新到github项目上去
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;:) 谢谢！&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>SEO 常用资源</title>
+        <link>http://fankcoder.github.io//2015/02/13/general-seo-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/02/13/general-seo-resources.html</guid>
+        <pubDate>Fri, 13 Feb 2015 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;小技巧&lt;/h2&gt;
+
+&lt;h3 id=&quot;url-&quot;&gt;URL中用&lt;code&gt;-&lt;/code&gt;分割单词，用&lt;code&gt;_&lt;/code&gt;关联单词&lt;/h3&gt;
+
+&lt;p&gt;Google 会把 &lt;code&gt;a-good_reource-of-seo.html&lt;/code&gt; 拆分成关键字：&lt;code&gt;a&lt;/code&gt;, &lt;code&gt;good_resource&lt;/code&gt;, &lt;code&gt;of&lt;/code&gt; 和 &lt;code&gt;seo&lt;/code&gt;。&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>chromium安装flash</title>
+        <link>http://fankcoder.github.io//2015/01/01/chromium-flash-linux.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/01/01/chromium-flash-linux.html</guid>
+        <pubDate>Thu, 01 Jan 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;　Flash Player For Linux 自11.2 起已经停止更新，目前 Linux 平台下面的 Flash Player 只能依靠 Google Chrom 的 PPAPI （Pepper Flash Player）进行更新&lt;/p&gt;
+
+&lt;p&gt;```
+ sudo apt-get install pepperflashplugin-nonfree&lt;/p&gt;
+
+&lt;p&gt;sudo update-pepperflashplugin-nonfree –install
+ ```&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Mac 常用资源</title>
+        <link>http://fankcoder.github.io//2014/08/03/general-mac-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/08/03/general-mac-resources.html</guid>
+        <pubDate>Sun, 03 Aug 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用软件&lt;/h2&gt;
+
+&lt;h3 id=&quot;alfred&quot;&gt;Alfred&lt;/h3&gt;
+
+&lt;h4 id=&quot;alfredworkflow&quot;&gt;Alfred常用Workflow&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kapeli.com/dash&quot;&gt;Dash&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/liberize/alfred-dict-workflow&quot;&gt;Dict - Lookup Word&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.alfredforum.com/topic/917-reminders/&quot;&gt;Reminders&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://support.alfredapp.com/evernote&quot;&gt;Evernote&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.alfredforum.com/topic/1009-notes/&quot;&gt;Notes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;常用命令&lt;/h2&gt;
+
+&lt;h3 id=&quot;dashboard&quot;&gt;开启关闭dashboard&lt;/h3&gt;
+
+&lt;p&gt;关闭&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;defaults write com.apple.dashboard mcx-disabled -boolean YES
+killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;开启&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;defaults write com.apple.dashboard mcx-disabled -boolean NO
+killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;剪贴板操作&lt;/h3&gt;
+&lt;p&gt;写入剪切板&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo &#39;test&#39; &amp;gt; pbcopy 
+cat testfile &amp;gt; pbcopy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;读取剪贴板&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pbpaste &amp;gt; testfile
+pbpaste | cat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;hidpi&quot;&gt;开启关闭Hidpi&lt;/h3&gt;
+&lt;p&gt;开启&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool YES
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;关闭&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo defaults delete /Library/Preferences/com.apple.windowserver DisplayResolutionDisabled
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;dock&quot;&gt;修改Dock隐藏和出现时间&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;defaults write com.apple.dock autohide-delay -int 0
+defaults write com.apple.dock autohide-time-modifier -float 0.4
+killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;itermoptionaltmeta&quot;&gt;设置iterm中option为alt(meta)键&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://7u2ho6.com1.z0.glb.clouddn.com/resource-set-meta-to-alt.png&quot; alt=&quot;option-to-meta&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;dropbox&quot;&gt;删除dropbox冲突文件&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;find . -type f -name &quot;* conflicted *&quot; -exec rm -f {} \;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;launchpad&quot;&gt;清空Launchpad（删除掉）&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;sqlite3 ~/Library/Application\ Support/Dock/*.db &#39;DELETE FROM apps;&#39; &amp;amp;&amp;amp; killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;launchpad-1&quot;&gt;重置Launchpad&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;rm -f ~/Library/Application\ Support/Dock/*.db &amp;amp;&amp;amp; killall Dock
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;finder&quot;&gt;修改Finder中文件夹显示语言&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;# 以Desktop为例
+touch ~/Desktop/.localized
+chmod 600 ~/Desktop/.localized
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;常用快捷键&lt;/h2&gt;
+
+&lt;h3 id=&quot;chrome&quot;&gt;Chrome&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;切换用户 &lt;code&gt;Command + shift + M&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>MySQL常用资源</title>
+        <link>http://fankcoder.github.io//2014/05/11/general-mysql-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/05/11/general-mysql-resources.html</guid>
+        <pubDate>Sun, 11 May 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用命令&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;登录数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -h localhost -uroot -p
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;导出数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mysqldump -uroot -p db &amp;gt; db.sql
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;导入数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -uroot -p db &amp;lt; db.sql
+// or
+mysql -uroot -p db -e &quot;source /path/to/db.sql&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;开启远程登录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;grant all privileges on ss.* to &#39;root&#39;@&#39;%&#39; indentified by &#39;passoword&#39; with grant option;
+// or 
+update user set Host=&quot;%&quot; and User=&quot;root&quot;
+// 注意%是不包含localhost的
+flush privileges;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;创建用户&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;CREATE USER &#39;test&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;;
+grant all privileges on *.* to test@&#39;localhost&#39; identified by &#39;test&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;创建表&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;CREATE SCHEMA testdb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;赋予数据库权限&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;GRANT ALL ON testdb.* TO &#39;test&#39;@&#39;localhost&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>SVN 常用资源</title>
+        <link>http://fankcoder.github.io//2014/01/15/general-svn-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-svn-resources.html</guid>
+        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用指令&lt;/h2&gt;
+
+&lt;h3 id=&quot;checkout&quot;&gt;将文件checkout到本地目录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn checkout path（path是服务器上的目录）
+svn checkout svn://192.168.1.1/pro/domain
+svn co
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;往版本库中添加新的文件&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn add file
+svn add test.php(添加test.php)
+svn add *.php(添加当前目录下所有的php文件)
+svn add *.php --force(增加所有文件)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;将改动的文件提交到版本库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn commit -m “LogMessage“ [-N] [--no-unlock] PATH(如果选择了保持锁，就使用–no-unlock开关)
+svn commit -m “add test file for my test“ test.php
+svn ci
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;加锁/解锁&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn lock -m “LockMessage“ [--force] PATH
+svn lock -m “lock test file“ test.php
+svn unlock PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;更新到某个版本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn update -r m path
+svn update 如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
+svn update -r 200 test.php(将版本库中的文件test.php还原到版本200)
+
+svn update test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先update，修改文件，然后清除svn resolved，最后再提交commit)
+
+svn up
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;查看文件或者目录状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn status path（目录下的文件和子目录的状态，正常状态不显示）
+【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】
+
+svn status -v path(显示文件和子目录状态)
+第一列保持相同，第二列显示工作版本号，第三和第四列显示最后一次修改的版本号和修改人。
+
+注：svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。
+
+svn st
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;删除文件&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn delete path -m “delete test fle“
+svn delete svn://192.168.1.1/pro/domain/test.php -m “delete test file”
+或者直接svn delete test.php 然后再svn ci -m ‘delete test file‘，推荐使用这种
+svn (del, remove, rm)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;查看日志&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn log path 
+svn log test.php 显示这个文件的所有修改记录，及其版本号的变化
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;查看文件详细信息&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn info path
+svn info test.php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;比较差异&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn diff path(将修改的文件与基础版本比较)
+svn diff test.php
+svn diff -r m:n path(对版本m和版本n比较差异)
+svn diff -r 200:201 test.php
+svn di
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;将两个版本之间的差异合并到当前文件&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn merge -r m:n path
+svn merge -r 200:205 test.php（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;svn-&quot;&gt;SVN 帮助&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn help
+svn help ci
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;版本库下的文件和目录列表&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn list path 
+svn ls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;创建纳入版本控制下的新目录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn mkdir: 创建纳入版本控制下的新目录。
+mkdir PATH…
+mkdir URL…
+
+创建版本控制的目录。
+
+1、每一个以工作副本 PATH 指定的目录，都会创建在本地端，并且加入新增调度，以待下一次的提交。
+2、每个以URL指定的目录，都会透过立即提交于仓库中创建.在这两个情况下，所有的中间目录都必须事先存在。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;恢复本地修改&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn revert: 恢复原始未改变的工作副本文件 (恢复大部份的本地修改)。revert:
+用法: revert PATH…
+注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复被删除的目录
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;url&quot;&gt;代码库URL变更&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn switch (sw): 更新工作副本至不同的URL。 
+
+1、switch URL [PATH]
+2、switch –relocate FROM TO [PATH...]
+1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。
+
+2、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比如方案名或是主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-14&quot;&gt;解决冲突&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn resolved: 移除工作副本的目录或文件的“冲突”状态。 java设计模式之——策略模式
+用法: resolved PATH…
+注意: 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的相关文件，然后让 PATH 可以再次提交。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;url-1&quot;&gt;输出指定文件或URL的内容。&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;svn cat 目标[@版本]…如果指定了版本，将从指定的版本开始查找。
+svn cat -r PREV filename &amp;gt; filename (PREV 是上一版本,也可以写具体版本号,这样输出结果是可以提交的)
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>Shell 常用资源</title>
+        <link>http://fankcoder.github.io//2014/01/15/general-shell-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-shell-resources.html</guid>
+        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用指令&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;文本内容搜索&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;grep aaa * 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;文件夹操作&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;查看文件夹大小   du -h --max-depth=1 /home/ys
+查看驱动器空间   df -h 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;压缩命令&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;tar zxvf aaa.tar.gz
+tar zcvf aaa.tar.gz aaa
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;登陆到其他用户&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;login
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;查看端口的占用&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;lsof -i:8087  查看8087端口的使用
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;批量杀死进程&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;ps -aux|grep name|grep -v grep|cut -c 9-15|xargs kill -9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;查看当前时间&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;date       时间
+date +%s   时间戳
+date -d &quot;2010-07-20 10:25:30&quot; +%s  指定时间时间戳
+date -d &quot;@1279592730&quot;    时间戳转时间
+date -d &quot;1970-01-01 14781 days&quot; &quot;+%Y/%m/%d %H:%M:%S&quot; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;查看进程内存使用情况&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;top -d 1 -p pid [,pid ...]
+pmap pid 
+ps aux|grep process_name
+查看/proc/process_id/文件夹下的status文件
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;linux&quot;&gt;查看Linux内核版本或发布版本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;lsb_release -a
+uname -a
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;http&quot;&gt;一句话实现一个HTTP服务，把当前文件夹作为根目录&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;python -m SimpleHTTPServer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;查看本地网络服务活动状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;lsof -i
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;ip&quot;&gt;查看自己的外网ip&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;curl ifconfig.me
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;下载整个网站&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;wget --random-wait -r -p -e robots=off -U mozilla http://www.example.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;后台运行一段不中止的程序，并可随时查看它的状态&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;screen -d -m -S some_ name ping my_router
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;查看进程执行的时间&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;ps -A -opid,stime,etime,args | grep python
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;创建守护进程&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;nohup python /var/www/a.py &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-14&quot;&gt;查看当前文件夹下文件（文件夹）大小&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;du -h --max-depth=1 .
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-15&quot;&gt;查看所有磁盘大小&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;df -h
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-16&quot;&gt;诊断网络&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;mtr 
+ping
+traceroute
+dig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-17&quot;&gt;列出本机监听的端口号&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;netstat –tlnp
+netstat -anop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-18&quot;&gt;在远程机器上运行一段脚本&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;ssh user@server bash &amp;lt; /path/to/local/script.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-19&quot;&gt;端口扫描&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;nc -z -v -n 127.0.0.1 20-100
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;google20&quot;&gt;负载测试，30秒内向Google发起20个并发连接&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;siege -c20 www.google.co.uk -b -t30s
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Python 常用资源</title>
+        <link>http://fankcoder.github.io//2014/01/15/general-python-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-python-resources.html</guid>
+        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用代码&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;遍历对象&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;for key in a.__dict__:
+    print key,&#39;:&#39;,a.__dict__[key]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;调试方法&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;assert False   //引发异常，观察错误界面
+import logging
+logging.info(&#39;&#39;)  //写日志
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;获得当前时间&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;#时间戳
+time.time()
+#日期时间
+time.ctime()
+#iso时间
+datetime.fromtimestamp(time.time()).isoformat()
+#固定格式
+time.strftime(&#39;%Y-%m-%d&#39;,time.localtime(time.time())) ### 日期到时间戳
+dateC=datetime.datetime(2010,6,6,8,14,59)
+timestamp=time.mktime(dateC.timetuple()) ### 时间戳到日期
+ltime=time.localtime(1237515355.0)
+timeStr=time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, ltime) ### 之后的包从绝对位置导入
+from __future__ import absolute_import
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>PHP 常用资源</title>
+        <link>http://fankcoder.github.io//2014/01/15/general-php-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-php-resources.html</guid>
+        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;常用资源&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;常用扩展&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.phpdoc.org&quot;&gt;phpDocumentor&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://phpunit.de&quot;&gt;PHPUnit&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/guzzle/guzzle&quot;&gt;Guzzle&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;好文&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wulijun.github.io/php-the-right-way/&quot;&gt;PHP之道&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/fangaoxin/article/details/6952954&quot;&gt;Cookie/Session机制详解&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;优秀的类库&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jingwentian.com/t-145&quot;&gt;PHP中文分词: 自动打标签功能&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;判断是否为空&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;+--------------+-----------+---------+-----------+---------+--------+
+| 真值表        | gettype() | empty() | is_null() | isset() | (bool) |
++--------------+-----------+---------+-----------+---------+--------+
+| $x = &quot;&quot;      | string    | true    | false     | true    | false  |
+| $x=null      | NULL      | true    | true      | false   | false  |
+| var $x       | NULL      | true    | true      | false   | false  |
+| $x = array() | array     | true    | false     | true    | false  |
+| $x = false   | boolean   | true    | false     | true    | false  |
+| $x = 15      | integer   | false   | false     | true    | true   |
+| $x = 1       | integer   | false   | false     | true    | true   |
+| $x = 0       | integer   | true    | false     | true    | false  |
+| $x = -1      | integer   | false   | false     | true    | true   |
+| $x = &#39;15&#39;    | string    | false   | false     | true    | true   |
+| $x = &#39;1&#39;     | string    | false   | false     | true    | true   |
+| $x = &#39;0&#39;     | string    | true    | false     | true    | false  |
+| $x = &#39;-1&#39;    | string    | false   | false     | true    | true   |
+| $x = &#39;foo&#39;   | string    | false   | false     | true    | true   |
+| $x = &#39;true&#39;  | string    | false   | false     | true    | true   |
+| $x = &#39;false&#39; | string    | false   | false     | true    | true   |
++--------------+-----------+---------+-----------+---------+--------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;常用命令&lt;/h2&gt;
+
+&lt;h3 id=&quot;phpunit&quot;&gt;修改phpunit内存限制&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;phpunit -d memory_limit=512M
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;phpstorm-&quot;&gt;PHPStorm 常用快捷键&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Quick Command&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;Command + Shift + A&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Quick File&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;Command + Shift + O&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Quick Class&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;Command + O&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Quick Symbol&lt;/p&gt;
+
+    &lt;p&gt;&lt;code&gt;Command + Option + O&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>jQuery 常用资源</title>
+        <link>http://fankcoder.github.io//2014/01/15/general-jquery-resources.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-jquery-resources.html</guid>
+        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
+        <description>&lt;h2 id=&quot;section&quot;&gt;官方资源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://jquery.com/&quot;&gt;官方首页&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://plugins.jquery.com/&quot;&gt;官方插件&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;下拉框扩展&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://ivaynberg.github.io/select2/&quot;&gt;Select 2&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;功能强大的下拉列表插件，基本包含了所有可能的需求……&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;a href=&quot;http://kotowicz.net/jquery-option-tree/demo/demo.html&quot;&gt;OptionTree&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;联动下拉列表插件，可以动态生成下拉列表，而且支持ajax获取数据&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;常用代码&lt;/h2&gt;
+
+&lt;h3 id=&quot;a&quot;&gt;禁用a的链接&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;href=&quot;return false;&quot;或href=&quot;javascript;&quot;
+$().live(&#39;click&#39;,function(e){
+  e.preventDefault();
+  });
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;file&quot;&gt;清空file的内容&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;var cfile = $(&#39;#id&#39;).clone();
+$(&#39;#id&#39;).replaceWith(cfile);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;jqueryformjs--jqueryvalidatejs&quot;&gt;jquery.form.js 和 jquery.validate.js配合使用&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;这两个脚本搭配在表单验证和提交是非常的好用,顺便增加了对bootstrap表单的支持
+$(&quot;#page_form&quot;).validate({
+  highlight: function(element) {
+    $(element).closest(&#39;.control-group&#39;).removeClass(&#39;success&#39;).addClass(&#39;error&#39;);
+  },
+  success: function(element) {
+    element.text(&#39;OK!&#39;).addClass(&#39;valid&#39;).closest(&#39;.control-group&#39;).removeClass(&#39;error&#39;).addClass(&#39;success&#39;);
+  },
+  submitHandler:function(form) {
+    $(form).ajaxSubmit(options);
+}});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;选择父节点&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;使用$(this)来将dom对象转为jquery对象
+$(this).parents(&#39;tr&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;多重操作&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;$(this).parents(&#39;tr&#39;).remove();
+因为jquery函数返回jquery节点
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      </item>
+    
+  </channel>
+</rss>

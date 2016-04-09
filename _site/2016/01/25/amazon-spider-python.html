@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
+
+<title>爬虫防屏蔽 | 三秋的博客</title>
+<meta name="author" content="三秋">
+
+  <meta name="keywords" content="spider">
+
+
+
+  <meta name="description " content="spider amazon">
+
+
+<link rel="shortcut icon" href="https://raw.githubusercontent.com/fankcoder/fankcoder.github.io/master/assets/img/12791032small.jpg" />
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+
+<link href="/pages/rss.xml" rel="alternate" title="三秋的博客" type="application/atom+xml">
+  </head>
+  <body>
+    <aside id="sidebar">
+  <nav id="tags">
+    <a href="/index.html" id="avatar" style="background-image:url(https://raw.githubusercontent.com/fankcoder/fankcoder.github.io/master/assets/img/onepiece.jpg)"></a>
+
+    <ul id="tags__ul">
+      <li id="pl__all" class="tags__li tags-btn active">全部</li>
+       
+        <li id="备忘" class="tags__li tags-btn">备忘</li>
+       
+        <li id="生活" class="tags__li tags-btn">生活</li>
+       
+        <li id="Linux" class="tags__li tags-btn">Linux</li>
+       
+        <li id="Python" class="tags__li tags-btn">Python</li>
+       
+        <li id="读书" class="tags__li tags-btn">读书</li>
+       
+        <li id="工具" class="tags__li tags-btn">工具</li>
+      
+    </ul>
+
+    <div id="tags__bottom">
+      <a href="mailto:fankcoder@gmail.com" id="icon-email" class="tags-btn fontello"></a>
+      <a href="/pages/rss.xml" id="icon-feed" class="tags-btn fontello"></a>
+    </div>
+  </nav> <!-- end #tags -->
+
+  <div id="posts-list">
+    <form action="" id="search-form">
+      <a href="/index.html" id="mobile-avatar" style="background-image:url(https://raw.githubusercontent.com/fankcoder/fankcoder.github.io/master/assets/img/onepiece.jpg)"></a>
+      <!-- NOTE: input field is disabled by default -->
+      <input id="search-input" type="text" placeholder="Search..." disabled >
+    </form>
+
+    <nav id="pl__container">
+    
+      <a class="Linux pl__all" href="/2016/03/10/screen-linux.html"><span class="pl__circle"></span><span class="pl__title">screen工具</span><span class="pl__date">Mar 2016</span></a>
+    
+      <a class="Python pl__all" href="/2016/03/08/todolist-django-python.html"><span class="pl__circle"></span><span class="pl__title">Todolist 应用</span><span class="pl__date">Mar 2016</span></a>
+    
+      <a class="备忘 pl__all" href="/2016/03/04/general-linux-resources.html"><span class="pl__circle"></span><span class="pl__title">Linux 常用资源</span><span class="pl__date">Mar 2016</span></a>
+    
+      <a class="工具 pl__all" href="/2016/01/28/good-tools.html"><span class="pl__circle"></span><span class="pl__title">神器收藏</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="备忘 pl__all" href="/2016/01/27/general-django-resource.html"><span class="pl__circle"></span><span class="pl__title">Django命令备忘录</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Python pl__all" href="/2016/01/25/amazon-spider-python.html"><span class="pl__circle"></span><span class="pl__title">爬虫防屏蔽</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="Python pl__all" href="/2016/01/20/add-static-django-python.html"><span class="pl__circle"></span><span class="pl__title">Django添加静态文件</span><span class="pl__date">Jan 2016</span></a>
+    
+      <a class="工具 pl__all" href="/2015/11/10/vpn-tools.html"><span class="pl__circle"></span><span class="pl__title">科学上网列表</span><span class="pl__date">Nov 2015</span></a>
+    
+      <a class="Linux pl__all" href="/2015/10/26/email-shell-linux.html"><span class="pl__circle"></span><span class="pl__title">Shell每日发邮件</span><span class="pl__date">Oct 2015</span></a>
+    
+      <a class="读书 pl__all" href="/2015/10/01/book-list-of-2015.html"><span class="pl__circle"></span><span class="pl__title">2016阅读书单</span><span class="pl__date">Oct 2015</span></a>
+    
+      <a class="Python pl__all" href="/2015/07/24/blog-django-python.html"><span class="pl__circle"></span><span class="pl__title">Django练习项目之搭建博客</span><span class="pl__date">Jul 2015</span></a>
+    
+      <a class="备忘 pl__all" href="/2015/02/13/general-seo-resources.html"><span class="pl__circle"></span><span class="pl__title">SEO 常用资源</span><span class="pl__date">Feb 2015</span></a>
+    
+      <a class="Linux pl__all" href="/2015/01/01/chromium-flash-linux.html"><span class="pl__circle"></span><span class="pl__title">chromium安装flash</span><span class="pl__date">Jan 2015</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/08/03/general-mac-resources.html"><span class="pl__circle"></span><span class="pl__title">Mac 常用资源</span><span class="pl__date">Aug 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/05/11/general-mysql-resources.html"><span class="pl__circle"></span><span class="pl__title">MySQL常用资源</span><span class="pl__date">May 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-svn-resources.html"><span class="pl__circle"></span><span class="pl__title">SVN 常用资源</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-shell-resources.html"><span class="pl__circle"></span><span class="pl__title">Shell 常用资源</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-python-resources.html"><span class="pl__circle"></span><span class="pl__title">Python 常用资源</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-php-resources.html"><span class="pl__circle"></span><span class="pl__title">PHP 常用资源</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-jquery-resources.html"><span class="pl__circle"></span><span class="pl__title">jQuery 常用资源</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-javascript-resources.html"><span class="pl__circle"></span><span class="pl__title">JavaScript 常用资源</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-html-resources.html"><span class="pl__circle"></span><span class="pl__title">HTML 常用</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="备忘 pl__all" href="/2014/01/15/general-git-resources.html"><span class="pl__circle"></span><span class="pl__title">Git 常用命令</span><span class="pl__date">Jan 2014</span></a>
+    
+      <a class="生活 pl__all" href="/2013/06/17/the-end-of-regular-college-course.html"><span class="pl__circle"></span><span class="pl__title">标题</span><span class="pl__date">Jun 2013</span></a>
+    
+      <a class="备忘 pl__all" href="/2013/04/23/general-bootstrap-resources.html"><span class="pl__circle"></span><span class="pl__title">Bootstrap常用资源</span><span class="pl__date">Apr 2013</span></a>
+    
+    </nav>
+  </div> <!-- end #posts-list -->
+</aside> <!-- end #sidebar -->
+    <div id="post">
+      <div id="pjax">
+        <article id="post__content">
+  <h1 id="post__title" data-identifier="20160125">爬虫防屏蔽</h1>
+  <p>##介绍</p>
+
+<p>最近爬了amazon,发现amazon服务器,连续访问100多次后爬虫就会经常失败了,</p>
+
+<p>查找了下失败的原因,发现amazon会检测Ip一旦发现请求次数过多,就会跳转到输入验证码的网页</p>
+
+<p>需要输入正确验证码才可继续愉快的访问,搞掉验证码是个麻烦活,执意研究验证码就跨到图像分析那个学科了(不过据说某些库识别率还行)。。</p>
+
+<p>Gg整理正常的防屏蔽方法,总结一下比较好的解决方案.</p>
+
+<h4 id="adsl">ADSL重启拨号</h4>
+
+<p>大家都知道adsl重拨号的话,会换一个新的ip地址,那就可以写脚本设置时间重拨adsl,或者先用爬虫爬着,发现开始跳转到验证码页面了,再调用重拨adsl的脚本</p>
+
+<h4 id="section">爬代理服务器地址</h4>
+
+<p>很机智的解决办法，代理服务器可以很好的解决ip被屏蔽的问题</p>
+
+<p>不过代理服务器的网站域名经常更换,我就不提供了,大家自行Gg吧,百度说不定也会有惊喜</p>
+
+<p>要注意的是爬下来的代理服务器,最好检测一下是否可用!</p>
+
+<p>参照下面篇博客的checkProxy()函数</p>
+
+<p>https://blog.linuxeye.com/410.html</p>
+
+<pre><code>#!/usr/bin/env python
+#coding:utf-8
+#BLOG: blog.linuxeye.com
+import urllib2
+import re
+import threading
+import time
+import MySQLdb
+rawProxyList = []
+checkedProxyList = []
+#抓取代理网站
+targets = []
+for i in xrange(1,42):
+        target = r"http://www.proxy.com.ru/list_%d.html" % i
+        targets.append(target)
+#抓取代理服务器正则
+p = re.compile(r'''&lt;tr&gt;&lt;b&gt;&lt;td&gt;(\d+)&lt;/td&gt;&lt;td&gt;(.+?)&lt;/td&gt;&lt;td&gt;(\d+)&lt;/td&gt;&lt;td&gt;(.+?)&lt;/td&gt;&lt;td&gt;(.+?)&lt;/td&gt;&lt;/b&gt;&lt;/tr&gt;''')
+#获取代理的类
+class ProxyGet(threading.Thread):
+    def __init__(self,target):
+        threading.Thread.__init__(self)
+        self.target = target
+    def getProxy(self):
+        print "代理服务器目标网站： " + self.target
+        req = urllib2.urlopen(self.target)
+        result = req.read()
+        #print chardet.detect(result)
+        matchs = p.findall(result)
+#       print matchs
+        for row in matchs:
+            ip=row[1]
+            port =row[2]
+            addr = row[4].decode("cp936").encode("utf-8")
+            proxy = [ip,port,addr]
+            print proxy
+            rawProxyList.append(proxy)
+    def run(self):
+        self.getProxy()
+#检验代理的类
+class ProxyCheck(threading.Thread):
+    def __init__(self,proxyList):
+        threading.Thread.__init__(self)
+        self.proxyList = proxyList
+        self.timeout = 5
+        self.testUrl = "http://www.baidu.com/"
+        self.testStr = "030173"
+    def checkProxy(self):
+        cookies = urllib2.HTTPCookieProcessor()
+        for proxy in self.proxyList:
+            proxyHandler = urllib2.ProxyHandler({"http" : r'http://%s:%s' %(proxy[0],proxy[1])})
+            #print r'http://%s:%s' %(proxy[0],proxy[1])
+            opener = urllib2.build_opener(cookies,proxyHandler)
+            opener.addheaders = [('User-agent', 'Mozilla/5.0 (Windows NT 6.2; WOW64; rv:22.0) Gecko/20100101 Firefox/22.0')]
+            #urllib2.install_opener(opener)
+            t1 = time.time()
+            try:
+                #req = urllib2.urlopen("http://www.baidu.com", timeout=self.timeout)
+                req = opener.open(self.testUrl, timeout=self.timeout)
+                #print "urlopen is ok...."
+                result = req.read()
+                #print "read html...."
+                timeused = time.time() - t1
+                pos = result.find(self.testStr)
+                #print "pos is %s" %pos
+                if pos &gt; 1:
+                    checkedProxyList.append((proxy[0],proxy[1],proxy[2],timeused))
+                    #print "ok ip: %s %s %s %s" %(proxy[0],proxy[1],proxy[2],timeused)
+                else:
+                     continue
+            except Exception,e:
+                #print e.message
+                continue
+    def run(self):
+        self.checkProxy()
+if __name__ == "__main__":
+    getThreads = []
+    checkThreads = []
+#对每个目标网站开启一个线程负责抓取代理
+for i in range(len(targets)):
+    t = ProxyGet(targets[i])
+    getThreads.append(t)
+for i in range(len(getThreads)):
+    getThreads[i].start()
+for i in range(len(getThreads)):
+    getThreads[i].join()
+print '.'*10+"总共抓取了%s个代理" %len(rawProxyList) +'.'*10
+#开启20个线程负责校验，将抓取到的代理分成20份，每个线程校验一份
+for i in range(20):
+    t = ProxyCheck(rawProxyList[((len(rawProxyList)+19)/20) * i:((len(rawProxyList)+19)/20) * (i+1)])
+    checkThreads.append(t)
+for i in range(len(checkThreads)):
+    checkThreads[i].start()
+for i in range(len(checkThreads)):
+    checkThreads[i].join()
+print '.'*10+"总共有%s个代理通过校验" %len(checkedProxyList) +'.'*10
+#插入数据库，表结构自己创建，四个字段ip,port,speed,address
+def db_insert(insert_list):
+    try:
+        conn = MySQLdb.connect(host="localhost", user="root", passwd="admin",db="m_common",charset='utf8')
+        cursor = conn.cursor()
+        cursor.execute('delete from proxy')
+        cursor.execute('alter table proxy AUTO_INCREMENT=1')
+        cursor.executemany("INSERT INTO proxy(ip,port,speed,address) VALUES (%s,%s,%s,%s)",insert_list)
+        conn.commit()
+        cursor.close()
+        conn.close()
+    except MySQLdb.Error,e:
+        print "Mysql Error %d: %s" % (e.args[0], e.args[1])
+#代理排序持久化
+proxy_ok = []
+f= open("proxy_list.txt",'w+')
+for proxy in sorted(checkedProxyList,cmp=lambda x,y:cmp(x[3],y[3])):
+    if proxy[3] &lt; 8:
+        #print "checked proxy is: %s:%s\t%s\t%s" %(proxy[0],proxy[1],proxy[2],proxy[3])
+        proxy_ok.append((proxy[0],proxy[1],proxy[3],proxy[2]))
+        f.write("%s:%s\t%s\t%s\n"%(proxy[0],proxy[1],proxy[2],proxy[3]))
+f.close()
+db_insert(proxy_ok)
+
+</code></pre>
+
+<p>想了解我的amazon爬虫?</p>
+
+<p>代码在github spider-comments项目下的amazon-spider-comments</p>
+
+<p>https://github.com/fankcoder/spider-comments</p>
+
+</article> <!-- end #post__content -->
+
+<div id="post__share">
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://fankcoder.github.io//2016/01/25/amazon-spider-python.html&text=爬虫防屏蔽" target="_blank"></a>
+  <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://fankcoder.github.io//2016/01/25/amazon-spider-python.html&title=爬虫防屏蔽" target="_blank"></a>
+</div> <!-- end #post__share -->
+<div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//fankcoder.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+
+        <p id="copyright">Powered by <a href="http://jekyllrb.com" target="_blank">Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Theme <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll</a>&nbsp;&nbsp;|&nbsp;&nbsp;Hosted on <a href="https://pages.github.com" target="_blank">Github</a></p>
+      </div> <!-- end #pjax -->
+
+      <div id="post__toc-trigger">
+        <div id="post__toc">
+          <span id="post__toc-title">Table of Contents</span>
+          <ul id="post__toc-ul"></ul>
+        </div>
+      </div>
+    </div> <!-- end #post -->
+
+    <button id="js-fullscreen"><span id="icon-arrow" class="fontello"></span></button>
+
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.pjax.js"></script>
+<script src="/assets/js/nprogress.js"></script>
+<script src="/assets/js/script.js"></script>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '', '');
+  ga('send', 'pageview');
+</script>
+  </body>
+</html>
