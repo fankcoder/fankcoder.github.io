@@ -7,6 +7,8 @@ keywords: spider
 description: spider amazon
 ---
 
+##介绍
+
 最近爬了amazon,发现amazon服务器,连续访问100多次后爬虫就会经常失败了,
 
 查找了下失败的原因,发现amazon会检测Ip一旦发现请求次数过多,就会跳转到输入验证码的网页
