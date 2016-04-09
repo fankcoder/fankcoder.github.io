@@ -831,6 +831,137 @@ STATICFILES_FINDERS = (
       </item>
     
       <item>
+        <title>Python黑魔法(split,enumerate)</title>
+        <link>http://fankcoder.github.io//2016/01/11/enumerate-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/01/11/enumerate-python.html</guid>
+        <pubDate>Mon, 11 Jan 2016 00:00:00 +0800</pubDate>
+        <description>&lt;h3 id=&quot;split&quot;&gt;split()&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;#!/usr/bin/python
+ 
+str = &quot;Line1-abcdef \nLine2-abc \nLine4-abcd&quot;;
+print str.split( );
+print str.split(&#39; &#39;, 1 );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[&#39;Line1-abcdef&#39;, &#39;Line2-abc&#39;, &#39;Line4-abcd&#39;]
+[&#39;Line1-abcdef&#39;, &#39;\nLine2-abc \nLine4-abcd&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;split()要点:&lt;/p&gt;
+
+&lt;p&gt;采用不带参数的split()，它会把所有空格（空格符、制表符、换行符）当作分隔符。&lt;/p&gt;
+
+&lt;p&gt;filter(None, s.split(‘ ‘))&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a = &#39;hello++world!+&#39;   #如何取得&#39;hello&#39;和&#39;world&#39;呢？
+ 
+&amp;gt;&amp;gt;&amp;gt;a.split(&#39;+&#39;)
+ 
+[&#39;hello&#39;, &#39;&#39;, &#39;world!&#39;, &#39;&#39;]    #含有两个空字符串
+ 
+&amp;gt;&amp;gt;&amp;gt;filter(None, a.split(&#39;+&#39;))
+ 
+[&#39;hello&#39;, &#39;world!&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;enumerate&quot;&gt;enumerate()&lt;/h3&gt;
+
+&lt;p&gt;写一个带引索的遍历数组&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in range (0,len(list)):
+    print i ,list[i]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果使用enumerate():&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;l = [1,2,3,&#39;a&#39;,&#39;b&#39;]
+ 
+ for index,data in enumerate(l):
+     print index,data
+ 
+&amp;gt;&amp;gt;   
+0 1
+1 2
+2 3
+3 a
+4 b
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;简直太方便了~&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Python转码问题</title>
+        <link>http://fankcoder.github.io//2016/01/11/encode-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2016/01/11/encode-python.html</guid>
+        <pubDate>Mon, 11 Jan 2016 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;在Python中，可以对String调用decode和encode方法来实现转码。&lt;/p&gt;
+
+&lt;p&gt;比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;s.decode(&#39;gbk&#39;).encode(&#39;utf-8′) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可是，在实际开发中，我发现，这种办法经常会出现异常：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;UnicodeDecodeError: ‘gbk&#39; codec can&#39;t decode bytes in position 30664-30665: illegal multibyte sequence 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这是因为遇到了非法字符——尤其是在某些用C/C++编写的程序中，全角空格往往有多种不同的实现方式，比如\xa3\xa0，或者\xa4\x57，这些字符，看起来都是全角空格，但它们并不是“合法”的全角空格（真正的全角空格是\xa1\xa1），因此在转码的过程中出现了异常。&lt;/p&gt;
+
+&lt;p&gt;这样的问题很让人头疼，因为只要字符串中出现了一个非法字符，整个字符串——有时候，就是整篇文章——就都无法转码。&lt;/p&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;s.decode(&#39;gbk&#39;, ‘ignore&#39;).encode(&#39;utf-8′) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因为decode的函数原型是decode([encoding], [errors=’strict’])，可以用第二个参数控制错误处理的策略，默认的参数就是strict，代表遇到非法字符时抛出异常； 
+如果设置为ignore，则会忽略非法字符； 
+如果设置为replace，则会用?取代非法字符； 
+如果设置为xmlcharrefreplace，则使用XML的字符引用。&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Python的xrange和range</title>
+        <link>http://fankcoder.github.io//2015/12/29/xrange-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/12/29/xrange-python.html</guid>
+        <pubDate>Tue, 29 Dec 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;这两个函数基本上都是在循环的时候用。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in range(0, 100): 
+print i 
+
+for i in xrange(0, 100): 
+print i 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这两个输出的结果都是一样的，实际上有很多不同，range会直接生成一个list对象：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a = range(0,100) 
+print type(a)  #list
+print a #[0,1,2...]
+print a[0], a[1] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;而xrange则不会直接生成一个list，而是每次调用返回其中的一个值&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a = xrange(0,100) 
+print type(a) #&amp;lt;type &#39;xrange&#39;&amp;gt;
+print a  #xrange(100)
+print a[0], a[1] 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以xrange做循环的性能比range好，尤其是返回列表很长的时候！&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
         <title>科学上网列表</title>
         <link>http://fankcoder.github.io//2015/11/10/vpn-tools.html</link>
         <guid isPermaLink="true">http://fankcoder.github.io//2015/11/10/vpn-tools.html</guid>
@@ -957,6 +1088,111 @@ EOF
       </item>
     
       <item>
+        <title>Python密码处理</title>
+        <link>http://fankcoder.github.io//2015/10/13/passwd-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/10/13/passwd-python.html</guid>
+        <pubDate>Tue, 13 Oct 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;python密码处理(可用于生产模式)
+　　
+```
+import os
+from hashlib import sha256
+from hmac import HMAC&lt;/p&gt;
+
+&lt;p&gt;def encrypt_password(password, salt=None):
+    “&quot;”Hash password on the fly.”””
+    if salt is None:
+        salt = os.urandom(8) # 64 bits.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;assert 8 == len(salt)
+assert isinstance(salt, str)
+
+if isinstance(password, unicode):
+    password = password.encode(&#39;UTF-8&#39;)
+
+assert isinstance(password, str)
+
+result = password
+for i in xrange(10):
+    result = HMAC(result, salt, sha256).digest()
+
+return salt + result ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里先随机生成 64 bits 的 salt，再选择 SHA-256 算法使用 HMAC 对密码和 salt 进行 10 次叠代混淆，最后将 salt 和 hash 结果一起返回。&lt;/p&gt;
+
+&lt;p&gt;使用的方法很简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;hashed = encrypt_password(&#39;secret password&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面是验证函数，它直接使用 encrypt_password 来对密码进行相同的单向转换并比较&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def validate_password(hashed, input_password):
+    return hashed == encrypt_password(input_password, salt=hashed[:8])
+
+assert validate_password(hashed, &#39;secret password&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;密码项目代码查看&lt;a href=&quot;https://github.com/fankcoder/ShowMeTheCode&quot;&gt;show me the code&lt;/a&gt;下 s21/ 目录&lt;/p&gt;
+</description>
+      </item>
+    
+      <item>
+        <title>Python标准库os</title>
+        <link>http://fankcoder.github.io//2015/10/12/os-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/10/12/os-python.html</guid>
+        <pubDate>Mon, 12 Oct 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;os模块包含普遍的操作系统功能。&lt;/p&gt;
+
+&lt;p&gt;如果你希望你的程序能够与平台无关的话，这个模块是尤为重要的。&lt;/p&gt;
+
+&lt;p&gt;即它允许一个程序在编写后不需要任何改动，也不会发生任何问题，就可以在Linux和Windows下运行。一个例子就是使用os.sep可以取代操作系统特定的路径分割符。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.name字符串指示你正在使用的平台。比如对于Windows，它是’nt’，而对于Linux/Unix用户，它是’posix’。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.getcwd()函数得到当前工作目录，即当前Python脚本工作的目录路径。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.getenv()和os.putenv()函数分别用来读取和设置环境变量。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.listdir()返回指定目录下的所有文件和目录名。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.remove()函数用来删除一个文件。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.system()函数用来运行shell命令。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.linesep字符串给出当前平台使用的行终止符。例如，Windows使用’\r\n’，Linux使用’\n’而Mac使用’\r’。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.path.split()函数返回一个路径的目录名和文件名。&lt;/p&gt;
+
+    &lt;p&gt;例如：&lt;/p&gt;
+
+    &lt;pre&gt;&lt;code&gt;os.path.split(&#39;/home/swaroop/byte/code/poem.txt&#39;)
+  
+(&#39;/home/swaroop/byte/code&#39;, &#39;poem.txt&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.path.isfile()和os.path.isdir()函数分别检验给出的路径是一个文件还是目录。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;os.path.existe()函数用来检验给出的路径是否真地存在。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+      </item>
+    
+      <item>
         <title>2016阅读书单</title>
         <link>http://fankcoder.github.io//2015/10/01/book-list-of-2015.html</link>
         <guid isPermaLink="true">http://fankcoder.github.io//2015/10/01/book-list-of-2015.html</guid>
@@ -1009,6 +1245,442 @@ with the code ,change the world.
 更值得一提的是github,这个网站的创建真是大大推动了开源软件的进步,注册了github帐号后,感觉到真是方便,无论是找好用的工具,还是学习别人的代码,给提高自己能力创造了及其便利的条件.
 &lt;/code&gt;&lt;/pre&gt;
 
+</description>
+      </item>
+    
+      <item>
+        <title>Python正则</title>
+        <link>http://fankcoder.github.io//2015/08/25/re-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/08/25/re-python.html</guid>
+        <pubDate>Tue, 25 Aug 2015 00:00:00 +0800</pubDate>
+        <description>&lt;p&gt;整理自&lt;a href=&quot;http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html&quot;&gt;博客园&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;re&quot;&gt;re模块&lt;/h4&gt;
+
+&lt;p&gt;Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: UTF-8
+import re
+ 
+# 将正则表达式编译成Pattern对象
+pattern = re.compile(r&#39;hello&#39;)
+ 
+# 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None
+match = pattern.match(&#39;hello world!&#39;)
+ 
+if match:
+    # 使用Match获得分组信息
+    print match.group()
+ 
+### 输出 ###
+# hello
+re.compile(strPattern[, flag]):
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。&lt;/p&gt;
+
+&lt;p&gt;第二个参数flag是匹配模式，取值可以使用按位或运算符’|‘表示同时生效，比如re.I | re.M。&lt;/p&gt;
+
+&lt;p&gt;另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。 可选值有：&lt;/p&gt;
+
+&lt;p&gt;re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）&lt;/p&gt;
+
+&lt;p&gt;M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）&lt;/p&gt;
+
+&lt;p&gt;S(DOTALL): 点任意匹配模式，改变’.’的行为&lt;/p&gt;
+
+&lt;p&gt;L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定&lt;/p&gt;
+
+&lt;p&gt;U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性&lt;/p&gt;
+
+&lt;p&gt;X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a = re.compile(r&quot;&quot;&quot;\d +  # the integral part
+                   \.    # the decimal point
+                   \d *  # some fractional digits&quot;&quot;&quot;, re.X)
+b = re.compile(r&quot;\d+\.\d*&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;re提供了众多模块方法用于完成正则表达式的功能。这些方法可以使用Pattern实例的相应方法替代，唯一的好处是少写一行re.compile()代码，但同时也无法复用编译后的Pattern对象。这些方法将在Pattern类的实例方法部分一起介绍。如上面这个例子可以简写为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;m = re.match(r&#39;hello&#39;, &#39;hello world!&#39;)
+print m.group()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;re模块还提供了一个方法escape(string)，用于将string中的正则表达式元字符如*/+/?等之前加上转义符再返回，在需要大量匹配元字符时有那么一点用。&lt;/p&gt;
+
+&lt;h4 id=&quot;match&quot;&gt;Match&lt;/h4&gt;
+
+&lt;p&gt;Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。&lt;/p&gt;
+
+&lt;p&gt;属性：&lt;/p&gt;
+
+&lt;p&gt;string: 匹配时使用的文本。&lt;/p&gt;
+
+&lt;p&gt;re: 匹配时使用的Pattern对象。&lt;/p&gt;
+
+&lt;p&gt;pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/p&gt;
+
+&lt;p&gt;endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。&lt;/p&gt;
+
+&lt;p&gt;lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。&lt;/p&gt;
+
+&lt;p&gt;lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。方法：&lt;/p&gt;
+
+&lt;p&gt;group([group1, …]):&lt;/p&gt;
+
+&lt;p&gt;获得一个或多个分组截获的字符串；指定多个参数时将以元组形式返回。group1可以使用编号也可以使用别名；编号0代表整个匹配的子串；不填写参数时，返回group(0)；没有截获字符串的组返回None；截获了多次的组返回最后一次截获的子串。&lt;/p&gt;
+
+&lt;p&gt;groups([default]):&lt;/p&gt;
+
+&lt;p&gt;以元组形式返回全部分组截获的字符串。相当于调用group(1,2,…last)。default表示没有截获字符串的组以这个值替代，默认为None。&lt;/p&gt;
+
+&lt;p&gt;groupdict([default]):&lt;/p&gt;
+
+&lt;p&gt;返回以有别名的组的别名为键、以该组截获的子串为值的字典，没有别名的组不包含在内。default含义同上。&lt;/p&gt;
+
+&lt;p&gt;start([group]):&lt;/p&gt;
+
+&lt;p&gt;返回指定的组截获的子串在string中的起始索引（子串第一个字符的索引）。group默认值为0。&lt;/p&gt;
+
+&lt;p&gt;end([group]):&lt;/p&gt;
+
+&lt;p&gt;返回指定的组截获的子串在string中的结束索引（子串最后一个字符的索引+1）。group默认值为0。&lt;/p&gt;
+
+&lt;p&gt;span([group]):&lt;/p&gt;
+
+&lt;p&gt;返回(start(group), end(group))。&lt;/p&gt;
+
+&lt;p&gt;expand(template):&lt;/p&gt;
+
+&lt;p&gt;将匹配到的分组代入template中然后返回。template中可以使用\id或\g&lt;id&gt;、\g&lt;name&gt;引用分组，但不能使用编号0。\id与\g&lt;id&gt;是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符&#39;0&#39;，只能使用\g&amp;lt;1&amp;gt;0。&lt;/id&gt;&lt;/name&gt;&lt;/id&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+m = re.match(r&#39;(\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&#39;, &#39;hello world!&#39;)
+ 
+print &quot;m.string:&quot;, m.string
+print &quot;m.re:&quot;, m.re
+print &quot;m.pos:&quot;, m.pos
+print &quot;m.endpos:&quot;, m.endpos
+print &quot;m.lastindex:&quot;, m.lastindex
+print &quot;m.lastgroup:&quot;, m.lastgroup
+ 
+print &quot;m.group(1,2):&quot;, m.group(1, 2)
+print &quot;m.groups():&quot;, m.groups()
+print &quot;m.groupdict():&quot;, m.groupdict()
+print &quot;m.start(2):&quot;, m.start(2)
+print &quot;m.end(2):&quot;, m.end(2)
+print &quot;m.span(2):&quot;, m.span(2)
+print r&quot;m.expand(r&#39;\2 \1\3&#39;):&quot;, m.expand(r&#39;\2 \1\3&#39;)
+ 
+### output ###
+# m.string: hello world!
+# m.re: &amp;lt;_sre.SRE_Pattern object at 0x016E1A38&amp;gt;
+# m.pos: 0
+# m.endpos: 12
+# m.lastindex: 3
+# m.lastgroup: sign
+# m.group(1,2): (&#39;hello&#39;, &#39;world&#39;)
+# m.groups(): (&#39;hello&#39;, &#39;world&#39;, &#39;!&#39;)
+# m.groupdict(): {&#39;sign&#39;: &#39;!&#39;}
+# m.start(2): 6
+# m.end(2): 11
+# m.span(2): (6, 11)
+# m.expand(r&#39;\2 \1\3&#39;): world hello!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;pattern&quot;&gt;Pattern&lt;/h4&gt;
+&lt;p&gt;Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。&lt;/p&gt;
+
+&lt;p&gt;Pattern不能直接实例化，必须使用re.compile()进行构造。&lt;/p&gt;
+
+&lt;p&gt;Pattern提供了几个可读属性用于获取表达式的相关信息：&lt;/p&gt;
+
+&lt;p&gt;pattern: 编译时用的表达式字符串。&lt;/p&gt;
+
+&lt;p&gt;flags: 编译时用的匹配模式。数字形式。&lt;/p&gt;
+
+&lt;p&gt;groups: 表达式中分组的数量。&lt;/p&gt;
+
+&lt;p&gt;groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+p = re.compile(r&#39;(\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)&#39;, re.DOTALL)
+ 
+print &quot;p.pattern:&quot;, p.pattern
+print &quot;p.flags:&quot;, p.flags
+print &quot;p.groups:&quot;, p.groups
+print &quot;p.groupindex:&quot;, p.groupindex
+ 
+### output ###
+# p.pattern: (\w+) (\w+)(?P&amp;lt;sign&amp;gt;.*)
+# p.flags: 16
+# p.groups: 3
+# p.groupindex: {&#39;sign&#39;: 3}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;实例方法[&lt;/td&gt;
+      &lt;td&gt;re模块方法]：&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;match(string[, pos[, endpos]])&lt;/td&gt;
+      &lt;td&gt;re.match(pattern, string[, flags]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。 
+pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。&lt;/p&gt;
+
+&lt;p&gt;注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符’$’。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;search(string[, pos[, endpos]])&lt;/td&gt;
+      &lt;td&gt;re.search(pattern, string[, flags]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。&lt;/p&gt;
+
+&lt;p&gt;pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# encoding: UTF-8 
+import re 
+ 
+# 将正则表达式编译成Pattern对象 
+pattern = re.compile(r&#39;world&#39;) 
+ 
+# 使用search()查找匹配的子串，不存在能匹配的子串时将返回None 
+# 这个例子中使用match()无法成功匹配 
+match = pattern.search(&#39;hello world!&#39;) 
+ 
+if match: 
+    # 使用Match获得分组信息 
+    print match.group() 
+ 
+### 输出 ### 
+# world
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;split(string[, maxsplit])&lt;/td&gt;
+      &lt;td&gt;re.split(pattern, string[, maxsplit]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+ 
+p = re.compile(r&#39;\d+&#39;)
+print p.split(&#39;one1two2three3four4&#39;)
+ 
+### output ###
+# [&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;findall(string[, pos[, endpos]])&lt;/td&gt;
+      &lt;td&gt;re.findall(pattern, string[, flags]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;搜索string，以列表形式返回全部能匹配的子串。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+ 
+p = re.compile(r&#39;\d+&#39;)
+print p.findall(&#39;one1two2three3four4&#39;)
+ 
+### output ###
+# [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;finditer(string[, pos[, endpos]])&lt;/td&gt;
+      &lt;td&gt;re.finditer(pattern, string[, flags]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+ 
+p = re.compile(r&#39;\d+&#39;)
+for m in p.finditer(&#39;one1two2three3four4&#39;):
+    print m.group(),
+ 
+### output ###
+# 1 2 3 4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;sub(repl, string[, count])&lt;/td&gt;
+      &lt;td&gt;re.sub(pattern, repl, string[, count]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;使用repl替换string中每一个匹配的子串后返回替换后的字符串。&lt;/p&gt;
+
+&lt;p&gt;当repl是一个字符串时，可以使用\id或\g&lt;id&gt;、\g&lt;name&gt;引用分组，但不能使用编号0。&lt;/name&gt;&lt;/id&gt;&lt;/p&gt;
+
+&lt;p&gt;当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。&lt;/p&gt;
+
+&lt;p&gt;count用于指定最多替换次数，不指定时全部替换。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+ 
+p = re.compile(r&#39;(\w+) (\w+)&#39;)
+s = &#39;i say, hello world!&#39;
+ 
+print p.sub(r&#39;\2 \1&#39;, s)
+ 
+def func(m):
+    return m.group(1).title() + &#39; &#39; + m.group(2).title()
+ 
+print p.sub(func, s)
+ 
+### output ###
+# say i, world hello!
+# I Say, Hello World!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;subn(repl, string[, count])&lt;/td&gt;
+      &lt;td&gt;re.sub(pattern, repl, string[, count]):&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;返回 (sub(repl, string[, count]), 替换次数)。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import re
+ 
+p = re.compile(r&#39;(\w+) (\w+)&#39;)
+s = &#39;i say, hello world!&#39;
+ 
+print p.subn(r&#39;\2 \1&#39;, s)
+ 
+def func(m):
+    return m.group(1).title() + &#39; &#39; + m.group(2).title()
+ 
+print p.subn(func, s)
+ 
+### output ###
+# (&#39;say i, world hello!&#39;, 2)
+# (&#39;I Say, Hello World!&#39;, 2)
+&lt;/code&gt;&lt;/pre&gt;
+
+</description>
+      </item>
+    
+      <item>
+        <title>Python内置函数(map、reduce、filter)</title>
+        <link>http://fankcoder.github.io//2015/08/11/func-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/08/11/func-python.html</guid>
+        <pubDate>Tue, 11 Aug 2015 00:00:00 +0800</pubDate>
+        <description>&lt;h3 id=&quot;map&quot;&gt;map&lt;/h3&gt;
+
+&lt;p&gt;map(…)
+    map(function, sequence[, sequence, …]) -&amp;gt; list 说明：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;对sequence中的item依次执行function(item)，执行结果输出为list。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; map(str, range(5))           #对range(5)各项进行str操作
+[&#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;]        #返回列表
+&amp;gt;&amp;gt;&amp;gt; def add(n):return n+n
+... 
+&amp;gt;&amp;gt;&amp;gt; map(add, range(5))           #对range(5)各项进行add操作
+[0, 2, 4, 6, 8]
+&amp;gt;&amp;gt;&amp;gt; map(lambda x:x+x,range(5))   #lambda 函数，各项+本身
+[0, 2, 4, 6, 8]
+&amp;gt;&amp;gt;&amp;gt; map(lambda x:x+1,range(10))  #lambda 函数，各项+1
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;reduce&quot;&gt;reduce&lt;/h3&gt;
+
+&lt;p&gt;reduce(…)
+    reduce(function, sequence[, initial]) -&amp;gt; value 说明：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;对sequence中的item顺序迭代调用function，函数必须要有2个参数。要是有第3个参数，则表示初始值，可以继续调用初始值，返回一个值。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; def add(x,y):return x+y
+... 
+&amp;gt;&amp;gt;&amp;gt; reduce(add,range(10))        #1+2+3+...+9
+45
+&amp;gt;&amp;gt;&amp;gt; reduce(add,range(11))        #1+2+3+...+10
+55
+&amp;gt;&amp;gt;&amp;gt; reduce(lambda x,y:x*y,range(1,3),5)           #lambda 函数，5是初始值， 1*2*5
+10
+&amp;gt;&amp;gt;&amp;gt; reduce(lambda x,y:x*y,range(1,6))             #阶乘，1*2*3*4*5
+120
+&amp;gt;&amp;gt;&amp;gt; reduce(lambda x,y:x*y,range(1,6),3)           #初始值3，结果再*3
+360
+&amp;gt;&amp;gt;&amp;gt; reduce(lambda x,y:x+y,[1,2,3,4,5,6])          #1+2+3+4+5+6
+21 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;filter&quot;&gt;filter&lt;/h3&gt;
+
+&lt;p&gt;filter(…)
+    filter(function or None, sequence) -&amp;gt; list, tuple, or string 说明：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;对sequence中的item依次执行function(item)，将执行结果为True（！=0）的item组成一个List/String/Tuple（取决于sequence的类型）返回，False则退出（0），进行过滤。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; def div(n):return n%2
+... 
+&amp;gt;&amp;gt;&amp;gt; filter(div,range(5))                    #返回div输出的不等于0的真值
+[1, 3]
+&amp;gt;&amp;gt;&amp;gt; filter(div,range(10))
+[1, 3, 5, 7, 9]
+&amp;gt;&amp;gt;&amp;gt; filter(lambda x : x%2,range(10))        #lambda 函数返回奇数，返回列表
+[1, 3, 5, 7, 9]
+&amp;gt;&amp;gt;&amp;gt; filter(lambda x : not x%2,range(10))
+[0, 2, 4, 6, 8]
+&amp;gt;&amp;gt;&amp;gt; def fin(n):return n!=&#39;f&#39;                #过滤&#39;z&#39; 函数，出现z则返回False
+... 
+&amp;gt;&amp;gt;&amp;gt; filter(fin,&#39;fankcoder&#39;)                    #&#39;z&#39;被过滤
+&#39;ankcoder&#39;
+&amp;gt;&amp;gt;&amp;gt; filter(lambda x : x !=&#39;f&#39;,&#39;fankcoder&#39;)     #labmda返回True值
+&#39;ankcoder&#39;
+&amp;gt;&amp;gt;&amp;gt; filter(lambda x : not x==&#39;f&#39;,&#39;fankcoder&#39;)  #返回：字符串
+&#39;ankcoder&#39;
+&lt;/code&gt;&lt;/pre&gt;
 </description>
       </item>
     
@@ -1363,6 +2035,146 @@ $ git push -u origin master   //将本地项目更新到github项目上去
       </item>
     
       <item>
+        <title>用xlrd\xlwt读写excel</title>
+        <link>http://fankcoder.github.io//2015/05/22/xlrd-python.html</link>
+        <guid isPermaLink="true">http://fankcoder.github.io//2015/05/22/xlrd-python.html</guid>
+        <pubDate>Fri, 22 May 2015 00:00:00 +0800</pubDate>
+        <description>&lt;h3 id=&quot;xlrdxlwt&quot;&gt;首先安装xlrd\xlwt模块&lt;/h3&gt;
+
+&lt;p&gt;xlrd模块下载地址:&lt;/p&gt;
+
+&lt;p&gt;https://pypi.python.org/pypi/xlrd&lt;/p&gt;
+
+&lt;p&gt;xlwt模块下载地址:&lt;/p&gt;
+
+&lt;p&gt;https://pypi.python.org/pypi/xlwt&lt;/p&gt;
+
+&lt;p&gt;linux 安装命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;windos 安装命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;setup.py install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;使用方法&lt;/h3&gt;
+
+&lt;h4 id=&quot;xlrd&quot;&gt;xlrd&lt;/h4&gt;
+&lt;p&gt;打开excel&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import xlrd
+data = xlrd.open_workbook(&#39;demo.xls&#39;) #注意这里的workbook首字母是小写
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;查看文件中包含sheet的名称&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;data.sheet_names()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;得到第一个工作表，或者通过索引顺序 或 工作表名称&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;table = data.sheets()[0]
+table = data.sheet_by_index(0)
+table = data.sheet_by_name(u&#39;Sheet1&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;获取行数和列数&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nrows = table.nrows
+ncols = table.ncols
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;获取整行和整列的值（数组）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;table.row_values(i)
+table.col_values(i)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;循环行,得到索引的列表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for rownum in range(table.nrows):
+print table.row_values(rownum)
+#单元格
+cell_A1 = table.cell(0,0).value
+cell_C4 = table.cell(2,3).value
+分别使用行列索引
+cell_A1 = table.row(0)[0].value
+cell_A2 = table.col(1)[0].value
+#简单的写入
+row = 0
+col = 0
+ctype = 1 # 类型 0 empty,1 string, 2 number, 3 date, 4 boolean, 5 error
+value = &#39;lixiaoluo&#39;
+xf = 0 # 扩展的格式化 (默认是0)
+table.put_cell(row, col, ctype, value, xf)
+table.cell(0,0) # 文本:u&#39;lixiaoluo&#39;
+table.cell(0,0).value # &#39;lixiaoluo&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;xlwt&quot;&gt;xlwt&lt;/h4&gt;
+
+&lt;p&gt;新建一个excel文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import xlwt
+file = xlwt.Workbook() #注意这里的Workbook首字母是大写，无语吧
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;新建一个sheet&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;table = file.add_sheet(&#39;sheet name&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;写入数据table.write(行,列,value)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;table.write(0,0,&#39;test&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果对一个单元格重复操作，会引发&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;returns error:
+ Exception: Attempt to overwrite cell:
+ sheetname=u&#39;sheet 1&#39; rowx=0 colx=0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以需要在打开时加cell_overwrite_ok=True解决&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;table = file.add_sheet(&#39;sheet name&#39;,cell_overwrite_ok=True)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;保存文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;file.save(&#39;demo.xls&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另外，使用style&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;style = xlwt.XFStyle() #初始化样式
+
+font = xlwt.Font() #为样式创建字体
+
+font.name = &#39;Times New Roman&#39;
+
+font.bold = True
+
+style.font = font #为样式设置字体
+
+table.write(0, 0, &#39;some bold Times text&#39;, style) # 使用样式
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;linuxwindos&quot;&gt;Linux下保存用中文名保存正常,windos下坑爹乱码问题&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;#coding:utf8
+
+file.save(&#39;世界你好&#39;)#linux正常,win乱码
+
+file.save(u&#39;世界你好&#39;.encode(&#39;GBK&#39;))# win正常
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      </item>
+    
+      <item>
         <title>SEO 常用资源</title>
         <link>http://fankcoder.github.io//2015/02/13/general-seo-resources.html</link>
         <guid isPermaLink="true">http://fankcoder.github.io//2015/02/13/general-seo-resources.html</guid>
@@ -1372,655 +2184,6 @@ $ git push -u origin master   //将本地项目更新到github项目上去
 &lt;h3 id=&quot;url-&quot;&gt;URL中用&lt;code&gt;-&lt;/code&gt;分割单词，用&lt;code&gt;_&lt;/code&gt;关联单词&lt;/h3&gt;
 
 &lt;p&gt;Google 会把 &lt;code&gt;a-good_reource-of-seo.html&lt;/code&gt; 拆分成关键字：&lt;code&gt;a&lt;/code&gt;, &lt;code&gt;good_resource&lt;/code&gt;, &lt;code&gt;of&lt;/code&gt; 和 &lt;code&gt;seo&lt;/code&gt;。&lt;/p&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>chromium安装flash</title>
-        <link>http://fankcoder.github.io//2015/01/01/chromium-flash-linux.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2015/01/01/chromium-flash-linux.html</guid>
-        <pubDate>Thu, 01 Jan 2015 00:00:00 +0800</pubDate>
-        <description>&lt;p&gt;　Flash Player For Linux 自11.2 起已经停止更新，目前 Linux 平台下面的 Flash Player 只能依靠 Google Chrom 的 PPAPI （Pepper Flash Player）进行更新&lt;/p&gt;
-
-&lt;p&gt;```
- sudo apt-get install pepperflashplugin-nonfree&lt;/p&gt;
-
-&lt;p&gt;sudo update-pepperflashplugin-nonfree –install
- ```&lt;/p&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>Mac 常用资源</title>
-        <link>http://fankcoder.github.io//2014/08/03/general-mac-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/08/03/general-mac-resources.html</guid>
-        <pubDate>Sun, 03 Aug 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;常用软件&lt;/h2&gt;
-
-&lt;h3 id=&quot;alfred&quot;&gt;Alfred&lt;/h3&gt;
-
-&lt;h4 id=&quot;alfredworkflow&quot;&gt;Alfred常用Workflow&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://kapeli.com/dash&quot;&gt;Dash&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/liberize/alfred-dict-workflow&quot;&gt;Dict - Lookup Word&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.alfredforum.com/topic/917-reminders/&quot;&gt;Reminders&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://support.alfredapp.com/evernote&quot;&gt;Evernote&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.alfredforum.com/topic/1009-notes/&quot;&gt;Notes&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;常用命令&lt;/h2&gt;
-
-&lt;h3 id=&quot;dashboard&quot;&gt;开启关闭dashboard&lt;/h3&gt;
-
-&lt;p&gt;关闭&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;defaults write com.apple.dashboard mcx-disabled -boolean YES
-killall Dock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;开启&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;defaults write com.apple.dashboard mcx-disabled -boolean NO
-killall Dock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;剪贴板操作&lt;/h3&gt;
-&lt;p&gt;写入剪切板&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;echo &#39;test&#39; &amp;gt; pbcopy 
-cat testfile &amp;gt; pbcopy
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;读取剪贴板&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pbpaste &amp;gt; testfile
-pbpaste | cat
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;hidpi&quot;&gt;开启关闭Hidpi&lt;/h3&gt;
-&lt;p&gt;开启&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool YES
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;关闭&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;sudo defaults delete /Library/Preferences/com.apple.windowserver DisplayResolutionDisabled
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;dock&quot;&gt;修改Dock隐藏和出现时间&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;defaults write com.apple.dock autohide-delay -int 0
-defaults write com.apple.dock autohide-time-modifier -float 0.4
-killall Dock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;itermoptionaltmeta&quot;&gt;设置iterm中option为alt(meta)键&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;http://7u2ho6.com1.z0.glb.clouddn.com/resource-set-meta-to-alt.png&quot; alt=&quot;option-to-meta&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;dropbox&quot;&gt;删除dropbox冲突文件&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;find . -type f -name &quot;* conflicted *&quot; -exec rm -f {} \;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;launchpad&quot;&gt;清空Launchpad（删除掉）&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;sqlite3 ~/Library/Application\ Support/Dock/*.db &#39;DELETE FROM apps;&#39; &amp;amp;&amp;amp; killall Dock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;launchpad-1&quot;&gt;重置Launchpad&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;rm -f ~/Library/Application\ Support/Dock/*.db &amp;amp;&amp;amp; killall Dock
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;finder&quot;&gt;修改Finder中文件夹显示语言&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;# 以Desktop为例
-touch ~/Desktop/.localized
-chmod 600 ~/Desktop/.localized
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;常用快捷键&lt;/h2&gt;
-
-&lt;h3 id=&quot;chrome&quot;&gt;Chrome&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;切换用户 &lt;code&gt;Command + shift + M&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>MySQL常用资源</title>
-        <link>http://fankcoder.github.io//2014/05/11/general-mysql-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/05/11/general-mysql-resources.html</guid>
-        <pubDate>Sun, 11 May 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;常用命令&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;登录数据库&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql -h localhost -uroot -p
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;导出数据库&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;mysqldump -uroot -p db &amp;gt; db.sql
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;导入数据库&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql -uroot -p db &amp;lt; db.sql
-// or
-mysql -uroot -p db -e &quot;source /path/to/db.sql&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;开启远程登录&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;grant all privileges on ss.* to &#39;root&#39;@&#39;%&#39; indentified by &#39;passoword&#39; with grant option;
-// or 
-update user set Host=&quot;%&quot; and User=&quot;root&quot;
-// 注意%是不包含localhost的
-flush privileges;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;创建用户&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;CREATE USER &#39;test&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;password&#39;;
-grant all privileges on *.* to test@&#39;localhost&#39; identified by &#39;test&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;创建表&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;CREATE SCHEMA testdb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;赋予数据库权限&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;GRANT ALL ON testdb.* TO &#39;test&#39;@&#39;localhost&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-      </item>
-    
-      <item>
-        <title>SVN 常用资源</title>
-        <link>http://fankcoder.github.io//2014/01/15/general-svn-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-svn-resources.html</guid>
-        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;常用指令&lt;/h2&gt;
-
-&lt;h3 id=&quot;checkout&quot;&gt;将文件checkout到本地目录&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn checkout path（path是服务器上的目录）
-svn checkout svn://192.168.1.1/pro/domain
-svn co
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;往版本库中添加新的文件&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn add file
-svn add test.php(添加test.php)
-svn add *.php(添加当前目录下所有的php文件)
-svn add *.php --force(增加所有文件)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;将改动的文件提交到版本库&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn commit -m “LogMessage“ [-N] [--no-unlock] PATH(如果选择了保持锁，就使用–no-unlock开关)
-svn commit -m “add test file for my test“ test.php
-svn ci
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;加锁/解锁&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn lock -m “LockMessage“ [--force] PATH
-svn lock -m “lock test file“ test.php
-svn unlock PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;更新到某个版本&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn update -r m path
-svn update 如果后面没有目录，默认将当前目录以及子目录下的所有文件都更新到最新版本。
-svn update -r 200 test.php(将版本库中的文件test.php还原到版本200)
-
-svn update test.php(更新，于版本库同步。如果在提交的时候提示过期的话，是因为冲突，需要先update，修改文件，然后清除svn resolved，最后再提交commit)
-
-svn up
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;查看文件或者目录状态&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn status path（目录下的文件和子目录的状态，正常状态不显示）
-【?：不在svn的控制中；M：内容被修改；C：发生冲突；A：预定加入到版本库；K：被锁定】
-
-svn status -v path(显示文件和子目录状态)
-第一列保持相同，第二列显示工作版本号，第三和第四列显示最后一次修改的版本号和修改人。
-
-注：svn status、svn diff和 svn revert这三条命令在没有网络的情况下也可以执行的，原因是svn在本地的.svn中保留了本地版本的原始拷贝。
-
-svn st
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;删除文件&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn delete path -m “delete test fle“
-svn delete svn://192.168.1.1/pro/domain/test.php -m “delete test file”
-或者直接svn delete test.php 然后再svn ci -m ‘delete test file‘，推荐使用这种
-svn (del, remove, rm)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;查看日志&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn log path 
-svn log test.php 显示这个文件的所有修改记录，及其版本号的变化
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;查看文件详细信息&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn info path
-svn info test.php
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;比较差异&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn diff path(将修改的文件与基础版本比较)
-svn diff test.php
-svn diff -r m:n path(对版本m和版本n比较差异)
-svn diff -r 200:201 test.php
-svn di
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;将两个版本之间的差异合并到当前文件&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn merge -r m:n path
-svn merge -r 200:205 test.php（将版本200与205之间的差异合并到当前文件，但是一般都会产生冲突，需要处理一下）
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;svn-&quot;&gt;SVN 帮助&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn help
-svn help ci
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;版本库下的文件和目录列表&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn list path 
-svn ls
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;创建纳入版本控制下的新目录&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn mkdir: 创建纳入版本控制下的新目录。
-mkdir PATH…
-mkdir URL…
-
-创建版本控制的目录。
-
-1、每一个以工作副本 PATH 指定的目录，都会创建在本地端，并且加入新增调度，以待下一次的提交。
-2、每个以URL指定的目录，都会透过立即提交于仓库中创建.在这两个情况下，所有的中间目录都必须事先存在。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-13&quot;&gt;恢复本地修改&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn revert: 恢复原始未改变的工作副本文件 (恢复大部份的本地修改)。revert:
-用法: revert PATH…
-注意: 本子命令不会存取网络，并且会解除冲突的状况。但是它不会恢复被删除的目录
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;url&quot;&gt;代码库URL变更&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn switch (sw): 更新工作副本至不同的URL。 
-
-1、switch URL [PATH]
-2、switch –relocate FROM TO [PATH...]
-1、更新你的工作副本，映射到一个新的URL，其行为跟“svn update”很像，也会将服务器上文件与本地文件合并。这是将工作副本对应到同一仓库中某个分支或者标记的方法。
-
-2、改写工作副本的URL元数据，以反映单纯的URL上的改变。当仓库的根URL变动(比如方案名或是主机名称变动)，但是工作副本仍旧对映到同一仓库的同一目录时使用这个命令更新工作副本与仓库的对应关系。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-14&quot;&gt;解决冲突&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn resolved: 移除工作副本的目录或文件的“冲突”状态。 java设计模式之——策略模式
-用法: resolved PATH…
-注意: 本子命令不会依语法来解决冲突或是移除冲突标记；它只是移除冲突的相关文件，然后让 PATH 可以再次提交。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;url-1&quot;&gt;输出指定文件或URL的内容。&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;svn cat 目标[@版本]…如果指定了版本，将从指定的版本开始查找。
-svn cat -r PREV filename &amp;gt; filename (PREV 是上一版本,也可以写具体版本号,这样输出结果是可以提交的)
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-      </item>
-    
-      <item>
-        <title>Shell 常用资源</title>
-        <link>http://fankcoder.github.io//2014/01/15/general-shell-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-shell-resources.html</guid>
-        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;常用指令&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;文本内容搜索&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;grep aaa * 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;文件夹操作&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;查看文件夹大小   du -h --max-depth=1 /home/ys
-查看驱动器空间   df -h 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;压缩命令&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;tar zxvf aaa.tar.gz
-tar zcvf aaa.tar.gz aaa
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;登陆到其他用户&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;login
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;查看端口的占用&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;lsof -i:8087  查看8087端口的使用
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;批量杀死进程&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;ps -aux|grep name|grep -v grep|cut -c 9-15|xargs kill -9
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;查看当前时间&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;date       时间
-date +%s   时间戳
-date -d &quot;2010-07-20 10:25:30&quot; +%s  指定时间时间戳
-date -d &quot;@1279592730&quot;    时间戳转时间
-date -d &quot;1970-01-01 14781 days&quot; &quot;+%Y/%m/%d %H:%M:%S&quot; 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;查看进程内存使用情况&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;top -d 1 -p pid [,pid ...]
-pmap pid 
-ps aux|grep process_name
-查看/proc/process_id/文件夹下的status文件
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;linux&quot;&gt;查看Linux内核版本或发布版本&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;lsb_release -a
-uname -a
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;http&quot;&gt;一句话实现一个HTTP服务，把当前文件夹作为根目录&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;python -m SimpleHTTPServer
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;查看本地网络服务活动状态&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;lsof -i
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;ip&quot;&gt;查看自己的外网ip&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;curl ifconfig.me
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;下载整个网站&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;wget --random-wait -r -p -e robots=off -U mozilla http://www.example.com
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;后台运行一段不中止的程序，并可随时查看它的状态&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;screen -d -m -S some_ name ping my_router
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;查看进程执行的时间&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;ps -A -opid,stime,etime,args | grep python
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-13&quot;&gt;创建守护进程&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;nohup python /var/www/a.py &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-14&quot;&gt;查看当前文件夹下文件（文件夹）大小&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;du -h --max-depth=1 .
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-15&quot;&gt;查看所有磁盘大小&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;df -h
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-16&quot;&gt;诊断网络&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;mtr 
-ping
-traceroute
-dig
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-17&quot;&gt;列出本机监听的端口号&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;netstat –tlnp
-netstat -anop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-18&quot;&gt;在远程机器上运行一段脚本&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;ssh user@server bash &amp;lt; /path/to/local/script.sh
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-19&quot;&gt;端口扫描&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;nc -z -v -n 127.0.0.1 20-100
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;google20&quot;&gt;负载测试，30秒内向Google发起20个并发连接&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;siege -c20 www.google.co.uk -b -t30s
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>Python 常用资源</title>
-        <link>http://fankcoder.github.io//2014/01/15/general-python-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-python-resources.html</guid>
-        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;常用代码&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;遍历对象&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;for key in a.__dict__:
-    print key,&#39;:&#39;,a.__dict__[key]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;调试方法&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;assert False   //引发异常，观察错误界面
-import logging
-logging.info(&#39;&#39;)  //写日志
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;获得当前时间&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;#时间戳
-time.time()
-#日期时间
-time.ctime()
-#iso时间
-datetime.fromtimestamp(time.time()).isoformat()
-#固定格式
-time.strftime(&#39;%Y-%m-%d&#39;,time.localtime(time.time())) ### 日期到时间戳
-dateC=datetime.datetime(2010,6,6,8,14,59)
-timestamp=time.mktime(dateC.timetuple()) ### 时间戳到日期
-ltime=time.localtime(1237515355.0)
-timeStr=time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, ltime) ### 之后的包从绝对位置导入
-from __future__ import absolute_import
-&lt;/code&gt;&lt;/pre&gt;
-
-</description>
-      </item>
-    
-      <item>
-        <title>PHP 常用资源</title>
-        <link>http://fankcoder.github.io//2014/01/15/general-php-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-php-resources.html</guid>
-        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;常用资源&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;常用扩展&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.phpdoc.org&quot;&gt;phpDocumentor&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://phpunit.de&quot;&gt;PHPUnit&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/guzzle/guzzle&quot;&gt;Guzzle&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;好文&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://wulijun.github.io/php-the-right-way/&quot;&gt;PHP之道&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/fangaoxin/article/details/6952954&quot;&gt;Cookie/Session机制详解&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;优秀的类库&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://jingwentian.com/t-145&quot;&gt;PHP中文分词: 自动打标签功能&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;判断是否为空&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;+--------------+-----------+---------+-----------+---------+--------+
-| 真值表        | gettype() | empty() | is_null() | isset() | (bool) |
-+--------------+-----------+---------+-----------+---------+--------+
-| $x = &quot;&quot;      | string    | true    | false     | true    | false  |
-| $x=null      | NULL      | true    | true      | false   | false  |
-| var $x       | NULL      | true    | true      | false   | false  |
-| $x = array() | array     | true    | false     | true    | false  |
-| $x = false   | boolean   | true    | false     | true    | false  |
-| $x = 15      | integer   | false   | false     | true    | true   |
-| $x = 1       | integer   | false   | false     | true    | true   |
-| $x = 0       | integer   | true    | false     | true    | false  |
-| $x = -1      | integer   | false   | false     | true    | true   |
-| $x = &#39;15&#39;    | string    | false   | false     | true    | true   |
-| $x = &#39;1&#39;     | string    | false   | false     | true    | true   |
-| $x = &#39;0&#39;     | string    | true    | false     | true    | false  |
-| $x = &#39;-1&#39;    | string    | false   | false     | true    | true   |
-| $x = &#39;foo&#39;   | string    | false   | false     | true    | true   |
-| $x = &#39;true&#39;  | string    | false   | false     | true    | true   |
-| $x = &#39;false&#39; | string    | false   | false     | true    | true   |
-+--------------+-----------+---------+-----------+---------+--------+
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;常用命令&lt;/h2&gt;
-
-&lt;h3 id=&quot;phpunit&quot;&gt;修改phpunit内存限制&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;phpunit -d memory_limit=512M
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;phpstorm-&quot;&gt;PHPStorm 常用快捷键&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Quick Command&lt;/p&gt;
-
-    &lt;p&gt;&lt;code&gt;Command + Shift + A&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Quick File&lt;/p&gt;
-
-    &lt;p&gt;&lt;code&gt;Command + Shift + O&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Quick Class&lt;/p&gt;
-
-    &lt;p&gt;&lt;code&gt;Command + O&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Quick Symbol&lt;/p&gt;
-
-    &lt;p&gt;&lt;code&gt;Command + Option + O&lt;/code&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-      </item>
-    
-      <item>
-        <title>jQuery 常用资源</title>
-        <link>http://fankcoder.github.io//2014/01/15/general-jquery-resources.html</link>
-        <guid isPermaLink="true">http://fankcoder.github.io//2014/01/15/general-jquery-resources.html</guid>
-        <pubDate>Wed, 15 Jan 2014 00:00:00 +0800</pubDate>
-        <description>&lt;h2 id=&quot;section&quot;&gt;官方资源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://jquery.com/&quot;&gt;官方首页&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://plugins.jquery.com/&quot;&gt;官方插件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;下拉框扩展&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://ivaynberg.github.io/select2/&quot;&gt;Select 2&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;功能强大的下拉列表插件，基本包含了所有可能的需求……&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;a href=&quot;http://kotowicz.net/jquery-option-tree/demo/demo.html&quot;&gt;OptionTree&lt;/a&gt;&lt;/p&gt;
-
-    &lt;p&gt;联动下拉列表插件，可以动态生成下拉列表，而且支持ajax获取数据&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;常用代码&lt;/h2&gt;
-
-&lt;h3 id=&quot;a&quot;&gt;禁用a的链接&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;href=&quot;return false;&quot;或href=&quot;javascript;&quot;
-$().live(&#39;click&#39;,function(e){
-  e.preventDefault();
-  });
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;file&quot;&gt;清空file的内容&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;var cfile = $(&#39;#id&#39;).clone();
-$(&#39;#id&#39;).replaceWith(cfile);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;jqueryformjs--jqueryvalidatejs&quot;&gt;jquery.form.js 和 jquery.validate.js配合使用&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;这两个脚本搭配在表单验证和提交是非常的好用,顺便增加了对bootstrap表单的支持
-$(&quot;#page_form&quot;).validate({
-  highlight: function(element) {
-    $(element).closest(&#39;.control-group&#39;).removeClass(&#39;success&#39;).addClass(&#39;error&#39;);
-  },
-  success: function(element) {
-    element.text(&#39;OK!&#39;).addClass(&#39;valid&#39;).closest(&#39;.control-group&#39;).removeClass(&#39;error&#39;).addClass(&#39;success&#39;);
-  },
-  submitHandler:function(form) {
-    $(form).ajaxSubmit(options);
-}});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;选择父节点&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;使用$(this)来将dom对象转为jquery对象
-$(this).parents(&#39;tr&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;多重操作&lt;/h3&gt;
-&lt;pre&gt;&lt;code&gt;$(this).parents(&#39;tr&#39;).remove();
-因为jquery函数返回jquery节点
-&lt;/code&gt;&lt;/pre&gt;
 </description>
       </item>
     
