@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]-->
 
-<title>Python正则 | 三秋的博客</title>
+<title>Git 常用命令 | 三秋的博客</title>
 <meta name="author" content="三秋">
+
+  <meta name="keywords" content="Git">
 
 
 
@@ -132,357 +134,166 @@
     <div id="post">
       <div id="pjax">
         <article id="post__content">
-  <h1 id="post__title" data-identifier="20150825">Python正则</h1>
-  <p>整理自<a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html">博客园</a></p>
+  <h1 id="post__title" data-identifier="20140915">Git 常用命令</h1>
+  <h2 id="section">库管理</h2>
 
-<h4 id="re">re模块</h4>
+<h3 id="section-1">克隆库</h3>
 
-<p>Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。</p>
-
-<pre><code># encoding: UTF-8
-import re
- 
-# 将正则表达式编译成Pattern对象
-pattern = re.compile(r'hello')
- 
-# 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None
-match = pattern.match('hello world!')
- 
-if match:
-    # 使用Match获得分组信息
-    print match.group()
- 
-### 输出 ###
-# hello
-re.compile(strPattern[, flag]):
+<pre><code class="language-bash">git clone https://github.com/php/php-src.git
+git clone --depth=1 https://github.com/php/php-src.git # 只抓取最近的一次 commit
 </code></pre>
 
-<p>这个方法是Pattern类的工厂方法，用于将字符串形式的正则表达式编译为Pattern对象。</p>
+<h2 id="section-2">历史管理</h2>
 
-<p>第二个参数flag是匹配模式，取值可以使用按位或运算符’|‘表示同时生效，比如re.I | re.M。</p>
+<h3 id="section-3">查看历史</h3>
 
-<p>另外，你也可以在regex字符串中指定模式，比如re.compile(‘pattern’, re.I | re.M)与re.compile(‘(?im)pattern’)是等价的。 可选值有：</p>
-
-<p>re.I(re.IGNORECASE): 忽略大小写（括号内是完整写法，下同）</p>
-
-<p>M(MULTILINE): 多行模式，改变’^’和’$’的行为（参见上图）</p>
-
-<p>S(DOTALL): 点任意匹配模式，改变’.’的行为</p>
-
-<p>L(LOCALE): 使预定字符类 \w \W \b \B \s \S 取决于当前区域设定</p>
-
-<p>U(UNICODE): 使预定字符类 \w \W \b \B \s \S \d \D 取决于unicode定义的字符属性</p>
-
-<p>X(VERBOSE): 详细模式。这个模式下正则表达式可以是多行，忽略空白字符，并可以加入注释。以下两个正则表达式是等价的：</p>
-
-<pre><code>a = re.compile(r"""\d +  # the integral part
-                   \.    # the decimal point
-                   \d *  # some fractional digits""", re.X)
-b = re.compile(r"\d+\.\d*")
+<pre><code class="language-bash">git log --pretty=oneline filename # 一行显示
+git show xxxx # 查看某次修改
 </code></pre>
 
-<p>re提供了众多模块方法用于完成正则表达式的功能。这些方法可以使用Pattern实例的相应方法替代，唯一的好处是少写一行re.compile()代码，但同时也无法复用编译后的Pattern对象。这些方法将在Pattern类的实例方法部分一起介绍。如上面这个例子可以简写为：</p>
+<h3 id="section-4">标签功能</h3>
 
-<pre><code>m = re.match(r'hello', 'hello world!')
-print m.group()
+<pre><code class="language-bash">git tag # 显示所有标签
+git tag -l 'v1.4.2.*' # 显示 1.4.2 开头标签
+git tag v1.3 # 简单打标签   
+git tag -a v1.2 9fceb02 # 后期加注标签
+git tag -a v1.4 -m 'my version 1.4' # 增加标签并注释， -a 为 annotated 缩写
+git show v1.4 # 看某一标签详情
+git push origin v1.5 # 分享某个标签
+git push origin --tags # 分享所有标签
 </code></pre>
 
-<p>re模块还提供了一个方法escape(string)，用于将string中的正则表达式元字符如*/+/?等之前加上转义符再返回，在需要大量匹配元字符时有那么一点用。</p>
+<h3 id="section-5">回滚操作</h3>
 
-<h4 id="match">Match</h4>
-
-<p>Match对象是一次匹配的结果，包含了很多关于此次匹配的信息，可以使用Match提供的可读属性或方法来获取这些信息。</p>
-
-<p>属性：</p>
-
-<p>string: 匹配时使用的文本。</p>
-
-<p>re: 匹配时使用的Pattern对象。</p>
-
-<p>pos: 文本中正则表达式开始搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</p>
-
-<p>endpos: 文本中正则表达式结束搜索的索引。值与Pattern.match()和Pattern.seach()方法的同名参数相同。</p>
-
-<p>lastindex: 最后一个被捕获的分组在文本中的索引。如果没有被捕获的分组，将为None。</p>
-
-<p>lastgroup: 最后一个被捕获的分组的别名。如果这个分组没有别名或者没有被捕获的分组，将为None。方法：</p>
-
-<p>group([group1, …]):</p>
-
-<p>获得一个或多个分组截获的字符串；指定多个参数时将以元组形式返回。group1可以使用编号也可以使用别名；编号0代表整个匹配的子串；不填写参数时，返回group(0)；没有截获字符串的组返回None；截获了多次的组返回最后一次截获的子串。</p>
-
-<p>groups([default]):</p>
-
-<p>以元组形式返回全部分组截获的字符串。相当于调用group(1,2,…last)。default表示没有截获字符串的组以这个值替代，默认为None。</p>
-
-<p>groupdict([default]):</p>
-
-<p>返回以有别名的组的别名为键、以该组截获的子串为值的字典，没有别名的组不包含在内。default含义同上。</p>
-
-<p>start([group]):</p>
-
-<p>返回指定的组截获的子串在string中的起始索引（子串第一个字符的索引）。group默认值为0。</p>
-
-<p>end([group]):</p>
-
-<p>返回指定的组截获的子串在string中的结束索引（子串最后一个字符的索引+1）。group默认值为0。</p>
-
-<p>span([group]):</p>
-
-<p>返回(start(group), end(group))。</p>
-
-<p>expand(template):</p>
-
-<p>将匹配到的分组代入template中然后返回。template中可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。\id与\g<id>是等价的；但\10将被认为是第10个分组，如果你想表达\1之后是字符'0'，只能使用\g&lt;1&gt;0。</id></name></id></p>
-
-<pre><code>import re
-m = re.match(r'(\w+) (\w+)(?P&lt;sign&gt;.*)', 'hello world!')
- 
-print "m.string:", m.string
-print "m.re:", m.re
-print "m.pos:", m.pos
-print "m.endpos:", m.endpos
-print "m.lastindex:", m.lastindex
-print "m.lastgroup:", m.lastgroup
- 
-print "m.group(1,2):", m.group(1, 2)
-print "m.groups():", m.groups()
-print "m.groupdict():", m.groupdict()
-print "m.start(2):", m.start(2)
-print "m.end(2):", m.end(2)
-print "m.span(2):", m.span(2)
-print r"m.expand(r'\2 \1\3'):", m.expand(r'\2 \1\3')
- 
-### output ###
-# m.string: hello world!
-# m.re: &lt;_sre.SRE_Pattern object at 0x016E1A38&gt;
-# m.pos: 0
-# m.endpos: 12
-# m.lastindex: 3
-# m.lastgroup: sign
-# m.group(1,2): ('hello', 'world')
-# m.groups(): ('hello', 'world', '!')
-# m.groupdict(): {'sign': '!'}
-# m.start(2): 6
-# m.end(2): 11
-# m.span(2): (6, 11)
-# m.expand(r'\2 \1\3'): world hello!
+<pre><code class="language-bash">git reset 9fceb02 # 保留修改
+git reset 9fceb02 --hard # 删除之后的修改
 </code></pre>
 
-<h4 id="pattern">Pattern</h4>
-<p>Pattern对象是一个编译好的正则表达式，通过Pattern提供的一系列方法可以对文本进行匹配查找。</p>
+<h3 id="section-6">取消文件的修改</h3>
 
-<p>Pattern不能直接实例化，必须使用re.compile()进行构造。</p>
-
-<p>Pattern提供了几个可读属性用于获取表达式的相关信息：</p>
-
-<p>pattern: 编译时用的表达式字符串。</p>
-
-<p>flags: 编译时用的匹配模式。数字形式。</p>
-
-<p>groups: 表达式中分组的数量。</p>
-
-<p>groupindex: 以表达式中有别名的组的别名为键、以该组对应的编号为值的字典，没有别名的组不包含在内。</p>
-
-<pre><code>import re
-p = re.compile(r'(\w+) (\w+)(?P&lt;sign&gt;.*)', re.DOTALL)
- 
-print "p.pattern:", p.pattern
-print "p.flags:", p.flags
-print "p.groups:", p.groups
-print "p.groupindex:", p.groupindex
- 
-### output ###
-# p.pattern: (\w+) (\w+)(?P&lt;sign&gt;.*)
-# p.flags: 16
-# p.groups: 3
-# p.groupindex: {'sign': 3}
+<pre><code class="language-bash">git checkout -- a.php #  取消单个文件
+git checkout -- # 取消所有文件的修改
 </code></pre>
 
-<table>
-  <tbody>
-    <tr>
-      <td>实例方法[</td>
-      <td>re模块方法]：</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="section-7">删除文件</h3>
 
-<table>
-  <tbody>
-    <tr>
-      <td>match(string[, pos[, endpos]])</td>
-      <td>re.match(pattern, string[, flags]):</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>这个方法将从string的pos下标处起尝试匹配pattern；如果pattern结束时仍可匹配，则返回一个Match对象；如果匹配过程中pattern无法匹配，或者匹配未结束就已到达endpos，则返回None。 
-pos和endpos的默认值分别为0和len(string)；re.match()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。</p>
-
-<p>注意：这个方法并不是完全匹配。当pattern结束时若string还有剩余字符，仍然视为成功。想要完全匹配，可以在表达式末尾加上边界匹配符’$’。</p>
-
-<table>
-  <tbody>
-    <tr>
-      <td>search(string[, pos[, endpos]])</td>
-      <td>re.search(pattern, string[, flags]):</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>这个方法用于查找字符串中可以匹配成功的子串。从string的pos下标处起尝试匹配pattern，如果pattern结束时仍可匹配，则返回一个Match对象；若无法匹配，则将pos加1后重新尝试匹配；直到pos=endpos时仍无法匹配则返回None。</p>
-
-<p>pos和endpos的默认值分别为0和len(string))；re.search()无法指定这两个参数，参数flags用于编译pattern时指定匹配模式。</p>
-
-<pre><code># encoding: UTF-8 
-import re 
- 
-# 将正则表达式编译成Pattern对象 
-pattern = re.compile(r'world') 
- 
-# 使用search()查找匹配的子串，不存在能匹配的子串时将返回None 
-# 这个例子中使用match()无法成功匹配 
-match = pattern.search('hello world!') 
- 
-if match: 
-    # 使用Match获得分组信息 
-    print match.group() 
- 
-### 输出 ### 
-# world
+<pre><code class="language-bash">git rm a.php  # 直接删除文件
+git rm --cached a.php # 删除文件暂存状态
 </code></pre>
 
-<table>
-  <tbody>
-    <tr>
-      <td>split(string[, maxsplit])</td>
-      <td>re.split(pattern, string[, maxsplit]):</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="section-8">移动文件</h3>
 
-<p>按照能够匹配的子串将string分割后返回列表。maxsplit用于指定最大分割次数，不指定将全部分割。</p>
-
-<pre><code>import re
- 
-p = re.compile(r'\d+')
-print p.split('one1two2three3four4')
- 
-### output ###
-# ['one', 'two', 'three', 'four', '']
+<pre><code class="language-bash">git mv a.php ./test/a.php
 </code></pre>
 
-<table>
-  <tbody>
-    <tr>
-      <td>findall(string[, pos[, endpos]])</td>
-      <td>re.findall(pattern, string[, flags]):</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="section-9">查看文件修改</h3>
 
-<p>搜索string，以列表形式返回全部能匹配的子串。</p>
-
-<pre><code>import re
- 
-p = re.compile(r'\d+')
-print p.findall('one1two2three3four4')
- 
-### output ###
-# ['1', '2', '3', '4']
+<pre><code class="language-bash">git diff          # 查看未暂存的文件更新 
+git diff --cached # 查看已暂存文件的更新 
 </code></pre>
 
-<table>
-  <tbody>
-    <tr>
-      <td>finditer(string[, pos[, endpos]])</td>
-      <td>re.finditer(pattern, string[, flags]):</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="staging">暂存和恢复当前staging</h3>
 
-<p>搜索string，返回一个顺序访问每一个匹配结果（Match对象）的迭代器。</p>
-
-<pre><code>import re
- 
-p = re.compile(r'\d+')
-for m in p.finditer('one1two2three3four4'):
-    print m.group(),
- 
-### output ###
-# 1 2 3 4
+<pre><code class="language-bash">git stash # 暂存当前分支的修改
+git stash apply # 恢复最近一次暂存
+git stash list # 查看暂存内容
+git stash apply stash@{2} # 指定恢复某次暂存内容
+git stash drop stash@{0} # 删除某次暂存内容
 </code></pre>
 
-<table>
-  <tbody>
-    <tr>
-      <td>sub(repl, string[, count])</td>
-      <td>re.sub(pattern, repl, string[, count]):</td>
-    </tr>
-  </tbody>
-</table>
+<h3 id="commit-">修改 commit 历史纪录</h3>
 
-<p>使用repl替换string中每一个匹配的子串后返回替换后的字符串。</p>
-
-<p>当repl是一个字符串时，可以使用\id或\g<id>、\g<name>引用分组，但不能使用编号0。</name></id></p>
-
-<p>当repl是一个方法时，这个方法应当只接受一个参数（Match对象），并返回一个字符串用于替换（返回的字符串中不能再引用分组）。</p>
-
-<p>count用于指定最多替换次数，不指定时全部替换。</p>
-
-<pre><code>import re
- 
-p = re.compile(r'(\w+) (\w+)')
-s = 'i say, hello world!'
- 
-print p.sub(r'\2 \1', s)
- 
-def func(m):
-    return m.group(1).title() + ' ' + m.group(2).title()
- 
-print p.sub(func, s)
- 
-### output ###
-# say i, world hello!
-# I Say, Hello World!
+<pre><code class="language-bash">git rebase -i 0580eab8
 </code></pre>
 
-<table>
-  <tbody>
-    <tr>
-      <td>subn(repl, string[, count])</td>
-      <td>re.sub(pattern, repl, string[, count]):</td>
-    </tr>
-  </tbody>
-</table>
+<h2 id="section-10">分支管理</h2>
 
-<p>返回 (sub(repl, string[, count]), 替换次数)。</p>
+<h3 id="section-11">创建分支</h3>
 
-<pre><code>import re
- 
-p = re.compile(r'(\w+) (\w+)')
-s = 'i say, hello world!'
- 
-print p.subn(r'\2 \1', s)
- 
-def func(m):
-    return m.group(1).title() + ' ' + m.group(2).title()
- 
-print p.subn(func, s)
- 
-### output ###
-# ('say i, world hello!', 2)
-# ('I Say, Hello World!', 2)
+<pre><code class="language-bash">git branch develop # 只创建分支
+git checkout -b master develop # 创建并切换到 develop 分支
 </code></pre>
 
+<h3 id="section-12">合并分支</h3>
+
+<pre><code class="language-bash">git checkout master # 切换到 master 分支
+git merge --no-ff develop # 把 develop 合并到 master 分支，no-ff 选项的作用是保留原分支记录
+git rebase develop # rebase 当前分支到 develop
+git branch -d develop # 删除 develop 分支
+</code></pre>
+
+<h3 id="section-13">克隆远程分支</h3>
+
+<pre><code class="language-bash">git branch -r # 显示所有分支，包含远程分支
+git checkout origin/android
+</code></pre>
+
+<h3 id="develop">修复develop上的合并错误</h3>
+
+<ol>
+  <li>将merge前的commit创建一个分之，保留merge后代码</li>
+  <li>将develop <code>reset --force</code>到merge前，然后<code>push --force</code></li>
+  <li>在分支中rebase develop</li>
+  <li>将分支push到服务器上重新merge</li>
+</ol>
+
+<h3 id="section-14">强制更新到远程分支最新版本</h3>
+
+<pre><code class="language-bash">git reset --hard origin/master
+git submodule update --remote -f
+</code></pre>
+
+<h2 id="submodule">Submodule使用</h2>
+
+<h3 id="submodule-1">克隆带submodule的库</h3>
+
+<pre><code class="language-bash">git clone --recursive https://github.com/chaconinc/MainProject
+</code></pre>
+
+<h3 id="cloneclone-submodule">clone主库后再去clone submodule</h3>
+
+<pre><code class="language-bash">git clone https://github.com/chaconinc/MainProject
+git submodule init
+git submodule update
+</code></pre>
+
+<h2 id="git">Git设置</h2>
+
+<p>Git的全局设置在<code>~/.gitconfig</code>中，单独设置在<code>project/.git/config</code>下。</p>
+
+<p>忽略设置全局在<code>~/.gitignore_global</code>中，单独设置在<code>project/.gitignore</code>下。</p>
+
+<h3 id="commit--1">设置 commit 的用户和邮箱</h3>
+
+<pre><code class="language-bash">git config user.name "xx"
+git config user.email "xx@xx.com"
+</code></pre>
+
+<p>或者直接修改config文件</p>
+
+<pre><code class="language-bash">[user]
+    name = xxx
+    email = xxx@xxx.com
+</code></pre>
+
+<h3 id="section-15">查看设置项</h3>
+
+<pre><code class="language-bash">git config --list
+</code></pre>
+
+<h3 id="git-1">设置git终端颜色</h3>
+
+<pre><code class="language-bash">git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+</code></pre>
 
 </article> <!-- end #post__content -->
 
 <div id="post__share">
-  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://fankcoder.github.io//2015/08/25/re-python.html&text=Python正则" target="_blank"></a>
+  <a id="icon-twitter" class="fontello" href="https://twitter.com/intent/tweet?url=http://fankcoder.github.io//2014/09/15/general-git-resources.html&text=Git 常用命令" target="_blank"></a>
   <a id="icon-cc" class="fontello" href="http://creativecommons.org/licenses/by-nc-sa/3.0" target="_blank"></a>
-  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://fankcoder.github.io//2015/08/25/re-python.html&title=Python正则" target="_blank"></a>
+  <a id="icon-weibo" class="fontello" href="http://v.t.sina.com.cn/share/share.php?url=http://fankcoder.github.io//2014/09/15/general-git-resources.html&title=Git 常用命令" target="_blank"></a>
 </div> <!-- end #post__share -->
 <div id="disqus_thread"></div>
 <script>

@@ -1,21 +1,18 @@
 ---
 layout: post
-title: Welcome
+title: 博主简介
+category: 关于
+tags: me
+description: about me
 ---
 
-有朋自远方来,不亦乐乎?
-
-欢迎~这里是fankcoder的博客~
-
-## 关于我
-
-标签
+#### 我的标签
 
 ```
 Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ 
 ```
 
-技能体系
+#### 技能体系
 
 ```
 操作系统:  Ubuntu(日常开发) / Fedora(折腾) / CentOS(折腾,配置LNMP) / OSX(入门)
@@ -27,12 +24,12 @@ Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ
        Java(学生时期)
        C(Linux下重新认识中)
 
-数据库: MySQL(熟悉) / Mongodb(入门) / Redis(入门)
+数据库: MySQL / Mongodb / Redis
 
 其他:  数据结构 / 算法 / Django MVC / 机算机网络 / Routeros网络管理(远程管理,PCC负载均衡,VPN等)
 ```
 
-痕迹
+#### 痕迹
 
 - [Github](https://github.com/fankcoder)
 
@@ -44,21 +41,15 @@ Pythoner / Linux爱好者 / 玩Routeros / vim党 / INTJ
 
 - 常用邮箱: zf.ice@qq.com
 
-目前
+#### 目前
 
 ```
 奋斗&修炼ing
 ```
 
-技术目标
+#### 技术目标
 
 ```
 短期: 全栈工程师
 长期:  CTO
 ```
-
-## 博客平台
-
-这个博客通过 [Jekyll](http://jekyllrb.com/) 生成，部署在 [Github](https://pages.github.com)，主题基于 [3-Jekyll](https://github.com/P233/3-Jekyll) 修改生成，非常感谢 [Peiwen Lu](https://github.com/P233) 开发出这么漂亮的主题。
-
-我博客的源码托管在[Github](https://github.com/fankcoder/fankcoder.github.io)上，如果有任何改进意见，欢迎讨论。
