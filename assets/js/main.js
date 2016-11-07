@@ -17,23 +17,14 @@ $(function() {
     }).attr('target', '_blank');
 
     // discus comment.
-    {% if site.disqus.shortname %}
-      var ds_loaded = false;
-      window.disqus_shortname = "{{ site.disqus.shortname }}";
-      main.scroll(function(){
-        var nScrollHight = $(this)[0].scrollHeight;
-        var nScrollTop = $(this)[0].scrollTop;
-        if(!ds_loaded && nScrollTop + main.height() >= nScrollHight) {
-          $.ajax({
-            type: 'GET',
-            url: 'http://' + disqus_shortname + '.disqus.com/embed.js',
-            dataType: 'script',
-            cache: true
-          });
-          ds_loaded = true;
-        }
-      });
+    {% if site.disqus_shortname %}
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//{{ site.disqus_shortname }}' + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
     {% endif %}
+
     // your scripts
   };
   afterPjax();
@@ -58,10 +49,11 @@ $(function() {
       afterPjax();
       NProgress.done();
       main.scrollTop(0).addClass('fadeIn');
-      // only remove open in small screen
-      if($(window).width() <= 1024) {
-        menu.add(sidebar).add(main).removeClass('open');
-      }
+      menu.add(sidebar).removeClass('open');
+      {% if site.google_analytics %}
+      ga('set', 'location', window.location.href);
+      ga('send', 'pageview');
+      {% endif %}
     }
   });
 
@@ -81,7 +73,7 @@ $(function() {
 
   // Menu
   menu.on('click', function() {
-    $(this).add(sidebar).add(menu).add(main).toggleClass('open');
+    $(this).add(sidebar).toggleClass('open');
   });
 
 });
