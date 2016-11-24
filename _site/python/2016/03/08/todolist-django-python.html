@@ -1,0 +1,93 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>Todolist 应用</title> <meta name="description" content="TodoList"> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://localhost:4000/python/2016/03/08/todolist-django-python.html"> <link rel="alternate" type="application/rss+xml" title="Fank" href="http://localhost:4000/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:fankcoder@gmail.com" class="sidebar-social-icon email"></a> <a href="https://github.com/https://github.com/fankcoder" class="sidebar-social-icon github" target="_blank"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="备忘">备忘</li> <li class="sidebar-tag" data-filter="工具">工具</li> <li class="sidebar-tag" data-filter="Linux">Linux</li> <li class="sidebar-tag" data-filter="Python">Python</li> <li class="sidebar-tag" data-filter="读书">读书</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="Linux" href="/linux/2016/11/01/chmod.html"> chmod命令 </a> <a class="toc-link" data-tags="Linux" href="/linux/2016/03/10/screen-linux.html"> screen工具 </a> <a class="toc-link" data-tags="Python" href="/python/2016/03/08/todolist-django-python.html"> Todolist 应用 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2016/03/04/general-linux-resources.html"> Linux 常用资源 </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2016/01/28/good-tools.html"> 神器收藏 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2016/01/27/general-django-resource.html"> Django命令备忘录 </a> <a class="toc-link" data-tags="Python" href="/python/2016/01/25/amazon-spider-python.html"> 爬虫防屏蔽 </a> <a class="toc-link" data-tags="Python" href="/python/2016/01/20/add-static-django-python.html"> Django添加静态文件 </a> <a class="toc-link" data-tags="Python" href="/python/2016/01/12/threading-python.html"> Python 多线程 </a> <a class="toc-link" data-tags="Python" href="/python/2016/01/11/encode-python.html"> Python转码问题 </a> <a class="toc-link" data-tags="Python" href="/python/2015/12/29/xrange-python.html"> Python的xrange和range </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2015/11/10/vpn-tools.html"> 科学上网列表 </a> <a class="toc-link" data-tags="Linux" href="/linux/2015/10/26/email-shell-linux.html"> Shell每日发邮件 </a> <a class="toc-link" data-tags="Python" href="/python/2015/10/13/passwd-python.html"> Python密码处理 </a> <a class="toc-link" data-tags="Python" href="/python/2015/10/12/os-python.html"> Python标准库os </a> <a class="toc-link" data-tags="读书" href="/%E8%AF%BB%E4%B9%A6/2015/10/01/book-list-of-2015.html"> 2015阅读书单 </a> <a class="toc-link" data-tags="Python" href="/python/2015/08/25/re-python.html"> Python正则 </a> <a class="toc-link" data-tags="Python" href="/python/2015/08/11/func-python.html"> Python内置函数(map、reduce、filter) </a> <a class="toc-link" data-tags="Linux" href="/linux/2015/07/25/awk-linux.html"> AWK </a> <a class="toc-link" data-tags="Python" href="/python/2015/07/24/blog-django-python.html"> Django练习项目之搭建博客 </a> <a class="toc-link" data-tags="Python" href="/python/2015/05/22/xlrd-python.html"> 用xlrd\xlwt读写excel </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2015/02/13/general-seo-resources.html"> SEO 常用资源 </a> <a class="toc-link" data-tags="Linux" href="/linux/2015/01/01/chromium-flash-linux.html"> chromium安装flash </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2014/12/24/ubuntu-tools.html"> Ubuntu常用 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/09/15/general-git-resources.html"> Git 常用命令 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/08/03/general-mac-resources.html"> Mac 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/05/11/general-mysql-resources.html"> MySQL常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/04/23/general-bootstrap-resources.html"> Bootstrap常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-svn-resources.html"> SVN 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-shell-resources.html"> Shell 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-python-resources.html"> Python 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-php-resources.html"> PHP 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-jquery-resources.html"> jQuery 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-javascript-resources.html"> JavaScript 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-html-resources.html"> HTML 常用 </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2016 March 08</span> <span class="post-meta-span tag">python,django</span> </div> <h1 class="post-title">Todolist 应用</h1> <h1 id="todolist">TodoList</h1> <h2 id="section">介绍</h2> <p>TodoList是一个便捷的事项管理应用,它帮助我们管理待办任务,梳理工作思路,来提高工作效率</p> <p>TodoList包含账户注册登录等功能,来方便记录管理你的任务事项</p> <h2 id="introduce">Introduce</h2> <p>Todolist,a quick and convenient management application for items that are about to be done,which helps us manage the to-do tasks, combine working train of thought and improve work efficency.</p> <p>Todolist consists of kinds of functions,including the registration and login for an account,so that it can make your tasks record and items management much easier.</p> <h2 id="section-1">项目地址</h2> <div class="highlighter-rouge"><pre class="highlight"><code>https://github.com/fankcoder/django-todolist
+</code></pre></div> <p>##安装&amp;运行 在用户目录下执行,将代码clone到本地</p> <div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/fankcoder/django-todolist.git
+</code></pre></div> <p>所需环境,请看 django-todolist/doc/requirements.txt</p> <p>注:为了部署方便应用默认采用了sqlite3数据库,需更换为MySQL数据库,请更改settings.py如下代码</p> <div class="highlighter-rouge"><pre class="highlight"><code>'''
+#use mysql databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'todolist',
+        'USER': 'root',    #replace your mysql username
+        'PASSWORD': 'xxxxx',  #replace your mysql password
+        'HOST': '127.0.0.1',
+        'PROT': '3306',
+    }
+}
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+</code></pre></div> <p>为,请注意替换为自己的MySQL用户密码.</p> <div class="highlighter-rouge"><pre class="highlight"><code>#use mysql databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'todolist',
+        'USER': 'root',    #replace your mysql username
+        'PASSWORD': 'xxxxx',  #replace your mysql password
+        'HOST': '127.0.0.1',
+        'PROT': '3306',
+    }
+}
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+'''
+</code></pre></div> <p>##安装&amp;配置完成后</p> <p>建立本地数据库,在django-todo/todo/目录下</p> <div class="highlighter-rouge"><pre class="highlight"><code>python manage.py makemigrations
+python manage.py migrate
+</code></pre></div> <p>运行</p> <div class="highlighter-rouge"><pre class="highlight"><code>python manage.py runserver 127.0.0.1:8001
+</code></pre></div> <p>如果没有报错,打开浏览器并访问</p> <div class="highlighter-rouge"><pre class="highlight"><code>127.0.0.1:8001
+</code></pre></div> <p>即可看到应用已经部署成功!</p> <p>##目录说明 doc 为文档目录 <br /> todolist 为应用目录</p> <div class="highlighter-rouge"><pre class="highlight"><code>django-todo/
+├── doc
+│   ├── index.png
+│   ├── login.png
+│   ├── register.png
+│   ├── user_done.png
+│   └── user_index.png
+├── README.md
+├── requirements.txt
+├── requirements.txt~
+└── todo
+    ├── db.sqlite3
+    ├── manage.py
+    ├── test.py
+    ├── test.py~
+    ├── todo
+    │   ├── __init__.py
+    │   ├── __init__.pyc
+    │   ├── settings.py
+    │   ├── settings.pyc
+    │   ├── urls.py
+    │   ├── urls.pyc
+    │   ├── wsgi.py
+    │   └── wsgi.pyc
+    └── todolist
+        ├── admin.py
+        ├── admin.pyc
+        ├── forms.py
+        ├── forms.pyc
+        ├── __init__.py
+        ├── __init__.pyc
+        ├── models.py
+        ├── models.pyc
+        ├── static
+        │   ├── css
+        │   │   ├── create_sytle.css
+        │   │   └── style.css
+        │   └── js
+        ├── templates
+        │   ├── complete.html
+        │   ├── create.html
+        │   ├── index.html
+        │   ├── login.html
+        │   ├── nav.html
+        │   └── register.html
+        ├── tests.py
+        ├── views.py
+        └── views.pyc
+</code></pre></div> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://localhost:4000/python/2016/03/08/todolist-django-python.html&text=Todolist 应用" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://localhost:4000/python/2016/03/08/todolist-django-python.html&title=Todolist 应用" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/python/2016/03/08/todolist-django-python.html&title=Todolist 应用" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> </body> </html>
