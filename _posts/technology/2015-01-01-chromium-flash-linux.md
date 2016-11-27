@@ -1,7 +1,7 @@
 ---
 layout: post
 title: chromium安装flash
-category: Linux
+category: 技术
 tags: flash
 keywords: flash
 description: install flash

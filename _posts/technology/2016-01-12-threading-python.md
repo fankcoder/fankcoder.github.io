@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python 多线程
-category: Python
+category: 技术
 tags: python,thread
 keywords: thread
 description: thread

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 爬虫防屏蔽
-category: Python
+category: 技术
 tags: python,spider
 keywords: spider
 description: spider amazon

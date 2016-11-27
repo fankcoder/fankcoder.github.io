@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python的xrange和range
-category: Python
+category: 技术
 tags: python
 description:
 ---

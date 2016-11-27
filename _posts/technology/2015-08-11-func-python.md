@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python内置函数(map、reduce、filter)
-category: Python
+category: 技术
 tags: python
 description:
 ---

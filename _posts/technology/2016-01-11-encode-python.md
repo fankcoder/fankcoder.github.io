@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python转码问题
-category: Python
+category: 技术
 tags: python
 description:
 ---

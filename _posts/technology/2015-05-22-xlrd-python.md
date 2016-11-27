@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 用xlrd\xlwt读写excel
-category: Python
+category: 技术
 tags: python
 description:
 ---

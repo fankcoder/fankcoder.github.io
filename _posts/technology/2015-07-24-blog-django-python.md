@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Django练习项目之搭建博客
-category: Python
+category: 技术
 tags: python,django
 keywords: django
 description: django blog

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Python密码处理
-category: Python
+category: 技术
 tags: python
 description:
 ---

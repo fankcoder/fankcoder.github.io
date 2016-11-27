@@ -1,7 +1,7 @@
 ---
 layout: post
 title: screen工具
-category: Linux
+category: 技术
 tags: screen
 keywords: screen
 description: 使用screen管理会话

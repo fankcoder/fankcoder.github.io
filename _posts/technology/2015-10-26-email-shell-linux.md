@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Shell每日发邮件
-category: Linux
+category: 技术
 tags: Shell
 keywords: Shell
 description: Shell每日发邮件

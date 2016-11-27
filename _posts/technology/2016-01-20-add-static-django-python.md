@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Django添加静态文件
-category: Python
+category: 技术
 tags: python
 keywords: django
 description: django
