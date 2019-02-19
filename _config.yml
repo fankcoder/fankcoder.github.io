@@ -34,5 +34,5 @@ github: https://github.com/fankcoder
 markdown: kramdown
 sass:
   style: compressed
-gems:
-  - jekyll-sitemap
+# gems:
+#   - jekyll-sitemap
