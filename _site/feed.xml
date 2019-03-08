@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Mar 2019 14:31:52 +0800</pubDate>
-    <lastBuildDate>Fri, 08 Mar 2019 14:31:52 +0800</lastBuildDate>
+    <pubDate>Fri, 08 Mar 2019 15:22:41 +0800</pubDate>
+    <lastBuildDate>Fri, 08 Mar 2019 15:22:41 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -149,6 +149,73 @@ export PROMPT_COMMAND='echo -ne &quot;\033]0;$PWD\007&quot;'
         
         
         <category>工具</category>
+        
+      </item>
+    
+      <item>
+        <title>Ubuntu&amp;OSX的app抓包方案</title>
+        <description>&lt;h2 id=&quot;ubuntu抓包方案&quot;&gt;Ubuntu抓包方案&lt;/h2&gt;
+
+&lt;h2 id=&quot;必备条件&quot;&gt;必备条件&lt;/h2&gt;
+&lt;p&gt;电脑手机同一wifi (如果pc做了ip端口映射也可以使用广域网ip抓包)&lt;/p&gt;
+
+&lt;h2 id=&quot;方案1&quot;&gt;方案1&lt;/h2&gt;
+
+&lt;h3 id=&quot;fiddler&quot;&gt;Fiddler&lt;/h3&gt;
+
+&lt;p&gt;Fiddler在Ubuntu上基于mono运行&lt;/p&gt;
+
+&lt;p&gt;Fiddler &amp;amp; mono 下载地址&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;http://fiddler.wikidot.com/mono
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;下载并装成功&lt;/li&gt;
+  &lt;li&gt;打开Fiddler-&amp;gt; tools-&amp;gt;options -&amp;gt; connections  查看Port选项，记录下来&lt;/li&gt;
+  &lt;li&gt;手机连接wifi并选择代理，方式手动代理&lt;/li&gt;
+  &lt;li&gt;填写主机名为PC本地ip地址，端口填写刚刚记录的Port&lt;/li&gt;
+  &lt;li&gt;打开手机app，观察Fiddler接受\发送的请求&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;方案2&quot;&gt;方案2&lt;/h2&gt;
+
+&lt;h3 id=&quot;charles&quot;&gt;Charles&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;下载安装
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://www.charlesproxy.com/download/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;打开charles在Proxy-&amp;gt;ProxySetting设置一个端口号，并勾选Enable&lt;/li&gt;
+  &lt;li&gt;设置手机代理&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果手机包出现乱码情况，请安装charles证书（安装方法在最后）。如果手机无法安装.pem修改为.crt
+（小米手机进入到设置-wifi，点击高级，安装证书）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;打开手机app，观察charles接受\发送的请求&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;mac-osx抓包方案&quot;&gt;mac osx抓包方案&lt;/h2&gt;
+
+&lt;h3 id=&quot;charles-1&quot;&gt;Charles&lt;/h3&gt;
+
+&lt;p&gt;使用手机安装SSL证书&lt;/p&gt;
+
+&lt;p&gt;在help-&amp;gt;SSL Proxying-&amp;gt; “nstall Charles Root Certificate on a Mobile Device or remote Browser”&lt;/p&gt;
+
+&lt;p&gt;然后根据提示访问安装&lt;/p&gt;
+</description>
+        <pubDate>Fri, 08 Mar 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/%E6%8A%80%E6%9C%AF/2019/03/08/appspider-tools.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2019/03/08/appspider-tools.html</guid>
+        
+        <category>app,</category>
+        
+        <category>抓包</category>
+        
+        
+        <category>技术</category>
         
       </item>
     
@@ -1045,53 +1112,6 @@ rboot  重启
         <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/01/25/amazon-spider-python.html</guid>
         
         <category>python,spider</category>
-        
-        
-        <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>Django添加静态文件</title>
-        <description>&lt;p&gt;最近做了一个todolist webapp,需要添加css时候忘记添加方法了,查看了以前的项目才想起来,所以记录一下.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;settings.py 将以下代码放到最下面&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;STATIC_URL = '/static/'
- 
-STATICFILES_DIRS = ( 
-    os.path.join(BASE_DIR),
-)
- 
-STATICFILES_FINDERS = (
-    &quot;django.contrib.staticfiles.finders.FileSystemFinder&quot;,
-    &quot;django.contrib.staticfiles.finders.AppDirectoriesFinder&quot;,
-)
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;给html添加静态文件&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;首行加入(一定要放在首行)，这里和Jekyll冲突了在需要代码前后添加的是“大括号和百分号”&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/\{\%/load staticfiles/\%\}/
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;然后按照jinjia2或者djagno template的语法加上css等静态文件的路径,如&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;/\{\%/ static 'css/style.css' /\%\}/&quot; /&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;搞定&lt;/p&gt;
-</description>
-        <pubDate>Wed, 20 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/01/20/add-static-django-python.html</link>
-        <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/01/20/add-static-django-python.html</guid>
-        
-        <category>python</category>
         
         
         <category>技术</category>
