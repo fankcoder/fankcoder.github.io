@@ -6,22 +6,13 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 08 Mar 2019 14:27:38 +0800</pubDate>
-    <lastBuildDate>Fri, 08 Mar 2019 14:27:38 +0800</lastBuildDate>
+    <pubDate>Fri, 08 Mar 2019 14:31:52 +0800</pubDate>
+    <lastBuildDate>Fri, 08 Mar 2019 14:31:52 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>Vscode</title>
-        <description>
-&lt;hr /&gt;
-&lt;p&gt;layout: post
-title: vscode配置手册
-category: 工具
-tags: vscode
-keywords: vscode
-—&lt;/p&gt;
-
-&lt;h2 id=&quot;vs-code&quot;&gt;VS Code&lt;/h2&gt;
+        <title>vscode配置手册</title>
+        <description>&lt;h2 id=&quot;vs-code&quot;&gt;VS Code&lt;/h2&gt;
 
 &lt;h3 id=&quot;plugin&quot;&gt;Plugin&lt;/h3&gt;
 
@@ -66,24 +57,19 @@ defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 </description>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/08/vscode.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/08/vscode.html</guid>
+        <link>http://localhost:4000/%E5%B7%A5%E5%85%B7/2019/03/08/vscode.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E5%B7%A5%E5%85%B7/2019/03/08/vscode.html</guid>
         
+        <category>vscode</category>
+        
+        
+        <category>工具</category>
         
       </item>
     
       <item>
-        <title>Mac Tools</title>
-        <description>
-&lt;hr /&gt;
-&lt;p&gt;layout: post
-title: mac使用手册
-category: 工具
-tags: mac, osx
-keywords: mac
-—&lt;/p&gt;
-
-&lt;h2 id=&quot;iterm2&quot;&gt;iterm2&lt;/h2&gt;
+        <title>mac使用手册</title>
+        <description>&lt;h2 id=&quot;iterm2&quot;&gt;iterm2&lt;/h2&gt;
 
 &lt;h3 id=&quot;分屏&quot;&gt;分屏&lt;/h3&gt;
 
@@ -154,9 +140,15 @@ export PROMPT_COMMAND='echo -ne &quot;\033]0;$PWD\007&quot;'
 &lt;p&gt;远程工具&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/2019/03/08/mac-tools.html</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/03/08/mac-tools.html</guid>
+        <link>http://localhost:4000/%E5%B7%A5%E5%85%B7/2019/03/08/mac-tools.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E5%B7%A5%E5%85%B7/2019/03/08/mac-tools.html</guid>
         
+        <category>mac,</category>
+        
+        <category>osx</category>
+        
+        
+        <category>工具</category>
         
       </item>
     
