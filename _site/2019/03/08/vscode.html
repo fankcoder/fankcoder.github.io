@@ -1,0 +1,52 @@
+
+<hr />
+<p>layout: post
+title: vscode配置手册
+category: 工具
+tags: vscode
+keywords: vscode
+—</p>
+
+<h2 id="vs-code">VS Code</h2>
+
+<h3 id="plugin">Plugin</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim
+atom dark theme
+al code outline
+python
+django
+sql server
+</code></pre></div></div>
+
+<h3 id="vim-插件不能响应长按的解决">vim 插件不能响应长按的解决</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false # For VS Code
+
+defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider
+</code></pre></div></div>
+
+<h3 id="使用tab键切换提示">使用tab键切换提示</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{
+
+"key": "tab",
+
+"command": "-acceptSelectedSuggestion",
+
+"when": "suggestWidgetVisible &amp;&amp; textInputFocus"
+
+},
+
+{
+
+"key": "tab",
+
+"command": "selectNextSuggestion",
+
+"when": "suggestWidgetMultipleSuggestions &amp;&amp; suggestWidgetVisible &amp;&amp; textInputFocus"
+
+}
+
+]
+</code></pre></div></div>
