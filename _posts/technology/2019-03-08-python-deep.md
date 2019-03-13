@@ -163,7 +163,7 @@ class Data:
 @classmethod类方法，第一参数是类本身cls，返回值不需要与类同名
 
 ```
-@classmethod
+    @classmethod
     def from_string(cls, date_str):  #cls传递的是类本身，不是实例
         year, month, day = tuple(date_str)
         return cls(year, month, day)  #写为cls,变为动态不必与类名相同
@@ -231,6 +231,50 @@ class MyThread(Thread):
 3. 在mixin中不要使用supper
 
 ### with上下文管理器
+```
+try:
+    raise KeyError
+except KeyError as e:
+    print('e')
+else:
+    print('else') #当try正确运行时&except没有捕获到异常打印
+finally:
+    print('f') #始终运行
+```
+with语句是为了简化try..finally诞生的
+```
+class Sample:
+    def __enter__(self):
+        #获取资源
+        print('enter')
+        return self
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        #释放资源
+        print('exit')
+    def do_something(self):
+        print('do smt')
+
+with Sample() as sample:
+    sample.do_something() 
+```
+这个类实现了上下文管理器协议，此协议非常好用。
+with是对上下文管理器的支持。
+
+### contextlib简化上下文管理器
+进一步简化
+```
+import contextlib
+
+@contextlib.contextmanager
+def file_open(file_name):
+    print('file open')  # __enter__的位置
+    yield {}
+    print('file end')  # __exit__的位置
+    
+with file_open('text') as f:
+    pass
+
+```
 
 
 ### collections
@@ -328,48 +372,117 @@ isinstance 和type，判断类的类型尽量用isinstance
 
 
 
-try.. excepte..finally(始终运行)..
-
-上下文管理器协议 with语句 先调用__enter__最后调用__exit__
-
- ### contextlib
-
-contextlib简化上下文管理 ,使用装饰器将函数变为上下文管理器
-
-import contextlib
-
-@contextlib.contextmanager
-
-def file_open(file_name):
-
-... yield {} ...
-
 ### 自定义序列类
 
 容器序列，扁平序列，可变序列sequence，不可变序列mutable
 
 python面向协议编程 in可以作用于list
 
-+,-,extend
+### +,+=,extend
++=（__iadd__）的参数可以是序列，+必须两边同类型
+a.extend(range(0,3)) #直接对值修改，不需要再赋值，参考apped
+a.append([1,2])  #[1,2,[1,2]]注意和extend的区别
 
-+=就地加参数可以为任意序列，通过for循环append
+
+参数可以为任意序列，通过for循环append
 
 切片[start : end : step]，默认值可省略[0,len(L),1].
 
-bisect处理已排序序列，二分查找。插入排序好的数列bisect.insort(list, 5).查找位置插入bisect.bisect(list, 3)
+实现支持切片操作的类
+```
+class Group:
+    def __init__(self, group_name, company_name, staffs):
+        self.group_name = group_name
+        self.company_name = company_name
+        self.staffs = staffs
+    
+    def __reversed__(self):
+        self.staffs.reverse()
+        
+    # def __getitem__(self, item):
+    #     return self.staff[item] #返回对象为list或单个元素
+    import numbers
+    def __getitem__(self, item):  #返回类对象
+        cls = type(self)
+        if isinstance(item, slice):
+            return cls(group_name=self.group_name, company_name=self.company_name, staffs=self.staffs[item])
+        elif isinstance(item, numbers.Interal):
+            return cls(group_name=self.group_name, company_name=self.company_name, [staffs=self.staffs[item]])
+    
+    def __len__(self):
+        return len(self.staffs)
+        
+    def __iter__(self):
+        return iter(self.staffs)
+    
+    def __contains__(self, item):
+        if item in self.staffs:
+            return True
+        else:
+            return False
+        
+staffs = ['a', 'b', 'c']
+group = Group(group_name='gname', company_name='cname', staff=staffs)
+group[:2]
+for user in group:
+    print(user)
+```
 
-array和list重要区别，array只能存放指定的数据类型。布隆过滤器。
+### bisect
+bisect处理已排序序列，二分查找。插入排序好的数列，升序bisect.insort(list, 5).
+二分法查找位置，插入位置bisect.bisect(list, 3)
+```
+import bisect
 
-推导式&表达式，列表生成式性能能高于列表操作
+l = []
+bisect.insort(4)
+bisect.insort(1)
+bisect.insort(3)
+bisect.insort(2)
+print(l) #[1,2,3,4]
+```
 
+arrary和list重要区别，array只能存放指定的数据类型。布隆过滤器。
+arrary是c中的数组，一串连续的内存块，性能高。
+```
+import array
+_a = array.array('i') # int,参数查看文档
+_a.append()
+```
+
+
+### 列表推导式（生成式）&生成器表达式
+通过一行代码生成列表。
+
+列表生成式性能能高于列表操作
+```
 odd_list = [i for i in range(21) if i%2 == 1]
+```
 
-odd_list = (i for i in range(21) if i%2 == 1)生成器表达式为小括号
+复杂情况的列表生成式，可以使用函数实现.（过于复杂就放弃吧，代码可读性更重要）
+```
+def sqrt(item):
+    return item*item
+odd_list = [sqrt(i) for i in range(21) if i%2 == 1]
+```
 
+
+生成器表达式为小括号，type变为generator
+```
+odd_list = (i for i in range(21) if i%2 == 1)
+```
+
+字典推导式
+```
 my_dict ={'a':1, 'b':2}
+_reversed = {value:key for key, value in my_dict.items()} # 交换value,key
+```
 
-_reversed = {value:key for key, value in my_dict.items()}
-
+集合推导式
+```
+my_set = {key for key,value in my_dict.items()}
+type(my_set)  # set
+```
 
 ### 深入set和dict
 
