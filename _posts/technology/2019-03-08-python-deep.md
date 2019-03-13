@@ -12,6 +12,7 @@ keywords: pyhton
 
 ---
 
+
   
 ### type,object和class的关系
 
@@ -485,20 +486,84 @@ type(my_set)  # set
 ```
 
 ### 深入set和dict
+```
+a.copy() #浅拷贝
 
-浅拷贝a.copy()
+import copy 
 
-深拷贝import copy 
+copy.deepcopy(a) #深拷贝
+```
+浅拷贝就是创建一个具有相同类型，相同值但不同id的新对象。
+深拷贝不仅仅拷贝了原始对象自身，也对其包含的值进行拷贝，它会递归的查找对象中包含的其他对象的引用，来完成更深层次拷贝。因此，深拷贝产生的副本可以随意修改而不需要担心会引起原始值的改变。
 
-copy.deepcopy(a)
+#### dict的formkeys方法
+```
+l = ['a', 'b']
+d = dict.fromkeys(l, {'c','d'})
+print(d) #{'a': {'c', 'd'}, 'b': {'c', 'd'}}
+```
+#### get方法
+```
+_d['key']  #key不存在会抛异常
+_dict.get("a", {}) #get方法非常实用！{}为默认值
+```
 
-_dict.get("a", {}) get
+#### items
+```
+for key, value in _d.items()：
+    print(k,v)   #烂大街的好方法
+```
+#### setdefault 增加get方法
+```
+setdefault(key, default)
+# 1.先调用get()
+# 2.没有则默认值
+# 3.再把默认值设置进dict
+```
+#### update
+合并字典
+```
+_dict.update({'c':1})
+_dict.update("a"=1,"b"=2) #放iterm都可以
+_dict.update(（（’e‘,'f'），）) #传入tuple
+```
 
-setdefault(key, default)先get()，没有则设置默认
+### dict子类
+写类不建议继承list和dict
+某些时候c不会使用覆盖的方法，而是会用dict本身的方法
+```
+from collections import UserDict 
+#推荐使用UserDict被python重写过
+class Mydict(UserDict):
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value*2)
 
-_dict.update("a"=1,"b"=2) 也可以放tuple
+from collections import defaultdict
 
-set和fronzenset(不可变)无序，不重复，fset可以做为dict的key
+# 如果找不到key,就赋值
+my_dict = defaultdict(dict())
+my_value = my_dict['fank'] #这里我的py3.7.1报错了
+```
+
+### set fronzenset
+
+set和fronzenset(不可变)无序，不重复，在去重时用的很多，并且fronzenset是不可变类型，所以可以做为dict的key
+```
+s = set('abcd')
+s1 = {'a', 'b'} #type是set
+s2 = frozenset('abcde') #无法add值，
+```
+
+#### set difference
+```
+s = {'a','b','c'}
+ans = set('cef')
+rs = s.difference(ans)
+print(rs) # {'a','b'}
+```
+
+#### dict和set实现原理
+
 
 dict 查哈希表，key必须为可哈希的值。str,fset,tuple,自己实现的类
 
