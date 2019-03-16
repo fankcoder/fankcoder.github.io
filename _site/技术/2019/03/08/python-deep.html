@@ -57,7 +57,7 @@ print(A.x) #error
     def parse_from_string(date_str):
         year, month, day = tuple(date_str)
         return Date(year, month, day)  #静态方法硬编码，返回值必须与类名相同
-</code></pre></div></div> <p>@classmethod类方法，第一参数是类本身cls，返回值不需要与类同名</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@classmethod
+</code></pre></div></div> <p>@classmethod类方法，第一参数是类本身cls，返回值不需要与类同名</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    @classmethod
     def from_string(cls, date_str):  #cls传递的是类本身，不是实例
         year, month, day = tuple(date_str)
         return cls(year, month, day)  #写为cls,变为动态不必与类名相同
@@ -100,10 +100,135 @@ class MyThread(Thread):
     def __init__(self, name, user):
         self.user = user
         super().__init__(name=name)  #重用父类代码
-</code></pre></div></div> <h3 id="mixin模式">mixin模式</h3> <p>多继承不推荐，mixin代替多继承 特点：</p> <ol> <li>Mixin类功能单一</li> <li>不和基类关联，可以和任意基类组合</li> <li>在mixin中不要使用supper</li> </ol> <h3 id="with上下文管理器">with上下文管理器</h3> <h3 id="collections">collections</h3> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from collections import *
+</code></pre></div></div> <h3 id="mixin模式">mixin模式</h3> <p>多继承不推荐，mixin代替多继承 特点：</p> <ol> <li>Mixin类功能单一</li> <li>不和基类关联，可以和任意基类组合</li> <li>在mixin中不要使用supper</li> </ol> <h3 id="with上下文管理器">with上下文管理器</h3> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>try:
+    raise KeyError
+except KeyError as e:
+    print('e')
+else:
+    print('else') #当try正确运行时&amp;except没有捕获到异常打印
+finally:
+    print('f') #始终运行
+</code></pre></div></div> <p>with语句是为了简化try..finally诞生的</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Sample:
+    def __enter__(self):
+        #获取资源
+        print('enter')
+        return self
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        #释放资源
+        print('exit')
+    def do_something(self):
+        print('do smt')
+
+with Sample() as sample:
+    sample.do_something() 
+</code></pre></div></div> <p>这个类实现了上下文管理器协议，此协议非常好用。 with是对上下文管理器的支持。</p> <h3 id="contextlib简化上下文管理器">contextlib简化上下文管理器</h3> <p>进一步简化</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import contextlib
+
+@contextlib.contextmanager
+def file_open(file_name):
+    print('file open')  # __enter__的位置
+    yield {}
+    print('file end')  # __exit__的位置
+    
+with file_open('text') as f:
+    pass
+
+</code></pre></div></div> <h3 id="collections">collections</h3> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from collections import *
 
 from collections.abc import * #抽象基类
-</code></pre></div></div> <p>tuple不可修改并不绝对。tuple值为list可以修改(id没变，不建议这样使用)</p> <p>tuple比list好处，c语音类比，tuple对应struct,list对应array.性能优化，线程安全，可以作为dict的key,拆包特性。</p> <p>namedtuple可以生成类，User = namedtuple(“User”,[‘name’,’age’])</p> <p>节省空间，用于数据处理，从数据库取数据为tuple，直接赋值</p> <h3 id="def-askargs-kwargspass">def ask(*args, **kwargs):pass</h3> <p>ask(‘f’,25) 传给*args, ask(name=’f’, age=25)传给**kwargs</p> <p>*args是个tuple, **kwargs是个dict</p> <p>_make方法初始化，_asdict()</p> <p>from collections import defaultdict C语言实现，性能高,比setdefault更强大</p> <p>default_dict = defaultdict(int) 参数是可调用对象</p> <p>default_dict[‘key’] #key=0</p> <h3 id="deque双端队列">deque双端队列</h3> <p>应用场景queue是由deque来完成的。deque是线程安全到，list不是线程安全的，由GIL保护。</p> <p>from collections import deque</p> <p>copy是浅拷贝，如果值为list会相互影响</p> <p>counter(iterm) 快速统计,counter.update().most_common(n)出现最多到前n个,使用堆实现(完全二叉树)</p> <h3 id="orderdict是有序的">OrderDict是有序的</h3> <p>py3的dict默认是有序的。</p> <p>_d = OrderedDict() _d.popitem()不需要传key _d.move_to_end()</p> <h3 id="chainmap">ChainMap</h3> <p>方便操作多个dict. 将dict连结,key相同只有一个。</p> <p>from collections import ChainMap</p> <p>new_dict = ChainMap(_d1, _d2)</p> <p>new_dict.maps全部打印，同样可以修改</p> <h3 id="类和对象">类和对象</h3> <p>type() object</p> <p>魔法函数</p> <p>hasattr(param,”<strong>len</strong>”) 判断是否有这个函数，用isinstance()更好</p> <p>希望用户继承时必须实现方法</p> <p>class CacheBase():</p> <p>def get(self, key):raise NotImplementedError</p> <p>def set(self, key, value):pass</p> <h3 id="is-和-">is 和 ==</h3> <p>is判断id是否相同</p> <p>==判断值</p> <p>isinstance 和type，判断类的类型尽量用isinstance</p> <p>try.. excepte..finally(始终运行)..</p> <p>上下文管理器协议 with语句 先调用__enter__最后调用__exit__</p> <p>### contextlib</p> <p>contextlib简化上下文管理 ,使用装饰器将函数变为上下文管理器</p> <p>import contextlib</p> <p>@contextlib.contextmanager</p> <p>def file_open(file_name):</p> <p>… yield {} …</p> <h3 id="自定义序列类">自定义序列类</h3> <p>容器序列，扁平序列，可变序列sequence，不可变序列mutable</p> <p>python面向协议编程 in可以作用于list</p> <p>+,-,extend</p> <p>+=就地加参数可以为任意序列，通过for循环append</p> <p>切片[start : end : step]，默认值可省略[0,len(L),1].</p> <p>bisect处理已排序序列，二分查找。插入排序好的数列bisect.insort(list, 5).查找位置插入bisect.bisect(list, 3)</p> <p>array和list重要区别，array只能存放指定的数据类型。布隆过滤器。</p> <p>推导式&amp;表达式，列表生成式性能能高于列表操作</p> <p>odd_list = [i for i in range(21) if i%2 == 1]</p> <p>odd_list = (i for i in range(21) if i%2 == 1)生成器表达式为小括号</p> <p>my_dict ={‘a’:1, ‘b’:2}</p> <p>_reversed = {value:key for key, value in my_dict.items()}</p> <h3 id="深入set和dict">深入set和dict</h3> <p>浅拷贝a.copy()</p> <p>深拷贝import copy</p> <p>copy.deepcopy(a)</p> <p>_dict.get(“a”, {}) get</p> <p>setdefault(key, default)先get()，没有则设置默认</p> <p>_dict.update(“a”=1,”b”=2) 也可以放tuple</p> <p>set和fronzenset(不可变)无序，不重复，fset可以做为dict的key</p> <p>dict 查哈希表，key必须为可哈希的值。str,fset,tuple,自己实现的类</p> <p>dict的内存花销大，查询速度快</p> <p>垃圾回收算法是采用引用计数 del</p> <h3 id="元类编程">元类编程</h3> <p>property动态属性，User.age可以取属性，不用调函数，类似get，set为@age.setter</p> <p>@propery</p> <p>def age(self):</p> <p>return age.year</p> <h3 id="__getattr__与__getattribute__的区别">__getattr__与__getattribute__的区别</h3> <p>__getattr__在查找不到属性的时候调用(写了就不会报错).维护dict动态访问key</p> <p>def <strong>getattr</strong>(self, item): return “not find”</p> <p>def <strong>getattribute</strong>(self, item): return “true” 无条件进入这个函数，控制全局属性访问</p> <p>属性描述符实现__get__,<strong>set</strong>,<strong>delete</strong></p> <p>数据描述符，非数据描述符</p> <p>属性查找过程</p> <p>传递方法为变化的user.age方式无法实现， 使用getattr(user, age)</p> <h3 id="__new__和__init__区别">__new__和__init__区别</h3> <p>def <strong>new</strong>(cls, *args, **kwargs):pass new传递类，在init之前，new控制对象的生成过程，如果new不返回对象，不会调用init函数</p> <p>type是默认元类，metaclass是自定义元类，可以控制实例化过程</p> <h3 id="迭代器和生成器">迭代器和生成器</h3> <p>迭代器是访问集合内元素的一种方式，一般用来遍历数据。</p> <p>迭代器和以下标的访问方式不一样，迭代器是不能返回的，迭代器提供一种惰性方式。</p> <p>__iter__迭代协议，可迭代的实现方法</p> <p>from collections.abc import Iterable,Iterator</p> <p>iter([_list])迭代器</p> <p>def <strong>iter</strong>(self) / def <strong>getitem</strong>(self, item)</p> <p>next(itor)接受迭代器，迭代器next无法切片。文件太大使用迭代器读数据</p> <p>生成器函数，函数内有yield关键字</p> <p>def gen_func(): yield 1 yield2 yield3</p> <p>gen = gen_func() #gen生成器对象，不是值</p> <p>for i in gen: print(i) 惰性求值提供了可能，比list好处是省内存</p> <p>查看字节码，import dis dis.dis(func)</p> <h3 id="socket编程">socket编程</h3> <p>import socket</p> <p>server = socket.socket()</p> <p>server.bind((‘0.0.0.0’, 8000))</p> <p>server.listen()</p> <p>sock, addr = server.accept()</p> <p>data = server.recv(1024) #1kb</p> <h3 id="多线进程">多线、进程</h3> <p>global interpreter lock GIL</p> <p>python中一个线程对应于c中的线程</p> <p>gil使得同一时刻只有一个线程在一个cpu上执行字节码</p> <p>为了安全，但速度慢，无法体现多核优势。pypy是去gil化的。gil在遇到io操作会主动释放</p> <p>操作系统调度的最小单元线程，对于io操作，多线程和多进程差别不大。</p> <p>1.通过thread类实例化</p> <p>thread1 = threading.Thread(target=func, args=(“”,))</p> <p>thread1.setDaemon(True)#设置为守护线程。当主线程关闭时，子线程被kill</p> <p>thread1.join() #阻塞，等待执行完</p> <ol> <li>通过继承thread来实现多线程</li> </ol> <p>class GetDetailHtml(threading.Thread):</p> <p>def run(self):</p> <p>pass</p> <p>thread1 = GDH()</p> <p>thread1.start()</p> <h3 id="线程之间的通信方式">线程之间的通信方式</h3> <p>1.共享全局变量(list)（多线程可以，多进程不行）</p> <p>这种方法，线程并不安全，需要加gil锁，所以并不推荐用作通信</p> <p>2.通过queue方法进行线程间同步,queue本身是线程安全的</p> <p>from queue import Queue</p> <p>detail_url_queue = Queue(maxsize=1000)</p> <p>url = queue.get()#阻塞方法，如果为空就一直停顿等待</p> <p>queueq.put_nowait()#设置为非阻塞</p> <p>.join()一直阻塞，想退出需要调用.task_down() #爬虫暂停</p> <p>如果共用变量为dict或其他，考虑使用全局变量</p> <h3 id="线程同步lock-rlock">线程同步（lock, rlock）</h3> <p>from threading import Lock</p> <p>lock = Lock()</p> <p>global lock</p> <p>lock.acquire()</p> <p>a +=1</p> <p>lock.release()</p> <ol> <li>用锁会影响性能</li> </ol> <p>2.锁会引起死锁（互相等待）</p> <p>rlock可重入的锁，在同一个线程里面，可以连续调用多次acquire，需要相等数量的release.</p> <h3 id="condition条件变量用于复杂的线程间同步锁">condition条件变量，用于复杂的线程间同步锁</h3> <p>from threading import Condition</p> <p>self.cond.acquire()</p> <p>print()</p> <p>self.cond.notify()</p> <p>self.cond.wait()</p> <p>self.release()</p> <p>with self.cond = acquire()/release()</p> <p>在调用with之后，才能使用notify, wait</p> <p>condition有两层锁，一把底层锁会在线程调用wait方法的时候释放，上面的锁会值每次调用wait时分配一把并放入到cond的等待队列中，等到notify方法唤醒</p> <h3 id="semaphore-是用于控制进入数量的锁">Semaphore 是用于控制进入数量的锁</h3> <p>#文件读写，写一搬只用一个线程，读可以允许有多个</p> <p>sem = threading.Semaphore(3)</p> <p>self.sem.acquire()</p> <p>self.sem.release() #在另一个函数release，每次3个线程</p> <p>线程池concurrent #py3.2</p> <p>from concurrent import futures</p> <p>1.主线程中可以获取某一个线程的状态或者某一个任务的状态，以及返回值</p> <p>2.当一个线程完成的时候，主线程能立即知道</p> <p>3.futures可以让多线程多进程编码接口一致</p> <p>from concurrent.futures import ThreadPoolExecutor</p> <p>executor = ThreadPoolExecutor(max_workers=2)</p> <p>task1 = executor.submit(get_html, (3))</p> <p>print(task1.done()) #done用于判定某个任务是否完成</p> <p>print(task1.result()) #阻塞的方法，可以获取执行结果</p> <p>task2.cancel()#取消</p> <p>#获取已经成功的task返回</p> <p>urls = [3,2,3]</p> <p>from concurrent.futures import as_completed</p> <p>all_task = [executor.submit(get_html, (url)) for url in urls]</p> <p>for future in as_complete(all_task):</p> <p>data = future.result()</p> <p>简化版,但返回顺序是urls，并不是谁先完成返回谁</p> <p>for data in executor.map(get_html, urls):</p> <p>print(data)</p> <h3 id="多进程">多进程</h3> <p>线程由于有gil无法并发，io操作进程切换代价高于线程。</p> <p>耗cpu的操作，多核cpu，多进程优于多线程。</p> <p>进程数据完全隔离,无法使用共享全局变量</p> <p>子进程完全拷贝Fork之后的父进程代码运行</p> <p>from concurrent.futures import ProcessPoolExecutor</p> <p>import multiproessing #比上面更底层，但不推荐</p> <p>def get_html(n):</p> <p>time.sleep(n)</p> <p>return n</p> <p>if <strong>name</strong> == ‘<strong>main</strong>’:</p> <p>progress = multiprocessing.Process(target=get_html, args=(2,))</p> <p>progress.start()</p> <p>progress.join()</p> <p>queue不能直接用于进程池通信，pool中的通信要使用manager.queue</p> <p>通过pipe实现进程通信</p> <p>recevie_pipe, send_pipe = Pipe()</p> <p>#pipe只适用与两个进程</p> <h3 id="协程-有多个入口的函数可以暂停的函数可以向暂停的地方传值">协程 （有多个入口的函数，可以暂停的函数，可以向暂停的地方传值）</h3> <p>python3.5之后的协程是原生协程，之前是利用生成器完成</p> <p>生成器不只可以产出值，还可以接受值send()</p> <p>send()是协程的基础</p> <p>throw()扔异常</p> <p>yield from iterable</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div> <p>tuple不可修改并不绝对。tuple值为list可以修改(id没变，不建议这样使用)</p> <p>tuple比list好处，c语音类比，tuple对应struct,list对应array.性能优化，线程安全，可以作为dict的key,拆包特性。</p> <p>namedtuple可以生成类，User = namedtuple(“User”,[‘name’,’age’])</p> <p>节省空间，用于数据处理，从数据库取数据为tuple，直接赋值</p> <h3 id="def-askargs-kwargspass">def ask(*args, **kwargs):pass</h3> <p>ask(‘f’,25) 传给*args, ask(name=’f’, age=25)传给**kwargs</p> <p>*args是个tuple, **kwargs是个dict</p> <p>_make方法初始化，_asdict()</p> <p>from collections import defaultdict C语言实现，性能高,比setdefault更强大</p> <p>default_dict = defaultdict(int) 参数是可调用对象</p> <p>default_dict[‘key’] #key=0</p> <h3 id="deque双端队列">deque双端队列</h3> <p>应用场景queue是由deque来完成的。deque是线程安全到，list不是线程安全的，由GIL保护。</p> <p>from collections import deque</p> <p>copy是浅拷贝，如果值为list会相互影响</p> <p>counter(iterm) 快速统计,counter.update().most_common(n)出现最多到前n个,使用堆实现(完全二叉树)</p> <h3 id="orderdict是有序的">OrderDict是有序的</h3> <p>py3的dict默认是有序的。</p> <p>_d = OrderedDict() _d.popitem()不需要传key _d.move_to_end()</p> <h3 id="chainmap">ChainMap</h3> <p>方便操作多个dict. 将dict连结,key相同只有一个。</p> <p>from collections import ChainMap</p> <p>new_dict = ChainMap(_d1, _d2)</p> <p>new_dict.maps全部打印，同样可以修改</p> <h3 id="类和对象">类和对象</h3> <p>type() object</p> <p>魔法函数</p> <p>hasattr(param,”<strong>len</strong>”) 判断是否有这个函数，用isinstance()更好</p> <p>希望用户继承时必须实现方法</p> <p>class CacheBase():</p> <p>def get(self, key):raise NotImplementedError</p> <p>def set(self, key, value):pass</p> <h3 id="is-和-">is 和 ==</h3> <p>is判断id是否相同</p> <p>==判断值</p> <p>isinstance 和type，判断类的类型尽量用isinstance</p> <h3 id="自定义序列类">自定义序列类</h3> <p>容器序列，扁平序列，可变序列sequence，不可变序列mutable</p> <p>python面向协议编程 in可以作用于list</p> <h3 id="extend">+,+=,extend</h3> <p>+=（<strong>iadd</strong>）的参数可以是序列，+必须两边同类型 a.extend(range(0,3)) #直接对值修改，不需要再赋值，参考apped a.append([1,2]) #[1,2,[1,2]]注意和extend的区别</p> <p>参数可以为任意序列，通过for循环append</p> <p>切片[start : end : step]，默认值可省略[0,len(L),1].</p> <p>实现支持切片操作的类</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Group:
+    def __init__(self, group_name, company_name, staffs):
+        self.group_name = group_name
+        self.company_name = company_name
+        self.staffs = staffs
+    
+    def __reversed__(self):
+        self.staffs.reverse()
+        
+    # def __getitem__(self, item):
+    #     return self.staff[item] #返回对象为list或单个元素
+    import numbers
+    def __getitem__(self, item):  #返回类对象
+        cls = type(self)
+        if isinstance(item, slice):
+            return cls(group_name=self.group_name, company_name=self.company_name, staffs=self.staffs[item])
+        elif isinstance(item, numbers.Interal):
+            return cls(group_name=self.group_name, company_name=self.company_name, [staffs=self.staffs[item]])
+    
+    def __len__(self):
+        return len(self.staffs)
+        
+    def __iter__(self):
+        return iter(self.staffs)
+    
+    def __contains__(self, item):
+        if item in self.staffs:
+            return True
+        else:
+            return False
+        
+staffs = ['a', 'b', 'c']
+group = Group(group_name='gname', company_name='cname', staff=staffs)
+group[:2]
+for user in group:
+    print(user)
+</code></pre></div></div> <h3 id="bisect">bisect</h3> <p>bisect处理已排序序列，二分查找。插入排序好的数列，升序bisect.insort(list, 5). 二分法查找位置，插入位置bisect.bisect(list, 3)</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import bisect
+
+l = []
+bisect.insort(4)
+bisect.insort(1)
+bisect.insort(3)
+bisect.insort(2)
+print(l) #[1,2,3,4]
+</code></pre></div></div> <p>arrary和list重要区别，array只能存放指定的数据类型。布隆过滤器。 arrary是c中的数组，一串连续的内存块，性能高。</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import array
+_a = array.array('i') # int,参数查看文档
+_a.append()
+</code></pre></div></div> <h3 id="列表推导式生成式生成器表达式">列表推导式（生成式）&amp;生成器表达式</h3> <p>通过一行代码生成列表。</p> <p>列表生成式性能能高于列表操作</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>odd_list = [i for i in range(21) if i%2 == 1]
+</code></pre></div></div> <p>复杂情况的列表生成式，可以使用函数实现.（过于复杂就放弃吧，代码可读性更重要）</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def sqrt(item):
+    return item*item
+odd_list = [sqrt(i) for i in range(21) if i%2 == 1]
+</code></pre></div></div> <p>生成器表达式为小括号，type变为generator</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>odd_list = (i for i in range(21) if i%2 == 1)
+</code></pre></div></div> <p>字典推导式</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dict ={'a':1, 'b':2}
+_reversed = {value:key for key, value in my_dict.items()} # 交换value,key
+</code></pre></div></div> <p>集合推导式</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_set = {key for key,value in my_dict.items()}
+type(my_set)  # set
+</code></pre></div></div> <h3 id="深入set和dict">深入set和dict</h3> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a.copy() #浅拷贝
+
+import copy 
+
+copy.deepcopy(a) #深拷贝
+</code></pre></div></div> <p>浅拷贝就是创建一个具有相同类型，相同值但不同id的新对象。 深拷贝不仅仅拷贝了原始对象自身，也对其包含的值进行拷贝，它会递归的查找对象中包含的其他对象的引用，来完成更深层次拷贝。因此，深拷贝产生的副本可以随意修改而不需要担心会引起原始值的改变。</p> <h4 id="dict的formkeys方法">dict的formkeys方法</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>l = ['a', 'b']
+d = dict.fromkeys(l, {'c','d'})
+print(d) #{'a': {'c', 'd'}, 'b': {'c', 'd'}}
+</code></pre></div></div> <h4 id="get方法">get方法</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_d['key']  #key不存在会抛异常
+_dict.get("a", {}) #get方法非常实用！{}为默认值
+</code></pre></div></div> <h4 id="items">items</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>for key, value in _d.items()：
+    print(k,v)   #烂大街的好方法
+</code></pre></div></div> <h4 id="setdefault-增加get方法">setdefault 增加get方法</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setdefault(key, default)
+# 1.先调用get()
+# 2.没有则默认值
+# 3.再把默认值设置进dict
+</code></pre></div></div> <h4 id="update">update</h4> <p>合并字典</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_dict.update({'c':1})
+_dict.update("a"=1,"b"=2) #放iterm都可以
+_dict.update(（（’e‘,'f'），）) #传入tuple
+</code></pre></div></div> <h3 id="dict子类">dict子类</h3> <p>写类不建议继承list和dict 某些时候c不会使用覆盖的方法，而是会用dict本身的方法</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from collections import UserDict 
+#推荐使用UserDict被python重写过
+class Mydict(UserDict):
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value*2)
+
+from collections import defaultdict
+
+# 如果找不到key,就赋值
+my_dict = defaultdict(dict())
+my_value = my_dict['fank'] #这里我的py3.7.1报错了
+</code></pre></div></div> <h3 id="set-fronzenset">set fronzenset</h3> <p>set和fronzenset(不可变)无序，不重复，在去重时用的很多，并且fronzenset是不可变类型，所以可以做为dict的key</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = set('abcd')
+s1 = {'a', 'b'} #type是set
+s2 = frozenset('abcde') #无法add值，
+</code></pre></div></div> <h4 id="set-difference">set difference</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = {'a','b','c'}
+ans = set('cef')
+rs = s.difference(ans)
+print(rs) # {'a','b'}
+</code></pre></div></div> <h4 id="dict和set实现原理">dict和set实现原理</h4> <p>dict 查哈希表，key必须为可哈希的值。str,fset,tuple,自己实现的类</p> <p>dict的内存花销大，查询速度快</p> <p>垃圾回收算法是采用引用计数 del</p> <h3 id="元类编程">元类编程</h3> <p>property动态属性，User.age可以取属性，不用调函数，类似get，set为@age.setter</p> <p>@propery</p> <p>def age(self):</p> <p>return age.year</p> <h3 id="__getattr__与__getattribute__的区别">__getattr__与__getattribute__的区别</h3> <p>__getattr__在查找不到属性的时候调用(写了就不会报错).维护dict动态访问key</p> <p>def <strong>getattr</strong>(self, item): return “not find”</p> <p>def <strong>getattribute</strong>(self, item): return “true” 无条件进入这个函数，控制全局属性访问</p> <p>属性描述符实现__get__,<strong>set</strong>,<strong>delete</strong></p> <p>数据描述符，非数据描述符</p> <p>属性查找过程</p> <p>传递方法为变化的user.age方式无法实现， 使用getattr(user, age)</p> <h3 id="__new__和__init__区别">__new__和__init__区别</h3> <p>def <strong>new</strong>(cls, *args, **kwargs):pass new传递类，在init之前，new控制对象的生成过程，如果new不返回对象，不会调用init函数</p> <p>type是默认元类，metaclass是自定义元类，可以控制实例化过程</p> <h3 id="迭代器和生成器">迭代器和生成器</h3> <p>迭代器是访问集合内元素的一种方式，一般用来遍历数据。</p> <p>迭代器和以下标的访问方式不一样，迭代器是不能返回的，迭代器提供一种惰性方式。</p> <p>__iter__迭代协议，可迭代的实现方法</p> <p>from collections.abc import Iterable,Iterator</p> <p>iter([_list])迭代器</p> <p>def <strong>iter</strong>(self) / def <strong>getitem</strong>(self, item)</p> <p>next(itor)接受迭代器，迭代器next无法切片。文件太大使用迭代器读数据</p> <p>生成器函数，函数内有yield关键字</p> <p>def gen_func(): yield 1 yield2 yield3</p> <p>gen = gen_func() #gen生成器对象，不是值</p> <p>for i in gen: print(i) 惰性求值提供了可能，比list好处是省内存</p> <p>查看字节码，import dis dis.dis(func)</p> <h3 id="socket编程">socket编程</h3> <p>import socket</p> <p>server = socket.socket()</p> <p>server.bind((‘0.0.0.0’, 8000))</p> <p>server.listen()</p> <p>sock, addr = server.accept()</p> <p>data = server.recv(1024) #1kb</p> <h3 id="多线进程">多线、进程</h3> <p>global interpreter lock GIL</p> <p>python中一个线程对应于c中的线程</p> <p>gil使得同一时刻只有一个线程在一个cpu上执行字节码</p> <p>为了安全，但速度慢，无法体现多核优势。pypy是去gil化的。gil在遇到io操作会主动释放</p> <p>操作系统调度的最小单元线程，对于io操作，多线程和多进程差别不大。</p> <p>1.通过thread类实例化</p> <p>thread1 = threading.Thread(target=func, args=(“”,))</p> <p>thread1.setDaemon(True)#设置为守护线程。当主线程关闭时，子线程被kill</p> <p>thread1.join() #阻塞，等待执行完</p> <ol> <li>通过继承thread来实现多线程</li> </ol> <p>class GetDetailHtml(threading.Thread):</p> <p>def run(self):</p> <p>pass</p> <p>thread1 = GDH()</p> <p>thread1.start()</p> <h3 id="线程之间的通信方式">线程之间的通信方式</h3> <p>1.共享全局变量(list)（多线程可以，多进程不行）</p> <p>这种方法，线程并不安全，需要加gil锁，所以并不推荐用作通信</p> <p>2.通过queue方法进行线程间同步,queue本身是线程安全的</p> <p>from queue import Queue</p> <p>detail_url_queue = Queue(maxsize=1000)</p> <p>url = queue.get()#阻塞方法，如果为空就一直停顿等待</p> <p>queueq.put_nowait()#设置为非阻塞</p> <p>.join()一直阻塞，想退出需要调用.task_down() #爬虫暂停</p> <p>如果共用变量为dict或其他，考虑使用全局变量</p> <h3 id="线程同步lock-rlock">线程同步（lock, rlock）</h3> <p>from threading import Lock</p> <p>lock = Lock()</p> <p>global lock</p> <p>lock.acquire()</p> <p>a +=1</p> <p>lock.release()</p> <ol> <li>用锁会影响性能</li> </ol> <p>2.锁会引起死锁（互相等待）</p> <p>rlock可重入的锁，在同一个线程里面，可以连续调用多次acquire，需要相等数量的release.</p> <h3 id="condition条件变量用于复杂的线程间同步锁">condition条件变量，用于复杂的线程间同步锁</h3> <p>from threading import Condition</p> <p>self.cond.acquire()</p> <p>print()</p> <p>self.cond.notify()</p> <p>self.cond.wait()</p> <p>self.release()</p> <p>with self.cond = acquire()/release()</p> <p>在调用with之后，才能使用notify, wait</p> <p>condition有两层锁，一把底层锁会在线程调用wait方法的时候释放，上面的锁会值每次调用wait时分配一把并放入到cond的等待队列中，等到notify方法唤醒</p> <h3 id="semaphore-是用于控制进入数量的锁">Semaphore 是用于控制进入数量的锁</h3> <p>#文件读写，写一搬只用一个线程，读可以允许有多个</p> <p>sem = threading.Semaphore(3)</p> <p>self.sem.acquire()</p> <p>self.sem.release() #在另一个函数release，每次3个线程</p> <p>线程池concurrent #py3.2</p> <p>from concurrent import futures</p> <p>1.主线程中可以获取某一个线程的状态或者某一个任务的状态，以及返回值</p> <p>2.当一个线程完成的时候，主线程能立即知道</p> <p>3.futures可以让多线程多进程编码接口一致</p> <p>from concurrent.futures import ThreadPoolExecutor</p> <p>executor = ThreadPoolExecutor(max_workers=2)</p> <p>task1 = executor.submit(get_html, (3))</p> <p>print(task1.done()) #done用于判定某个任务是否完成</p> <p>print(task1.result()) #阻塞的方法，可以获取执行结果</p> <p>task2.cancel()#取消</p> <p>#获取已经成功的task返回</p> <p>urls = [3,2,3]</p> <p>from concurrent.futures import as_completed</p> <p>all_task = [executor.submit(get_html, (url)) for url in urls]</p> <p>for future in as_complete(all_task):</p> <p>data = future.result()</p> <p>简化版,但返回顺序是urls，并不是谁先完成返回谁</p> <p>for data in executor.map(get_html, urls):</p> <p>print(data)</p> <h3 id="多进程">多进程</h3> <p>线程由于有gil无法并发，io操作进程切换代价高于线程。</p> <p>耗cpu的操作，多核cpu，多进程优于多线程。</p> <p>进程数据完全隔离,无法使用共享全局变量</p> <p>子进程完全拷贝Fork之后的父进程代码运行</p> <p>from concurrent.futures import ProcessPoolExecutor</p> <p>import multiproessing #比上面更底层，但不推荐</p> <p>def get_html(n):</p> <p>time.sleep(n)</p> <p>return n</p> <p>if <strong>name</strong> == ‘<strong>main</strong>’:</p> <p>progress = multiprocessing.Process(target=get_html, args=(2,))</p> <p>progress.start()</p> <p>progress.join()</p> <p>queue不能直接用于进程池通信，pool中的通信要使用manager.queue</p> <p>通过pipe实现进程通信</p> <p>recevie_pipe, send_pipe = Pipe()</p> <p>#pipe只适用与两个进程</p> <h3 id="协程-有多个入口的函数可以暂停的函数可以向暂停的地方传值">协程 （有多个入口的函数，可以暂停的函数，可以向暂停的地方传值）</h3> <p>python3.5之后的协程是原生协程，之前是利用生成器完成</p> <p>生成器不只可以产出值，还可以接受值send()</p> <p>send()是协程的基础</p> <p>throw()扔异常</p> <p>yield from iterable</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 from itertools import chain
 
 for value in chain(list, dict, range(5))

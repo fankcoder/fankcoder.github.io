@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 12 Mar 2019 17:06:00 +0800</pubDate>
-    <lastBuildDate>Tue, 12 Mar 2019 17:06:00 +0800</lastBuildDate>
+    <pubDate>Sat, 16 Mar 2019 10:54:29 +0800</pubDate>
+    <lastBuildDate>Sat, 16 Mar 2019 10:54:29 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -296,7 +296,7 @@ print(A.x) #error
 
 &lt;p&gt;@classmethod类方法，第一参数是类本身cls，返回值不需要与类同名&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;@classmethod
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    @classmethod
     def from_string(cls, date_str):  #cls传递的是类本身，不是实例
         year, month, day = tuple(date_str)
         return cls(year, month, day)  #写为cls,变为动态不必与类名相同
@@ -363,6 +363,47 @@ class MyThread(Thread):
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;with上下文管理器&quot;&gt;with上下文管理器&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;try:
+    raise KeyError
+except KeyError as e:
+    print('e')
+else:
+    print('else') #当try正确运行时&amp;amp;except没有捕获到异常打印
+finally:
+    print('f') #始终运行
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;with语句是为了简化try..finally诞生的&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Sample:
+    def __enter__(self):
+        #获取资源
+        print('enter')
+        return self
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        #释放资源
+        print('exit')
+    def do_something(self):
+        print('do smt')
+
+with Sample() as sample:
+    sample.do_something() 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这个类实现了上下文管理器协议，此协议非常好用。
+with是对上下文管理器的支持。&lt;/p&gt;
+
+&lt;h3 id=&quot;contextlib简化上下文管理器&quot;&gt;contextlib简化上下文管理器&lt;/h3&gt;
+&lt;p&gt;进一步简化&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import contextlib
+
+@contextlib.contextmanager
+def file_open(file_name):
+    print('file open')  # __enter__的位置
+    yield {}
+    print('file end')  # __exit__的位置
+    
+with file_open('text') as f:
+    pass
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;collections&quot;&gt;collections&lt;/h3&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from collections import *
@@ -441,63 +482,176 @@ from collections.abc import * #抽象基类
 
 &lt;p&gt;isinstance 和type，判断类的类型尽量用isinstance&lt;/p&gt;
 
-&lt;p&gt;try.. excepte..finally(始终运行)..&lt;/p&gt;
-
-&lt;p&gt;上下文管理器协议 with语句 先调用__enter__最后调用__exit__&lt;/p&gt;
-
-&lt;p&gt;### contextlib&lt;/p&gt;
-
-&lt;p&gt;contextlib简化上下文管理 ,使用装饰器将函数变为上下文管理器&lt;/p&gt;
-
-&lt;p&gt;import contextlib&lt;/p&gt;
-
-&lt;p&gt;@contextlib.contextmanager&lt;/p&gt;
-
-&lt;p&gt;def file_open(file_name):&lt;/p&gt;
-
-&lt;p&gt;… yield {} …&lt;/p&gt;
-
 &lt;h3 id=&quot;自定义序列类&quot;&gt;自定义序列类&lt;/h3&gt;
 
 &lt;p&gt;容器序列，扁平序列，可变序列sequence，不可变序列mutable&lt;/p&gt;
 
 &lt;p&gt;python面向协议编程 in可以作用于list&lt;/p&gt;
 
-&lt;p&gt;+,-,extend&lt;/p&gt;
+&lt;h3 id=&quot;extend&quot;&gt;+,+=,extend&lt;/h3&gt;
+&lt;p&gt;+=（&lt;strong&gt;iadd&lt;/strong&gt;）的参数可以是序列，+必须两边同类型
+a.extend(range(0,3)) #直接对值修改，不需要再赋值，参考apped
+a.append([1,2])  #[1,2,[1,2]]注意和extend的区别&lt;/p&gt;
 
-&lt;p&gt;+=就地加参数可以为任意序列，通过for循环append&lt;/p&gt;
+&lt;p&gt;参数可以为任意序列，通过for循环append&lt;/p&gt;
 
 &lt;p&gt;切片[start : end : step]，默认值可省略[0,len(L),1].&lt;/p&gt;
 
-&lt;p&gt;bisect处理已排序序列，二分查找。插入排序好的数列bisect.insort(list, 5).查找位置插入bisect.bisect(list, 3)&lt;/p&gt;
+&lt;p&gt;实现支持切片操作的类&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class Group:
+    def __init__(self, group_name, company_name, staffs):
+        self.group_name = group_name
+        self.company_name = company_name
+        self.staffs = staffs
+    
+    def __reversed__(self):
+        self.staffs.reverse()
+        
+    # def __getitem__(self, item):
+    #     return self.staff[item] #返回对象为list或单个元素
+    import numbers
+    def __getitem__(self, item):  #返回类对象
+        cls = type(self)
+        if isinstance(item, slice):
+            return cls(group_name=self.group_name, company_name=self.company_name, staffs=self.staffs[item])
+        elif isinstance(item, numbers.Interal):
+            return cls(group_name=self.group_name, company_name=self.company_name, [staffs=self.staffs[item]])
+    
+    def __len__(self):
+        return len(self.staffs)
+        
+    def __iter__(self):
+        return iter(self.staffs)
+    
+    def __contains__(self, item):
+        if item in self.staffs:
+            return True
+        else:
+            return False
+        
+staffs = ['a', 'b', 'c']
+group = Group(group_name='gname', company_name='cname', staff=staffs)
+group[:2]
+for user in group:
+    print(user)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;array和list重要区别，array只能存放指定的数据类型。布隆过滤器。&lt;/p&gt;
+&lt;h3 id=&quot;bisect&quot;&gt;bisect&lt;/h3&gt;
+&lt;p&gt;bisect处理已排序序列，二分查找。插入排序好的数列，升序bisect.insort(list, 5).
+二分法查找位置，插入位置bisect.bisect(list, 3)&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import bisect
 
-&lt;p&gt;推导式&amp;amp;表达式，列表生成式性能能高于列表操作&lt;/p&gt;
+l = []
+bisect.insort(4)
+bisect.insort(1)
+bisect.insort(3)
+bisect.insort(2)
+print(l) #[1,2,3,4]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;odd_list = [i for i in range(21) if i%2 == 1]&lt;/p&gt;
+&lt;p&gt;arrary和list重要区别，array只能存放指定的数据类型。布隆过滤器。
+arrary是c中的数组，一串连续的内存块，性能高。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import array
+_a = array.array('i') # int,参数查看文档
+_a.append()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;odd_list = (i for i in range(21) if i%2 == 1)生成器表达式为小括号&lt;/p&gt;
+&lt;h3 id=&quot;列表推导式生成式生成器表达式&quot;&gt;列表推导式（生成式）&amp;amp;生成器表达式&lt;/h3&gt;
+&lt;p&gt;通过一行代码生成列表。&lt;/p&gt;
 
-&lt;p&gt;my_dict ={‘a’:1, ‘b’:2}&lt;/p&gt;
+&lt;p&gt;列表生成式性能能高于列表操作&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;odd_list = [i for i in range(21) if i%2 == 1]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;_reversed = {value:key for key, value in my_dict.items()}&lt;/p&gt;
+&lt;p&gt;复杂情况的列表生成式，可以使用函数实现.（过于复杂就放弃吧，代码可读性更重要）&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def sqrt(item):
+    return item*item
+odd_list = [sqrt(i) for i in range(21) if i%2 == 1]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;生成器表达式为小括号，type变为generator&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;odd_list = (i for i in range(21) if i%2 == 1)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;字典推导式&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;my_dict ={'a':1, 'b':2}
+_reversed = {value:key for key, value in my_dict.items()} # 交换value,key
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;集合推导式&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;my_set = {key for key,value in my_dict.items()}
+type(my_set)  # set
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;深入set和dict&quot;&gt;深入set和dict&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;a.copy() #浅拷贝
 
-&lt;p&gt;浅拷贝a.copy()&lt;/p&gt;
+import copy 
 
-&lt;p&gt;深拷贝import copy&lt;/p&gt;
+copy.deepcopy(a) #深拷贝
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;浅拷贝就是创建一个具有相同类型，相同值但不同id的新对象。
+深拷贝不仅仅拷贝了原始对象自身，也对其包含的值进行拷贝，它会递归的查找对象中包含的其他对象的引用，来完成更深层次拷贝。因此，深拷贝产生的副本可以随意修改而不需要担心会引起原始值的改变。&lt;/p&gt;
 
-&lt;p&gt;copy.deepcopy(a)&lt;/p&gt;
+&lt;h4 id=&quot;dict的formkeys方法&quot;&gt;dict的formkeys方法&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;l = ['a', 'b']
+d = dict.fromkeys(l, {'c','d'})
+print(d) #{'a': {'c', 'd'}, 'b': {'c', 'd'}}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;get方法&quot;&gt;get方法&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_d['key']  #key不存在会抛异常
+_dict.get(&quot;a&quot;, {}) #get方法非常实用！{}为默认值
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;_dict.get(“a”, {}) get&lt;/p&gt;
+&lt;h4 id=&quot;items&quot;&gt;items&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;for key, value in _d.items()：
+    print(k,v)   #烂大街的好方法
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;setdefault-增加get方法&quot;&gt;setdefault 增加get方法&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;setdefault(key, default)
+# 1.先调用get()
+# 2.没有则默认值
+# 3.再把默认值设置进dict
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;update&quot;&gt;update&lt;/h4&gt;
+&lt;p&gt;合并字典&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;_dict.update({'c':1})
+_dict.update(&quot;a&quot;=1,&quot;b&quot;=2) #放iterm都可以
+_dict.update(（（’e‘,'f'），）) #传入tuple
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;setdefault(key, default)先get()，没有则设置默认&lt;/p&gt;
+&lt;h3 id=&quot;dict子类&quot;&gt;dict子类&lt;/h3&gt;
+&lt;p&gt;写类不建议继承list和dict
+某些时候c不会使用覆盖的方法，而是会用dict本身的方法&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from collections import UserDict 
+#推荐使用UserDict被python重写过
+class Mydict(UserDict):
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value*2)
 
-&lt;p&gt;_dict.update(“a”=1,”b”=2) 也可以放tuple&lt;/p&gt;
+from collections import defaultdict
 
-&lt;p&gt;set和fronzenset(不可变)无序，不重复，fset可以做为dict的key&lt;/p&gt;
+# 如果找不到key,就赋值
+my_dict = defaultdict(dict())
+my_value = my_dict['fank'] #这里我的py3.7.1报错了
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;set-fronzenset&quot;&gt;set fronzenset&lt;/h3&gt;
+
+&lt;p&gt;set和fronzenset(不可变)无序，不重复，在去重时用的很多，并且fronzenset是不可变类型，所以可以做为dict的key&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;s = set('abcd')
+s1 = {'a', 'b'} #type是set
+s2 = frozenset('abcde') #无法add值，
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;set-difference&quot;&gt;set difference&lt;/h4&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;s = {'a','b','c'}
+ans = set('cef')
+rs = s.difference(ans)
+print(rs) # {'a','b'}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;dict和set实现原理&quot;&gt;dict和set实现原理&lt;/h4&gt;
 
 &lt;p&gt;dict 查哈希表，key必须为可哈希的值。str,fset,tuple,自己实现的类&lt;/p&gt;
 
@@ -898,7 +1052,32 @@ await asyncio.sleep(sleep_times)
     
       <item>
         <title>Hey, U find me!</title>
-        <description>
+        <description>&lt;h3 id=&quot;我&quot;&gt;我&lt;/h3&gt;
+
+&lt;p&gt;网名：三秋，取自《滕王阁序》“时维九月，序属三秋。” 九月生，天秤座。&lt;/p&gt;
+
+&lt;p&gt;十分热爱思考，善于分析、判断、总结和预测。&lt;/p&gt;
+
+&lt;h3 id=&quot;计算机&quot;&gt;计算机&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;通过解决问题学习计算机&lt;/li&gt;
+  &lt;li&gt;通过学习计算机解决问题&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在很久以前使用计算机解决了问题，从此便对计算机产生了浓厚兴趣。&lt;/p&gt;
+
+&lt;h3 id=&quot;如何找到我&quot;&gt;如何找到我&lt;/h3&gt;
+
+&lt;p&gt;GitHub: &lt;a href=&quot;https://github.com/fankcoder&quot;&gt;fankcoder&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;微博: &lt;a href=&quot;https://weibo.com/u/2424646683&quot;&gt;似叶三秋&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;知乎: &lt;a href=&quot;https://www.zhihu.com/people/si-xie-san-qiu/activities&quot;&gt;似叶三秋&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Bilibili: &lt;a href=&quot;https://space.bilibili.com/38307214&quot;&gt;三秋Q3Q&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Email: fankcoder#gmail.com&lt;/p&gt;
 </description>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/about/2019/03/08/HeyUFindMe.html</link>
