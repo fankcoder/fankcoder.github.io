@@ -36,3 +36,8 @@ sass:
   style: compressed
 # gems:
 #   - jekyll-sitemap
+
+leancloud:
+  enable: true
+  app_id: hsC57we7N9PmKYMU6t3KyweJ-gzGzoHsz
+  app_key: YQlAC7WFiUBJqltxoXXApj0O

@@ -12,7 +12,6 @@ keywords: pyhton
 
 ---
 
-
   
 ### type,object和class的关系
 
@@ -126,11 +125,13 @@ class RedisCache(CacheBase):
     pass
 
 redis_cache = REdisCache()  
-#会报错，这里abstractmethod要求被继承的类，必须实现get,set
+#会报错。
+#abstractmethod要求被继承的类，必须实现父类的方法，否则会报错
 ```
+
 判断继承用isinstance()不要用type()
 
-#### 类变量和实力变量
+#### 类变量和实例变量
 类中的self是类的实例
 ```
 class A:
@@ -151,7 +152,7 @@ self是类的实例，类变量和类实例变量的区别
 __mro__查找。DFS深度优先，对菱形继承有问题，BFS广度优先也有覆盖问题，py3用C3算法
 
   
-@staticmethod静态方法，和普通函数一样，不需要写self参数
+@staticmethod静态方法，传参和普通函数一样，**不需要写self参数**
 
 ```
 class Data:
@@ -292,7 +293,7 @@ namedtuple可以生成类，User = namedtuple("User",['name','age'])
 
 节省空间，用于数据处理，从数据库取数据为tuple，直接赋值
 
-  
+
 ### def ask(*args, **kwargs):pass
 
 ask('f',25) 传给*args, ask(name='f', age=25)传给**kwargs
@@ -398,7 +399,9 @@ class Group:
         self.staffs = staffs
     
     def __reversed__(self):
-        self.staffs.reverse()
+        self.staffs.reversed()  #这种方式实现不了
+        for each in self.staffs[::-1]:
+            yield each
         
     # def __getitem__(self, item):
     #     return self.staff[item] #返回对象为list或单个元素
