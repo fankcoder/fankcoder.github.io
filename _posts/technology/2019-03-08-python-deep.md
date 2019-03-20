@@ -12,6 +12,7 @@ keywords: pyhton
 
 ---
 
+
   
 ### type,object和class的关系
 
@@ -296,9 +297,17 @@ namedtuple可以生成类，User = namedtuple("User",['name','age'])
 
 ### def ask(*args, **kwargs):pass
 
-ask('f',25) 传给*args, ask(name='f', age=25)传给**kwargs
-
 *args是个tuple, **kwargs是个dict
+```
+def test(*args, **kwargs):
+    print(*args)
+    print(**kwargs)
+
+test('f',25)
+test({'name':'f','age':25}
+
+# ask('f',25) 传给*args, ask(name='f', age=25)传给**kwargs
+```
 
 
 _make方法初始化，_asdict()
@@ -371,7 +380,22 @@ is判断id是否相同
 ==判断值
 
 isinstance 和type，判断类的类型尽量用isinstance
+```
+In [46]: a = 1
+In [47]: b = 1
+In [48]: a is b
+Out[48]: True
 
+In [49]: a = [1,2,3]
+In [50]: b = [1,2,3]
+In [51]: a is b
+Out[51]: False
+
+In [72]: a = "hello world"
+In [73]: b = "hello world"
+In [74]: a is b
+Out[74]: False
+```
 
 
 ### 自定义序列类
@@ -432,7 +456,7 @@ for user in group:
     print(user)
 ```
 
-### bisect
+### bisect二分查找
 bisect处理已排序序列，二分查找。插入排序好的数列，升序bisect.insort(list, 5).
 二分法查找位置，插入位置bisect.bisect(list, 3)
 ```
@@ -574,38 +598,128 @@ dict的内存花销大，查询速度快
 
 垃圾回收算法是采用引用计数 del
 
-### 元类编程
+### property
 
-property动态属性，User.age可以取属性，不用调函数，类似get，set为@age.setter
-
-@propery
-
-def age(self):
-
-return age.year
+property动态属性，User.age可以取属性，不用调函数，类似get，set为
+```
+class User:
+    def __init__(self, birthday):
+        self.birthday = birthday
+        self._age = 0
+    @propery  #装饰器。讲age变为属性描述符,直接调用
+    def age(self):
+        return datetime.now().year - self.birthday.year
+    @age.setter  #设置
+    def age(self, value):
+        self._age = value
+    
+user = User(year='1992')
+user.age
+user.age = 26  #属性赋值
+```
 
 ### __getattr__与__getattribute__的区别
 
 __getattr__在查找不到属性的时候调用(写了就不会报错).维护dict动态访问key
 
 def __getattr__(self, item): return "not find"
+```
+from datetime import date
+class User:
+    def __init__(self, name,info={}):
+        self.name = name
+        self.info = info
+        
+    def __getattr__(self, item):
+        return self.info[item]
+user = User('fank', info={'a':1})
+user.a
+```
 
-def __getattribute__(self, item): return "true" 无条件进入这个函数，控制全局属性访问
 
-属性描述符实现__get__,__set__,__delete__
+def __getattribute__(self, item): return "true" 
+优先级别高，无条件进入这个函数，它控制全局属性访问
 
-数据描述符，非数据描述符
+### 属性描述符
+在赋值的时候检查属性
+实现了__get__,__set__,__delete__三个中的任意一个的类都是属性描述符
+```
+class IntField:
+    def __get__(self, instance):
+        return self.value
+    def __set__(self, instance,value):
+        if isinstance(value, numbers.Interagral):
+            raise ValueError('int value need')
+        self.value = value
+    def __delete__(self, instance):
+        pass
+
+class User:
+    age = Intfield()
+```
+
+数据描述符都实现
+非数据描述符只实现__get__
 
 属性查找过程
 
 传递方法为变化的user.age方式无法实现， 使用getattr(user, age)
 
 ### __new__和__init__区别
-
-def __new__(cls, *args, **kwargs):pass new传递类，在init之前，new控制对象的生成过程，如果new不返回对象，不会调用init函数
+```
+class User:
+    def __new__(cls, *args, **kwargs): #写框架使用很频繁
+        pass
+        return super().__new__(cls)
+    def __init__(self, name):
+        self.name = name
+user = User('fank')
+```
+new传递类cls，在init之前，new控制对象的生成过程.
+如果new不返回对象，不会调用init函数
 
 type是默认元类，metaclass是自定义元类，可以控制实例化过程
 
+
+### 元类编程
+类也是对象，type是用来创建类的类
+```
+def create_class(name):
+    if name == "user":
+        class User:
+            def __str__(self):
+                return 'user'
+        return User
+    elif name == "company":
+        class Company:
+            def __str__(self):
+                return 'Company'
+        return Company
+
+#type是可以创建类的。动态创建类
+User = type("User", (), {"name":"user"})  #第二个参数继承基类必写
+u = User()
+print(u.name)
+
+#如何给type写方法
+def say(self):
+    retun "i am user"
+User = type("User", (), {"name":"user", "say":say}) 
+u = User()
+print(u.say)
+#继承
+User = type("User", (Baseclass,), {"name":"user", "say":say})
+```
+元类是创建类的类， 对象<-class<-type
+```
+class MetaClass(type):
+    def __new__(self, *args, **kwargs):
+        return super().__new__(cls, *args, **kwargs) #带*参数必传否则会报错
+
+class User(metaclass=MetaClass):  #当不写metaclass会默认调用type创建类对象
+    pass
+#python类的实例化过程中，会首先寻找metaclass,通过metaclass创建类，控制实例化过程
+```
 
 ### 迭代器和生成器
 
