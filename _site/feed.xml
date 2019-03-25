@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Mar 2019 17:21:33 +0800</pubDate>
-    <lastBuildDate>Mon, 18 Mar 2019 17:21:33 +0800</lastBuildDate>
+    <pubDate>Mon, 25 Mar 2019 18:12:51 +0800</pubDate>
+    <lastBuildDate>Mon, 25 Mar 2019 18:12:51 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -422,9 +422,16 @@ from collections.abc import * #抽象基类
 
 &lt;h3 id=&quot;def-askargs-kwargspass&quot;&gt;def ask(*args, **kwargs):pass&lt;/h3&gt;
 
-&lt;p&gt;ask(‘f’,25) 传给*args, ask(name=’f’, age=25)传给**kwargs&lt;/p&gt;
-
 &lt;p&gt;*args是个tuple, **kwargs是个dict&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def test(*args, **kwargs):
+    print(*args)
+    print(**kwargs)
+
+test('f',25)
+test({'name':'f','age':25}
+
+# ask('f',25) 传给*args, ask(name='f', age=25)传给**kwargs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;_make方法初始化，_asdict()&lt;/p&gt;
 
@@ -483,6 +490,21 @@ from collections.abc import * #抽象基类
 &lt;p&gt;==判断值&lt;/p&gt;
 
 &lt;p&gt;isinstance 和type，判断类的类型尽量用isinstance&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;In [46]: a = 1
+In [47]: b = 1
+In [48]: a is b
+Out[48]: True
+
+In [49]: a = [1,2,3]
+In [50]: b = [1,2,3]
+In [51]: a is b
+Out[51]: False
+
+In [72]: a = &quot;hello world&quot;
+In [73]: b = &quot;hello world&quot;
+In [74]: a is b
+Out[74]: False
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;自定义序列类&quot;&gt;自定义序列类&lt;/h3&gt;
 
@@ -540,7 +562,7 @@ for user in group:
     print(user)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;bisect&quot;&gt;bisect&lt;/h3&gt;
+&lt;h3 id=&quot;bisect二分查找&quot;&gt;bisect二分查找&lt;/h3&gt;
 &lt;p&gt;bisect处理已排序序列，二分查找。插入排序好的数列，升序bisect.insort(list, 5).
 二分法查找位置，插入位置bisect.bisect(list, 3)&lt;/p&gt;
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import bisect
@@ -663,37 +685,120 @@ print(rs) # {'a','b'}
 
 &lt;p&gt;垃圾回收算法是采用引用计数 del&lt;/p&gt;
 
-&lt;h3 id=&quot;元类编程&quot;&gt;元类编程&lt;/h3&gt;
+&lt;h3 id=&quot;property&quot;&gt;property&lt;/h3&gt;
 
-&lt;p&gt;property动态属性，User.age可以取属性，不用调函数，类似get，set为@age.setter&lt;/p&gt;
-
-&lt;p&gt;@propery&lt;/p&gt;
-
-&lt;p&gt;def age(self):&lt;/p&gt;
-
-&lt;p&gt;return age.year&lt;/p&gt;
+&lt;p&gt;property动态属性，User.age可以取属性，不用调函数，类似get，set为&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class User:
+    def __init__(self, birthday):
+        self.birthday = birthday
+        self._age = 0
+    @propery  #装饰器。讲age变为属性描述符,直接调用
+    def age(self):
+        return datetime.now().year - self.birthday.year
+    @age.setter  #设置
+    def age(self, value):
+        self._age = value
+    
+user = User(year='1992')
+user.age
+user.age = 26  #属性赋值
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;__getattr__与__getattribute__的区别&quot;&gt;__getattr__与__getattribute__的区别&lt;/h3&gt;
 
 &lt;p&gt;__getattr__在查找不到属性的时候调用(写了就不会报错).维护dict动态访问key&lt;/p&gt;
 
 &lt;p&gt;def &lt;strong&gt;getattr&lt;/strong&gt;(self, item): return “not find”&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from datetime import date
+class User:
+    def __init__(self, name,info={}):
+        self.name = name
+        self.info = info
+        
+    def __getattr__(self, item):
+        return self.info[item]
+user = User('fank', info={'a':1})
+user.a
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;def &lt;strong&gt;getattribute&lt;/strong&gt;(self, item): return “true” 无条件进入这个函数，控制全局属性访问&lt;/p&gt;
+&lt;p&gt;def &lt;strong&gt;getattribute&lt;/strong&gt;(self, item): return “true” 
+优先级别高，无条件进入这个函数，它控制全局属性访问&lt;/p&gt;
 
-&lt;p&gt;属性描述符实现__get__,&lt;strong&gt;set&lt;/strong&gt;,&lt;strong&gt;delete&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;属性描述符&quot;&gt;属性描述符&lt;/h3&gt;
+&lt;p&gt;在赋值的时候检查属性
+实现了__get__,&lt;strong&gt;set&lt;/strong&gt;,__delete__三个中的任意一个的类都是属性描述符&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class IntField:
+    def __get__(self, instance):
+        return self.value
+    def __set__(self, instance,value):
+        if isinstance(value, numbers.Interagral):
+            raise ValueError('int value need')
+        self.value = value
+    def __delete__(self, instance):
+        pass
 
-&lt;p&gt;数据描述符，非数据描述符&lt;/p&gt;
+class User:
+    age = Intfield()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;数据描述符都实现
+非数据描述符只实现__get__&lt;/p&gt;
 
 &lt;p&gt;属性查找过程&lt;/p&gt;
 
 &lt;p&gt;传递方法为变化的user.age方式无法实现， 使用getattr(user, age)&lt;/p&gt;
 
 &lt;h3 id=&quot;__new__和__init__区别&quot;&gt;__new__和__init__区别&lt;/h3&gt;
-
-&lt;p&gt;def &lt;strong&gt;new&lt;/strong&gt;(cls, *args, **kwargs):pass new传递类，在init之前，new控制对象的生成过程，如果new不返回对象，不会调用init函数&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class User:
+    def __new__(cls, *args, **kwargs): #写框架使用很频繁
+        pass
+        return super().__new__(cls)
+    def __init__(self, name):
+        self.name = name
+user = User('fank')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;new传递类cls，在init之前，new控制对象的生成过程.
+如果new不返回对象，不会调用init函数&lt;/p&gt;
 
 &lt;p&gt;type是默认元类，metaclass是自定义元类，可以控制实例化过程&lt;/p&gt;
+
+&lt;h3 id=&quot;元类编程&quot;&gt;元类编程&lt;/h3&gt;
+&lt;p&gt;类也是对象，type是用来创建类的类&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def create_class(name):
+    if name == &quot;user&quot;:
+        class User:
+            def __str__(self):
+                return 'user'
+        return User
+    elif name == &quot;company&quot;:
+        class Company:
+            def __str__(self):
+                return 'Company'
+        return Company
+
+#type是可以创建类的。动态创建类
+User = type(&quot;User&quot;, (), {&quot;name&quot;:&quot;user&quot;})  #第二个参数继承基类必写
+u = User()
+print(u.name)
+
+#如何给type写方法
+def say(self):
+    retun &quot;i am user&quot;
+User = type(&quot;User&quot;, (), {&quot;name&quot;:&quot;user&quot;, &quot;say&quot;:say}) 
+u = User()
+print(u.say)
+#继承
+User = type(&quot;User&quot;, (Baseclass,), {&quot;name&quot;:&quot;user&quot;, &quot;say&quot;:say})
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;元类是创建类的类， 对象&amp;lt;-class&amp;lt;-type&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class MetaClass(type):
+    def __new__(self, *args, **kwargs):
+        return super().__new__(cls, *args, **kwargs) #带*参数必传否则会报错
+
+class User(metaclass=MetaClass):  #当不写metaclass会默认调用type创建类对象
+    pass
+#python类的实例化过程中，会首先寻找metaclass,通过metaclass创建类，控制实例化过程
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;迭代器和生成器&quot;&gt;迭代器和生成器&lt;/h3&gt;
 

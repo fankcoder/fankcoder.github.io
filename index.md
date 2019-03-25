@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 有朋自远方来,不亦乐乎?
+title: 三秋的博客
 ---
 
-欢迎~
+有朋自远方来,不亦乐乎?
 
-这里是fankcoder的博客~
+这里是三秋(fankcoder)的博客~
 
 ```
                    ___                                        
