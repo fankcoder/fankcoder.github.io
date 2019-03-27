@@ -286,13 +286,33 @@ from collections import *
 
 from collections.abc import * #抽象基类
 ```
-tuple不可修改并不绝对。tuple值为list可以修改(id没变，不建议这样使用)
-
-tuple比list好处，c语音类比，tuple对应struct,list对应array.性能优化，线程安全，可以作为dict的key,拆包特性。
 
 namedtuple可以生成类，User = namedtuple("User",['name','age'])
 
 节省空间，用于数据处理，从数据库取数据为tuple，直接赋值
+
+### tuple功能
+1. 不可变(不绝对)
+2. iterable
+
+```
+#拆包，方便找到对应关系
+_tuple = ('fank', 26, 182)
+name, age, height = _tuple
+#name = _tuple[0] 不好的写法
+
+#拆包加强
+name, *other = _tuple
+print(name, other)
+```
+
+### tuple比list好的地方
+1. immutable的重要性
+2. 性能优化，不可变对象在编译时作为常量，产生显著的速度差异
+3. 线程安全
+4. 可以作为dict的key
+5. 拆包特性
+6. 如果拿C来类比，tuple对应struct, 而list对应array
 
 
 ### def ask(*args, **kwargs):pass
@@ -313,13 +333,18 @@ test({'name':'f','age':25}
 _make方法初始化，_asdict()
 
   
-
+### defaultdict
 from collections import defaultdict C语言实现，性能高,比setdefault更强大
 
-default_dict = defaultdict(int) 参数是可调用对象
+```
+default_dict = defaultdict(int) #参数是一个可调用对象list,int,func..
 
-default_dict['key'] #key=0
+default_dict['key'] #key=0 ,初始化成功后，直接访问不会报错，会默认生成
 
+def gen_func():
+    return {'fank':123,'code':321}
+default_dict = defaultdict(gen_func) #生成默认值
+```
   
 
 ### deque双端队列
