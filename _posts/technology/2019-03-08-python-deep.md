@@ -728,31 +728,73 @@ class User(metaclass=MetaClass):  #当不写metaclass会默认调用type创建�
 迭代器和以下标的访问方式不一样，迭代器是不能返回的，迭代器提供一种惰性方式。
 
 __iter__迭代协议，可迭代的实现方法
-
+```
 from collections.abc import Iterable,Iterator
 
-iter([_list])迭代器
+iter([_list]) #将list变为迭代器
 
 def __iter__(self) / def __getitem__(self, item)
-
+```
 next(itor)接受迭代器，迭代器next无法切片。文件太大使用迭代器读数据
 
-  
+
 
 生成器函数，函数内有yield关键字
-
-def gen_func(): yield 1 yield2 yield3
-
+```
+def gen_func(): 
+    yield 1 yield2 yield3
+```
+python在编译时字节码发现yield于是变为生成器
+python查看字节码
+```
+import dis
+print(dis.dis(func))
+```
 gen = gen_func() #gen生成器对象，不是值
 
 for i in gen: print(i) 惰性求值提供了可能，比list好处是省内存
 
-查看字节码，import dis dis.dis(func)
+生成器读取大文件
+```
+#数据在文件中只有1行
+f = open()
+f.read(4096) #一次读取的大小，偏移量
 
-  
+def myreadlines(f, newline):
+    buf = ""
+    while True:
+        while newline in buf:
+            pos = buf.index(newline)
+            yield buf[:pos]
+            buf = buf[pos + len(newline):]
+        chunk = f.read(4096)
+        
+        if not chunk:
+            yield buf
+            break
+        buf += chunk
+```
 
 ### socket编程
+服务端socket
+1. bind(协议，地址，端口）
+2. listen(监听客户端socket请求）
+3. accept()
+4. 阻塞等待连接请求（新套接字）
+5. recv()
+6. send()
+7. close()
 
+客户端socket
+1. connect() 三次握手 -> 等待套接字
+2. send() -> recv() server #接受bytes类型需要编码
+3. recv() -> send() server
+4.close()
+
+爬虫是典型的客户端socket
+如果使得服务端可以多用户连接？
+将每个socket做为线程
+```
 import socket
 
 server = socket.socket()
@@ -764,8 +806,41 @@ server.listen()
 sock, addr = server.accept()
 
 data = server.recv(1024) #1kb
+```
 
-  
+socketHttp
+reqeusts -> urlib -> socket
+```
+import socket
+from urllib.parse import urlparse
+
+def get_url(url):
+    # get html by socket
+    url = urlparse(url)
+    host = url.netloc
+    path = url.path
+    if path == '':
+        path = '/'
+        
+    #connect socket
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((host, 80))
+    client.send("GET {} HTTP/1.1\r\nHOST:{}\r\nConnection:close\r\n\r\n".format(path, host).encode('utf8'))
+    
+    data = b''
+    while True:
+        d = client.recv(1024)
+        if d:
+            data += d
+        else:
+            break
+    data = data.decode('utf8')
+    htmldata = data.split('\r\n\r\n')[1]
+    print(htmldata)
+
+if __name__ == '__main__':
+    get_url('http://www.baidu.com')
+```
 
 ### 多线、进程
 
