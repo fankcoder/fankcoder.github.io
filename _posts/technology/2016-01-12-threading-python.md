@@ -23,6 +23,7 @@ gil使得同一时刻只有一个线程在一个cpu上执行字节码，无法�
 操作系统调度的最小单元线程，对于io操作，多线程和多进程差别不大。
 
 #### 通过thread类实例化
+
 ```
 thread1 = threading.Thread(target=func, args=("",))
 
@@ -30,8 +31,10 @@ thread1.setDaemon(True)#设置为守护线程。当主线程关闭时，子线�
 
 thread1.join() #阻塞，等待thread1子线程执行完成
 ```
+
 #### 继承thread来实现多线程
 当代码量大，逻辑复杂时，推荐通过继承thread来实现多线程
+
 ```
 class GetDetailHtml(threading.Thread):
     def __init__(self, name):   #为线程命名，好习惯
@@ -69,6 +72,7 @@ if __name__ == '__main__':
 #### 1.共享全局变量(list)（多线程可以，多进程不行）
 
 这种方法，线程并不安全，需要加gil锁，所以并不推荐用作通信
+
 ```
 import time
 import threading
@@ -102,6 +106,7 @@ if __name__ == '__main__':
 ```
 
 #### 2.通过queue方法进行线程间通讯,queue本身是线程安全的
+
 ```
 from queue import Queue
 import time
@@ -155,6 +160,7 @@ queue.task_done()
 使用锁会出现的问题
 1. 用锁会影响性能
 2. 锁会引起死锁（互相等待）,不能连续调用两次acquire
+
 ```
 from threading import Lock
 
@@ -168,7 +174,9 @@ a += 1
 
 lock.release() #释放
 ```
+
 死锁情况
+
 ```
 A(a, b)
 acquire(a)
@@ -180,7 +188,9 @@ acquire(a)
 ```
 
 #### rlock可重入的锁
+
 解决lock，不能连续调用acquire的问题。它可以在同一个线程里面，可以连续调用多次acquire，需要相等数量的release.
+
 ```
 from threading import RLock
 lock = Rlock()
@@ -189,4 +199,61 @@ lock.acquire()
 lock.acquire()
 lock.release()
 lock.release()
+```
+
+### condition条件变量
+
+用于复杂的线程间同步锁
+
+
+wait()允许等待某个条件变量的通知
+notify()会通知调用了wait()方法的那个线程启动
+1. 使用condition启动顺序非常重要
+2. 一定要先调用with方法或者acquire和release，之后再调用wait(),notify()
+3. condition有两层锁，一把底层锁会在线程调用wait方法的时候释放，上面的锁会值每次调用wait时分配一把并放入到cond的等待队列中，等到notify方法唤醒
+
+```
+import threading
+from threading import Condition
+
+class XiaAi(threading.Thread):
+    def __init__(self, cond):
+        super().__init__(name='小爱')
+        self.cond = cond
+    
+    def run(self):
+        with self.cond:
+            self.cond.wait()
+            print('{}: 在'.format(self.name))
+            self.cond.notify()
+
+            self.cond.wait()
+            print('{}: 好啊'.format(self.name))
+            self.cond.notify()
+    
+class TianMao(threading.Thread):
+    def __init__(self, cond):
+        super().__init__(name='天猫')
+        self.cond = cond
+    
+    def run(self):
+        with self.cond:
+            print('{}: 小爱同学'.format(self.name))
+            self.cond.notify()
+            self.cond.wait()
+
+            print('{}: 我们来对古诗吧'.format(self.name))
+            self.cond.notify()
+            self.cond.wait()
+
+if __name__ == '__main__':
+    cond = threading.Condition()
+
+    xiaoai = XiaAi(cond)
+    tianmao = TianMao(cond)
+
+    xiaoai.start()
+    tianmao.start()
+    xiaoai.join()
+    tianmao.join()
 ```
