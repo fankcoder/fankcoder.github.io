@@ -257,3 +257,41 @@ if __name__ == '__main__':
     xiaoai.join()
     tianmao.join()
 ```
+
+
+### Semaphore 控制线程并发数量
+
+(文件读写，写一般只用一个线程，读可以允许有多个线程)
+
+```
+import threading
+import time
+
+
+class HtmlSpider(threading.Thread):
+    def __init__(self, url, sem):
+        super().__init__()
+        self.url = url
+        self.sem = sem
+    
+    def run(self):
+        time.sleep(2)
+        print('get html success')
+        self.sem.release()
+
+class UrlProducer(threading.Thread):
+    def __init__(self, sem):
+        super().__init__()
+        self.sem = sem
+    
+    def run(self):
+        for i in range(10):
+            self.sem.acquire()
+            html_thread = HtmlSpider('http://www.baidu.com/id/{}/'.format(i), self.sem)
+            html_thread.start()
+
+if __name__ == '__main__':
+    sem = threading.Semaphore(3)
+    url_thread = UrlProducer(sem)
+    url_thread.start()
+```
