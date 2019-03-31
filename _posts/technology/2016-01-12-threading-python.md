@@ -295,3 +295,91 @@ if __name__ == '__main__':
     url_thread = UrlProducer(sem)
     url_thread.start()
 ```
+
+### 线程池concurrent #py3.2
+concurrent容易的编写多线程，多进程代码
+
+为什么使用线程池？
+
+1.主线程中可以获取某一个线程的状态或者某一个任务的状态，以及返回值
+
+2.当一个线程完成的时候，主线程能立即知道
+
+3.futures可以让多线程多进程编码接口一致
+
+```
+from concurrent.futures import ThreadPoolExecutor,as_completed,wait,FIRST_COMPLETED
+import time
+
+def get_html(times):
+    time.sleep(times)
+    print('get html {} success'.format(times))
+    return times
+
+executor = ThreadPoolExecutor(max_workers=2)
+
+#通过submit提交执行的函数到线程池中，submit是立即返回
+task1 = executor.submit(get_html, (3))
+task2 = executor.submit(get_html, (2))
+print(task1.done())
+#取消线程执行，状态done无论为true和false都不能取消执行。只有还没提交到线程池中的线程才能提交，与max_workers的设置有关
+print(task2.cancel(2))
+time.sleep(3.1)
+#done()查看该线程当前的执行状态
+print(task1.done())
+#result()获取该线程的返回结果
+print(task1.result())
+
+#as_completed获取已经成功的task的返回，如爬虫
+urls = [2,3,4,2]
+all_task = [executor.submit(get_html, (url)) for url in urls]
+for future in as_completed(all_task):
+    data = future.result()
+    print('get {} page success'.format(data))
+
+#使用executor的map方法对as_completed进行简化.map的返回结果就是future.result()
+#map的返回顺序是按照list的顺序，并不是先执行完就返回
+for data in executor.map(get_html, urls):
+    print('get {} page success'.format(data))
+#wait设置阻塞，参数可选择条件默认为ALL_COMPLETED
+wait(all_task, return_when=FIRST_COMPLETED)
+print('main')
+```
+
+### 多进程
+
+线程由于有gil无法并发，python多线程无法利用多cpu。
+
+耗cpu的操作，多核cpu，计算，图像，挖矿多进程优于多线程。
+io操作进程切换代价高于线程。
+
+进程数据完全隔离,无法使用共享全局变量
+
+子进程完全拷贝Fork之后的父进程代码运行
+
+```
+import time
+from concurrent.futures import ThreadPoolExecutor,as_completed
+from concurrent.futures import ProcessPoolExecutor
+
+def fib(n):
+    if n <=2:
+        return 1
+    return fib(n-1)+fib(n-2)
+
+# 耗cpu的操作多进程比多线程速度快
+with ProcessPoolExecutor(3) as executor:  #win使用多进程必须在__name=='__main__'下运行
+# with ThreadPoolExecutor(3) as executor:
+    alltask = [executor.submit(fib, (num)) for num in range(25,40)]
+    start_time = time.time()
+    for future in as_completed(alltask):
+        data = future.result()
+        print('exec result {}'.format(data))
+    
+    print('last time is :{}'.format(time.time() - start_time))
+
+# io操作多线程比多进程快
+def random_sleep(n):
+    time.sleep(n)
+    return n
+```
