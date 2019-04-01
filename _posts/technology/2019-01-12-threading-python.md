@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python线程&进程
+title: Python深入线程&进程&协程&异步
 category: 技术
 tags: python,thread
 keywords: thread
@@ -382,4 +382,109 @@ with ProcessPoolExecutor(3) as executor:  #win使用多进程必须在__name=='_
 def random_sleep(n):
     time.sleep(n)
     return n
+```
+
+#### 更加底层的多进程包
+学习底层，生产环境还是推荐conncurrent
+```
+import os
+import time
+import multiprocessing
+
+pid = os.fork()
+print('fank')
+if pid == 0:  #pid=0 child pro
+    print('child process {}. parent process {}'.format(os.getpid(), os.getppid()))
+else:
+    print('parent process {}'.format(pid))
+
+time.sleep(2)
+
+def get_html(n):
+    time.sleep(n)
+    print('sub progress success')
+    return n
+
+if __name__ == '__main__':
+    program = multiprocessing.Process(target=get_html, args=(2,))
+    program.start()
+    program.join()
+    print(program.pid) #比线程多个pid属性
+    print('main progress end')
+
+    #进程池
+    pool = multiprocessing.Pool(multiprocessing.cpu_count())
+    result = pool.apply_async(get_html,args=(3,))
+
+    #等待所有任务完成
+    pool.close()  #关闭接受新的进程
+    pool.join()
+    print(result.get())
+
+    #imap  按顺序输出
+    for result in pool.imap(get_html, [1,5,3]):
+        print('{} sleep success'.format(result))
+
+    #imapunordered  按执行速度输出
+    for result in pool.imap_unordered(get_html, [1,5,3]):
+        print('{} sleep success'.format(result))
+```
+
+### 进程间的通讯
+
+共享全局变量在多进程中不适用
+
+mutiprocessing.queue用于进程间的通讯
+
+进程池中的通讯有3个queue需要区分
+1. 系统from queue import Queue不能用于通讯
+2. from mutiprocessing import Queue 不能用在进程池通讯
+3. from mutiprocessing import Manager().queue 用于进程池pool中的通讯
+
+```
+import time
+from multiprocessing import Process, Queue, Manager, Pipe
+
+def producer(queue):
+    queue.put('a')
+    time.sleep(2)
+
+def consumer(queue):
+    time.sleep(2)
+    data = queue.get()
+    print(data)
+
+if __name__ == '__main__':
+    queue = Queue(10)   #使用multi的queue
+    my_producer = Process(target=producer, args=(queue,))
+    my_consumer = Process(target=consumer, args=(queue,))
+    my_producer.start()
+    my_consumer.start()
+    my_producer.join()
+    my_consumer.join()
+
+    #manage 用于进程池中的通讯
+    queue = Manager().queue(10)
+
+    # pipe 用于两个进程间的通讯
+    # 通过pipe实现进程通信,pipe只适用与两个进程
+    # 为什么不直接用queue？因为pipe的性能高于queue
+    receiver_pipe, send_pipe = Pipe()
+    my_producer = Process(target=producer, args=(send_pipe,))
+    my_consumer = Process(target=consumer, args=(receiver_pipe,))
+    my_producer.start()
+    my_consumer.start()
+    my_producer.join()
+    my_consumer.join()
+
+    # 数据同步，以manager dict为例
+    def add_data(p_dict, key, value):
+        p_dict[key] = value
+    process_dict = Manager().dict()
+    first_progress = Process(target=add_data, args(process_dict,'f',25))
+    second_progress = Process(target=add_data, args(process_dict,'f2',27))
+    first_progress.start()
+    second_progress.start()
+    first_progress.join()
+    second_progress.join()
 ```
