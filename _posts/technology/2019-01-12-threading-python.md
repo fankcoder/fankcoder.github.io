@@ -543,3 +543,291 @@ win不支持，linux2.6内核中提出，是select和poll的增强版。epoll查
 并发性不高，同时连接活跃，select比较好（比如游戏）。
 
 通过非阻塞io实现http请求
+
+
+#### C10M问题
+如何利用8核心cpu，64G内存，在10gbps的网网上保持1000万并发连接
+
+#### 协程解决的问题
+主要是解决回调编写难的问题。保持性能+代码编写容易
+
+1.采用同步的方式编写异步的代码
+2.使用单线程去切换任务：
+    1. 线程是由操作系统切换的，单线程切换意味着需要程序员去调度任务
+    2. 不在需要锁，并发性高，如果单线程内切换函数，性能高于线程切换，
+
+#传统函数调用方式 A-B-C,一旦调用其他函数，函数只运行一次然后退出
+#我们需要一个可以暂停的函数，并且可以在适当的时候恢复该函数继续执行
+#协程  -> 有多个入口的函数，可以暂停的函数，并且可以向暂停的地方传入值
+生成器就是可以暂停的函数
+
+### 生成器进阶send,close,throw
+
+send
+
+```
+def gen_func():
+    #这种写法1.可以产出值 2.可以接受值
+    html = yield "http://www.baidu.com"
+    print(html)
+    yield 2
+    yield 3
+    return 'fank'
+
+#生成器不仅可以产生值，还可以接受值
+if __name__ == '__main__':
+    gen = gen_func()
+    #启动生成器的方式有2种，1.next() 2.send
+    print(next(gen))
+    #send默认包含了next
+    print(gen.send('fank'))
+    print(next(gen))
+```
+
+close
+
+```
+def gen_func():
+    #这种写法1.可以产出值 2.可以接受值
+    try:
+        yield "http://www.baidu.com"
+    except GeneratorExit:
+        pass
+    yield 2
+    yield 3
+    return 'fank'
+
+#生成器不仅可以产生值，还可以接受值
+if __name__ == '__main__':
+    gen = gen_func()
+    #启动生成器的方式有2种，1.next() 2.send
+    print(next(gen))
+    gen.close()
+    print(next(gen))
+
+    #GeneratorExit是继承BaseException
+```
+
+throw
+
+```
+def gen_func():
+    #这种写法1.可以产出值 2.可以接受值
+    try:
+        yield "http://www.baidu.com"
+    except GeneratorExit:
+        pass
+    yield 2
+    yield 3
+    return 'fank'
+
+#生成器不仅可以产生值，还可以接受值
+if __name__ == '__main__':
+    gen = gen_func()
+    #启动生成器的方式有2种，1.next() 2.send
+    print(next(gen))
+    gen.throw(Exception, 'download error') #没有向下执行，是当前yeild的异常
+```
+
+#### yield from
+生成器实现协程是由程序员自己调度的，线程，进程由操作系统内核调度。协程是函数级别的
+
+yield from是python3.3之后新加入的语法
+
+python3.5之后的协程是原生协程，之前是利用生成器完成
+
+```
+from itertools import chain
+
+my_list = [1,2,3]
+my_dict = {
+    'fank':"fankcoder.com",
+    'fank1':"fankcoder1.com",
+    'fank2':"fankcoder2.com"
+}
+
+# yeild from 后面跟一个iterable
+# 但远不止这些，如果yeild from 跟生成器
+def my_chain(*args, **kwargs):
+    for item in args:
+        yield from item
+        # for each in item:
+        #     yield each
+
+for value in my_chain(my_list, my_dict, range(5,10)):
+    print(value)
+
+def g1(gen):
+    yield from gen
+
+def main():
+    g = g1
+    g.send(None)
+
+#1. main调用生成器 2.g1委托生成器 3.gen子生成器
+#2. yield from 会在调用生成器和子生成器之间建立一个双向通道，
+# 两者可以互通，现在调用生成器可以直接发送close,throw到子生成器
+
+```
+
+协程调度，事件循环+协程模式，协程是单线程模式.
+编写时候凡是遇到耗io的操作，都用啥yield或yield from模式.
+tornado是生成器生成的协程.
+
+#### async和await 原生协程
+
+```
+#python3.5以后为了将语义变得更加明确，就引入了async和await关键词来定义原生协程
+# async下不能再出现yield,同样await只能出现在async下
+# await 后面跟的函数必须是awaitable也就是加了async的函数
+import types
+
+async def downloader(url):
+    return 'fank'
+
+# 另一种方法让函数变为awaitable，但是我没有试验成功。不过这种方法本来不推荐
+@types.coroutine
+def downloader2(url):
+    return 'fank2'
+
+async def download_url(url):
+    # do something
+    # await对应生成器的yield from
+    html = await downloader2(url)
+    return html
+
+if __name__ == "__main__":
+    coro = download_url('http://www.google.com')
+    # next(coro)  原生协程不能这样调用
+    coro.send(None)
+
+```
+
+### asyncio模块
+把它叫做异步Io库，并不叫协程库，这里包含了多线程，多进程，协程
+
+1. 包含各种特定系统实现的模块化事件循环
+2. 传输和协议抽象
+3. 对tcp,udp,ssl,子进程，延时调用以及其他的具体支持
+4. 模仿Futures模块但适用于事件循环适用的Future类
+5. 基于yield from的协议和任务，可以让你用顺序的方式编写并发代码
+6. 必须使用一个将产生阻塞io的调用时，哟接口可以把这个事件转移到线程池
+7. 模仿threading模块中的同步原语，可以用在单线程内的协程之间
+
+
+ asyncio 异步io并发编程 py3.4以后支持
+
+事件循环
+
+协程编码模式3个：1.事件循环 2.回调(驱动生成器) 3.epoll（io多路复用）
+
+应用：tornado, gevent, twisted(scrapy, django channels)
+
+ps: tornado不建议使用Pymysql,mysqlclient
+
+```
+#事件循环+回调（驱动生成器）+epoll(IO多路复用)
+#asyncio是Python用于解决异步io的一整套解决方案
+#tornado,gevent,twisted(scrapy, dango channels(http2.0 websocket) 目前都是基于twisted)
+#tornado(实现了web服务器)，django+flask(uwsgi,gunicorn+nginx)
+#tornado可以直接部署，外加nginx
+
+#asyncio
+import asyncio
+import time
+
+async def get_html(url):
+    print('start get html')
+    #time.sleep()  #不能使用同步阻塞的方法
+    await asyncio.sleep(2)  #耗时操作，io操作加await
+    print('end get url')
+
+if __name__ == "__main__":
+    start_time = time.time()
+    loop  = asyncio.get_event_loop()  #事件循环，自动select
+    tasks = [get_html('http://www.google.com') for i in range(10)]
+    # loop.run_until_complete(get_html('http://www.google.com'))
+    loop.run_until_complete(asyncio.wait(tasks))
+    print('time:', time.time() - start_time)
+
+#获取协程的返回值
+from functools import partial
+
+async def get_html(url):
+    print('start get html')
+    #time.sleep()  #不能使用同步阻塞的方法
+    await asyncio.sleep(2)  #耗时操作，io操作加await
+    return 'fank'
+
+def callback(url, future): #partial url 要写在前面
+    print(url)
+
+if __name__ == "__main__":
+    start_time = time.time()
+    loop  = asyncio.get_event_loop()  #事件循环，自动select
+    # get_future = asyncio.ensure_future(get_html('http://www.google.com'))  #一个线程只有一个loop，这里ensure_future自动帮我们获取loop
+    task = loop.create_task(get_html('http://www.google.com'))  #和上一句等效
+    # loop.run_until_complete(get_html('http://www.google.com'))
+    # task.add_done_callback(callback)
+    #如过callback需要传参
+    task.add_done_callback(partial(callback, 'http://www.googl.com'))
+
+    # loop.run_until_complete(get_future)
+    loop.run_until_complete(task)
+    # print(get_future.result())
+    print('time:', time.time() - start_time)
+
+#wait 和gather的用法和区别
+#gather更加高层，可以分组
+async def get_html(url):
+    print('start get html')
+    #time.sleep()  #不能使用同步阻塞的方法
+    await asyncio.sleep(2)  #耗时操作，io操作加await
+    print('end get url')
+
+if __name__ == "__main__":
+    start_time = time.time()
+    loop  = asyncio.get_event_loop()  #事件循环，自动select
+    group1 = [get_html('http://www.google.com') for i in range(10)]
+    group2 = [get_html('http://www.google.com') for i in range(10)]
+    # loop.run_until_complete(get_html('http://www.google.com'))
+    group2.cancel() #批量取消
+    loop.run_until_complete(asyncio.gather(*group1, *group2))
+    print('time:', time.time() - start_time)
+```
+
+#### 取消task
+
+```
+# run_until_complete
+import asyncio
+
+# loop = asyncio.get_event_loop()
+# loop.run_forever()  #不会停止，会一直运行
+# loop.run_until_complete()  #运行了指定的协程之后会停止
+
+async def get_html(sleep_times):
+    print('waiting')
+    await asyncio.sleep(sleep_times)
+    print('done after {}'.format(sleep_times))
+
+if __name__ == "__main__":
+    task1 = get_html(2)
+    task2 = get_html(3)
+    task3 = get_html(3)
+
+    tasks = [task1, task2, task3]
+    loop = asyncio.get_event_loop()
+
+    try:
+        loop.run_until_complete(asyncio.wait(tasks))
+    except KeyboardInterrupt as e:
+        all_tasks = asyncio.Task.all_tasks()
+        for task in all_tasks:
+            print('cancel task')
+            print(task.cancel())
+        loop.stop()
+        loop.run_forever()  #很关键，不加会报错
+    finally:
+        loop.close()
+```
