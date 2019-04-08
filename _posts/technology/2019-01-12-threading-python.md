@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Python线程&进程
+title: Python线程&进程&协程&asyncio
 category: 技术
 tags: python,thread
 keywords: thread
@@ -830,4 +830,147 @@ if __name__ == "__main__":
         loop.run_forever()  #很关键，不加会报错
     finally:
         loop.close()
+```
+
+#### 底层方法call_soon,call_later,call_at
+
+```
+import asyncio
+
+#可以给asyncio直接传递函数（不是async函数）
+def callback(sleep_time):
+    print('sleep {} success'.format(sleep_time))
+
+def stoploop(loop):
+    loop.stop()
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    loop.call_soon(callback, 2)  #即刻执行，在队列里等到下一个循环立马执行
+    loop.call_soon(stoploop, loop)
+
+    loop.call_later(2,callback,2)  #在2秒钟之后运行callback
+    loop.call_later(1,callback,1)
+    loop.call_later(3,callback,3)
+
+    now = loop.time()  #loop的time
+    loop.call_at(now+2, callback, 2)
+    loop.call_at(now+3, callback, 3)
+
+    loop.call_soon_threadsafe()  #变量线程安全
+
+    loop.run_forever()
+```
+
+#### asyncio+ThreadPollExecutor
+
+```
+#使用多线程:在协程中继承阻塞io(某些库就是阻塞的)
+import asyncio
+import socket
+from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor
+
+def get_url(url):
+    # get html by socket
+    url = urlparse(url)
+    host = url.netloc
+    path = url.path
+    if path == '':
+        path = '/'
+    
+    #connect socket
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((host, 80))
+    client.send("GET {} HTTP/1.1\r\nHOST:{}\r\nConnection:close\r\n\r\n".format(path, host).encode('utf8'))
+    
+    data = b''
+    while True:
+        d = client.recv(1024)
+        if d:
+            data += d
+        else:
+            break
+    data = data.decode('utf8')
+    htmldata = data.split('\r\n\r\n')[1]
+    print(htmldata)
+
+if __name__ == "__main__":
+    loop = asyncio.get_event_loop()
+    executor = ThreadPoolExecutor(3)
+    tasks = []
+    for i in range(20):
+        #参数1.线程池 2.函数名 3.函数参数
+       task = loop.run_in_executor(executor, get_url, 'http://www.baidu.com/{}'.format(i))  #将某个阻塞Io函数放入executor中运行
+       tasks.append(task)
+    loop.run_until_complete(asyncio.wait(tasks))
+```
+
+#### 同步的方式实现异步http模拟请
+
+```
+#asyncio没有提供http协议的接口；aiohttp异步的requests，可以启动服务器，可以爬虫
+#同步的方式实现异步http模拟请求
+import asyncio
+import socket
+from urllib.parse import urlparse
+
+async def get_url(url):
+    # get html by socket
+    url = urlparse(url)
+    host = url.netloc
+    path = url.path
+    if path == '':
+        path = '/'
+    
+    #connect socket
+    reader, writer = await asyncio.open_connection(host, 80)  #线程
+    writer.write("GET {} HTTP/1.1\r\nHOST:{}\r\nConnection:close\r\n\r\n".format(path, host).encode('utf8'))
+    
+    all_lines = []
+    async for raw_line in reader:  #异步化，因为内部有yield from语法
+        data = raw_line.decode('utf8')
+        all_lines.append(data)
+
+    html = '\n'.join(all_lines)
+    return html
+
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    tasks = []
+    for i in range(20):
+        url = 'http://www.baidu.com/{}'.format(i)
+        tasks.append(asyncio.ensure_future(get_url(url)))
+    loop.run_until_complete(asyncio.wait(tasks))
+    for task in tasks:
+        print(task.result()
+```
+
+#### asyncio同步和通信
+
+```
+import asyncio
+from asyncio import Lock,Queue
+queue = Queue()
+await queue.get()
+queue1 = [] #普通的全局变量也能用，但是不能控制Size流量
+
+cache = {}
+lock = Lock()
+
+async def get_stuff(url):
+    async with lock:
+        # await lock.acquire()  #async 
+        if url in cache:
+            return cache[url]
+        stuff = await aiohttp.request('get', url)
+        cache[url] = stuff
+        return stuff
+        # lock.release()  #不需要await
+
+async def parse_stuff():
+    stuff = await get_stuff()
+
+async def use_stuff():
+    stuff = await get_stuff()
 ```
