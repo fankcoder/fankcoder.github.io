@@ -974,3 +974,21 @@ async def parse_stuff():
 async def use_stuff():
     stuff = await get_stuff()
 ```
+
+
+### aiohttp实现高并发爬虫
+
+#### aiohttp
+HTTP client/server framework for asyncio
+
+server可以搭建http服务器
+
+### client爬虫
+爬取Url
+抽取内部Url
+过滤
+反爬
+分布式
+
+#### sanic
+号称可以媲美go性能的高并发web服务器
