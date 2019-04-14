@@ -6,9 +6,175 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 25 Mar 2019 18:12:51 +0800</pubDate>
-    <lastBuildDate>Mon, 25 Mar 2019 18:12:51 +0800</lastBuildDate>
+    <pubDate>Fri, 12 Apr 2019 10:50:59 +0800</pubDate>
+    <lastBuildDate>Fri, 12 Apr 2019 10:50:59 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Docker 常用</title>
+        <description>&lt;h2 id=&quot;基础类&quot;&gt;基础类&lt;/h2&gt;
+&lt;h3 id=&quot;查看docker信息&quot;&gt;查看docker信息&lt;/h3&gt;
+&lt;h3 id=&quot;-查看docker版本&quot;&gt;# 查看docker版本&lt;/h3&gt;
+&lt;p&gt;docker version&lt;/p&gt;
+&lt;h4 id=&quot;显示docker系统的信息&quot;&gt;显示docker系统的信息&lt;/h4&gt;
+&lt;p&gt;docker info&lt;/p&gt;
+&lt;h4 id=&quot;日志信息&quot;&gt;日志信息&lt;/h4&gt;
+&lt;p&gt;docker logs&lt;/p&gt;
+&lt;h4 id=&quot;故障检查&quot;&gt;故障检查&lt;/h4&gt;
+&lt;p&gt;service docker status&lt;/p&gt;
+&lt;h4 id=&quot;启动关闭docker&quot;&gt;启动关闭docker&lt;/h4&gt;
+&lt;p&gt;sudo service docker start|stop&lt;/p&gt;
+
+&lt;h2 id=&quot;查看容器信息&quot;&gt;查看容器信息&lt;/h2&gt;
+&lt;h4 id=&quot;查看当前运行的容器&quot;&gt;查看当前运行的容器&lt;/h4&gt;
+&lt;p&gt;docker ps&lt;/p&gt;
+&lt;h4 id=&quot;查看全部容器&quot;&gt;查看全部容器&lt;/h4&gt;
+&lt;p&gt;docker ps -a&lt;/p&gt;
+&lt;h4 id=&quot;查看全部容器的id和信息&quot;&gt;查看全部容器的id和信息&lt;/h4&gt;
+&lt;p&gt;docker ps -a -q&lt;/p&gt;
+&lt;h4 id=&quot;查看全部容器占用的空间&quot;&gt;查看全部容器占用的空间&lt;/h4&gt;
+&lt;p&gt;docker ps -as&lt;/p&gt;
+&lt;h4 id=&quot;查看一个正在运行容器进程支持-ps-命令参数&quot;&gt;查看一个正在运行容器进程，支持 ps 命令参数&lt;/h4&gt;
+&lt;p&gt;docker top&lt;/p&gt;
+
+&lt;h2 id=&quot;启动停止容器等操作&quot;&gt;启动停止容器等操作&lt;/h2&gt;
+&lt;p&gt;docker start|stop|restart [id]&lt;/p&gt;
+&lt;h4 id=&quot;暂停恢复-某一容器的所有进程&quot;&gt;暂停|恢复 某一容器的所有进程&lt;/h4&gt;
+&lt;p&gt;docker pause|unpause [id]&lt;/p&gt;
+&lt;h4 id=&quot;杀死一个或多个指定容器进程&quot;&gt;杀死一个或多个指定容器进程&lt;/h4&gt;
+&lt;p&gt;docker kill -s KILL [id]&lt;/p&gt;
+&lt;h4 id=&quot;停止全部运行的容器&quot;&gt;停止全部运行的容器&lt;/h4&gt;
+&lt;p&gt;docker stop &lt;code class=&quot;highlighter-rouge&quot;&gt;docker ps -q&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&quot;杀掉全部运行的容器&quot;&gt;杀掉全部运行的容器&lt;/h4&gt;
+&lt;p&gt;docker kill -s KILL &lt;code class=&quot;highlighter-rouge&quot;&gt;docker ps -q&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;交互式进入容器&quot;&gt;交互式进入容器&lt;/h2&gt;
+&lt;p&gt;sudo docker exec -it  bash&lt;/p&gt;
+</description>
+        <pubDate>Thu, 04 Apr 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/%E5%A4%87%E5%BF%98/2019/04/04/general-docker.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E5%A4%87%E5%BF%98/2019/04/04/general-docker.html</guid>
+        
+        <category>docker</category>
+        
+        
+        <category>备忘</category>
+        
+      </item>
+    
+      <item>
+        <title>第N次折腾vps科学上网，解决方案笔记</title>
+        <description>&lt;h1 id=&quot;背景&quot;&gt;背景&lt;/h1&gt;
+&lt;h2 id=&quot;过去&quot;&gt;过去&lt;/h2&gt;
+&lt;p&gt;记得第一打开谷歌，是在初中的某一天，和当时的我熟悉的百度比较，除了它的Logo比较新颖之外，印象最深的就是这个网站，与国内所有的搜索引擎不同，它不能在线听歌，那时候正是国内盗版软件光盘盛行的时候，关心音乐的版权更是极少的。&lt;/p&gt;
+
+&lt;h2 id=&quot;后来&quot;&gt;后来&lt;/h2&gt;
+&lt;p&gt;有一天在大学机房做实验，老师闲聊说谷歌以后不能访问了，我听过也没太在意，因为在我意识中互联网世界就是同一个虚拟世界，可惜从那以后对我来说它就不再是了。之后的事大家都知道了，百度虚假广告越来越多，在当时我有很长一段时间都觉得，使用搜索引擎是一件极其痛苦的事，每当我在百度查找需要的东西，我大概需要过滤掉80%无用的信息，其中30%是广告，30%是色情信息，20%是无关信息。于是我将系统hosts替换，重新使用起了谷歌。&lt;/p&gt;
+
+&lt;h2 id=&quot;再后来&quot;&gt;再后来&lt;/h2&gt;
+&lt;p&gt;替换hosts这个方法我大概使用了2，3年之久（首先因为免费，其次它比某些收费vpn访问速度还快，缺点是不能看youtube视频）
+这时候我已经是一名谷歌重度使用者了。
+在2015年7月10号，那段时间hosts经常不稳定，找到了一篇用vps搭建ss的教程，在搬瓦工购入了一台vps，从此开始了vps搭建ss的折腾之旅&lt;/p&gt;
+
+&lt;h1 id=&quot;目前的完美折腾方案&quot;&gt;目前的完美折腾方案&lt;/h1&gt;
+&lt;p&gt;由于我的vps购入比较早，19.9$/Y（现在应该买不到了）它还是古老的OVZ架构，虽然便宜，但很遗憾它不能享用bbr加速方案。
+我尝试切换过几个机房，洛杉矶的速度不多，可以在youtube看1080p的视频。&lt;/p&gt;
+
+&lt;h3 id=&quot;已一台刚装好的centos65为例&quot;&gt;已一台刚装好的centOS6.5为例&lt;/h3&gt;
+
+&lt;p&gt;安装git&amp;amp;ss&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt install git
+pip install https://github.com/shadowsocks/shadowsocks/archive/master.zip -U
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;配置ss&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /etc/shadowdowsocks.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;配置ss例子，端口写不常用的，并且的越随意越好，记得不要超过65535&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{                                  
+    &quot;server&quot;:&quot;my_server_ip&quot;,          //服务器的IP地址
+    &quot;server_port&quot;:7711,              //服务器的端口，
+    &quot;local_address&quot;: &quot;127.0.0.1&quot;,       //本机IP地址
+    &quot;local_port&quot;:1080,               //本机端口
+    &quot;password&quot;:&quot;mypassword&quot;,        //自己设定的密码
+    &quot;timeout&quot;:600,                  //超出时间
+    &quot;method&quot;:&quot;chacha20-ietf&quot;,          //加密方法，推荐使用&quot;aes-256-cfb&quot;
+    &quot;fast_open&quot;: false                //true 或 false}
+}
+
+# 若是多用户模式，将server_port和password合并为port_password：
+&quot;port_password&quot;: {
+         &quot;443&quot;: &quot; mypassword 1”,  //对应端口设定不同的密码
+         &quot;8888&quot;: &quot; mypassword 2”
+     },
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;安装gevent，如果使用Python2，高版本的gevent可能会安装失败，官方推荐1.1版本&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$ yum install -y libevent
+$ pip install greenlet
+$ pip install gevent==1.1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;强烈使用推荐的chacha20-ietf算法。安装新算法需要先安装libsodium&lt;/p&gt;
+
+&lt;p&gt;直接安装or编译安装随心情&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum install epel-release
+yum install libsodium
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum -y groupinstall &quot;Development Tools&quot;
+wget https://github.com/jedisct1/libsodium/releases/download/1.0.15/libsodium-1.0.15.tar.gz
+tar xf libsodium-1.0.15.tar.gz &amp;amp;&amp;amp; cd libsodium-1.0.15
+./configure &amp;amp;&amp;amp; make -j2 &amp;amp;&amp;amp; make install
+echo /usr/local/lib &amp;gt; /etc/ld.so.conf.d/usr_local_lib.conf
+ldconfig
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;启动ss服务&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssserver -c /etc/shadowsocks.json
+# 若想让ss一直在后台运行，可运行：
+nohup ssserver -c /etc/shadowsocks.json &amp;gt; /dev/null 2&amp;gt;&amp;amp;1 &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;客户端&lt;/p&gt;
+
+&lt;p&gt;macos: ShadowsocksX-NG&lt;/p&gt;
+
+&lt;p&gt;win: https://shadowsocks.org/en/download/clients.html&lt;/p&gt;
+
+&lt;p&gt;android: 可以先从pc下个apk传到手机（或者免费vpn有很多临时用下不错）再用gg play更新/下载&lt;/p&gt;
+
+&lt;p&gt;ios:wingy&lt;/p&gt;
+
+&lt;h2 id=&quot;kcptun&quot;&gt;kcptun&lt;/h2&gt;
+
+&lt;h4 id=&quot;参考文档&quot;&gt;参考文档&lt;/h4&gt;
+&lt;p&gt;https://github.com/easonhuang123/blog/issues/1&lt;/p&gt;
+
+&lt;p&gt;https://github.com/shadowsocksrr/shadowsocks-rss/wiki/libsodium&lt;/p&gt;
+
+&lt;p&gt;下面是一篇升级glibc的文章，我的确升级成功了，但是bbr还是用不了，放弃了
+https://cnodejs.org/topic/56dc21f1502596633dc2c3dc&lt;/p&gt;
+</description>
+        <pubDate>Tue, 02 Apr 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/%E5%B7%A5%E5%85%B7/2019/04/02/ss_config.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E5%B7%A5%E5%85%B7/2019/04/02/ss_config.html</guid>
+        
+        <category>ss</category>
+        
+        <category>google</category>
+        
+        
+        <category>工具</category>
+        
+      </item>
     
       <item>
         <title>vscode配置手册</title>
@@ -412,13 +578,36 @@ with file_open('text') as f:
 
 from collections.abc import * #抽象基类
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;tuple不可修改并不绝对。tuple值为list可以修改(id没变，不建议这样使用)&lt;/p&gt;
-
-&lt;p&gt;tuple比list好处，c语音类比，tuple对应struct,list对应array.性能优化，线程安全，可以作为dict的key,拆包特性。&lt;/p&gt;
 
 &lt;p&gt;namedtuple可以生成类，User = namedtuple(“User”,[‘name’,’age’])&lt;/p&gt;
 
 &lt;p&gt;节省空间，用于数据处理，从数据库取数据为tuple，直接赋值&lt;/p&gt;
+
+&lt;h3 id=&quot;tuple功能&quot;&gt;tuple功能&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;不可变(不绝对)&lt;/li&gt;
+  &lt;li&gt;iterable&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#拆包，方便找到对应关系
+_tuple = ('fank', 26, 182)
+name, age, height = _tuple
+#name = _tuple[0] 不好的写法
+
+#拆包加强
+name, *other = _tuple
+print(name, other)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;tuple比list好的地方&quot;&gt;tuple比list好的地方&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;immutable的重要性&lt;/li&gt;
+  &lt;li&gt;性能优化，不可变对象在编译时作为常量，产生显著的速度差异&lt;/li&gt;
+  &lt;li&gt;线程安全&lt;/li&gt;
+  &lt;li&gt;可以作为dict的key&lt;/li&gt;
+  &lt;li&gt;拆包特性&lt;/li&gt;
+  &lt;li&gt;如果拿C来类比，tuple对应struct, 而list对应array&lt;/li&gt;
+&lt;/ol&gt;
 
 &lt;h3 id=&quot;def-askargs-kwargspass&quot;&gt;def ask(*args, **kwargs):pass&lt;/h3&gt;
 
@@ -435,11 +624,17 @@ test({'name':'f','age':25}
 
 &lt;p&gt;_make方法初始化，_asdict()&lt;/p&gt;
 
+&lt;h3 id=&quot;defaultdict&quot;&gt;defaultdict&lt;/h3&gt;
 &lt;p&gt;from collections import defaultdict C语言实现，性能高,比setdefault更强大&lt;/p&gt;
 
-&lt;p&gt;default_dict = defaultdict(int) 参数是可调用对象&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;default_dict = defaultdict(int) #参数是一个可调用对象list,int,func..
 
-&lt;p&gt;default_dict[‘key’] #key=0&lt;/p&gt;
+default_dict['key'] #key=0 ,初始化成功后，直接访问不会报错，会默认生成
+
+def gen_func():
+    return {'fank':123,'code':321}
+default_dict = defaultdict(gen_func) #生成默认值
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;deque双端队列&quot;&gt;deque双端队列&lt;/h3&gt;
 
@@ -807,38 +1002,115 @@ class User(metaclass=MetaClass):  #当不写metaclass会默认调用type创建�
 &lt;p&gt;迭代器和以下标的访问方式不一样，迭代器是不能返回的，迭代器提供一种惰性方式。&lt;/p&gt;
 
 &lt;p&gt;__iter__迭代协议，可迭代的实现方法&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from collections.abc import Iterable,Iterator
 
-&lt;p&gt;from collections.abc import Iterable,Iterator&lt;/p&gt;
+iter([_list]) #将list变为迭代器
 
-&lt;p&gt;iter([_list])迭代器&lt;/p&gt;
-
-&lt;p&gt;def &lt;strong&gt;iter&lt;/strong&gt;(self) / def &lt;strong&gt;getitem&lt;/strong&gt;(self, item)&lt;/p&gt;
-
+def __iter__(self) / def __getitem__(self, item)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;next(itor)接受迭代器，迭代器next无法切片。文件太大使用迭代器读数据&lt;/p&gt;
 
 &lt;p&gt;生成器函数，函数内有yield关键字&lt;/p&gt;
-
-&lt;p&gt;def gen_func(): yield 1 yield2 yield3&lt;/p&gt;
-
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def gen_func(): 
+    yield 1 yield2 yield3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;python在编译时字节码发现yield于是变为生成器
+python查看字节码&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import dis
+print(dis.dis(func))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;gen = gen_func() #gen生成器对象，不是值&lt;/p&gt;
 
 &lt;p&gt;for i in gen: print(i) 惰性求值提供了可能，比list好处是省内存&lt;/p&gt;
 
-&lt;p&gt;查看字节码，import dis dis.dis(func)&lt;/p&gt;
+&lt;p&gt;生成器读取大文件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#数据在文件中只有1行
+f = open()
+f.read(4096) #一次读取的大小，偏移量
+
+def myreadlines(f, newline):
+    buf = &quot;&quot;
+    while True:
+        while newline in buf:
+            pos = buf.index(newline)
+            yield buf[:pos]
+            buf = buf[pos + len(newline):]
+        chunk = f.read(4096)
+        
+        if not chunk:
+            yield buf
+            break
+        buf += chunk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;socket编程&quot;&gt;socket编程&lt;/h3&gt;
+&lt;p&gt;服务端socket&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;bind(协议，地址，端口）&lt;/li&gt;
+  &lt;li&gt;listen(监听客户端socket请求）&lt;/li&gt;
+  &lt;li&gt;accept()&lt;/li&gt;
+  &lt;li&gt;阻塞等待连接请求（新套接字）&lt;/li&gt;
+  &lt;li&gt;recv()&lt;/li&gt;
+  &lt;li&gt;send()&lt;/li&gt;
+  &lt;li&gt;close()&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;import socket&lt;/p&gt;
+&lt;p&gt;客户端socket&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;connect() 三次握手 -&amp;gt; 等待套接字&lt;/li&gt;
+  &lt;li&gt;send() -&amp;gt; recv() server #接受bytes类型需要编码&lt;/li&gt;
+  &lt;li&gt;recv() -&amp;gt; send() server
+4.close()&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;server = socket.socket()&lt;/p&gt;
+&lt;p&gt;爬虫是典型的客户端socket
+如果使得服务端可以多用户连接？
+将每个socket做为线程&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import socket
 
-&lt;p&gt;server.bind((‘0.0.0.0’, 8000))&lt;/p&gt;
+server = socket.socket()
 
-&lt;p&gt;server.listen()&lt;/p&gt;
+server.bind(('0.0.0.0', 8000))
 
-&lt;p&gt;sock, addr = server.accept()&lt;/p&gt;
+server.listen()
 
-&lt;p&gt;data = server.recv(1024) #1kb&lt;/p&gt;
+sock, addr = server.accept()
+
+data = server.recv(1024) #1kb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;socketHttp
+reqeusts -&amp;gt; urlib -&amp;gt; socket&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import socket
+from urllib.parse import urlparse
+
+def get_url(url):
+    # get html by socket
+    url = urlparse(url)
+    host = url.netloc
+    path = url.path
+    if path == '':
+        path = '/'
+        
+    #connect socket
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((host, 80))
+    client.send(&quot;GET {} HTTP/1.1\r\nHOST:{}\r\nConnection:close\r\n\r\n&quot;.format(path, host).encode('utf8'))
+    
+    data = b''
+    while True:
+        d = client.recv(1024)
+        if d:
+            data += d
+        else:
+            break
+    data = data.decode('utf8')
+    htmldata = data.split('\r\n\r\n')[1]
+    print(htmldata)
+
+if __name__ == '__main__':
+    get_url('http://www.baidu.com')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;多线进程&quot;&gt;多线、进程&lt;/h3&gt;
 
@@ -1200,6 +1472,981 @@ await asyncio.sleep(sleep_times)
       </item>
     
       <item>
+        <title>Python线程&amp;进程&amp;协程&amp;asyncio</title>
+        <description>&lt;h3 id=&quot;线程进程&quot;&gt;线程&amp;amp;进程&lt;/h3&gt;
+
+&lt;p&gt;GIL global interpreter lock GIL全局解释锁&lt;/p&gt;
+
+&lt;p&gt;python中一个线程对应于c中的线程&lt;/p&gt;
+
+&lt;p&gt;python是先将py文件编译为字节码&lt;/p&gt;
+
+&lt;p&gt;gil使得同一时刻只有一个线程在一个cpu上执行字节码，无法将多个线程映射到多个cpu上&lt;/p&gt;
+
+&lt;p&gt;为了安全，但速度慢，无法体现多核优势。pypy是去gil化的。gil在遇到io操作会主动释放&lt;/p&gt;
+
+&lt;p&gt;操作系统调度的最小单元线程，对于io操作，多线程和多进程差别不大。&lt;/p&gt;
+
+&lt;h4 id=&quot;通过thread类实例化&quot;&gt;通过thread类实例化&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;thread1 = threading.Thread(target=func, args=(&quot;&quot;,))
+
+thread1.setDaemon(True)#设置为守护线程。当主线程关闭时，子线程被kill
+
+thread1.join() #阻塞，等待thread1子线程执行完成
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;继承thread来实现多线程&quot;&gt;继承thread来实现多线程&lt;/h4&gt;
+&lt;p&gt;当代码量大，逻辑复杂时，推荐通过继承thread来实现多线程&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;class GetDetailHtml(threading.Thread):
+    def __init__(self, name):   #为线程命名，好习惯
+        super().__init__(name=name)
+    
+    def run(self):
+        print('get detail html')
+        time.sleep(2)
+        print('get detail html done')
+
+class GetTitleHtml(threading.Thread):
+    def __init__(self, name):
+        super().__init__(name=name)
+
+    def run(self):
+        print('get title url')
+        time.sleep(2)
+        print('get title url done')
+
+
+if __name__ == '__main__':
+    thread1 = GetTitleHtml('get title html')
+    thread2 = GetDetailHtml('get detail html')
+    start_time = time.time()
+    thread1.start()
+    thread2.start()
+    thread1.join()
+    thread2.join()
+    print('last time {}'.format(time.time() - start_time))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;线程之间的通信方式&quot;&gt;线程之间的通信方式&lt;/h3&gt;
+
+&lt;h4 id=&quot;1共享全局变量list多线程可以多进程不行&quot;&gt;1.共享全局变量(list)（多线程可以，多进程不行）&lt;/h4&gt;
+
+&lt;p&gt;这种方法，线程并不安全，需要加gil锁，所以并不推荐用作通信&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import time
+import threading
+
+#1.共享全局变量
+detail_url_list = []
+
+def get_title_html(detail_url_list):
+    print('get title url')
+    time.sleep(2)
+    for i in range(20):
+        detail_url_list.append('http://www.test.com/id/{}/'.format(i))
+    print('get title url done')
+
+def get_detail_html(detail_url_list):
+    print('get detail html')
+    time.sleep(2)
+    if len(detail_url_list):
+        url = detail_url_list.pop()
+        print('get detail html done')
+
+if __name__ == '__main__':
+    thread1 = threading.Thread(target=get_title_html, args=(detail_url_list,))
+    for i in range(10): #启动10个线程，太多线程操作系统切换会产生很大代价
+        html_thread = threading.Thread(target=get_detail_html, args=(detail_url_list,))
+        html_thread.start()
+    start_time = time.time()
+    thread1.start()
+    thread1.join()
+    print('last time {}'.format(time.time() - start_time))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;2通过queue方法进行线程间通讯queue本身是线程安全的&quot;&gt;2.通过queue方法进行线程间通讯,queue本身是线程安全的&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from queue import Queue
+import time
+import threading
+
+def get_title_html(queue):
+    while True:
+        print('get title url')
+        time.sleep(2)
+        for i in range(20):
+            queue.put('http://www.test.com/id/{}/'.format(i))
+        print('get title url done')
+
+def get_detail_html(queue):
+    while True:
+        print('get detail html')
+        time.sleep(2)
+        url = queue.get()  #get方法是阻塞方法，如果queue为空就等待
+        print('get detail html done')
+
+if __name__ == '__main__':
+    detail_queue = Queue(maxsize=1000)
+    thread1 = threading.Thread(target=get_title_html, args=(detail_queue,))
+    for i in range(10): #启动10个线程，太多线程操作系统切换会产生很大代价
+        html_thread = threading.Thread(target=get_detail_html, args=(detail_queue,))
+        html_thread.start()
+    start_time = time.time()
+    thread1.start()
+    thread1.join()
+    print('last time {}'.format(time.time() - start_time))
+
+
+queue.get()#阻塞方法，如果为空就一直停顿等待
+queue.put_nowait()#设置为非阻塞
+queue.qsize() #获取长度，同样是线程安全的可以直接使用
+queue.empty()
+queue.full()
+queue.join()#阻塞直到执行到task_done()
+queue.task_done()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;.join()一直阻塞，想退出需要调用.task_down() #爬虫暂停&lt;/p&gt;
+
+&lt;p&gt;如果共用变量为dict或其他非队列数据，也可以考虑使用全局变量&lt;/p&gt;
+
+&lt;h3 id=&quot;线程同步lock-rlock&quot;&gt;线程同步（lock, rlock）&lt;/h3&gt;
+
+&lt;p&gt;避免淘宝库存同时有人买
+线程同步机制,lock锁，反正锁住的代码段都只能有一个在运行，释放之后才能让其他代码运行.&lt;/p&gt;
+
+&lt;p&gt;使用锁会出现的问题&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;用锁会影响性能&lt;/li&gt;
+  &lt;li&gt;锁会引起死锁（互相等待）,不能连续调用两次acquire&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from threading import Lock
+
+lock = Lock()
+
+global lock
+
+lock.acquire() #获取
+
+a += 1
+
+lock.release() #释放
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;死锁情况&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;A(a, b)
+acquire(a)
+acquire(b)
+
+B(a, b)
+acquire(b) # a,b同时等待
+acquire(a)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;rlock可重入的锁&quot;&gt;rlock可重入的锁&lt;/h4&gt;
+
+&lt;p&gt;解决lock，不能连续调用acquire的问题。它可以在同一个线程里面，可以连续调用多次acquire，需要相等数量的release.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from threading import RLock
+lock = Rlock()
+
+lock.acquire()
+lock.acquire()
+lock.release()
+lock.release()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;condition条件变量&quot;&gt;condition条件变量&lt;/h3&gt;
+
+&lt;p&gt;用于复杂的线程间同步锁&lt;/p&gt;
+
+&lt;p&gt;wait()允许等待某个条件变量的通知
+notify()会通知调用了wait()方法的那个线程启动&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;使用condition启动顺序非常重要&lt;/li&gt;
+  &lt;li&gt;一定要先调用with方法或者acquire和release，之后再调用wait(),notify()&lt;/li&gt;
+  &lt;li&gt;condition有两层锁，一把底层锁会在线程调用wait方法的时候释放，上面的锁会值每次调用wait时分配一把并放入到cond的等待队列中，等到notify方法唤醒&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import threading
+from threading import Condition
+
+class XiaAi(threading.Thread):
+    def __init__(self, cond):
+        super().__init__(name='小爱')
+        self.cond = cond
+    
+    def run(self):
+        with self.cond:
+            self.cond.wait()
+            print('{}: 在'.format(self.name))
+            self.cond.notify()
+
+            self.cond.wait()
+            print('{}: 好啊'.format(self.name))
+            self.cond.notify()
+    
+class TianMao(threading.Thread):
+    def __init__(self, cond):
+        super().__init__(name='天猫')
+        self.cond = cond
+    
+    def run(self):
+        with self.cond:
+            print('{}: 小爱同学'.format(self.name))
+            self.cond.notify()
+            self.cond.wait()
+
+            print('{}: 我们来对古诗吧'.format(self.name))
+            self.cond.notify()
+            self.cond.wait()
+
+if __name__ == '__main__':
+    cond = threading.Condition()
+
+    xiaoai = XiaAi(cond)
+    tianmao = TianMao(cond)
+
+    xiaoai.start()
+    tianmao.start()
+    xiaoai.join()
+    tianmao.join()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;semaphore-控制线程并发数量&quot;&gt;Semaphore 控制线程并发数量&lt;/h3&gt;
+
+&lt;p&gt;(文件读写，写一般只用一个线程，读可以允许有多个线程)&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import threading
+import time
+
+
+class HtmlSpider(threading.Thread):
+    def __init__(self, url, sem):
+        super().__init__()
+        self.url = url
+        self.sem = sem
+    
+    def run(self):
+        time.sleep(2)
+        print('get html success')
+        self.sem.release()
+
+class UrlProducer(threading.Thread):
+    def __init__(self, sem):
+        super().__init__()
+        self.sem = sem
+    
+    def run(self):
+        for i in range(10):
+            self.sem.acquire()
+            html_thread = HtmlSpider('http://www.baidu.com/id/{}/'.format(i), self.sem)
+            html_thread.start()
+
+if __name__ == '__main__':
+    sem = threading.Semaphore(3)
+    url_thread = UrlProducer(sem)
+    url_thread.start()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;线程池concurrent-py32&quot;&gt;线程池concurrent #py3.2&lt;/h3&gt;
+&lt;p&gt;concurrent容易的编写多线程，多进程代码&lt;/p&gt;
+
+&lt;p&gt;为什么使用线程池？&lt;/p&gt;
+
+&lt;p&gt;1.主线程中可以获取某一个线程的状态或者某一个任务的状态，以及返回值&lt;/p&gt;
+
+&lt;p&gt;2.当一个线程完成的时候，主线程能立即知道&lt;/p&gt;
+
+&lt;p&gt;3.futures可以让多线程多进程编码接口一致&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from concurrent.futures import ThreadPoolExecutor,as_completed,wait,FIRST_COMPLETED
+import time
+
+def get_html(times):
+    time.sleep(times)
+    print('get html {} success'.format(times))
+    return times
+
+executor = ThreadPoolExecutor(max_workers=2)
+
+#通过submit提交执行的函数到线程池中，submit是立即返回
+task1 = executor.submit(get_html, (3))
+task2 = executor.submit(get_html, (2))
+print(task1.done())
+#取消线程执行，状态done无论为true和false都不能取消执行。只有还没提交到线程池中的线程才能提交，与max_workers的设置有关
+print(task2.cancel(2))
+time.sleep(3.1)
+#done()查看该线程当前的执行状态
+print(task1.done())
+#result()获取该线程的返回结果
+print(task1.result())
+
+#as_completed获取已经成功的task的返回，如爬虫
+urls = [2,3,4,2]
+all_task = [executor.submit(get_html, (url)) for url in urls]
+for future in as_completed(all_task):
+    data = future.result()
+    print('get {} page success'.format(data))
+
+#使用executor的map方法对as_completed进行简化.map的返回结果就是future.result()
+#map的返回顺序是按照list的顺序，并不是先执行完就返回
+for data in executor.map(get_html, urls):
+    print('get {} page success'.format(data))
+#wait设置阻塞，参数可选择条件默认为ALL_COMPLETED
+wait(all_task, return_when=FIRST_COMPLETED)
+print('main')
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;多进程&quot;&gt;多进程&lt;/h3&gt;
+
+&lt;p&gt;线程由于有gil无法并发，python多线程无法利用多cpu。&lt;/p&gt;
+
+&lt;p&gt;耗cpu的操作，多核cpu，计算，图像，挖矿多进程优于多线程。
+io操作进程切换代价高于线程。&lt;/p&gt;
+
+&lt;p&gt;进程数据完全隔离,无法使用共享全局变量&lt;/p&gt;
+
+&lt;p&gt;子进程完全拷贝Fork之后的父进程代码运行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import time
+from concurrent.futures import ThreadPoolExecutor,as_completed
+from concurrent.futures import ProcessPoolExecutor
+
+def fib(n):
+    if n &amp;lt;=2:
+        return 1
+    return fib(n-1)+fib(n-2)
+
+# 耗cpu的操作多进程比多线程速度快
+with ProcessPoolExecutor(3) as executor:  #win使用多进程必须在__name=='__main__'下运行
+# with ThreadPoolExecutor(3) as executor:
+    alltask = [executor.submit(fib, (num)) for num in range(25,40)]
+    start_time = time.time()
+    for future in as_completed(alltask):
+        data = future.result()
+        print('exec result {}'.format(data))
+    
+    print('last time is :{}'.format(time.time() - start_time))
+
+# io操作多线程比多进程快
+def random_sleep(n):
+    time.sleep(n)
+    return n
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;更加底层的多进程包&quot;&gt;更加底层的多进程包&lt;/h4&gt;
+&lt;p&gt;学习底层，生产环境还是推荐conncurrent&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import os
+import time
+import multiprocessing
+
+pid = os.fork()
+print('fank')
+if pid == 0:  #pid=0 child pro
+    print('child process {}. parent process {}'.format(os.getpid(), os.getppid()))
+else:
+    print('parent process {}'.format(pid))
+
+time.sleep(2)
+
+def get_html(n):
+    time.sleep(n)
+    print('sub progress success')
+    return n
+
+if __name__ == '__main__':
+    program = multiprocessing.Process(target=get_html, args=(2,))
+    program.start()
+    program.join()
+    print(program.pid) #比线程多个pid属性
+    print('main progress end')
+
+    #进程池
+    pool = multiprocessing.Pool(multiprocessing.cpu_count())
+    result = pool.apply_async(get_html,args=(3,))
+
+    #等待所有任务完成
+    pool.close()  #关闭接受新的进程
+    pool.join()
+    print(result.get())
+
+    #imap  按顺序输出
+    for result in pool.imap(get_html, [1,5,3]):
+        print('{} sleep success'.format(result))
+
+    #imapunordered  按执行速度输出
+    for result in pool.imap_unordered(get_html, [1,5,3]):
+        print('{} sleep success'.format(result))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;进程间的通讯&quot;&gt;进程间的通讯&lt;/h3&gt;
+
+&lt;p&gt;共享全局变量在多进程中不适用&lt;/p&gt;
+
+&lt;p&gt;mutiprocessing.queue用于进程间的通讯&lt;/p&gt;
+
+&lt;p&gt;进程池中的通讯有3个queue需要区分&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;系统from queue import Queue不能用于通讯&lt;/li&gt;
+  &lt;li&gt;from mutiprocessing import Queue 不能用在进程池通讯&lt;/li&gt;
+  &lt;li&gt;from mutiprocessing import Manager().queue 用于进程池pool中的通讯&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import time
+from multiprocessing import Process, Queue, Manager, Pipe
+
+def producer(queue):
+    queue.put('a')
+    time.sleep(2)
+
+def consumer(queue):
+    time.sleep(2)
+    data = queue.get()
+    print(data)
+
+if __name__ == '__main__':
+    queue = Queue(10)   #使用multi的queue
+    my_producer = Process(target=producer, args=(queue,))
+    my_consumer = Process(target=consumer, args=(queue,))
+    my_producer.start()
+    my_consumer.start()
+    my_producer.join()
+    my_consumer.join()
+
+    #manage 用于进程池中的通讯
+    queue = Manager().queue(10)
+
+    # pipe 用于两个进程间的通讯
+    # 通过pipe实现进程通信,pipe只适用与两个进程
+    # 为什么不直接用queue？因为pipe的性能高于queue
+    receiver_pipe, send_pipe = Pipe()
+    my_producer = Process(target=producer, args=(send_pipe,))
+    my_consumer = Process(target=consumer, args=(receiver_pipe,))
+    my_producer.start()
+    my_consumer.start()
+    my_producer.join()
+    my_consumer.join()
+
+    # 数据同步，以manager dict为例
+    def add_data(p_dict, key, value):
+        p_dict[key] = value
+    process_dict = Manager().dict()
+    first_progress = Process(target=add_data, args(process_dict,'f',25))
+    second_progress = Process(target=add_data, args(process_dict,'f2',27))
+    first_progress.start()
+    second_progress.start()
+    first_progress.join()
+    second_progress.join()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;协程-有多个入口的函数可以暂停的函数可以向暂停的地方传值&quot;&gt;协程 （有多个入口的函数，可以暂停的函数，可以向暂停的地方传值）&lt;/h3&gt;
+
+&lt;h4 id=&quot;并发&quot;&gt;并发&lt;/h4&gt;
+&lt;p&gt;指在一个时间段内，有几个程序在同一个cpu上运行，但任意时刻只有一个程序在cpu上运行&lt;/p&gt;
+
+&lt;h4 id=&quot;并行&quot;&gt;并行&lt;/h4&gt;
+&lt;p&gt;指任意时刻有多个程序运行在多个cpu上&lt;/p&gt;
+
+&lt;h4 id=&quot;同步&quot;&gt;同步&lt;/h4&gt;
+&lt;p&gt;指代码调用io操作时，必须等待io操作完成才返回的调用方式&lt;/p&gt;
+
+&lt;h4 id=&quot;异步&quot;&gt;异步&lt;/h4&gt;
+&lt;p&gt;指代码调用io操作时，不必等待io操作完成就返回的调用方式（future）&lt;/p&gt;
+
+&lt;h4 id=&quot;阻塞&quot;&gt;阻塞&lt;/h4&gt;
+&lt;p&gt;指调用函数时，当前线程会被挂起（等待）&lt;/p&gt;
+
+&lt;h4 id=&quot;非阻塞&quot;&gt;非阻塞&lt;/h4&gt;
+&lt;p&gt;调用函数时，当前线程不会被挂起，而是立即返回&lt;/p&gt;
+
+&lt;p&gt;C10k问题，1999年被提出的一个挑战。要求在一颗1GHz CPU,2G内存,1gbps带宽，让单台服务器同时为1万个客户提供ftp服务。
+如果为每个用户开一个线程，作为低配服务器做不到&lt;/p&gt;
+
+&lt;h4 id=&quot;unix下五种io模型&quot;&gt;unix下五种io模型&lt;/h4&gt;
+&lt;p&gt;阻塞式io，在等待io操作时，cpu是空闲的&lt;/p&gt;
+
+&lt;p&gt;非阻塞式io，做计算任务或者单向发送请求，不需要等待返回的任务&lt;/p&gt;
+
+&lt;p&gt;I/O复用，select,poll,epoll由操作系统提供。
+select查看那些socket或文件句柄已经准备好了，select可以同时监听多个socket&lt;/p&gt;
+
+&lt;p&gt;信号驱动式I/O,操作系统发起的用的较少&lt;/p&gt;
+
+&lt;p&gt;异步I/O(POSIX的aio_系列函数)，
+其实很多并发框架都是使用io多路复用，用aio不多,aio与io复用并没有很明显的提升，编码难度比io复用高很多。&lt;/p&gt;
+
+&lt;h3 id=&quot;selectpollepoll&quot;&gt;select,poll,epoll&lt;/h3&gt;
+
+&lt;p&gt;他们都是io多路复用机制。io多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般为读写就绪），能够通知程序进行相应的读写操作。但select,poll,epoll本质上都是同步io，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步io则无需自己负责进行读写，异步io的实现会负责把数据从内核拷贝到用户空间。&lt;/p&gt;
+
+&lt;h4 id=&quot;select&quot;&gt;select&lt;/h4&gt;
+&lt;p&gt;select函数监视的文件描述分3类，分别是writefds、readfds和exceptfds。调用后select函数会阻塞，知道有描述符就绪（数据可读可写，或有except),或者超时（timeout指定等待时间，如果立即返回设定为null）,函数返回。当select函数返回后，可以通过遍历fdset,来找到就绪的描述符。
+select目前几乎在所有平台上支持。缺点在于单个进程能够监视的文件描述符的数量存在最大限制，在linux上一般为1024，虽然可以修改，但是会造成效率降低。&lt;/p&gt;
+
+&lt;h4 id=&quot;poll&quot;&gt;poll&lt;/h4&gt;
+&lt;p&gt;不同与select使用三个位图来表示三个fdset的方式，poll使用一个pollfd的指针实现。
+pollfd没有最大数量限制。select和poll一样需要遍历文件描述符来获取已经就绪的socket，随着描述符数量增长，其效率也会下降。&lt;/p&gt;
+
+&lt;h4 id=&quot;epoll&quot;&gt;epoll&lt;/h4&gt;
+&lt;p&gt;win不支持，linux2.6内核中提出，是select和poll的增强版。epoll查询使用性能很高的红黑树。
+1.epoll并不代表一定比select好，在并发高的情况下，连接活跃度不高，epoll比较好（网站）。
+并发性不高，同时连接活跃，select比较好（比如游戏）。&lt;/p&gt;
+
+&lt;p&gt;通过非阻塞io实现http请求&lt;/p&gt;
+
+&lt;h4 id=&quot;c10m问题&quot;&gt;C10M问题&lt;/h4&gt;
+&lt;p&gt;如何利用8核心cpu，64G内存，在10gbps的网网上保持1000万并发连接&lt;/p&gt;
+
+&lt;h4 id=&quot;协程解决的问题&quot;&gt;协程解决的问题&lt;/h4&gt;
+&lt;p&gt;主要是解决回调编写难的问题。保持性能+代码编写容易&lt;/p&gt;
+
+&lt;p&gt;1.采用同步的方式编写异步的代码
+2.使用单线程去切换任务：
+    1. 线程是由操作系统切换的，单线程切换意味着需要程序员去调度任务
+    2. 不在需要锁，并发性高，如果单线程内切换函数，性能高于线程切换，&lt;/p&gt;
+
+&lt;p&gt;#传统函数调用方式 A-B-C,一旦调用其他函数，函数只运行一次然后退出
+#我们需要一个可以暂停的函数，并且可以在适当的时候恢复该函数继续执行
+#协程  -&amp;gt; 有多个入口的函数，可以暂停的函数，并且可以向暂停的地方传入值
+生成器就是可以暂停的函数&lt;/p&gt;
+
+&lt;h3 id=&quot;生成器进阶sendclosethrow&quot;&gt;生成器进阶send,close,throw&lt;/h3&gt;
+
+&lt;p&gt;send&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def gen_func():
+    #这种写法1.可以产出值 2.可以接受值
+    html = yield &quot;http://www.baidu.com&quot;
+    print(html)
+    yield 2
+    yield 3
+    return 'fank'
+
+#生成器不仅可以产生值，还可以接受值
+if __name__ == '__main__':
+    gen = gen_func()
+    #启动生成器的方式有2种，1.next() 2.send
+    print(next(gen))
+    #send默认包含了next
+    print(gen.send('fank'))
+    print(next(gen))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;close&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def gen_func():
+    #这种写法1.可以产出值 2.可以接受值
+    try:
+        yield &quot;http://www.baidu.com&quot;
+    except GeneratorExit:
+        pass
+    yield 2
+    yield 3
+    return 'fank'
+
+#生成器不仅可以产生值，还可以接受值
+if __name__ == '__main__':
+    gen = gen_func()
+    #启动生成器的方式有2种，1.next() 2.send
+    print(next(gen))
+    gen.close()
+    print(next(gen))
+
+    #GeneratorExit是继承BaseException
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;throw&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;def gen_func():
+    #这种写法1.可以产出值 2.可以接受值
+    try:
+        yield &quot;http://www.baidu.com&quot;
+    except GeneratorExit:
+        pass
+    yield 2
+    yield 3
+    return 'fank'
+
+#生成器不仅可以产生值，还可以接受值
+if __name__ == '__main__':
+    gen = gen_func()
+    #启动生成器的方式有2种，1.next() 2.send
+    print(next(gen))
+    gen.throw(Exception, 'download error') #没有向下执行，是当前yeild的异常
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;yield-from&quot;&gt;yield from&lt;/h4&gt;
+&lt;p&gt;生成器实现协程是由程序员自己调度的，线程，进程由操作系统内核调度。协程是函数级别的&lt;/p&gt;
+
+&lt;p&gt;yield from是python3.3之后新加入的语法&lt;/p&gt;
+
+&lt;p&gt;python3.5之后的协程是原生协程，之前是利用生成器完成&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;from itertools import chain
+
+my_list = [1,2,3]
+my_dict = {
+    'fank':&quot;fankcoder.com&quot;,
+    'fank1':&quot;fankcoder1.com&quot;,
+    'fank2':&quot;fankcoder2.com&quot;
+}
+
+# yeild from 后面跟一个iterable
+# 但远不止这些，如果yeild from 跟生成器
+def my_chain(*args, **kwargs):
+    for item in args:
+        yield from item
+        # for each in item:
+        #     yield each
+
+for value in my_chain(my_list, my_dict, range(5,10)):
+    print(value)
+
+def g1(gen):
+    yield from gen
+
+def main():
+    g = g1
+    g.send(None)
+
+#1. main调用生成器 2.g1委托生成器 3.gen子生成器
+#2. yield from 会在调用生成器和子生成器之间建立一个双向通道，
+# 两者可以互通，现在调用生成器可以直接发送close,throw到子生成器
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;协程调度，事件循环+协程模式，协程是单线程模式.
+编写时候凡是遇到耗io的操作，都用啥yield或yield from模式.
+tornado是生成器生成的协程.&lt;/p&gt;
+
+&lt;h4 id=&quot;async和await-原生协程&quot;&gt;async和await 原生协程&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#python3.5以后为了将语义变得更加明确，就引入了async和await关键词来定义原生协程
+# async下不能再出现yield,同样await只能出现在async下
+# await 后面跟的函数必须是awaitable也就是加了async的函数
+import types
+
+async def downloader(url):
+    return 'fank'
+
+# 另一种方法让函数变为awaitable，但是我没有试验成功。不过这种方法本来不推荐
+@types.coroutine
+def downloader2(url):
+    return 'fank2'
+
+async def download_url(url):
+    # do something
+    # await对应生成器的yield from
+    html = await downloader2(url)
+    return html
+
+if __name__ == &quot;__main__&quot;:
+    coro = download_url('http://www.google.com')
+    # next(coro)  原生协程不能这样调用
+    coro.send(None)
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;asyncio模块&quot;&gt;asyncio模块&lt;/h3&gt;
+&lt;p&gt;把它叫做异步Io库，并不叫协程库，这里包含了多线程，多进程，协程&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;包含各种特定系统实现的模块化事件循环&lt;/li&gt;
+  &lt;li&gt;传输和协议抽象&lt;/li&gt;
+  &lt;li&gt;对tcp,udp,ssl,子进程，延时调用以及其他的具体支持&lt;/li&gt;
+  &lt;li&gt;模仿Futures模块但适用于事件循环适用的Future类&lt;/li&gt;
+  &lt;li&gt;基于yield from的协议和任务，可以让你用顺序的方式编写并发代码&lt;/li&gt;
+  &lt;li&gt;必须使用一个将产生阻塞io的调用时，哟接口可以把这个事件转移到线程池&lt;/li&gt;
+  &lt;li&gt;模仿threading模块中的同步原语，可以用在单线程内的协程之间&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;asyncio 异步io并发编程 py3.4以后支持&lt;/p&gt;
+
+&lt;p&gt;事件循环&lt;/p&gt;
+
+&lt;p&gt;协程编码模式3个：1.事件循环 2.回调(驱动生成器) 3.epoll（io多路复用）&lt;/p&gt;
+
+&lt;p&gt;应用：tornado, gevent, twisted(scrapy, django channels)&lt;/p&gt;
+
+&lt;p&gt;ps: tornado不建议使用Pymysql,mysqlclient&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#事件循环+回调（驱动生成器）+epoll(IO多路复用)
+#asyncio是Python用于解决异步io的一整套解决方案
+#tornado,gevent,twisted(scrapy, dango channels(http2.0 websocket) 目前都是基于twisted)
+#tornado(实现了web服务器)，django+flask(uwsgi,gunicorn+nginx)
+#tornado可以直接部署，外加nginx
+
+#asyncio
+import asyncio
+import time
+
+async def get_html(url):
+    print('start get html')
+    #time.sleep()  #不能使用同步阻塞的方法
+    await asyncio.sleep(2)  #耗时操作，io操作加await
+    print('end get url')
+
+if __name__ == &quot;__main__&quot;:
+    start_time = time.time()
+    loop  = asyncio.get_event_loop()  #事件循环，自动select
+    tasks = [get_html('http://www.google.com') for i in range(10)]
+    # loop.run_until_complete(get_html('http://www.google.com'))
+    loop.run_until_complete(asyncio.wait(tasks))
+    print('time:', time.time() - start_time)
+
+#获取协程的返回值
+from functools import partial
+
+async def get_html(url):
+    print('start get html')
+    #time.sleep()  #不能使用同步阻塞的方法
+    await asyncio.sleep(2)  #耗时操作，io操作加await
+    return 'fank'
+
+def callback(url, future): #partial url 要写在前面
+    print(url)
+
+if __name__ == &quot;__main__&quot;:
+    start_time = time.time()
+    loop  = asyncio.get_event_loop()  #事件循环，自动select
+    # get_future = asyncio.ensure_future(get_html('http://www.google.com'))  #一个线程只有一个loop，这里ensure_future自动帮我们获取loop
+    task = loop.create_task(get_html('http://www.google.com'))  #和上一句等效
+    # loop.run_until_complete(get_html('http://www.google.com'))
+    # task.add_done_callback(callback)
+    #如过callback需要传参
+    task.add_done_callback(partial(callback, 'http://www.googl.com'))
+
+    # loop.run_until_complete(get_future)
+    loop.run_until_complete(task)
+    # print(get_future.result())
+    print('time:', time.time() - start_time)
+
+#wait 和gather的用法和区别
+#gather更加高层，可以分组
+async def get_html(url):
+    print('start get html')
+    #time.sleep()  #不能使用同步阻塞的方法
+    await asyncio.sleep(2)  #耗时操作，io操作加await
+    print('end get url')
+
+if __name__ == &quot;__main__&quot;:
+    start_time = time.time()
+    loop  = asyncio.get_event_loop()  #事件循环，自动select
+    group1 = [get_html('http://www.google.com') for i in range(10)]
+    group2 = [get_html('http://www.google.com') for i in range(10)]
+    # loop.run_until_complete(get_html('http://www.google.com'))
+    group2.cancel() #批量取消
+    loop.run_until_complete(asyncio.gather(*group1, *group2))
+    print('time:', time.time() - start_time)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;取消task&quot;&gt;取消task&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# run_until_complete
+import asyncio
+
+# loop = asyncio.get_event_loop()
+# loop.run_forever()  #不会停止，会一直运行
+# loop.run_until_complete()  #运行了指定的协程之后会停止
+
+async def get_html(sleep_times):
+    print('waiting')
+    await asyncio.sleep(sleep_times)
+    print('done after {}'.format(sleep_times))
+
+if __name__ == &quot;__main__&quot;:
+    task1 = get_html(2)
+    task2 = get_html(3)
+    task3 = get_html(3)
+
+    tasks = [task1, task2, task3]
+    loop = asyncio.get_event_loop()
+
+    try:
+        loop.run_until_complete(asyncio.wait(tasks))
+    except KeyboardInterrupt as e:
+        all_tasks = asyncio.Task.all_tasks()
+        for task in all_tasks:
+            print('cancel task')
+            print(task.cancel())
+        loop.stop()
+        loop.run_forever()  #很关键，不加会报错
+    finally:
+        loop.close()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;底层方法call_sooncall_latercall_at&quot;&gt;底层方法call_soon,call_later,call_at&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import asyncio
+
+#可以给asyncio直接传递函数（不是async函数）
+def callback(sleep_time):
+    print('sleep {} success'.format(sleep_time))
+
+def stoploop(loop):
+    loop.stop()
+
+if __name__ == &quot;__main__&quot;:
+    loop = asyncio.get_event_loop()
+    loop.call_soon(callback, 2)  #即刻执行，在队列里等到下一个循环立马执行
+    loop.call_soon(stoploop, loop)
+
+    loop.call_later(2,callback,2)  #在2秒钟之后运行callback
+    loop.call_later(1,callback,1)
+    loop.call_later(3,callback,3)
+
+    now = loop.time()  #loop的time
+    loop.call_at(now+2, callback, 2)
+    loop.call_at(now+3, callback, 3)
+
+    loop.call_soon_threadsafe()  #变量线程安全
+
+    loop.run_forever()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;asynciothreadpollexecutor&quot;&gt;asyncio+ThreadPollExecutor&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#使用多线程:在协程中继承阻塞io(某些库就是阻塞的)
+import asyncio
+import socket
+from urllib.parse import urlparse
+from concurrent.futures import ThreadPoolExecutor
+
+def get_url(url):
+    # get html by socket
+    url = urlparse(url)
+    host = url.netloc
+    path = url.path
+    if path == '':
+        path = '/'
+    
+    #connect socket
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((host, 80))
+    client.send(&quot;GET {} HTTP/1.1\r\nHOST:{}\r\nConnection:close\r\n\r\n&quot;.format(path, host).encode('utf8'))
+    
+    data = b''
+    while True:
+        d = client.recv(1024)
+        if d:
+            data += d
+        else:
+            break
+    data = data.decode('utf8')
+    htmldata = data.split('\r\n\r\n')[1]
+    print(htmldata)
+
+if __name__ == &quot;__main__&quot;:
+    loop = asyncio.get_event_loop()
+    executor = ThreadPoolExecutor(3)
+    tasks = []
+    for i in range(20):
+        #参数1.线程池 2.函数名 3.函数参数
+       task = loop.run_in_executor(executor, get_url, 'http://www.baidu.com/{}'.format(i))  #将某个阻塞Io函数放入executor中运行
+       tasks.append(task)
+    loop.run_until_complete(asyncio.wait(tasks))
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;同步的方式实现异步http模拟请&quot;&gt;同步的方式实现异步http模拟请&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#asyncio没有提供http协议的接口；aiohttp异步的requests，可以启动服务器，可以爬虫
+#同步的方式实现异步http模拟请求
+import asyncio
+import socket
+from urllib.parse import urlparse
+
+async def get_url(url):
+    # get html by socket
+    url = urlparse(url)
+    host = url.netloc
+    path = url.path
+    if path == '':
+        path = '/'
+    
+    #connect socket
+    reader, writer = await asyncio.open_connection(host, 80)  #线程
+    writer.write(&quot;GET {} HTTP/1.1\r\nHOST:{}\r\nConnection:close\r\n\r\n&quot;.format(path, host).encode('utf8'))
+    
+    all_lines = []
+    async for raw_line in reader:  #异步化，因为内部有yield from语法
+        data = raw_line.decode('utf8')
+        all_lines.append(data)
+
+    html = '\n'.join(all_lines)
+    return html
+
+if __name__ == '__main__':
+    loop = asyncio.get_event_loop()
+    tasks = []
+    for i in range(20):
+        url = 'http://www.baidu.com/{}'.format(i)
+        tasks.append(asyncio.ensure_future(get_url(url)))
+    loop.run_until_complete(asyncio.wait(tasks))
+    for task in tasks:
+        print(task.result()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;asyncio同步和通信&quot;&gt;asyncio同步和通信&lt;/h4&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;import asyncio
+from asyncio import Lock,Queue
+queue = Queue()
+await queue.get()
+queue1 = [] #普通的全局变量也能用，但是不能控制Size流量
+
+cache = {}
+lock = Lock()
+
+async def get_stuff(url):
+    async with lock:
+        # await lock.acquire()  #async 
+        if url in cache:
+            return cache[url]
+        stuff = await aiohttp.request('get', url)
+        cache[url] = stuff
+        return stuff
+        # lock.release()  #不需要await
+
+async def parse_stuff():
+    stuff = await get_stuff()
+
+async def use_stuff():
+    stuff = await get_stuff()
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;aiohttp实现高并发爬虫&quot;&gt;aiohttp实现高并发爬虫&lt;/h3&gt;
+
+&lt;h4 id=&quot;aiohttp&quot;&gt;aiohttp&lt;/h4&gt;
+&lt;p&gt;HTTP client/server framework for asyncio&lt;/p&gt;
+
+&lt;p&gt;server可以搭建http服务器&lt;/p&gt;
+
+&lt;h3 id=&quot;client爬虫&quot;&gt;client爬虫&lt;/h3&gt;
+&lt;p&gt;爬取Url
+抽取内部Url
+过滤
+反爬
+分布式&lt;/p&gt;
+
+&lt;h4 id=&quot;sanic&quot;&gt;sanic&lt;/h4&gt;
+&lt;p&gt;号称可以媲美go性能的高并发web服务器&lt;/p&gt;
+</description>
+        <pubDate>Sat, 12 Jan 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/%E6%8A%80%E6%9C%AF/2019/01/12/threading-python.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2019/01/12/threading-python.html</guid>
+        
+        <category>python,thread</category>
+        
+        
+        <category>技术</category>
+        
+      </item>
+    
+      <item>
         <title>chmod命令</title>
         <description>&lt;h2 id=&quot;chmod-命令&quot;&gt;chmod 命令&lt;/h2&gt;
 
@@ -1342,500 +2589,6 @@ others= --- = 0+0+0 = 0
         
         
         <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>Todolist 应用</title>
-        <description>&lt;h1 id=&quot;todolist&quot;&gt;TodoList&lt;/h1&gt;
-
-&lt;h2 id=&quot;介绍&quot;&gt;介绍&lt;/h2&gt;
-&lt;p&gt;TodoList是一个便捷的事项管理应用,它帮助我们管理待办任务,梳理工作思路,来提高工作效率&lt;/p&gt;
-
-&lt;p&gt;TodoList包含账户注册登录等功能,来方便记录管理你的任务事项&lt;/p&gt;
-
-&lt;h2 id=&quot;introduce&quot;&gt;Introduce&lt;/h2&gt;
-&lt;p&gt;Todolist,a quick and convenient management application for items that are about to be done,which helps us manage the to-do tasks, combine working train of thought and improve work efficency.&lt;/p&gt;
-
-&lt;p&gt;Todolist consists of kinds of functions,including the registration and login for an account,so that it can make your tasks record and items management much easier.&lt;/p&gt;
-
-&lt;h2 id=&quot;项目地址&quot;&gt;项目地址&lt;/h2&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;https://github.com/fankcoder/django-todolist
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;##安装&amp;amp;运行
-在用户目录下执行,将代码clone到本地&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;git clone https://github.com/fankcoder/django-todolist.git
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;所需环境,请看 django-todolist/doc/requirements.txt&lt;/p&gt;
-
-&lt;p&gt;注:为了部署方便应用默认采用了sqlite3数据库,需更换为MySQL数据库,请更改settings.py如下代码&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;'''
-#use mysql databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todolist',
-        'USER': 'root',    #replace your mysql username
-        'PASSWORD': 'xxxxx',  #replace your mysql password
-        'HOST': '127.0.0.1',
-        'PROT': '3306',
-    }
-}
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;为,请注意替换为自己的MySQL用户密码.&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;#use mysql databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'todolist',
-        'USER': 'root',    #replace your mysql username
-        'PASSWORD': 'xxxxx',  #replace your mysql password
-        'HOST': '127.0.0.1',
-        'PROT': '3306',
-    }
-}
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-'''
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;##安装&amp;amp;配置完成后&lt;/p&gt;
-
-&lt;p&gt;建立本地数据库,在django-todo/todo/目录下&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python manage.py makemigrations
-python manage.py migrate
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;运行&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;python manage.py runserver 127.0.0.1:8001
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;如果没有报错,打开浏览器并访问&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;127.0.0.1:8001
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;即可看到应用已经部署成功!&lt;/p&gt;
-
-&lt;p&gt;##目录说明
-doc 为文档目录 &lt;br /&gt;
-todolist 为应用目录&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;django-todo/
-├── doc
-│   ├── index.png
-│   ├── login.png
-│   ├── register.png
-│   ├── user_done.png
-│   └── user_index.png
-├── README.md
-├── requirements.txt
-├── requirements.txt~
-└── todo
-    ├── db.sqlite3
-    ├── manage.py
-    ├── test.py
-    ├── test.py~
-    ├── todo
-    │   ├── __init__.py
-    │   ├── __init__.pyc
-    │   ├── settings.py
-    │   ├── settings.pyc
-    │   ├── urls.py
-    │   ├── urls.pyc
-    │   ├── wsgi.py
-    │   └── wsgi.pyc
-    └── todolist
-        ├── admin.py
-        ├── admin.pyc
-        ├── forms.py
-        ├── forms.pyc
-        ├── __init__.py
-        ├── __init__.pyc
-        ├── models.py
-        ├── models.pyc
-        ├── static
-        │   ├── css
-        │   │   ├── create_sytle.css
-        │   │   └── style.css
-        │   └── js
-        ├── templates
-        │   ├── complete.html
-        │   ├── create.html
-        │   ├── index.html
-        │   ├── login.html
-        │   ├── nav.html
-        │   └── register.html
-        ├── tests.py
-        ├── views.py
-        └── views.pyc
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-</description>
-        <pubDate>Tue, 08 Mar 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/03/08/todolist-django-python.html</link>
-        <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/03/08/todolist-django-python.html</guid>
-        
-        <category>python,django</category>
-        
-        
-        <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>Linux 常用资源</title>
-        <description>&lt;h2 id=&quot;常用指令&quot;&gt;常用指令&lt;/h2&gt;
-
-&lt;h3 id=&quot;遍历创建&quot;&gt;遍历创建&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mkdir -p 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;当前目录&quot;&gt;当前目录&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;pwd 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;上次目录&quot;&gt;上次目录&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd -
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;删除目录--f强制&quot;&gt;删除目录 -f强制&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rm -rf
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;复制目录--a与源文件一模一样&quot;&gt;复制目录 -a与源文件一模一样&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cp -r
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;剪切改名&quot;&gt;剪切/改名&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;find搜索&quot;&gt;find搜索&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;find /root -iname install.log  #-i不区分大小写
-find /root -user root  #按照所有者搜索
-find /var/log/ -mtime +10 #查找10天前修改的文件
--10 10天内修改文件
-10 10天当天修改的文件
-+10 10天前修改的文件
-atime 文件访问时间
-ctime 改变文件属性
-mtime 修改文件内容
-
-find . -size 25k
-+25k 大于25k
--小于25k
-M大写
-
-find /etc -size +20k -a -size -50k
--a and 和
--o or 或
-
--exec ls -lh {} \;
-find /etc -size +20k -a -size -50k -exec ls -lh {} \;
-将第一个结果放入第二个在处理一遍
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;grep&quot;&gt;grep&lt;/h3&gt;
-&lt;p&gt;grep是包含匹配搜索文件内容,find是完全匹配搜索文件名&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;grep &quot;size&quot; anaconda-ks.cfg
--v 取返
--i 不分大小写
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;帮助命令&quot;&gt;帮助命令&lt;/h3&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;	man -f 查看级别相当于whatis
-	whereis passwd
-	ls --help选项帮助命令
-	info 命令
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;常用压缩格式-zip-gz-bz2-targz-tarbz2&quot;&gt;常用压缩格式 .zip .gz .bz2 .tar.gz .tar.bz2&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;zip 压缩文件名 源文件 #压缩文件
-zip -r 压缩文件名 源文件 #压缩目录
-
-unzip 压缩文件 #解压缩
-
-gzip 源文件 #压缩为.gz的文件,源文件会消失
-gzip -c 源文件 &amp;gt; 压缩文件 #源文件保留
-gzip -r 目录 #压缩目录下所有子文件,不压缩目录
-gzip -d 压缩文件 #解压
-gunzip 压缩文件 #解压
-
-打包tar
-tar -cvf 打包文件名 源文件
-tar -xvf 解打包
-tar -zcvf 压缩包名.tar.gz 源文件
-tar -zxvf 压缩包名.tar.gz #解压缩
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;shutdown-选项-时间&quot;&gt;shutdown [选项] 时间&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;-c 取消前一个关机命令
--h 关机
--r 重启
-rboot  重启
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h3 id=&quot;mount--a-自动挂载etcfatab&quot;&gt;mount -a 自动挂载/etc/fatab&lt;/h3&gt;
-
-&lt;h3 id=&quot;w&quot;&gt;w&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;查看用户登录信息 who类似 ### last 
-所有用户登录信息 /var/log/wtmp ### lastlog 
-最后登录时间
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-</description>
-        <pubDate>Fri, 04 Mar 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/%E5%A4%87%E5%BF%98/2016/03/04/general-linux-resources.html</link>
-        <guid isPermaLink="true">http://localhost:4000/%E5%A4%87%E5%BF%98/2016/03/04/general-linux-resources.html</guid>
-        
-        <category>Linux</category>
-        
-        
-        <category>备忘</category>
-        
-      </item>
-    
-      <item>
-        <title>神器收藏</title>
-        <description>&lt;h2 id=&quot;编辑器--ide&quot;&gt;编辑器 &amp;amp; IDE&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;VIM
-    &lt;ul&gt;
-      &lt;li&gt;gmarik/vundle&lt;/li&gt;
-      &lt;li&gt;rizzatti/funcoo.vim&lt;/li&gt;
-      &lt;li&gt;https://github.com/scrooloose/nerdtree.git&lt;/li&gt;
-      &lt;li&gt;Modeliner&lt;/li&gt;
-      &lt;li&gt;DrawIt&lt;/li&gt;
-      &lt;li&gt;vim-scripts/Align&lt;/li&gt;
-      &lt;li&gt;https://github.com/Lokaltog/vim-powerline.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/vim-scripts/taglist.vim.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/scrooloose/nerdcommenter.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/kien/ctrlp.vim.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/nelstrom/vim-visual-star-search.git&lt;/li&gt;
-      &lt;li&gt;junegunn/goyo.vim&lt;/li&gt;
-      &lt;li&gt;https://github.com/vim-scripts/Visual-Mark.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/mattn/emmet-vim.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/Shougo/neocomplcache.vim.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/terryma/vim-multiple-cursors.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/ervandew/supertab.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/sjl/vitality.vim.git&lt;/li&gt;
-      &lt;li&gt;https://github.com/Lokaltog/vim-easymotion.git&lt;/li&gt;
-      &lt;li&gt;rking/ag.vim&lt;/li&gt;
-      &lt;li&gt;Valloric/YouCompleteMe&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Sublime Text
-    &lt;ul&gt;
-      &lt;li&gt;Abacus&lt;/li&gt;
-      &lt;li&gt;ASCII Decorator&lt;/li&gt;
-      &lt;li&gt;BracketHighlighter&lt;/li&gt;
-      &lt;li&gt;DocBlockr&lt;/li&gt;
-      &lt;li&gt;Emmet&lt;/li&gt;
-      &lt;li&gt;FileDiffs&lt;/li&gt;
-      &lt;li&gt;Goto-CSS-Declaration&lt;/li&gt;
-      &lt;li&gt;Laravel 4 Facades&lt;/li&gt;
-      &lt;li&gt;Laravel Blade Highlighter&lt;/li&gt;
-      &lt;li&gt;Live CSS&lt;/li&gt;
-      &lt;li&gt;Open URL&lt;/li&gt;
-      &lt;li&gt;Package Control&lt;/li&gt;
-      &lt;li&gt;Theme-Soda&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;PhpStorm&lt;/li&gt;
-  &lt;li&gt;Intellij IDEA&lt;/li&gt;
-  &lt;li&gt;PyCharm&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;浏览器&quot;&gt;浏览器&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Chrome
-    &lt;ul&gt;
-      &lt;li&gt;Visual Event&lt;/li&gt;
-      &lt;li&gt;Web Developer&lt;/li&gt;
-      &lt;li&gt;XPather&lt;/li&gt;
-      &lt;li&gt;Tampermonkey&lt;/li&gt;
-      &lt;li&gt;Pesticide for Chrome&lt;/li&gt;
-      &lt;li&gt;EditThisCookie&lt;/li&gt;
-      &lt;li&gt;Clockwork&lt;/li&gt;
-      &lt;li&gt;AlloyDesigner&lt;/li&gt;
-      &lt;li&gt;jQuery Audit&lt;/li&gt;
-      &lt;li&gt;JSONView&lt;/li&gt;
-      &lt;li&gt;Octosplit&lt;/li&gt;
-      &lt;li&gt;Octotree&lt;/li&gt;
-      &lt;li&gt;Print GitHub markdown: GitPrint.com&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;文档--代码片段管理&quot;&gt;文档 &amp;amp; 代码片段管理&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CodeBox&lt;/li&gt;
-  &lt;li&gt;Dash&lt;/li&gt;
-  &lt;li&gt;iDocument Plus&lt;/li&gt;
-  &lt;li&gt;Sparkbox&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;调试工具--代码生成&quot;&gt;调试工具 &amp;amp; 代码生成&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CodeRunner&lt;/li&gt;
-  &lt;li&gt;PAW&lt;/li&gt;
-  &lt;li&gt;PaintCode&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;窗口管理&quot;&gt;窗口管理&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Slate&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;取色--度量&quot;&gt;取色 &amp;amp; 度量&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Sip&lt;/li&gt;
-  &lt;li&gt;ColorSchemer Studio&lt;/li&gt;
-  &lt;li&gt;xScope&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;数据库管理&quot;&gt;数据库管理&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;Sequel Pro&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;屏幕录制--演示&quot;&gt;屏幕录制 &amp;amp; 演示&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;ScreenFlow&lt;/li&gt;
-  &lt;li&gt;Zoom It&lt;/li&gt;
-  &lt;li&gt;GrabIt&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;图像处理&quot;&gt;图像处理&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Adobe Photoshop
-    &lt;ul&gt;
-      &lt;li&gt;PNG Hat&lt;/li&gt;
-      &lt;li&gt;CSS Hat&lt;/li&gt;
-      &lt;li&gt;Renamy&lt;/li&gt;
-      &lt;li&gt;Random User Generator&lt;/li&gt;
-      &lt;li&gt;Ink&lt;/li&gt;
-      &lt;li&gt;GuideGuide&lt;/li&gt;
-      &lt;li&gt;Griddify&lt;/li&gt;
-      &lt;li&gt;FlatIcon&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Slicy&lt;/li&gt;
-  &lt;li&gt;iconKit&lt;/li&gt;
-  &lt;li&gt;LilyView&lt;/li&gt;
-  &lt;li&gt;Mark Man&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;版本管理--比对&quot;&gt;版本管理 &amp;amp; 比对&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Tower&lt;/li&gt;
-  &lt;li&gt;Github&lt;/li&gt;
-  &lt;li&gt;Kaleidoscope&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;脑图--任务&quot;&gt;脑图 &amp;amp; 任务&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;OmniPlan&lt;/li&gt;
-  &lt;li&gt;OmniGraffle&lt;/li&gt;
-  &lt;li&gt;MindNode Pro&lt;/li&gt;
-  &lt;li&gt;Things&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;虚拟机--vnc&quot;&gt;虚拟机 &amp;amp; VNC&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;VirtualBox&lt;/li&gt;
-  &lt;li&gt;VMWare Fusion&lt;/li&gt;
-  &lt;li&gt;Jump Desktop&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;效率&quot;&gt;效率&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Alfred&lt;/li&gt;
-  &lt;li&gt;PopClip&lt;/li&gt;
-  &lt;li&gt;Soulver&lt;/li&gt;
-  &lt;li&gt;Caffeine&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;其他&quot;&gt;其他&lt;/h4&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Sdef Editor&lt;/li&gt;
-  &lt;li&gt;HopperDisassembler&lt;/li&gt;
-  &lt;li&gt;Leaf&lt;/li&gt;
-  &lt;li&gt;iTerm&lt;/li&gt;
-  &lt;li&gt;ForkLift&lt;/li&gt;
-  &lt;li&gt;GoAgentX&lt;/li&gt;
-  &lt;li&gt;MPlayerX&lt;/li&gt;
-  &lt;li&gt;GIFBrewery&lt;/li&gt;
-  &lt;li&gt;Fritzing&lt;/li&gt;
-  &lt;li&gt;Debookee&lt;/li&gt;
-  &lt;li&gt;BetterZip&lt;/li&gt;
-  &lt;li&gt;Cactus Beta&lt;/li&gt;
-  &lt;li&gt;Bartender&lt;/li&gt;
-  &lt;li&gt;AppCleaner&lt;/li&gt;
-  &lt;li&gt;Adobe Effects&lt;/li&gt;
-  &lt;li&gt;Adobe Illustrator&lt;/li&gt;
-  &lt;li&gt;Adobe Reader&lt;/li&gt;
-  &lt;li&gt;Airmail&lt;/li&gt;
-  &lt;li&gt;The Unachiver&lt;/li&gt;
-  &lt;li&gt;Charles&lt;/li&gt;
-  &lt;li&gt;Macaw&lt;/li&gt;
-  &lt;li&gt;Poedit&lt;/li&gt;
-  &lt;li&gt;MacDown&lt;/li&gt;
-  &lt;li&gt;Vox&lt;/li&gt;
-  &lt;li&gt;TotalFinder&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Thu, 28 Jan 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/%E5%B7%A5%E5%85%B7/2016/01/28/good-tools.html</link>
-        <guid isPermaLink="true">http://localhost:4000/%E5%B7%A5%E5%85%B7/2016/01/28/good-tools.html</guid>
-        
-        <category>神器</category>
-        
-        
-        <category>工具</category>
         
       </item>
     
