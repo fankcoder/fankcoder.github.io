@@ -36,7 +36,7 @@ description: life, time
 
 #### 想清楚再做。
 
-这点我深有感悟，我信奉 Think twict, Code onece.
+这点我深有感悟，我信奉 Think twice, Code once.
 
 #### 关注长期利益规划。
 

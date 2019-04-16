@@ -6,8 +6,8 @@
 </description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 12 Apr 2019 10:50:59 +0800</pubDate>
-    <lastBuildDate>Fri, 12 Apr 2019 10:50:59 +0800</lastBuildDate>
+    <pubDate>Mon, 15 Apr 2019 17:24:21 +0800</pubDate>
+    <lastBuildDate>Mon, 15 Apr 2019 17:24:21 +0800</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
@@ -2447,6 +2447,86 @@ async def use_stuff():
       </item>
     
       <item>
+        <title>时间和人生感悟</title>
+        <description>&lt;h1 id=&quot;投资自己的时间&quot;&gt;投资自己的时间&lt;/h1&gt;
+
+&lt;h3 id=&quot;花时间学习基础知识花时间读文档&quot;&gt;花时间学习基础知识，花时间读文档。&lt;/h3&gt;
+
+&lt;p&gt;系统地学习一门技术是非常关键的，所以这个时间是值得投资的。&lt;/p&gt;
+
+&lt;h3 id=&quot;花时间在解放自己生产力的事上&quot;&gt;花时间在解放自己生产力的事上。&lt;/h3&gt;
+
+&lt;p&gt;在自动化、可配置、可重用、可扩展上要多花时间。花时间在解放自己的事上是最有意义的了。&lt;/p&gt;
+
+&lt;h4 id=&quot;花时间在让自己成长的事上&quot;&gt;花时间在让自己成长的事上。&lt;/h4&gt;
+
+&lt;p&gt;在行业内的成长才是真正的成长。所以，把时间花在能让自己成长，能让自己有更强的竞争力，能让自己有更大的视野，能让自己有更多可能性的事情上。&lt;/p&gt;
+
+&lt;h4 id=&quot;花时间在建立高效的环境上&quot;&gt;花时间在建立高效的环境上&lt;/h4&gt;
+
+&lt;h1 id=&quot;规划自己的时间&quot;&gt;规划自己的时间&lt;/h1&gt;
+
+&lt;h4 id=&quot;定义好优先级&quot;&gt;定义好优先级。&lt;/h4&gt;
+
+&lt;p&gt;无论写不写出来，一定都要有一个自己的 to-do list。&lt;/p&gt;
+
+&lt;h4 id=&quot;最短作业优先&quot;&gt;最短作业优先。&lt;/h4&gt;
+
+&lt;p&gt;对于相同优先级的事，推荐“最短作业优先”的调度算法。理由是，看到任何的数据在减少，对于自己也好，对于老板也好。&lt;/p&gt;
+
+&lt;h4 id=&quot;想清楚再做&quot;&gt;想清楚再做。&lt;/h4&gt;
+
+&lt;p&gt;这点我深有感悟，我信奉 Think twice, Code once.&lt;/p&gt;
+
+&lt;h4 id=&quot;关注长期利益规划&quot;&gt;关注长期利益规划。&lt;/h4&gt;
+
+&lt;p&gt;要多关注长远可以节省多少时间，而不是当前会花费多少时间。长期成本会比短期成本大得多。&lt;/p&gt;
+
+&lt;p&gt;所以，宁可在短期延期，也不要透支未来。这里的逻辑是，工作上的事你永远也做不完的，长痛不如短痛。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;总结：你要学会规划自己的行动计划，不是短期的，而是一个中长期的。个人建议是按季度来规划，这个季度做什么，达到什么目标，一年往前走四步，而不是只考虑眼下。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;用好自己的时间&quot;&gt;用好自己的时间&lt;/h1&gt;
+
+&lt;h4 id=&quot;将军赶路不追小兔&quot;&gt;将军赶路不追小兔。&lt;/h4&gt;
+&lt;p&gt;这个世界有太多的东西会让我们分心和跑偏。能专注地把时间投入到一个有价值的事上是非常重要的。&lt;/p&gt;
+
+&lt;p&gt;不要让别人来影响自己的心情，心情被影响了，你一下就会什么都不想干了。做自己心情的主人，不要让别人 hack 了你的心情。&lt;/p&gt;
+
+&lt;p&gt;不与不如自己的人争论，也不要尝试花时间去叫醒那些装睡的人，这些都是非常浪费时间的事。多花时间在有产出的事上，少花时间在说服别人的事上。&lt;/p&gt;
+
+&lt;h4 id=&quot;形成习惯&quot;&gt;形成习惯。&lt;/h4&gt;
+
+&lt;p&gt;养成一个好习惯通常需要 30 天左右的时间，尤其在最初的几天最为重要。&lt;/p&gt;
+
+&lt;h4 id=&quot;形成正反馈&quot;&gt;形成正反馈。&lt;/h4&gt;
+
+&lt;p&gt;也就是成就感，如果在学习过程中不断地有正反馈，就更利于我们坚持下去。比如，解决自己和他人的痛点，这样你会收获别人的赞扬和鼓励。&lt;/p&gt;
+
+&lt;h4 id=&quot;反思和举一反三&quot;&gt;反思和举一反三。&lt;/h4&gt;
+&lt;p&gt;可以尝试每周末花上点时间思考一下，本周做了哪些事儿？时间安排是否合理？还有哪些可以优化提高的地方？有点儿类似于我们常说的“复盘”。&lt;/p&gt;
+
+&lt;h1 id=&quot;其他一些摘录&quot;&gt;其他一些摘录&lt;/h1&gt;
+
+&lt;h2 id=&quot;人最宝贵的财富就是时间把时间用在刀刃上必将让你的人生有更多收获&quot;&gt;人最宝贵的财富就是时间，把时间用在刀刃上，必将让你的人生有更多收获。&lt;/h2&gt;
+
+&lt;h2 id=&quot;天赋决定了你能达到的上限努力程度决定了你能达到的下限-以绝大多数人的努力程度之低远远没有达到要去拼天赋的地步&quot;&gt;天赋决定了你能达到的上限，努力程度决定了你能达到的下限。 以绝大多数人的努力程度之低，远远没有达到要去拼天赋的地步。&lt;/h2&gt;
+
+</description>
+        <pubDate>Tue, 01 Jan 2019 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/%E7%94%9F%E6%B4%BB/2019/01/01/life-time-manage.html</link>
+        <guid isPermaLink="true">http://localhost:4000/%E7%94%9F%E6%B4%BB/2019/01/01/life-time-manage.html</guid>
+        
+        <category>life,</category>
+        
+        <category>time</category>
+        
+        
+        <category>生活</category>
+        
+      </item>
+    
+      <item>
         <title>chmod命令</title>
         <description>&lt;h2 id=&quot;chmod-命令&quot;&gt;chmod 命令&lt;/h2&gt;
 
@@ -2519,73 +2599,6 @@ others= --- = 0+0+0 = 0
         <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/11/01/chmod.html</guid>
         
         <category>chmod</category>
-        
-        
-        <category>技术</category>
-        
-      </item>
-    
-      <item>
-        <title>screen工具</title>
-        <description>&lt;h2 id=&quot;screen-多窗口工具&quot;&gt;screen 多窗口工具&lt;/h2&gt;
-&lt;p&gt;远程到服务器，通常情况下我们会为每一个长时间任务开一个远程终端窗口，操作下载东西或者Print十几万行数据，等待，是一件让人非常痛苦的事情，而且在此期间不能关掉窗口或者断开连接，否则这个任务就会被杀掉了，screen把我们从痛苦中解救出来。&lt;/p&gt;
-
-&lt;p&gt;screen是一个可以在多个进程之间多路复用一个物理终端的窗口管理器。screen中有会话的概念，用户可以在一个screen会话中创建多个screen窗口，在每一个screen窗口中就像操作一个真实的telnet/SSH连接窗口那样。当断开或关闭终端时，只要不杀死screen的进程，待重新连接后任能继续断开前的操作。&lt;/p&gt;
-
-&lt;h2 id=&quot;screen命令&quot;&gt;screen命令&lt;/h2&gt;
-&lt;p&gt;查看会话：&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;### screen -ls
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;There is a screen on:
-19393.test      (Detached)
-1 Socket in /var/run/screen/S-root.&lt;/p&gt;
-
-&lt;p&gt;选择会话&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;### screen -r test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;### screen -r 19393
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;创建一个新会话&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;### screen -dmS test
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;快捷键&quot;&gt;快捷键&lt;/h2&gt;
-
-&lt;p&gt;C-a d 暂时断开screen会话&lt;/p&gt;
-
-&lt;p&gt;C-a ?	显示所有键绑定信息&lt;/p&gt;
-
-&lt;p&gt;C-a w	显示所有窗口列表&lt;/p&gt;
-
-&lt;p&gt;C-a C-a	切换到之前显示的窗口&lt;/p&gt;
-
-&lt;p&gt;C-a c	创建一个新的运行shell的窗口并切换到该窗口&lt;/p&gt;
-
-&lt;p&gt;C-a n	切换到下一个窗口&lt;/p&gt;
-
-&lt;p&gt;C-a p	切换到前一个窗口(与C-a n相对)&lt;/p&gt;
-
-&lt;p&gt;C-a 0..9	切换到窗口0..9&lt;/p&gt;
-
-&lt;p&gt;C-a a	发送 C-a到当前窗口&lt;/p&gt;
-
-&lt;p&gt;C-a k	杀掉当前窗口&lt;/p&gt;
-
-&lt;p&gt;C-a [	进入拷贝/回滚模式&lt;/p&gt;
-</description>
-        <pubDate>Thu, 10 Mar 2016 00:00:00 +0800</pubDate>
-        <link>http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/03/10/screen-linux.html</link>
-        <guid isPermaLink="true">http://localhost:4000/%E6%8A%80%E6%9C%AF/2016/03/10/screen-linux.html</guid>
-        
-        <category>screen</category>
         
         
         <category>技术</category>
