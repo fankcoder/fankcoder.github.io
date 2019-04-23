@@ -185,73 +185,99 @@ description:
 
     Symbol 使用 Symbol() 创建的，调用带有一个可选的描述。
 
+    let id1 = Symbol("id");
+    let id2 = Symbol("id");
+    alert(id1 == id2); // false
+
     Symbol 总是不同的值，即使它们有相同的名称。如果我们希望同名 Symbol 相等，那么我们应该使用全局注册表：Symbol.for(key) 返回（如果需要的话创建）一个以 key 作为名称的全局 Symbol。Symbol.for 的多次调用完全返回相同的 Symbol。
-
-### 字符串截取
-    substr(start [, length ])
-    返回一个从指定位置开始的指定长度的子字符串
-    substring(start, end)
-    返回位于 String 对象中指定位置的子字符串。
-
-
-### 页面跳转
-    window.navigate("top.jsp");
-    window.history.back(-1);
-    window.location.href="login.jsp?backurl="+window.location.href; 
-    self.location='top.htm';
-    top.location='xx.jsp';
     
-### 加载完成
-    window.onload 
-    必须等页面内包括图片的所有元素加载完成后才能执行。
-    不能同时编写多个，只执行一个
-    $(document).ready()
-    是DOM结构绘制完毕后就可以执行
-    可以编写多个
-    简写$(function(){});
-    $(window).load()等同与window.onload
+### 方法中的 “this”
+    对象方法需要访问对象中的存储的信息来完成其工作。为了访问该对象，方法中可以使用 this 关键字。
+    let user = {
+      name: "John",
+      age: 30,
+      sayHi() {
+        alert(this.name);
+      }
+    };
+    user.sayHi(); // John
+    this 的值就是在点之前的这个对象，即调用该方法的对象
 
-### 刷新页面
-    history.go(0) 
-    location.reload() 
-    location=location 
-    location.assign(location) 
-    document.execCommand('Refresh') 
-    window.navigate(location) 
-    location.replace(location) 
-    document.URL=location.href 
+### 构造函数
+    构造函数在技术上是常规函数。不过有两个约定：
+    他们首先用大写字母命名。
+    它们只能用 "new" 操作符来执行。这样的调用意味着在开始时创建空的 this，并在最后返回填充的对象。
 
-### json转化和解析
+    例如：
+    function User(name) {
+      this.name = name;
+      this.isAdmin = false;
+    }
+    let user = new User("Jack");
+    alert(user.name); // Jack
+    alert(user.isAdmin); // false
 
-    JSON.parse("{a:'111',b:'ccc'}");  //解析
-    eval("("+"{{ cpu_data }}"+")"); //解析
+    当一个函数作为 new User(...)执行时，它执行以下步骤：
+    一个新的空对象被创建并分配给 this。
+    函数体执行。通常它会修改 this，为其添加新的属性。返回 this 的值。
 
-### 时间转换
+### 字符串
+    字符串可以包含在单引号、双引号或反引号中.
+    单引号和双引号本质上是一样的。但是，反引号允许我们将任何表达式嵌入到字符串中，包括函数调用.
+    反引号的另一个优点是它们允许字符串跨行
 
-    var day1 = parseInt(new Date().valueOf()/1000); //获得当前时间时间戳
-    day2 = new Date(day1*1000);
-    alert(day2.getFullYear()+"-"+(day2.getMonth()+1)+"-"+day2.getDate()+" "+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds())
-    d = new Date();
-    s = d.getFullYear() + "-";
-    s += ("0"+(d.getMonth()+1)).slice(-2) + "-";
-    s += ("0"+d.getDate()).slice(-2) + " ";
-    s += ("0"+d.getHours()).slice(-2) + ":";
-    s += ("0"+d.getMinutes()).slice(-2) + ":";
-    s += ("0"+d.getSeconds()).slice(-2) + ".";
-    s += ("00"+d.getMilliseconds()).slice(-3);
+    alert( `My\n`.length );   //length 属性有字符串长度
 
-### URI编码转换
+    let str = `Hello`;
+    alert( str[1000] ); // undefined
+    alert( str.charAt(1000) ); // '' (an empty string)
 
-    var a="':'";
-    en = encodeURI(a);    //编码
-    a = decodeURI(en);    //解码
+### 数组
+    let arr = new Array();
+    let arr = [];
 
-### HTML编码转换
+    push 在末端添加一个元素.pop 从末端取出一个元素.
 
-    function htmlEncode(value){
-      return $('<div/>').text(value).html();
+    shift取出数组的第一个元素并返回它.unshift在数组的前端添加元素
+
+    性能push/pop 方法运行的比较快，而 shift/unshift 比较慢。
+
+    遍历
+    let fruits = ["Apple", "Orange", "Plum"];
+
+    // 迭代数组元素
+    for (let fruit of fruits) {
+      alert( fruit );
     }
 
-    function htmlDecode(value){
-      return $('<div/>').html(value).text();
+    let arr = ["Apple", "Orange", "Pear"];
+
+    for (let i = 0; i < arr.length; i++) {
+      alert( arr[i] );
     }
+
+    alert( arr.length );
+
+#### delete
+    元素被删除，但数组长度不变
+
+#### splice
+    arr.splice(index[, deleteCount, elem1, ..., elemN])
+    索引，删除个数，替换。并且返回删除的元素
+
+#### slice
+    arr.slice(start, end)
+    它从所有元素的开始索引 "start" 复制到 "end" (不包括 "end") 返回一个新的数组。
+
+#### concat
+    arr.concat(arg1, arg2...)
+
+#### 查询数组
+    这些是在数组中查询某些内容的方法。
+
+    indexOf/lastIndexOf 和 includes
+    arr.indexOf、arr.lastIndexOf 和 arr.includes 方法与字符串操作具有相同的语法，只不过这里是对数组元素而不是字符进行操作：
+
+    arr.indexOf(item, from) 从索引 from 查询 item，如果找到返回索引，否则返回 -1。
+    arr.lastIndexOf(item, from) — 和上面相同，只是从尾部开始查询。
+    arr.includes(item, from) — 从索引 from 查询 item，如果找到则返回 true。
