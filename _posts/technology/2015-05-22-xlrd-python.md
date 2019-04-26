@@ -10,28 +10,18 @@ description:
 
 xlrd模块下载地址:
 
-https://pypi.python.org/pypi/xlrd
+    pip install xlrd
 
 xlwt模块下载地址:
 
-https://pypi.python.org/pypi/xlwt
+    pip install xlwt
 
-linux 安装命令 
-
-```
-python setup.py install
-```
-
-windos 安装命令
-
-```
-setup.py install
-```
  
 
 ### 使用方法
 
-#### xlrd
+### xlrd
+
 打开excel
 
 ```
@@ -39,13 +29,13 @@ import xlrd
 data = xlrd.open_workbook('demo.xls') #注意这里的workbook首字母是小写
 ```
 
-查看文件中包含sheet的名称
+##### 查看文件中包含sheet的名称
 
 ```
 data.sheet_names()
 ```
 
-得到第一个工作表，或者通过索引顺序 或 工作表名称
+#### 得到第一个工作表，或者通过索引顺序 或 工作表名称
 
 ```
 table = data.sheets()[0]
@@ -53,21 +43,21 @@ table = data.sheet_by_index(0)
 table = data.sheet_by_name(u'Sheet1')
 ```
 
-获取行数和列数
+##### 获取行数和列数
 
 ```
 nrows = table.nrows
 ncols = table.ncols
 ```
 
-获取整行和整列的值（数组）
+#### 获取整行和整列的值（数组）
 
 ```
 table.row_values(i)
 table.col_values(i)
 ```
 
-循环行,得到索引的列表
+#### 循环行,得到索引的列表
 
 ```
 for rownum in range(table.nrows):
@@ -89,28 +79,39 @@ table.cell(0,0) # 文本:u'lixiaoluo'
 table.cell(0,0).value # 'lixiaoluo'
 ```
 
-#### xlwt
+#### 特定单元格读取：
 
-新建一个excel文件
+    a) 获取单元格值：
+        sheet1.cell_value(1, 2)
+        sheet1.cell(1, 2).value
+        sheet1.row(1)[2].value 
+    b) 获取单元格类型：
+        sheet1.cell(1, 2).ctype
+        sheet1.cell_type(1, 2)
+        sheet1.row(1)[2].ctype
+
+### xlwt
+
+#### 新建一个excel文件
 
 ```
 import xlwt
 file = xlwt.Workbook() #注意这里的Workbook首字母是大写，无语吧
 ```
 
-新建一个sheet
+ #### 新建一个sheet
 
 ```
 table = file.add_sheet('sheet name')
 ```
 
-写入数据table.write(行,列,value)
+#### 写入数据table.write(行,列,value)
 
 ```
 table.write(0,0,'test')
 ```
 
-如果对一个单元格重复操作，会引发
+#### 如果对一个单元格重复操作，会引发
 
 ```
 returns error:
@@ -124,13 +125,13 @@ returns error:
 table = file.add_sheet('sheet name',cell_overwrite_ok=True)
 ```
 
-保存文件
+#### 保存文件
 
 ```
 file.save('demo.xls')
 ```
 
-另外，使用style
+#### 使用style
 
 ```
 style = xlwt.XFStyle() #初始化样式
