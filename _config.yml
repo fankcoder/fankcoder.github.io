@@ -37,7 +37,15 @@ sass:
 # gems:
 #   - jekyll-sitemap
 
-leancloud:
+# leancloud:
+#   enable: true
+#   app_id: hsC57we7N9PmKYMU6t3KyweJ-gzGzoHsz
+#   app_key: YQlAC7WFiUBJqltxoXXApj0O
+
+# gitalk
+gitalk:
   enable: true
-  app_id: hsC57we7N9PmKYMU6t3KyweJ-gzGzoHsz
-  app_key: YQlAC7WFiUBJqltxoXXApj0O
+  comment_gitalk_clientId: 5afeeb9b7e4bf73eb3af
+  comment_gitalk_clientSecret: 0783582b7c9ac41c3327051bfe88910590ddee06*
+  comment_gitalk_repo: fankcoder.github.io
+  github_username: fankcoder
