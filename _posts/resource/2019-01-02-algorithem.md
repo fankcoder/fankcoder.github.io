@@ -43,11 +43,37 @@ description:
 
 #### 遍历
 
+
+按照访问根元素(当前元素)的前后顺序，遍历方式可划分为如下几种：
+
+深度优先：先访问子节点，再访问父节点，最后访问第二个子节点。根据根节点相对于左右子节点的访问先后顺序又可细分为以下三种方式。
+前序(pre-order)：先根后左再右
+中序(in-order)：先左后根再右
+后序(post-order)：先左后右再根
+广度优先：先访问根节点，沿着树的宽度遍历子节点，直到所有节点均被访问为止。
+
+    # 创建二叉树
     class TreeNode:
         def __init__(self, val):
             self.val = val
             self.left, self.right = None, None
-
+            
+    # 将数组以BST形式插入二叉树
+    def create(arr):
+        root = None
+        for i in arr:
+            root = insert(root, i)
+        return root    
+        
+    def insert(root, num):
+        if not root: return TreeNode(num)
+        if num <= root.val:
+            root.left = insert(root.left, num)
+        else:
+            root.right = insert(root.right, num)
+        return root    
+            
+    # 遍历二叉树
     class Traversal(object):
         def __init__(self):
             self.traverse_path = list()
@@ -74,7 +100,22 @@ description:
 
 一颗二叉查找树(BST)是一颗二叉树，其中每个节点都含有一个可进行比较的键及相应的值，且每个节点的键都大于等于左子树中的任意节点的键，而小于右子树中的任意节点的键。
 
-使用中序遍历可得到有序数组，这是二叉查找树的又一个重要特征。
+* 使用中序遍历可得到有序数组（有小到大），这是二叉查找树的又一个重要特征。
+
+#### 重建二叉树
+1.确定root
+2.根据长度再确定root
+3.递归
+
+     28 def rebuild(pre, ino):
+     29     if len(pre) == 0: return
+     30     if len(pre) == 1:
+     31         return TreeNode(pre[0])
+     32     else:
+     33         root = TreeNode(pre[0])
+     34         root.left = rebuild(pre[1:ino.index(root.val)+1], ino[:ino.index(root.val)])
+     35         root.right = rebuild(pre[ino.index(root.val)+1:], ino[ino.index(root.val)+1:])
+     36     return root
 
 
 ## Queue
