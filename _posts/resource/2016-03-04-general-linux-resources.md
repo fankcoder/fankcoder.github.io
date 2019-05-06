@@ -107,3 +107,44 @@ grep是包含匹配搜索文件内容,find是完全匹配搜索文件名
 	最后登录时间
     
 
+#### 查看文件夹占用量
+
+    du -smh .
+    
+### 查看磁盘
+
+    sudo fdisk -l
+    
+#### 挂载ntfs
+
+    sudo mount -t ntfs-3g /dev/sdb1 /media/userom/
+
+#### rsync远程同步工具
+rsync是linux系统下的数据镜像备份工具。使用快速增量备份工具Remote Sync可以远程同步，支持本地复制，或者与其他SSH、rsync主机同步。
+
+    rsync -av 源目录 目标目录
+    
+
+#### 正则查找文件
+
+    sudo find ~/ -name “*.abc”
+
+#### 查看进程
+
+    ps aux | grep process
+
+#### 搜索加删除
+
+    find ./ -name "*.md~" -exec rm -rf {} \;
+    
+#### 定时任务
+
+    crontab
+    
+#### 后台管理工具
+
+    screen
+
+#### 查询所有文件及子目录文件个数
+
+    sudo find . -type f -print | wc -l    
