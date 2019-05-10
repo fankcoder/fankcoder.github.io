@@ -37,11 +37,11 @@ description:
 
 #### 获取所有非manager的员工emp_no
     
-    select e.emp_no from employees e left join dept_manager d on e.emp_no == d.emp_no where d.emp_no is Null;
+    select e.emp_no from employees e left join dept_manager d on e.emp_no = d.emp_no where d.emp_no is Null;
     
 #### 获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to_date='9999-01-01'。
     select e.emp_no, m.emp_no as manager_no from dept_emp e 
-    inner join dept_manager m on e.dept_no == m.dept_no
+    inner join dept_manager m on e.dept_no = m.dept_no
     where m.to_date='9999-01-01' and e.to_date='9999-01-01' and m.emp_no <> e.emp_no
     
 #### distinct
@@ -54,7 +54,7 @@ MySQL发现第1个匹配行后，停止为当前的行组合搜索更多的行�
     
 #### 查找employees表所有emp_no为奇数，且last_name不为Mary的员工信息，并按照hire_date逆序排列
     
-    select * from employees where emp_no %2 == 1 and last_name != 'Mary' order by hire_date desc;
+    select * from employees where emp_no %2 = 1 and last_name != 'Mary' order by hire_date desc;
     
 #### 查找当前薪水(to_date='9999-01-01')排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，不准使用order by
 
