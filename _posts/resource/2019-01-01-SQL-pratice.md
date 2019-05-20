@@ -168,6 +168,9 @@ MySQL发现第1个匹配行后，停止为当前的行组合搜索更多的行�
     
     显示
     SHOW INDEX FROM table_name
+
+    联合索引
+    ALTER TABLE `detect_res` ADD INDEX index_union_name_password(username,password)
     
 #### 创建视图
     视图是一种虚拟的表,是从数据库中一个或者多个表中导出的表。数据库只存放了视图的定义,而并没有存放视图中的数据,这些数据存放在原来的表中
