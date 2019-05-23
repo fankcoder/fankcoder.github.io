@@ -8,9 +8,12 @@ description:
 ---
 ## Django REST framework
 媒体文件序列化，文档生成，输入检测
+
 web browable API
+
 OAuth1,2   第三方登录
-serializaion 序列化ORMdata  类似django form
+
+serializaion 序列化ORMdata 类似django form
 
 #### 启用drf
 
@@ -26,23 +29,50 @@ serializaion 序列化ORMdata  类似django form
         url(r'^api-auth/', include('rest_framework.urls'))
     ]
 
-#### 
+#### 使用ModelSerializers
+    class SnippetSerializer(serializers.ModelSerializer):
+    #自定义序列化
+    category = CategorySerializer()
+    class Meta:
+        model = Snippet
+        fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
+        #将所有字段快速添加方法
+        fields = "__all__"
+        
+
+#### view层级关系
 
 GenericViewSet(viewset)  -drf
     GenericAPIView  -drf
         APIView  -drf
             View  -django
 
-mixin
+#### mixin
     CreateModelMixin
     ListModelMixin
     RetrieveModelMixin
     UpdateModelMixin
     DestroyModelMixin
     
-    
+#### 如何通过配置分页
+    drf源码-> settings -> default ->DEFAULT_PAGINATION_CLASS
+    REST_FRAMEWORK = {
+        'PAGE_SIZE':10,
+    }
 
-目录结构
+    这时接口返回结果会有count，next，previous字段，方便前端分页使用
+    
+#### 自定义分页
+
+    from rest_framework.pageination import PageNumberPagination
+
+    class GoodsPagination(PageNumberPagination):
+        page_size = 10
+        page_size_query_ param = 'page_size' #每页大小
+        page_query_param = 'p' #第几页p
+        max_page_size = 100
+
+#### 目录结构
 db_tools    #数据库初始化脚本
 extra_apps  #额外第三方库
 
