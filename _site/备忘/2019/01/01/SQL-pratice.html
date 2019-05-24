@@ -1,0 +1,149 @@
+<!DOCTYPE html> <html> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /> <!--[if lte IE 9]><meta http-equiv="refresh" content="0;url=/ie.html"><![endif]--> <title>SQL练习</title> <meta name="description" content="查找最晚入职员工的所有信息SELECT * FROM employees ORDER BY hire_date DESC LIMIT 0,1;或SELECT * FROM employees WHERE hire_date = (SELECT MAX(hire_date) FROM employees..."> <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600|Droid+Sans+Mono' rel='stylesheet' type='text/css'> <link rel="stylesheet" href="/css/main.css"> <link rel="canonical" href="http://localhost:4000/%E5%A4%87%E5%BF%98/2019/01/01/SQL-pratice.html"> <link rel="alternate" type="application/rss+xml" title="Fank" href="http://localhost:4000/feed.xml" /> <script src="/assets/js/prefixfree.js"></script> </head> <body> <aside id="sidebar"> <div id="sidebar-left"> <a id="sidebar-avatar" href="/"> <img id="sidebar-avatar-img" alt="" src="/assets/img/avatar.jpg"/> </a> <div id="sidebar-social"> <a href="/feed.xml" class="sidebar-social-icon feed"></a> <a href="mailto:fankcoder@gmail.com" class="sidebar-social-icon email"></a> <a href="http://www.weibo.com/u/2424646683" class="sidebar-social-icon weibo" target="_blank"></a> <a href="https://github.com/fankcoder" class="sidebar-social-icon github" target="_blank"></a> </div> <ul id="sidebar-tags"> <li class="sidebar-tag active" data-filter="all">全部文章</li> <li class="sidebar-tag" data-filter="备忘">备忘</li> <li class="sidebar-tag" data-filter="工具">工具</li> <li class="sidebar-tag" data-filter="技术">技术</li> <li class="sidebar-tag" data-filter="生活">生活</li> <li class="sidebar-tag" data-filter="About">About</li> </ul> </div> <div id="sidebar-right"> <div id="search-box"> <input id="search-input" type="text" placeholder="Search" /> </div> <nav id="toc"> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2019/05/21/MySQL-optimize.html"> MySQL亿级表优化 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2019/05/01/django-drf-learn.html"> Django深入学习笔记 </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2019/04/28/fix-chrome-darkmode.html"> 在mojave深色模式下，禁用chrome的深色主题 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2019/04/04/general-docker.html"> Docker 常用 </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2019/04/02/ss_config.html"> 第N次折腾vps科学上网，解决方案笔记 </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2019/03/08/vscode.html"> vscode配置手册 </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2019/03/08/mac-tools.html"> mac使用手册 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2019/03/08/python-deep.html"> Python深入学习笔记 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2019/03/08/appspider-tools.html"> Ubuntu&OSX的app抓包方案 </a> <a class="toc-link" data-tags="About" href="/about/2019/03/08/HeyUFindMe.html"> Hey, U find me! </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2019/02/01/vim.html"> vim使用手册 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2019/01/15/general-javascript-resources.html"> JavaScript 常用资源 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2019/01/12/threading-python.html"> Python线程&进程&协程&asyncio </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2019/01/02/algorithem.html"> 算法&数据结构 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2019/01/01/SQL-pratice.html"> SQL练习 </a> <a class="toc-link" data-tags="生活" href="/%E7%94%9F%E6%B4%BB/2019/01/01/life-time-manage.html"> 时间和人生感悟 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/11/01/chmod.html"> chmod命令 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/03/10/screen-linux.html"> screen工具 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/03/08/todolist-django-python.html"> Todolist 应用 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2016/03/04/general-linux-resources.html"> Linux 常用资源 </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2016/01/28/good-tools.html"> 神器收藏 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2016/01/27/general-django-resource.html"> Django命令备忘录 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/01/25/amazon-spider-python.html"> 爬虫防屏蔽 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/01/20/add-static-django-python.html"> Django添加静态文件 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2016/01/11/encode-python.html"> Python转码问题 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/12/29/xrange-python.html"> Python的xrange和range </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2015/11/10/vpn-tools.html"> 科学上网列表 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/26/email-shell-linux.html"> Shell每日发邮件 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/13/passwd-python.html"> Python密码处理 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/10/12/os-python.html"> Python标准库os </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/08/25/re-python.html"> Python正则 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/08/11/func-python.html"> Python内置函数(map、reduce、filter) </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/07/25/awk-linux.html"> AWK </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/07/24/blog-django-python.html"> Django练习项目之搭建博客 </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/05/22/xlrd-python.html"> 用xlrd\xlwt读写excel </a> <a class="toc-link" data-tags="技术" href="/%E6%8A%80%E6%9C%AF/2015/01/01/chromium-flash-linux.html"> chromium安装flash </a> <a class="toc-link" data-tags="工具" href="/%E5%B7%A5%E5%85%B7/2014/12/24/ubuntu-tools.html"> Ubuntu常用 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/09/15/general-git-resources.html"> Git 常用命令 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/05/11/general-mysql-resources.html"> MySQL常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/04/23/general-bootstrap-resources.html"> Bootstrap常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-svn-resources.html"> SVN 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-shell-resources.html"> Shell 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-python-resources.html"> Python 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-jquery-resources.html"> jQuery 常用资源 </a> <a class="toc-link" data-tags="备忘" href="/%E5%A4%87%E5%BF%98/2014/01/15/general-html-resources.html"> HTML 常用 </a> </nav> </div> </aside> <main id="main"> <article class="post container"> <div class="post-meta"> <span class="post-meta-span date">2019 January 01</span> <span class="post-meta-span tag">SQL</span> </div> <h1 class="post-title">SQL练习</h1> <h4 id="查找最晚入职员工的所有信息">查找最晚入职员工的所有信息</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM employees ORDER BY hire_date DESC LIMIT 0,1;
+或
+SELECT * FROM employees WHERE hire_date = (SELECT       MAX(hire_date) FROM employees);
+</code></pre></div></div> <p>区别在于当存在重复日期，下面会输出多个</p> <h4 id="两张表查找所有已经分配部门的员工的last_name和first_name">两张表查找所有已经分配部门的员工的last_name和first_name</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select e.last_name, e.first_name, d.dept_no from employees e join dept_emp d on e.emp_no = d.emp_no
+</code></pre></div></div> <h4 id="查找所有员工的last_name和first_name以及对应部门编号dept_no也包括展示没有分配具体部门的员工">查找所有员工的last_name和first_name以及对应部门编号dept_no，也包括展示没有分配具体部门的员工</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select e.last_name, e.first_name, d.dept_no from employees e left join dept_emp d on e.emp_no == d.emp_no;
+</code></pre></div></div> <h4 id="group和having">Group和having</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>WHERE语句在GROUP BY语句之前；SQL会在分组之前计算WHERE语句。   
+HAVING语句在GROUP BY语句之后；SQL会在分组之后计算HAVING语句。
+
+如：找出所有员工当前(to_date='9999-01-01')具体的薪水salary情况，对于相同的薪水只显示一次,并按照逆序显示
+select salary from salaries where to_date='9999-01-01' group by salary order by salary desc;
+</code></pre></div></div> <h4 id="查找薪水涨幅超过15次的员工号emp_no以及其对应的涨幅次数t">查找薪水涨幅超过15次的员工号emp_no以及其对应的涨幅次数t</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select emp_no, count(salary) as t from salaries group by emp_no having t &gt;15
+</code></pre></div></div> <h4 id="获取所有非manager的员工emp_no">获取所有非manager的员工emp_no</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select e.emp_no from employees e left join dept_manager d on e.emp_no = d.emp_no where d.emp_no is Null;
+</code></pre></div></div> <h4 id="获取所有员工当前的manager如果当前的manager是自己的话结果不显示当前表示to_date9999-01-01">获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to_date=’9999-01-01’。</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select e.emp_no, m.emp_no as manager_no from dept_emp e 
+inner join dept_manager m on e.dept_no = m.dept_no
+where m.to_date='9999-01-01' and e.to_date='9999-01-01' and m.emp_no &lt;&gt; e.emp_no
+</code></pre></div></div> <h4 id="distinct">distinct</h4> <p>MySQL发现第1个匹配行后，停止为当前的行组合搜索更多的行。</p> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>从titles表获取按照title进行分组，每组个数大于等于2，给出title以及对应的数目t。注意对于重复的emp_no进行忽略。
+
+select title, count(distinct emp_no) t from titles group by title having title &gt;2;
+</code></pre></div></div> <h4 id="查找employees表所有emp_no为奇数且last_name不为mary的员工信息并按照hire_date逆序排列">查找employees表所有emp_no为奇数，且last_name不为Mary的员工信息，并按照hire_date逆序排列</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select * from employees where emp_no %2 = 1 and last_name != 'Mary' order by hire_date desc;
+</code></pre></div></div> <h4 id="查找当前薪水to_date9999-01-01排名第二多的员工编号emp_no薪水salarylast_name以及first_name不准使用order-by">查找当前薪水(to_date=’9999-01-01’)排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，不准使用order by</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select e.emp_no, max(s.salary), e.last_name, e.first_name 
+from employees e , salaries s 
+where e.emp_no = s.emp_no and s.to_date='9999-01-01' and
+s.salary &lt; (select max(salary) from salaries)
+</code></pre></div></div> <h4 id="三表左连接">三表左连接</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>查找所有员工的last_name和first_name以及对应的dept_name，也包括暂时没有分配部门的员工
+
+select e.last_name, e.first_name, d.dept_name from employees e left join dept_emp de on e.emp_no = de.emp_no left join departments d on de.dept_no = d.dept_no
+</code></pre></div></div> <h4 id="嵌套运算">嵌套运算</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>查找员工编号emp_no为10001其自入职以来的薪水salary涨幅值growth
+
+select (
+(select salary from salaries where emp_no=10001 order by to_date desc limit 0,1) - (select salary from salaries where emp_no=10001 order by to_date asc limit 0,1)
+ )as growth
+</code></pre></div></div> <h4 id="构建新表查询">构建新表查询</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>查找所有员工自入职以来的薪水涨幅情况，给出员工编号emp_no以及其对应的薪水涨幅growth，并按照growth进行升序
+select now_s.emp_no, (now_s.salary - old_s.salary) as growth 
+from (select s.emp_no, s.salary  from employees e inner join salaries s on s.emp_no = e.emp_no where s.to_date='9999-01-01') as now_s
+inner join 
+(select s.emp_no, s.salary  from employees e inner join salaries s on s.emp_no = e.emp_no where s.from_date=e.hire_date) as old_s
+on now_s.emp_no = old_s.emp_no
+order by growth;
+</code></pre></div></div> <h4 id="not-in--join-on-and">not in ; join on and</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>对所有员工的当前(to_date='9999-01-01')薪水按照salary进行按照1-N的排名，相同salary并列且按照emp_no升序排列
+SELECT s1.emp_no, s1.salary, COUNT(DISTINCT s2.salary) AS rank FROM salaries AS s1, salaries AS s2 WHERE s1.to_date = '9999-01-01'  AND s2.to_date = '9999-01-01' AND s1.salary &lt;= s2.salary GROUP BY s1.emp_no ORDER BY s1.salary DESC, s1.emp_no ASC
+</code></pre></div></div> <h4 id="获取员工其当前的薪水比其manager当前薪水还高的相关信息当前表示to_date9999-01-01">获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to_date=’9999-01-01’,</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>结果第一列给出员工的emp_no，
+第二列给出其manager的manager_no，
+第三列给出该员工当前的薪水emp_salary,
+第四列给该员工对应的manager当前的薪水manager_salary    
+
+select de_s.emp_no, dm_s.emp_no as manager_no, de_s.salary as emp_salary, dm_s.salary as manager_salary from
+(select de.emp_no,s.salary,de.dept_no from dept_emp de, salaries s where de.emp_no=s.emp_no and  s.to_date='9999-01-01') as de_s 
+inner join 
+(select dm.emp_no,s.salary,dm.dept_no from dept_manager dm, salaries s where dm.emp_no=s.emp_no and  s.to_date='9999-01-01') as dm_s on de_s.dept_no = dm_s.dept_no and de_s.salary &gt; dm_s.salary
+</code></pre></div></div> <h4 id="inner-join-直接3表连接">inner join 直接3表连接</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>汇总各个部门当前员工的title类型的分配数目，结果给出部门编号dept_no、dept_name、其当前员工所有的title以及该类型title对应的数目count
+
+SELECT de.dept_no, dp.dept_name, t.title, COUNT(t.title) AS count
+FROM titles AS t INNER JOIN dept_emp AS de 
+ON t.emp_no = de.emp_no AND de.to_date = '9999-01-01' AND t.to_date = '9999-01-01'
+INNER JOIN departments AS dp 
+ON de.dept_no = dp.dept_no
+GROUP BY de.dept_no, t.title
+</code></pre></div></div> <h4 id="给出每个员工每年薪水涨幅超过5000的员工编号emp_no薪水变更开始日期from_date以及薪水涨幅值salary_growth并按照salary_growth逆序排列">给出每个员工每年薪水涨幅超过5000的员工编号emp_no、薪水变更开始日期from_date以及薪水涨幅值salary_growth，并按照salary_growth逆序排列。</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>提示：在sqlite中获取datetime时间对应的年份函数为strftime('%Y', to_date)
+SELECT s2.emp_no, s2.from_date, (s2.salary - s1.salary) AS salary_growth
+FROM salaries AS s1, salaries AS s2
+WHERE s1.emp_no = s2.emp_no 
+AND salary_growth &gt; 5000
+AND (strftime("%Y",s2.to_date) - strftime("%Y",s1.to_date) = 1 
+     OR strftime("%Y",s2.from_date) - strftime("%Y",s1.from_date) = 1 )
+ORDER BY salary_growth DESC
+</code></pre></div></div> <h4 id="子查询">子查询</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>使用子查询的方式找出属于Action分类的所有电影对应的title,description
+select f.title,f.description from film f
+where f.film_id in (select film_id from film_category fc where fc.category_id = 
+(select category_id from category where `name`='Action'))
+</code></pre></div></div> <h4 id="获取执行计划">获取执行计划</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>explain select * from employees;
+</code></pre></div></div> <h4 id="字符串拼接">字符串拼接</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MySQL
+select concat(`last_name`,' ', first_name) Name from employees
+SQLlite
+SELECT last_name||" "||first_name AS Name FROM employees
+</code></pre></div></div> <h4 id="创建表并给默认时间为当前">创建表并给默认时间为当前</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create table actor (
+actor_id smallint(5) not null,
+first_name varchar(45) not null,
+last_name varchar(45) not null,
+last_update timestamp not null default now(),
+primary key (actor_id)
+);
+</code></pre></div></div> <h4 id="插入">插入</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>insert into actor values (1,'PENELOPE','GUINESS','2006-02-15 12:34:33');
+
+如果已存在则忽略
+
+insert IGNORE into actor values(3,'ED','CHASE','2006-02-15 12:34:33');
+</code></pre></div></div> <h4 id="创建表并从旧表插入">创建表并从旧表插入</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  create table actor_name select first_name,last_name from actor;
+</code></pre></div></div> <h4 id="创建索引和唯一索引">创建索引和唯一索引</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE INDEX indexName ON mytable(username(length)); 
+
+CREATE UNIQUE INDEX indexName ON mytable(username(length)) 
+
+删除
+DROP INDEX [indexName] ON mytable; 
+
+显示
+SHOW INDEX FROM table_name
+
+联合索引
+ALTER TABLE `detect_res` ADD INDEX index_union_name_password(username,password)
+</code></pre></div></div> <h4 id="创建视图">创建视图</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>视图是一种虚拟的表,是从数据库中一个或者多个表中导出的表。数据库只存放了视图的定义,而并没有存放视图中的数据,这些数据存放在原来的表中
+
+CREATE OR REPLACE VIEW v3 AS SELECT * FROM t_book WHERE id =3;
+
+删除
+DROP VIEW IF EXISTS v4;
+</code></pre></div></div> <h4 id="强制使用索引查询-force-index-name">强制使用索引查询 FORCE INDEX name</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT * FROM salaries FORCE INDEX idx_emp_no WHERE emp_no = 10005
+</code></pre></div></div> <h4 id="alter表结构命令">alter表结构命令</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER TABLE testalter_tbl  DROP i;
+
+ALTER TABLE testalter_tbl ADD i INT;
+
+修改字段类型及名称
+ALTER TABLE testalter_tbl MODIFY c CHAR(10);
+
+ALTER TABLE testalter_tbl CHANGE i j BIGINT;
+
+修改字段默认值
+ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;
+
+改表名
+alter table titles_test rename titles_2017
+</code></pre></div></div> <h4 id="构造触发器">构造触发器</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>触发器很耗费资源，尽量少用
+create trigger audit_log after insert on employees_test
+begin
+     insert into audit values(new.id,new.name);
+end;
+</code></pre></div></div> <h4 id="删除">删除</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>删除emp_no重复的记录，只保留最小的id对应的记录。
+
+delete from titles_test where id not in (select min(id) from titles_test group by emp_no)
+</code></pre></div></div> <h4 id="更新数据update">更新数据update</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update titles_test set to_date=null,from_date='2001-01-01' where to_date='9999-01-01';
+</code></pre></div></div> <h4 id="替换replace">替换replace</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REPLACE INTO titles_test VALUES (5, 10005, 'Senior Engineer', '1986-06-26', '9999-01-01')
+</code></pre></div></div> <h4 id="外键">外键</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>alter table audit add  foreign key(emp_no) references employees_test(id)
+</code></pre></div></div> <h4 id="截取字符串">截取字符串</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>select first_name from employees order by right(first_name,2);
+</code></pre></div></div> <h4 id="聚合函数group_concat">聚合函数GROUP_CONCAT</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GROUP_CONCAT，这个函数很强大，直接可以吧group by后的结果拼接成一个长字符串，默认用“，”分割
+SELECT dept_no, group_concat(emp_no) as employees from dept_emp group by dept_no;
+</code></pre></div></div> <h4 id="分页">分页</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>第一条记录序号为0
+SELECT * FROM employees LIMIT 5 OFFSET 5
+
+方法二：只利用 LIMIT 关键字。注意：在 LIMIT X,Y 中，Y代表返回几条记录，X代表从第几条记录开始返回（第一条记录序号为0），切勿记反。
+SELECT * FROM employees LIMIT 5,5
+</code></pre></div></div> <h4 id="exists">exists</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>EXISTS用于检查子查询是否至少会返回一行数据，该子查询实际上并不返回任何数据，而是返回值True或False。
+SELECT * FROM employees WHERE NOT EXISTS (SELECT emp_no FROM dept_emp WHERE emp_no = employees.emp_no)
+</code></pre></div></div> <h4 id="case条件表达式">case条件表达式</h4> <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT e.emp_no, e.first_name, e.last_name, b.btype, s.salary, 
+(CASE b.btype 
+ WHEN 1 THEN s.salary * 0.1
+ WHEN 2 THEN s.salary * 0.2
+ ELSE s.salary * 0.3 END) AS bonus
+FROM employees AS e INNER JOIN emp_bonus AS b ON e.emp_no = b.emp_no
+INNER JOIN salaries AS s ON e.emp_no = s.emp_no AND s.to_date = '9999-01-01'
+</code></pre></div></div> </article> <div class="post-share"> <div class="container"> <a href="https://twitter.com/share?url=http://localhost:4000/%E5%A4%87%E5%BF%98/2019/01/01/SQL-pratice.html&text=SQL练习" target="_blank" class="post-share-icon twitter"></a> <a href="https://www.evernote.com/clip.action?url=http://localhost:4000/%E5%A4%87%E5%BF%98/2019/01/01/SQL-pratice.html&title=SQL练习" target="_blank" class="post-share-icon evernote"></a> <a href="http://service.weibo.com/share/share.php?url=http://localhost:4000/%E5%A4%87%E5%BF%98/2019/01/01/SQL-pratice.html&title=SQL练习" target="_blank" class="post-share-icon weibo"></a> </div> </div> <div class="footer"> <div class="container"> <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p> <p class="footer-entry">Buit with <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> and <a href="https://github.com/P233/3-Jekyll" target="_blank">3-Jekyll theme</a> • Hosted on <a href="https://pages.github.com/" target="_blank">Github</a></p> </div> </div> </main> <button id="menu"> <span id="menu-icons"></span> </button> <script src="/assets/js/jquery-2.1.3.min.js"></script> <script src="/assets/js/jquery.pjax.js"></script> <script src="/assets/js/nprogress.js"></script> <script src="/assets/js/main.js"></script> <!-- --> </body> </html>
