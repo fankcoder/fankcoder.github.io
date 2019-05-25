@@ -38,21 +38,7 @@ serializaion 序列化ORMdata 类似django form
         fields = ('id', 'title', 'code', 'linenos', 'language', 'style')
         #将所有字段快速添加方法
         fields = "__all__"
-        
 
-#### view层级关系
-
-GenericViewSet(viewset)  -drf
-    GenericAPIView  -drf
-        APIView  -drf
-            View  -django
-
-#### mixin
-    CreateModelMixin
-    ListModelMixin
-    RetrieveModelMixin
-    UpdateModelMixin
-    DestroyModelMixin
     
 #### 如何通过配置分页
     drf源码-> settings -> default ->DEFAULT_PAGINATION_CLASS
@@ -71,6 +57,102 @@ GenericViewSet(viewset)  -drf
         page_size_query_ param = 'page_size' #每页大小
         page_query_param = 'p' #第几页p
         max_page_size = 100
+
+#### Viewsets
+
+配合使用配置urls.py
+
+    snippet_list = SnippetViewSet.as_view({
+    'get': 'list',
+    'post': 'create'
+})
+    urlpatterns = format_suffix_patterns([
+    path('snippets/', snippet_list, name='snippet-list'),
+    ])
+    
+#### Routers
+注册routers urls.py
+
+    from django.urls import path, include
+    from rest_framework.routers import DefaultRouter
+    from snippets import views
+
+    # Create a router and register our viewsets with it.
+    router = DefaultRouter()
+    router.register(r'snippets', views.SnippetViewSet)
+    router.register(r'users', views.UserViewSet)
+
+    # The API URLs are now determined automatically by the router.
+    urlpatterns = [
+        path('', include(router.urls)),
+    ]
+
+#### view层级关系
+
+GenericViewSet(viewset)  -drf
+    GenericAPIView  -drf
+        APIView  -drf
+            View  -django
+        
+#### mixin
+    CreateModelMixin
+    ListModelMixin
+    RetrieveModelMixin
+    UpdateModelMixin
+    DestroyModelMixin
+
+#### viewsets
+    ViewSetMixin
+    ViewSet
+    GenericViewSet
+    ReadOnlyViewSet
+    ModelViewSet
+
+#### drf request & response
+request拓展接收类型
+
+response根据前端需求类型返回
+
+#### drf的过滤
+    serializer = GoodsSeriallzer
+    
+    def get_queryset(self):
+        return Goods.objects.filter(shop_price__gt=100)
+        
+    #用Filtering简化,自定义filter类需要看django-fiters文档
+   
+    from django_filters.rest_framework import FilterSet
+
+    class ProductFilter(filters.FilterSet):
+    min_price = filters.NumberFilter(field_name="price", lookup_expr='gte')
+    max_price = filters.NumberFilter(field_name="price", lookup_expr='lte')
+
+    class Meta:
+        model = Product
+        fields = ['category', 'in_stock', 'min_price', 'max_price']
+
+#### drf搜索过滤
+    #模糊查询，方法1
+    manufacturer__name = django_filters.CharFilter(lookup_expr='icontains')
+    
+    #方法2，和like相似
+    from rest_framework import filters
+
+    class UserListView(generics.ListAPIView):
+        queryset = User.objects.all()
+        serializer_class = UserSerializer
+        filter_backends = (filters.SearchFilter,)
+        search_fields = ('username', 'email')
+    
+    #ps:真正的搜索要用到全文搜索引擎，表支持，elastic search
+   
+#### 排序OrderFilter
+    class UserListView(generics.ListAPIView):
+        queryset = User.objects.all()
+        serializer_class = UserSerializer
+        filter_backends = (filters.OrderingFilter,)
+        ordering_fields = ('username', 'email')
+
 
 #### 目录结构
 db_tools    #数据库初始化脚本
