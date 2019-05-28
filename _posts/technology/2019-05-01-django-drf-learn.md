@@ -202,6 +202,10 @@ django的migration功能在多服务该表时非常好用
 3. 前端工作量增大
 4. seo难度增大
 
+#### drf跨域
+1. npm跨域解决prox代理
+2. 在服务器端设置django-cors-headers
+
 ### restful api
 restful api目前是前后端分离最佳实践，是一套标准规范
 
