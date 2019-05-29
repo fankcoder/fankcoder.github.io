@@ -206,6 +206,34 @@ django的migration功能在多服务该表时非常好用
 1. npm跨域解决prox代理
 2. 在服务器端设置django-cors-headers
 
+#### 前后端分离不需要csrf
+csrf主要防止跨站攻击，这种模式已经进行跨站了。
+
+### token验证
+注册时将token与user绑定，token创建
+
+    from rest_framework.authtoken.models import Token
+
+    token = Token.objects.create(user=...)
+    print(token.key)
+
+前端将token放入header中。
+
+验证api，将user & passwd post到api获取token
+
+    from rest_framework.authtoken import views
+    urlpatterns += [
+        url(r'^api-token-auth/', views.obtain_auth_token)
+    ]
+
+#### 公开的接口
+公共数据，不需要token的api。前端在写的时候可能会全局加token,如果过期公共接口返回401.从后端解决不在settings里配置auth,在每个view里配置。
+
+    form rest_framework.authentication import TokenAuthentication
+    
+    class ...:
+        authentication_classes = (TokenAuthentication, )
+
 ### restful api
 restful api目前是前后端分离最佳实践，是一套标准规范
 
