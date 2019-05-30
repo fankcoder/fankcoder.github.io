@@ -234,6 +234,48 @@ csrf主要防止跨站攻击，这种模式已经进行跨站了。
     class ...:
         authentication_classes = (TokenAuthentication, )
 
+### json web token, JWT
+
+#### 传统方式
+后端生成token，和id存入session中，然后把token传给用户，存入浏览器cookie，但这样可能会导致xss漏洞
+
+如果将token保存在数据库中，每次需要根据token查询userid,增加了数据库查询和存储开销。
+
+使用对称加密算法来加密用户id形成token,服务端只要解密该token就可以知道用户的id了，但要以防加密算法泄漏。
+
+#### JWT方式
+特点：
+
+    1.简洁。可以通过url,post参数或http header发送，数据量小，传输速度快
+    2.自包含。负载中包含了所有用户所需要的信息，避免多次查询数据库
+
+JWT组成
+
+    Header
+    {
+      "alg": "HS256",  #加密算法
+      "typ": "JWT"
+    }
+    
+    Payload
+    
+    {
+      "sub": "1234567890",
+      "name": "John Doe",
+      "admin": true
+    }
+    
+    Signature
+
+JWT使用方式
+
+客户端每次与服务器通信，都要带上这个 JWT。你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求的头信息Authorization字段里面。
+
+#### django-rest-framework-jwt
+
+    pip install djangorestframework-jwt
+
+
 ### restful api
 restful api目前是前后端分离最佳实践，是一套标准规范
 
