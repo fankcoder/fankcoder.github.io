@@ -275,6 +275,12 @@ JWT使用方式
 
     pip install djangorestframework-jwt
 
+### Permissions
+drf权限判断
+
+    from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
+    class ExampleView(APIView):
+        permission_classes = (IsAuthenticated|ReadOnly,)
 
 ### restful api
 restful api目前是前后端分离最佳实践，是一套标准规范
