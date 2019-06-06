@@ -275,12 +275,73 @@ JWT使用方式
 
     pip install djangorestframework-jwt
 
+#### 自定义用户验证
+    from django.contrib.auth.backends import ModelBackend
+    
+    class CoustomBackend(ModelBackend):
+        #重写authenticate
+        def authenticate(self, username, pw, **kwargs):
+            user = User.object.get(Q(username|Q(email)|Q(mobile))
+            if user.check_password(pw):
+                return user
+
+### djagno signals
+信号，model signals 对model操作，发送全局信号，可以用于修改用户密码
+
 ### Permissions
 drf权限判断
 
     from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
     class ExampleView(APIView):
         permission_classes = (IsAuthenticated|ReadOnly,)
+
+### drf缓存设置
+github drf-extensions 扩展drf缓存
+
+    from rest_framework_extensions.cache.mixins import CacheResponseMixin
+
+    class UserViewSet(CacheResponseMixin, viewsets.ModelViewSet):
+    serializer_class = UserSerializer
+
+如果数据被修改了，缓存就没用了，不能一直存在于内存中，所以要设置过期时间
+
+    REST_FRAMEWORK_EXTENSIONS = {
+    'DEFAULT_CACHE_RESPONSE_TIMEOUT': 60 * 15
+    }
+
+### drf配置redis缓存
+github django-redis
+
+    pip djagno-redis
+    
+    CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://:password@127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+    }
+
+### drf的throttle设置api的访问速度
+防止爬虫，AnonRate根据ip限制，UserRate根据token限制
+
+    REST_FRAMEWORK = {
+        'DEFAULT_THROTTLE_CLASSES': (
+            'rest_framework.throttling.AnonRateThrottle',
+            'rest_framework.throttling.UserRateThrottle'
+        ),
+        'DEFAULT_THROTTLE_RATES': {
+            'anon': '100/day',
+            'user': '1000/day'
+        }
+    }
+
+
+### auth2.0第三方登录
+借助第三方开放平台，给用户注册新用户
+
 
 ### restful api
 restful api目前是前后端分离最佳实践，是一套标准规范
