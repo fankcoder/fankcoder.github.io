@@ -342,6 +342,11 @@ github django-redis
 ### auth2.0第三方登录
 借助第三方开放平台，给用户注册新用户
 
+### 第三方登录库
+
+    pip install social-auth-app-django
+    
+    doc http://python-social-auth.readthedocs.org/.
 
 ### restful api
 restful api目前是前后端分离最佳实践，是一套标准规范
@@ -406,3 +411,7 @@ HTTP是一个无状态协议。客户端想要操作服务器，需要通过 pos
     
     from django.http import JsonResponse
     return JsonResponse(json_data, safe=False)
+    
+### sentry日志
+通过docker搭建sentry
+集成jira，bug管理
