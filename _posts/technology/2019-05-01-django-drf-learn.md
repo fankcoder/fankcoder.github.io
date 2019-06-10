@@ -415,3 +415,7 @@ HTTP是一个无状态协议。客户端想要操作服务器，需要通过 pos
 ### sentry日志
 通过docker搭建sentry
 集成jira，bug管理
+sentry email 端口25  阿里云ssl465
+
+### sentry集成到django
+查看sentry文档并添加配置
