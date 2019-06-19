@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django深入学习笔记
+title: Django rest framework学习笔记
 category: 技术
 tags: Django drf
 keywords: django
