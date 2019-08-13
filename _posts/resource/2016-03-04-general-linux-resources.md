@@ -8,7 +8,11 @@ description:
 ---
 
 
-## 常用指令
+## 常用指令，持续更新。。
+
+### xdg-open
+
+xdg-open opens a file or URL in the user's preferred application. 
 
 ### 遍历创建
 
