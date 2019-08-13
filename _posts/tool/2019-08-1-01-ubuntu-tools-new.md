@@ -106,6 +106,7 @@ vim ~/.zshrc
 ZSH_THEME="spaceship"
 plugins=(robbyrussell git zsh-syntax-highlighting autojump zsh-autosuggestions)
 alias py3="source /Users/fank/code/py3.7/bin/activate"
+source /Users/fank/code/py3.7/bin/activate
 ```
 
 ## 数据库图形工具
