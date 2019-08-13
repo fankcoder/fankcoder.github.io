@@ -133,3 +133,9 @@ sudo apt-get install indicator-sysmonitor
 配置让其显示内存占用与实时网速
 
 Preference-Advanced add: mem:{mem} net:{net}
+
+## 配置代理走PAC
+
+使用最新的18.04走系统配置自动加载pac文件，Chrome代理失败，Firefox配置后成功。
+
+解决方法是安装SwitchyOmega插件来增强Chrome代理设置功能
