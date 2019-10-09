@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JavaScript 常用资源
+title: JavaScript 笔记
 category: 备忘
 tags: JavaScript
 keywords: JavaScript

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Django命令备忘录
+title: Django基本命令
 category: 备忘
 tags: django
 description: Django基本命令

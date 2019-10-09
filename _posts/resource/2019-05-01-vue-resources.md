@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Vue 常用资源
+title: Vue 笔记
 category: 备忘
 tags: Vue
 keywords: Vue

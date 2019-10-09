@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Linux 常用资源
+title: Linux 笔记
 category: 备忘
 tags: Linux
 keywords: Linux
@@ -10,33 +10,33 @@ description:
 
 ## 常用指令，持续更新。。
 
+### 自用.vimrc服务器无插件版
+
+```
+ set autoindent
+ set tabstop=4
+ set shiftwidth=4
+ set expandtab
+ set number
+ ab xdate <c-r>=strftime("20%y%m%d %H:%M:%S")<C-I>
+ set nu
+ colorscheme slate
+ syntax on
+```
+
+### Nginx官方的Yum源
+
+vim /etc/yum.repos.d/nginx.repo
+
+[nginx]
+name=nginx repo
+baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+gpgcheck=0
+enabled=1
+
 ### xdg-open
 
 xdg-open opens a file or URL in the user's preferred application. 
-
-### 遍历创建
-
-    mkdir -p 
-
-### 当前目录
-
-    pwd 
-
-### 上次目录
-
-    cd -
-
-### 删除目录 -f强制
-
-    rm -rf
-
-### 复制目录 -a与源文件一模一样
-
-    cp -r
-
-### 剪切/改名
-
-    mv
 
 ### find搜索
 
@@ -105,8 +105,10 @@ grep是包含匹配搜索文件内容,find是完全匹配搜索文件名
 
 ### w 
 	查看用户登录信息 who类似
+
 ### last 
 	所有用户登录信息 /var/log/wtmp
+
 ### lastlog 
 	最后登录时间
     
@@ -152,3 +154,67 @@ rsync是linux系统下的数据镜像备份工具。使用快速增量备份工�
 #### 查询所有文件及子目录文件个数
 
     sudo find . -type f -print | wc -l    
+
+### 诊断网络
+
+    mtr 
+    ping
+    traceroute
+    dig
+
+### 查看本地网络服务活动状态
+
+    lsof -i
+
+### 查看自己的外网ip
+
+    curl ifconfig.me
+
+### 登陆到其他用户
+
+    login
+
+### 查看端口的占用
+
+    lsof -i:8087  查看8087端口的使用
+
+### 批量杀死进程
+
+    ps -aux|grep name|grep -v grep|cut -c 9-15|xargs kill -9
+
+### 查看当前时间
+
+    date       时间
+    date +%s   时间戳
+    date -d "2010-07-20 10:25:30" +%s  指定时间时间戳
+    date -d "@1279592730"    时间戳转时间
+    date -d "1970-01-01 14781 days" "+%Y/%m/%d %H:%M:%S" 
+
+### 查看进程内存使用情况
+
+    top -d 1 -p pid [,pid ...]
+    pmap pid 
+    ps aux|grep process_name
+    查看/proc/process_id/文件夹下的status文件
+
+### 查看Linux内核版本或发布版本
+
+    lsb_release -a
+    uname -a
+
+### 列出本机监听的端口号
+
+    netstat –tlnp
+    netstat -anop
+
+### 在远程机器上运行一段脚本
+
+    ssh user@server bash < /path/to/local/script.sh
+
+### 端口扫描
+
+    nc -z -v -n 127.0.0.1 20-100
+
+### 负载测试，30秒内向Google发起20个并发连接
+
+    siege -c20 www.google.co.uk -b -t30s

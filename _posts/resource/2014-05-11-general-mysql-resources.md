@@ -2,7 +2,7 @@
 
 layout: post
 
-title: MySQL常用资源
+title: MySQL常用语法
 
 category: 备忘
 
@@ -14,7 +14,7 @@ keywords: MySQL
 
   
 
-## 常用命令
+## 常用语法
 
   
 
