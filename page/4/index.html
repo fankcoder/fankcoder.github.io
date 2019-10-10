@@ -613,103 +613,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/02/19/technology-2015-08-11-func-python/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fankcoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="三秋">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/02/19/technology-2015-08-11-func-python/" class="post-title-link" itemprop="url">Python内置函数(map、reduce、filter)</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-02-19 16:07:56" itemprop="dateCreated datePublished" datetime="2019-02-19T16:07:56+08:00">2019-02-19</time>
-            </span>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>map(…)<br>    map(function, sequence[, sequence, …]) -&gt; list 说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对sequence中的item依次执行function(item)，执行结果输出为list。</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; map(str, range(5))           #对range(5)各项进行str操作</span><br><span class="line">[&apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;]        #返回列表</span><br><span class="line">&gt;&gt;&gt; def add(n):return n+n</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; map(add, range(5))           #对range(5)各项进行add操作</span><br><span class="line">[0, 2, 4, 6, 8]</span><br><span class="line">&gt;&gt;&gt; map(lambda x:x+x,range(5))   #lambda 函数，各项+本身</span><br><span class="line">[0, 2, 4, 6, 8]</span><br><span class="line">&gt;&gt;&gt; map(lambda x:x+1,range(10))  #lambda 函数，各项+1</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br></pre></td></tr></table></figure>
-
-<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3><p>reduce(…)<br>    reduce(function, sequence[, initial]) -&gt; value 说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对sequence中的item顺序迭代调用function，函数必须要有2个参数。要是有第3个参数，则表示初始值，可以继续调用初始值，返回一个值。</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add(x,y):return x+y</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; reduce(add,range(10))        #1+2+3+...+9</span><br><span class="line">45</span><br><span class="line">&gt;&gt;&gt; reduce(add,range(11))        #1+2+3+...+10</span><br><span class="line">55</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x*y,range(1,3),5)           #lambda 函数，5是初始值， 1*2*5</span><br><span class="line">10</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x*y,range(1,6))             #阶乘，1*2*3*4*5</span><br><span class="line">120</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x*y,range(1,6),3)           #初始值3，结果再*3</span><br><span class="line">360</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x+y,[1,2,3,4,5,6])          #1+2+3+4+5+6</span><br><span class="line">21</span><br></pre></td></tr></table></figure>
-
-<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>filter(…)<br>    filter(function or None, sequence) -&gt; list, tuple, or string 说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对sequence中的item依次执行function(item)，将执行结果为True（！=0）的item组成一个List/String/Tuple（取决于sequence的类型）返回，False则退出（0），进行过滤。</span><br></pre></td></tr></table></figure>
-
-<p>例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def div(n):return n%2</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; filter(div,range(5))                    #返回div输出的不等于0的真值</span><br><span class="line">[1, 3]</span><br><span class="line">&gt;&gt;&gt; filter(div,range(10))</span><br><span class="line">[1, 3, 5, 7, 9]</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : x%2,range(10))        #lambda 函数返回奇数，返回列表</span><br><span class="line">[1, 3, 5, 7, 9]</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : not x%2,range(10))</span><br><span class="line">[0, 2, 4, 6, 8]</span><br><span class="line">&gt;&gt;&gt; def fin(n):return n!=&apos;f&apos;                #过滤&apos;z&apos; 函数，出现z则返回False</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; filter(fin,&apos;fankcoder&apos;)                    #&apos;z&apos;被过滤</span><br><span class="line">&apos;ankcoder&apos;</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : x !=&apos;f&apos;,&apos;fankcoder&apos;)     #labmda返回True值</span><br><span class="line">&apos;ankcoder&apos;</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : not x==&apos;f&apos;,&apos;fankcoder&apos;)  #返回：字符串</span><br><span class="line">&apos;ankcoder&apos;</span><br></pre></td></tr></table></figure>
-
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/02/19/technology-2015-07-25-awk-linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -924,6 +827,103 @@
 
 <h1 id="反转-按行逆序打印输入-1"><a href="#反转-按行逆序打印输入-1" class="headerlink" title="反转 - 按行逆序打印输入"></a>反转 - 按行逆序打印输入</h1><pre><code>{ line[NR] = $0 }   # 记下每个输入行</code></pre><p>END { for (i = NR; i &gt; 0; i = i - 1)<br>        print line[i]<br>    }</p>
 <pre><code></code></pre>
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/02/19/technology-2015-08-11-func-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/02/19/technology-2015-08-11-func-python/" class="post-title-link" itemprop="url">Python内置函数(map、reduce、filter)</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-02-19 16:07:56" itemprop="dateCreated datePublished" datetime="2019-02-19T16:07:56+08:00">2019-02-19</time>
+            </span>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="map"><a href="#map" class="headerlink" title="map"></a>map</h3><p>map(…)<br>    map(function, sequence[, sequence, …]) -&gt; list 说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对sequence中的item依次执行function(item)，执行结果输出为list。</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; map(str, range(5))           #对range(5)各项进行str操作</span><br><span class="line">[&apos;0&apos;, &apos;1&apos;, &apos;2&apos;, &apos;3&apos;, &apos;4&apos;]        #返回列表</span><br><span class="line">&gt;&gt;&gt; def add(n):return n+n</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; map(add, range(5))           #对range(5)各项进行add操作</span><br><span class="line">[0, 2, 4, 6, 8]</span><br><span class="line">&gt;&gt;&gt; map(lambda x:x+x,range(5))   #lambda 函数，各项+本身</span><br><span class="line">[0, 2, 4, 6, 8]</span><br><span class="line">&gt;&gt;&gt; map(lambda x:x+1,range(10))  #lambda 函数，各项+1</span><br><span class="line">[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]</span><br></pre></td></tr></table></figure>
+
+<h3 id="reduce"><a href="#reduce" class="headerlink" title="reduce"></a>reduce</h3><p>reduce(…)<br>    reduce(function, sequence[, initial]) -&gt; value 说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对sequence中的item顺序迭代调用function，函数必须要有2个参数。要是有第3个参数，则表示初始值，可以继续调用初始值，返回一个值。</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def add(x,y):return x+y</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; reduce(add,range(10))        #1+2+3+...+9</span><br><span class="line">45</span><br><span class="line">&gt;&gt;&gt; reduce(add,range(11))        #1+2+3+...+10</span><br><span class="line">55</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x*y,range(1,3),5)           #lambda 函数，5是初始值， 1*2*5</span><br><span class="line">10</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x*y,range(1,6))             #阶乘，1*2*3*4*5</span><br><span class="line">120</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x*y,range(1,6),3)           #初始值3，结果再*3</span><br><span class="line">360</span><br><span class="line">&gt;&gt;&gt; reduce(lambda x,y:x+y,[1,2,3,4,5,6])          #1+2+3+4+5+6</span><br><span class="line">21</span><br></pre></td></tr></table></figure>
+
+<h3 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h3><p>filter(…)<br>    filter(function or None, sequence) -&gt; list, tuple, or string 说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对sequence中的item依次执行function(item)，将执行结果为True（！=0）的item组成一个List/String/Tuple（取决于sequence的类型）返回，False则退出（0），进行过滤。</span><br></pre></td></tr></table></figure>
+
+<p>例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; def div(n):return n%2</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; filter(div,range(5))                    #返回div输出的不等于0的真值</span><br><span class="line">[1, 3]</span><br><span class="line">&gt;&gt;&gt; filter(div,range(10))</span><br><span class="line">[1, 3, 5, 7, 9]</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : x%2,range(10))        #lambda 函数返回奇数，返回列表</span><br><span class="line">[1, 3, 5, 7, 9]</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : not x%2,range(10))</span><br><span class="line">[0, 2, 4, 6, 8]</span><br><span class="line">&gt;&gt;&gt; def fin(n):return n!=&apos;f&apos;                #过滤&apos;z&apos; 函数，出现z则返回False</span><br><span class="line">... </span><br><span class="line">&gt;&gt;&gt; filter(fin,&apos;fankcoder&apos;)                    #&apos;z&apos;被过滤</span><br><span class="line">&apos;ankcoder&apos;</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : x !=&apos;f&apos;,&apos;fankcoder&apos;)     #labmda返回True值</span><br><span class="line">&apos;ankcoder&apos;</span><br><span class="line">&gt;&gt;&gt; filter(lambda x : not x==&apos;f&apos;,&apos;fankcoder&apos;)  #返回：字符串</span><br><span class="line">&apos;ankcoder&apos;</span><br></pre></td></tr></table></figure>
+
+
         
       
     </div>
@@ -1809,6 +1809,7 @@ netstat -anop</code></pre><h3 id="在远程机器上运行一段脚本"><a href=
   
 
   
+
 
 </body>
 </html>
