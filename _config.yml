@@ -79,5 +79,5 @@ theme: jekyll-theme-cayman
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:fankcoder/fankcoder.github.io.git
-  branch: gh-pages
+  repo: https://github.com/fankcoder/fankcoder.github.io
+  branch: master
