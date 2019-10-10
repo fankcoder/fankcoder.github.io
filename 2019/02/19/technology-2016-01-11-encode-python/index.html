@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="在Python中，可以对String调用decode和encode方法来实现转码。 比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作  1s.decode(&amp;apos;gbk&amp;apos;).encode(&amp;apos;utf-8′)  可是，在实际开发中，我发现，这种办法经常会出现异常：  1UnicodeDecodeError: ‘gbk&amp;apos; codec can">
+  <meta name="description" content="在Python中，可以对String调用decode和encode方法来实现转码。 比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作  1s.decode(&amp;apos;gbk&amp;apos;).encode(&amp;apos;utf-8′)  可是，在实际开发中，我发现，这种办法经常会出现异常：  1UnicodeDecodeError: ‘gbk&amp;apos; codec c">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python转码问题">
 <meta property="og:url" content="http://fankcoder.com/2019/02/19/technology-2016-01-11-encode-python/index.html">
 <meta property="og:site_name" content="三秋">
-<meta property="og:description" content="在Python中，可以对String调用decode和encode方法来实现转码。 比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作  1s.decode(&amp;apos;gbk&amp;apos;).encode(&amp;apos;utf-8′)  可是，在实际开发中，我发现，这种办法经常会出现异常：  1UnicodeDecodeError: ‘gbk&amp;apos; codec can">
+<meta property="og:description" content="在Python中，可以对String调用decode和encode方法来实现转码。 比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作  1s.decode(&amp;apos;gbk&amp;apos;).encode(&amp;apos;utf-8′)  可是，在实际开发中，我发现，这种办法经常会出现异常：  1UnicodeDecodeError: ‘gbk&amp;apos; codec c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-19T08:07:56.053Z">
+<meta property="og:updated_time" content="2019-10-10T18:37:50.418Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python转码问题">
-<meta name="twitter:description" content="在Python中，可以对String调用decode和encode方法来实现转码。 比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作  1s.decode(&amp;apos;gbk&amp;apos;).encode(&amp;apos;utf-8′)  可是，在实际开发中，我发现，这种办法经常会出现异常：  1UnicodeDecodeError: ‘gbk&amp;apos; codec can">
+<meta name="twitter:description" content="在Python中，可以对String调用decode和encode方法来实现转码。 比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作  1s.decode(&amp;apos;gbk&amp;apos;).encode(&amp;apos;utf-8′)  可是，在实际开发中，我发现，这种办法经常会出现异常：  1UnicodeDecodeError: ‘gbk&amp;apos; codec c">
   <link rel="canonical" href="http://fankcoder.com/2019/02/19/technology-2016-01-11-encode-python/">
 
 
@@ -275,6 +275,18 @@
               <time title="Created: 2019-02-19 16:07:56" itemprop="dateCreated datePublished" datetime="2019-02-19T16:07:56+08:00">2019-02-19</time>
             </span>
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-11 02:37:50" itemprop="dateModified" datetime="2019-10-11T02:37:50+08:00">2019-10-11</time>
+              </span>
+            
+          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -300,7 +312,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>在Python中，可以对String调用decode和encode方法来实现转码。</p>
+        <a id="more"></a>
+
+<p>在Python中，可以对String调用decode和encode方法来实现转码。</p>
 <p>比如，若要将某个String对象s从gbk内码转换为UTF-8，可以如下操作 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.decode(&apos;gbk&apos;).encode(&apos;utf-8′)</span><br></pre></td></tr></table></figure>
 
@@ -338,8 +352,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/02/19/technology-2015-10-26-email-shell-linux/" rel="next" title="Shell每日发邮件">
-                  <i class="fa fa-chevron-left"></i> Shell每日发邮件
+                <a href="/2019/02/19/technology-2019-01-12-threading-python/" rel="next" title="Python线程&进程&协程&asyncio">
+                  <i class="fa fa-chevron-left"></i> Python线程&进程&协程&asyncio
                 </a>
               
             </div>
@@ -348,8 +362,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/02/19/technology-2019-01-12-threading-python/" rel="prev" title="Python线程&进程&协程&asyncio">
-                  Python线程&进程&协程&asyncio <i class="fa fa-chevron-right"></i>
+                <a href="/2019/02/19/technology-2016-01-20-add-static-django-python/" rel="prev" title="Django添加静态文件">
+                  Django添加静态文件 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>

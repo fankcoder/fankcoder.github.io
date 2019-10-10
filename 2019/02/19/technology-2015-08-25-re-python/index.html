@@ -55,19 +55,19 @@
   };
 </script>
 
-  <meta name="description" content="整理自博客园 re模块Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。 12345678910111213141516# encoding: UTF-8import re # 将正则表达式编译成Pattern">
+  <meta name="description" content="整理自博客园 re模块Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。 12345678910111213141516# encoding: UTF-8import re # 将正则表达式编译成Patter">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python正则">
 <meta property="og:url" content="http://fankcoder.com/2019/02/19/technology-2015-08-25-re-python/index.html">
 <meta property="og:site_name" content="三秋">
-<meta property="og:description" content="整理自博客园 re模块Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。 12345678910111213141516# encoding: UTF-8import re # 将正则表达式编译成Pattern">
+<meta property="og:description" content="整理自博客园 re模块Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。 12345678910111213141516# encoding: UTF-8import re # 将正则表达式编译成Patter">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/fankcoder/fankcoder.github.io/master/static/rematch.png">
-<meta property="og:updated_time" content="2019-04-12T02:50:45.037Z">
+<meta property="og:updated_time" content="2019-10-10T18:36:35.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python正则">
-<meta name="twitter:description" content="整理自博客园 re模块Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。 12345678910111213141516# encoding: UTF-8import re # 将正则表达式编译成Pattern">
+<meta name="twitter:description" content="整理自博客园 re模块Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。 12345678910111213141516# encoding: UTF-8import re # 将正则表达式编译成Patter">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/fankcoder/fankcoder.github.io/master/static/rematch.png">
   <link rel="canonical" href="http://fankcoder.com/2019/02/19/technology-2015-08-25-re-python/">
 
@@ -285,7 +285,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-04-12 10:50:45" itemprop="dateModified" datetime="2019-04-12T10:50:45+08:00">2019-04-12</time>
+                <time title="Modified: 2019-10-11 02:36:35" itemprop="dateModified" datetime="2019-10-11T02:36:35+08:00">2019-10-11</time>
               </span>
             
           
@@ -314,7 +314,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>整理自<a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html" target="_blank" rel="noopener">博客园</a></p>
+        <a id="more"></a>
+<p>整理自<a href="http://www.cnblogs.com/huxi/archive/2010/07/04/1771073.html" target="_blank" rel="noopener">博客园</a></p>
 <h4 id="re模块"><a href="#re模块" class="headerlink" title="re模块"></a>re模块</h4><p>Python通过re模块提供对正则表达式的支持。使用re的一般步骤是先将正则表达式的字符串形式编译为Pattern实例，然后使用Pattern实例处理文本并获得匹配结果（一个Match实例），最后使用Match实例获得信息，进行其他的操作。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># encoding: UTF-8</span><br><span class="line">import re</span><br><span class="line"> </span><br><span class="line"># 将正则表达式编译成Pattern对象</span><br><span class="line">pattern = re.compile(r&apos;hello&apos;)</span><br><span class="line"> </span><br><span class="line"># 使用Pattern匹配文本，获得匹配结果，无法匹配时将返回None</span><br><span class="line">match = pattern.match(&apos;hello world!&apos;)</span><br><span class="line"> </span><br><span class="line">if match:</span><br><span class="line">    # 使用Match获得分组信息</span><br><span class="line">    print match.group()</span><br><span class="line"> </span><br><span class="line">### 输出 ###</span><br><span class="line"># hello</span><br><span class="line">re.compile(strPattern[, flag]):</span><br></pre></td></tr></table></figure>
 
@@ -424,8 +425,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/02/19/technology-2015-10-12-os-python/" rel="next" title="Python标准库os">
-                  <i class="fa fa-chevron-left"></i> Python标准库os
+                <a href="/2019/02/19/technology-2015-08-11-func-python/" rel="next" title="Python内置函数(map、reduce、filter)">
+                  <i class="fa fa-chevron-left"></i> Python内置函数(map、reduce、filter)
                 </a>
               
             </div>
@@ -434,8 +435,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/02/19/technology-2015-10-13-passwd-python/" rel="prev" title="Python密码处理">
-                  Python密码处理 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/02/19/technology-2015-10-12-os-python/" rel="prev" title="Python标准库os">
+                  Python标准库os <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>

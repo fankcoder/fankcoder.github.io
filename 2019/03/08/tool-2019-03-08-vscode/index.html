@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="VS CodePlugin12345678910vimatom dark themeal code outlinepythondjangochineseopenAPI(Swagger)editoropenapi-lintSwagger ViewerYAML  vim 插件不能响应长按的解决123defaults write com.microsoft.VSCode ApplePressAndHol">
+  <meta name="description" content="VS CodePlugin12345678910vimatom dark themeal code outlinepythondjangochineseopenAPI(Swagger)editoropenapi-lintSwagger ViewerYAML">
 <meta name="keywords" content="vscode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vscode配置手册">
 <meta property="og:url" content="http://fankcoder.com/2019/03/08/tool-2019-03-08-vscode/index.html">
 <meta property="og:site_name" content="三秋">
-<meta property="og:description" content="VS CodePlugin12345678910vimatom dark themeal code outlinepythondjangochineseopenAPI(Swagger)editoropenapi-lintSwagger ViewerYAML  vim 插件不能响应长按的解决123defaults write com.microsoft.VSCode ApplePressAndHol">
+<meta property="og:description" content="VS CodePlugin12345678910vimatom dark themeal code outlinepythondjangochineseopenAPI(Swagger)editoropenapi-lintSwagger ViewerYAML">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-13T15:28:51.907Z">
+<meta property="og:updated_time" content="2019-10-10T18:39:32.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vscode配置手册">
-<meta name="twitter:description" content="VS CodePlugin12345678910vimatom dark themeal code outlinepythondjangochineseopenAPI(Swagger)editoropenapi-lintSwagger ViewerYAML  vim 插件不能响应长按的解决123defaults write com.microsoft.VSCode ApplePressAndHol">
+<meta name="twitter:description" content="VS CodePlugin12345678910vimatom dark themeal code outlinepythondjangochineseopenAPI(Swagger)editoropenapi-lintSwagger ViewerYAML">
   <link rel="canonical" href="http://fankcoder.com/2019/03/08/tool-2019-03-08-vscode/">
 
 
@@ -283,7 +283,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-08-13 23:28:51" itemprop="dateModified" datetime="2019-08-13T23:28:51+08:00">2019-08-13</time>
+                <time title="Modified: 2019-10-11 02:39:32" itemprop="dateModified" datetime="2019-10-11T02:39:32+08:00">2019-10-11</time>
               </span>
             
           
@@ -314,6 +314,7 @@
       
         <h2 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h2><h3 id="Plugin"><a href="#Plugin" class="headerlink" title="Plugin"></a>Plugin</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">vim</span><br><span class="line">atom dark theme</span><br><span class="line">al code outline</span><br><span class="line">python</span><br><span class="line">django</span><br><span class="line">chinese</span><br><span class="line">openAPI(Swagger)editor</span><br><span class="line">openapi-lint</span><br><span class="line">Swagger Viewer</span><br><span class="line">YAML</span><br></pre></td></tr></table></figure>
 
+<a id="more"></a>
 <h3 id="vim-插件不能响应长按的解决"><a href="#vim-插件不能响应长按的解决" class="headerlink" title="vim 插件不能响应长按的解决"></a>vim 插件不能响应长按的解决</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false # For VS Code</span><br><span class="line"></span><br><span class="line">defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false # For VS Code Insider</span><br></pre></td></tr></table></figure>
 
 <h3 id="使用tab键切换提示"><a href="#使用tab键切换提示" class="headerlink" title="使用tab键切换提示"></a>使用tab键切换提示</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[&#123;</span><br><span class="line"></span><br><span class="line">&quot;key&quot;: &quot;tab&quot;,</span><br><span class="line"></span><br><span class="line">&quot;command&quot;: &quot;-acceptSelectedSuggestion&quot;,</span><br><span class="line"></span><br><span class="line">&quot;when&quot;: &quot;suggestWidgetVisible &amp;&amp; textInputFocus&quot;</span><br><span class="line"></span><br><span class="line">&#125;,</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&quot;key&quot;: &quot;tab&quot;,</span><br><span class="line"></span><br><span class="line">&quot;command&quot;: &quot;selectNextSuggestion&quot;,</span><br><span class="line"></span><br><span class="line">&quot;when&quot;: &quot;suggestWidgetMultipleSuggestions &amp;&amp; suggestWidgetVisible &amp;&amp; textInputFocus&quot;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">]</span><br></pre></td></tr></table></figure>

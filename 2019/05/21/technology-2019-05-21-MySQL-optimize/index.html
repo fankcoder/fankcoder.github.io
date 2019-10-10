@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等 SQL优化&amp;amp;索引SQL优化常见的SQL优化： 使用limit对查询结果的记录进行限定 避免select *，将需要查找的字段列出来 使用连接（join）来代替子查询 拆分大的delete或insert语句 OR改写成IN 避免%xxx式查询 使用">
+  <meta name="description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等">
 <meta name="keywords" content="SQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL亿级表优化">
 <meta property="og:url" content="http://fankcoder.com/2019/05/21/technology-2019-05-21-MySQL-optimize/index.html">
 <meta property="og:site_name" content="三秋">
-<meta property="og:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等 SQL优化&amp;amp;索引SQL优化常见的SQL优化： 使用limit对查询结果的记录进行限定 避免select *，将需要查找的字段列出来 使用连接（join）来代替子查询 拆分大的delete或insert语句 OR改写成IN 避免%xxx式查询 使用">
+<meta property="og:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-24T03:40:15.469Z">
+<meta property="og:updated_time" content="2019-10-10T18:34:17.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL亿级表优化">
-<meta name="twitter:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等 SQL优化&amp;amp;索引SQL优化常见的SQL优化： 使用limit对查询结果的记录进行限定 避免select *，将需要查找的字段列出来 使用连接（join）来代替子查询 拆分大的delete或insert语句 OR改写成IN 避免%xxx式查询 使用">
+<meta name="twitter:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等">
   <link rel="canonical" href="http://fankcoder.com/2019/05/21/technology-2019-05-21-MySQL-optimize/">
 
 
@@ -283,7 +283,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-09-24 11:40:15" itemprop="dateModified" datetime="2019-09-24T11:40:15+08:00">2019-09-24</time>
+                <time title="Modified: 2019-10-11 02:34:17" itemprop="dateModified" datetime="2019-10-11T02:34:17+08:00">2019-10-11</time>
               </span>
             
           
@@ -314,6 +314,8 @@
       
         <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案</p>
 <h2 id="设计之初"><a href="#设计之初" class="headerlink" title="设计之初"></a>设计之初</h2><p>设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等</p>
+<a id="more"></a>
+
 <h2 id="SQL优化-amp-索引"><a href="#SQL优化-amp-索引" class="headerlink" title="SQL优化&amp;索引"></a>SQL优化&amp;索引</h2><h4 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h4><p>常见的SQL优化：</p>
 <pre><code>使用limit对查询结果的记录进行限定
 避免select *，将需要查找的字段列出来

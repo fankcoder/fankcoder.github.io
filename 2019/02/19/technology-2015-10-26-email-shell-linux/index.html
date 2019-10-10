@@ -63,7 +63,7 @@
 <meta property="og:site_name" content="三秋">
 <meta property="og:description" content="Shell每日发邮件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-19T08:07:56.052Z">
+<meta property="og:updated_time" content="2019-10-10T18:37:40.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell每日发邮件">
 <meta name="twitter:description" content="Shell每日发邮件">
@@ -275,6 +275,18 @@
               <time title="Created: 2019-02-19 16:07:56" itemprop="dateCreated datePublished" datetime="2019-02-19T16:07:56+08:00">2019-02-19</time>
             </span>
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-11 02:37:40" itemprop="dateModified" datetime="2019-10-11T02:37:40+08:00">2019-10-11</time>
+              </span>
+            
+          
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -302,7 +314,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>很是好奇运维工作，刚好有幸接触到，每日发邮件脚本，多用来发送服务器日志，</p>
+        <p>脚本代码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">LOGFILE=&quot;$fank/&quot;`date +&quot;%Y%m%d&quot;`&quot;data&quot;#每日文件</span><br><span class="line"></span><br><span class="line">from=&quot;abc@123.com&quot;#发件人</span><br><span class="line"></span><br><span class="line">recipients=&quot;fank@123.com&quot;#收件人</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">subject=&quot;[REPORT]every day check&quot; #主题</span><br><span class="line">content=&quot;$(cat $&#123;LOGFILE&#125;)&quot;  #内容</span><br><span class="line"></span><br><span class="line">/usr/sbin/sendmail &quot;$&#123;recipients&#125;&quot; &lt;&lt;EOF</span><br><span class="line">subject:$&#123;subject&#125;</span><br><span class="line">from:$&#123;from&#125;</span><br><span class="line">$&#123;content&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 
 
@@ -333,8 +345,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/02/19/technology-2015-12-29-xrange-python/" rel="next" title="Python的xrange和range">
-                  <i class="fa fa-chevron-left"></i> Python的xrange和range
+                <a href="/2019/02/19/technology-2015-10-13-passwd-python/" rel="next" title="Python密码处理">
+                  <i class="fa fa-chevron-left"></i> Python密码处理
                 </a>
               
             </div>
@@ -343,8 +355,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/02/19/technology-2016-01-11-encode-python/" rel="prev" title="Python转码问题">
-                  Python转码问题 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/02/19/technology-2015-12-29-xrange-python/" rel="prev" title="Python的xrange和range">
+                  Python的xrange和range <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
