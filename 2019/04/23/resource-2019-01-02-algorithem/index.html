@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/small.jpg?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="数据结构DataArray「数组」。连续的记忆体。搜索、插入、删除的时间复杂度都是O(N) 。资料已排序，则支持二分搜索。 List （ Linked List ）「链表」。利用指针得到下一块记忆体。 搜索的时间复杂度是O(N) 。知道正确位置，插入与删除的时间复杂度是O(1) ，否则必须先搜索。无索引值，故不支持二分搜索。 特殊的List尾串到头，头尾循环，称作Circular List 。特色">
+<meta name="keywords" content="algorithem">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法&amp;数据结构">
+<meta property="og:url" content="http://fankcoder.com/2019/04/23/resource-2019-01-02-algorithem/index.html">
+<meta property="og:site_name" content="三秋">
+<meta property="og:description" content="数据结构DataArray「数组」。连续的记忆体。搜索、插入、删除的时间复杂度都是O(N) 。资料已排序，则支持二分搜索。 List （ Linked List ）「链表」。利用指针得到下一块记忆体。 搜索的时间复杂度是O(N) 。知道正确位置，插入与删除的时间复杂度是O(1) ，否则必须先搜索。无索引值，故不支持二分搜索。 特殊的List尾串到头，头尾循环，称作Circular List 。特色">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-27T02:02:26.161Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法&amp;数据结构">
+<meta name="twitter:description" content="数据结构DataArray「数组」。连续的记忆体。搜索、插入、删除的时间复杂度都是O(N) 。资料已排序，则支持二分搜索。 List （ Linked List ）「链表」。利用指针得到下一块记忆体。 搜索的时间复杂度是O(N) 。知道正确位置，插入与删除的时间复杂度是O(1) ，否则必须先搜索。无索引值，故不支持二分搜索。 特殊的List尾串到头，头尾循环，称作Circular List 。特色">
+  <link rel="canonical" href="http://fankcoder.com/2019/04/23/resource-2019-01-02-algorithem/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>算法&数据结构 | 三秋</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149748039-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-149748039-1');
+      }
+    </script>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">三秋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Think twice, code onece.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/fankcoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/04/23/resource-2019-01-02-algorithem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">算法&数据结构
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-04-23 17:22:55" itemprop="dateCreated datePublished" datetime="2019-04-23T17:22:55+08:00">2019-04-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-06-27 10:02:26" itemprop="dateModified" datetime="2019-06-27T10:02:26+08:00">2019-06-27</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/备忘/" itemprop="url" rel="index"><span itemprop="name">备忘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h1><h2 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h2><h4 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h4><p>「数组」。连续的记忆体。搜索、插入、删除的时间复杂度都是O(N) 。资料已排序，则支持二分搜索。</p>
+<h4 id="List-（-Linked-List-）"><a href="#List-（-Linked-List-）" class="headerlink" title="List （ Linked List ）"></a>List （ Linked List ）</h4><p>「链表」。利用指针得到下一块记忆体。</p>
+<p>搜索的时间复杂度是O(N) 。知道正确位置，插入与删除的时间复杂度是O(1) ，否则必须先搜索。无索引值，故不支持二分搜索。</p>
+<h4 id="特殊的List"><a href="#特殊的List" class="headerlink" title="特殊的List"></a>特殊的List</h4><p>尾串到头，头尾循环，称作Circular List 。特色是开头可以随便选、随便动。<br>只串单向，称作Singly Linked List 。双向都串，称作Doubly Linked List ，特色是双向都能搜索。</p>
+<h4 id="List-里面放入Array"><a href="#List-里面放入Array" class="headerlink" title="List 里面放入Array"></a>List 里面放入Array</h4><pre><code>英文做Unrolled Linked List ，中文称作「松散链表」、「块状链表」。查无正式学术名称。
+
+N 笔资料，分成A 块，每块约B = N/A 个元素。每块各自记录元素数量。
+
+索引：先数块、再数元素，时间复杂度为O(A) 。
+
+搜索：全找，时间复杂度为O(N) 。资料已排序，则为O(A + logB) 。
+
+插入、删除：一块大于等于2B 就拆开成两块，相邻两块小于等于B 就合并成一块，避免一拆开就要合并、一合并就要拆开，时间复杂度为O(A + 2B) 到O(2A + B) 。</code></pre><h4 id="Array-里面放入List"><a href="#Array-里面放入List" class="headerlink" title="Array 里面放入List"></a>Array 里面放入List</h4><p>大致上就是图论的Adjacency Lists 。</p>
+<p>大致上就是之后提到的Hash Table 。</p>
+<h2 id="Binary-Tree-二叉树"><a href="#Binary-Tree-二叉树" class="headerlink" title="Binary Tree - 二叉树"></a>Binary Tree - 二叉树</h2><p>二叉树是每个节点最多有两个子树的树结构，子树有左右之分，二叉树常被用于实现二叉查找树和二叉堆。</p>
+<h4 id="遍历"><a href="#遍历" class="headerlink" title="遍历"></a>遍历</h4><p>按照访问根元素(当前元素)的前后顺序，遍历方式可划分为如下几种：</p>
+<p>深度优先：先访问子节点，再访问父节点，最后访问第二个子节点。根据根节点相对于左右子节点的访问先后顺序又可细分为以下三种方式。<br>前序(pre-order)：先根后左再右<br>中序(in-order)：先左后根再右<br>后序(post-order)：先左后右再根<br>广度优先：先访问根节点，沿着树的宽度遍历子节点，直到所有节点均被访问为止。</p>
+<pre><code># 创建二叉树
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+
+# 将数组以BST形式插入二叉树
+def create(arr):
+    root = None
+    for i in arr:
+        root = insert(root, i)
+    return root    
+
+def insert(root, num):
+    if not root: return TreeNode(num)
+    if num &lt;= root.val:
+        root.left = insert(root.left, num)
+    else:
+        root.right = insert(root.right, num)
+    return root    
+
+# 遍历二叉树
+class Traversal(object):
+    def __init__(self):
+        self.traverse_path = list()
+
+    def preorder(self, root):
+        if root:
+            self.traverse_path.append(root.val)
+            self.preorder(root.left)
+            self.preorder(root.right)
+
+    def inorder(self,root):
+        if root:
+            self.inorder(root.left)
+            self.traverse_path.append(root.val)
+            self.inorder(root.right)
+
+    def postorder(self,root):
+        if root:
+            self.postorder(root.left)
+            self.postorder(root.right)
+            self.traverse_path.append(root.val)</code></pre><h4 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h4><p>一颗二叉查找树(BST)是一颗二叉树，其中每个节点都含有一个可进行比较的键及相应的值，且每个节点的键都大于等于左子树中的任意节点的键，而小于右子树中的任意节点的键。</p>
+<ul>
+<li>使用中序遍历可得到有序数组（有小到大），这是二叉查找树的又一个重要特征。</li>
+</ul>
+<h4 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h4><p>1.确定root<br>2.根据长度再确定root<br>3.递归</p>
+<pre><code>28 def rebuild(pre, ino):
+29     if len(pre) == 0: return
+30     if len(pre) == 1:
+31         return TreeNode(pre[0])
+32     else:
+33         root = TreeNode(pre[0])
+34         root.left = rebuild(pre[1:ino.index(root.val)+1], ino[:ino.index(root.val)])
+35         root.right = rebuild(pre[ino.index(root.val)+1:], ino[ino.index(root.val)+1:])
+36     return root</code></pre><h2 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h2><p>「队列」像排队，维持资料前后顺序。插入、删除需时O(1) 。搜索需时O(N) 。<br>Queue 是一个 FIFO（先进先出）的数据结构，并发中使用较多，可以安全地将对象从一个任务传给另一个任务。</p>
+<h4 id="Deque-（-Double-Ended-Queue-）"><a href="#Deque-（-Double-Ended-Queue-）" class="headerlink" title="Deque （ Double Ended Queue ）"></a>Deque （ Double Ended Queue ）</h4><p>两头皆能插入与删除，称作Deque ，同时有着Stack 和Queue 的功效。</p>
+<pre><code>dq = collections.deque();
+dq.appendleft(e)
+dq.append(e)
+dq.popleft()
+dq.pop()</code></pre><h2 id="Heap-堆"><a href="#Heap-堆" class="headerlink" title="Heap - 堆"></a>Heap - 堆</h2><p>一般情况下，堆通常指的是二叉堆，二叉堆是一个近似完全二叉树的数据结构，但由于对二叉树平衡及插入/删除操作较为麻烦，二叉堆实际上使用数组来实现。即物理结构为数组，逻辑结构为完全二叉树。子结点的键值或索引总是小于（或者大于）它的父节点，且每个节点的左右子树又是一个二叉堆(大根堆或者小根堆)。根节点最大的堆叫做最大堆或大根堆，根节点最小的堆叫做最小堆或小根堆。常被用作实现优先队列。</p>
+<h4 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h4><ol>
+<li>以数组表示，但是以完全二叉树的方式理解。</li>
+<li>唯一能够同时最优地利用空间和时间的方法——最坏情况下也能保证使用 2N \log N2NlogN 次比较和恒定的额外空间。</li>
+<li>在索引从0开始的数组中：<br>父节点 i 的左子节点在位置(2<em>i+1)<br>父节点 i 的右子节点在位置(2</em>i+2)<br>子节点 i 的父节点在位置floor((i-1)/2)</li>
+</ol>
+<pre><code>class MaxHeap:
+    def __init__(self, array=None):
+        if array:
+            self.heap = self._max_heapify(array)
+        else:
+            self.heap = []
+
+    def _sink(self, array, i):
+        # move node down the tree
+        left, right = 2 * i + 1, 2 * i + 2
+        max_index = i
+        # should compare two chidren then determine which one to swap with
+        if left &lt; len(array) and right &lt; len(array):
+            flag = array[left] &gt; array[right]
+        else:
+            flag = True
+        if left &lt; len(array) and array[left] &gt; array[max_index] and flag:
+            max_index = left
+        if right &lt; len(array) and array[right] &gt; array[max_index] and not flag:
+            max_index = right
+        if max_index != i:
+            array[i], array[max_index] = array[max_index], array[i]
+            self._sink(array, max_index)
+
+    def _swim(self, array, i):
+        # move node up the tree
+        if i == 0:
+            return
+        father = (i - 1) / 2
+        if array[father] &lt; array[i]:
+            array[father], array[i] = array[i], array[father]
+            self._swim(array, father)
+
+    def _max_heapify(self, array):
+        for i in xrange(len(array) / 2, -1, -1):
+            self._sink(array, i)
+        return array
+
+    def push(self, item):
+        self.heap.append(item)
+        self._swim(self.heap, len(self.heap) - 1)
+
+    def pop(self):
+        self.heap[0], self.heap[-1] = self.heap[-1], self.heap[0]
+        item = self.heap.pop()
+        self._sink(self.heap, 0)
+        return item</code></pre><h2 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h2><p>栈是一种 LIFO(Last In First Out) 的数据结构，常用方法有添加元素，取栈顶元素，弹出栈顶元素，判断栈是否为空。</p>
+<pre><code>stack = []
+len(stack) # size of stack
+
+# more efficient stack
+import collections
+stack = collections.deque()
+
+len(stack) != 0 - 判断stack是否weikong
+stack[-1] - 取栈顶元素，不移除
+pop() - 移除栈顶元素并返回该元素
+append(item) - 向栈顶添加元素</code></pre><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><pre><code>Set 是一种用于保存不重复元素的数据结构。常被用作测试归属性，故其查找的性能十分重要</code></pre><h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>Map 是一种关联数组的数据结构，也常被称为字典或键值对。在 Python 中 dict(Map) 是一种基本的数据结构。</p>
+<h4 id="Hash-Table"><a href="#Hash-Table" class="headerlink" title="Hash Table"></a>Hash Table</h4><pre><code>当元素的数值范围很大，甚至元素不是整数，此时可以利用hash function 得到一个索引值，而不会超出列表边界。
+
+数值范围小，索引储存是首选，省时间费空间；数值范围大，循序储存是首选，省空间费时间。hash table 两者兼具，介于中间。</code></pre><h2 id="Graph-图"><a href="#Graph-图" class="headerlink" title="Graph - 图"></a>Graph - 图</h2><p>图的表示通常使用邻接矩阵和邻接表，前者易实现但是对于稀疏矩阵会浪费较多空间，后者使用链表的方式存储信息但是对于图搜索时间复杂度较高。</p>
+<h4 id="邻接矩阵"><a href="#邻接矩阵" class="headerlink" title="邻接矩阵"></a>邻接矩阵</h4><p>设顶点个数为 V, 那么邻接矩阵可以使用 V × V 的二维数组来表示。 g[i][j]表示顶点i和顶点j的关系，对于无向图可以使用0/1表示是否有连接，对于带权图则需要使用INF来区分。有重边时保存边数或者权值最大/小的边即可。</p>
+<h4 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h4><p>邻接表通过表示从顶点i出发到其他所有可能能到的边。</p>
+<h2 id="Python位运算操作符"><a href="#Python位运算操作符" class="headerlink" title="Python位运算操作符"></a>Python位运算操作符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>意义</th>
+<th>举例</th>
+<th>操作符</th>
+<th>意义</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>~</td>
+<td>按位取反</td>
+<td>~5</td>
+<td>&amp;</td>
+<td>按位与</td>
+<td>5&amp;6</td>
+</tr>
+<tr>
+<td>|</td>
+<td>按位或</td>
+<td>5|6</td>
+<td>^</td>
+<td>按位异或</td>
+<td>5^6</td>
+</tr>
+<tr>
+<td>&lt;&lt;</td>
+<td>左移m位</td>
+<td>5&lt;&lt;1</td>
+<td>&gt;&gt;</td>
+<td>右移</td>
+<td>6&gt;&gt;1</td>
+</tr>
+</tbody></table>
+<h4 id="原码反码补码"><a href="#原码反码补码" class="headerlink" title="原码反码补码"></a>原码反码补码</h4><ol>
+<li><p>原码：原码是二进制数字的一种简单的表示法。二进制首位为符号位，1代表负，0代表正。</p>
+</li>
+<li><p>反码：反码可由原码得到。如果是正数，反码与原码相同；如果是负数，反码是其原码（符号位除外）各位取反而得到的。</p>
+</li>
+<li><p>补码：补码可由原码得到。如果是正数，补码与原码相同；如果是负数，补码是对其原码（除符号位外）各位取反，并在末位加1而得到的（有进位则进位，但不改变符号位）。</p>
+</li>
+</ol>
+<p>原码是为了方便人计算，补码是方便计算机计算，而反码是认为提出的一个中间桥梁。<br>计算机里面，只有加法器，没有减法器，所有的减法运算，都必须用加法进行。<br>用补数代替原数，可把减法转变为加法。出现的进位就是模，此时的进位，就应该忽略不计。<br>二进制下，有多少位数参加运算，模就是在 1 的后面加上多少个 0。<br>补码就是按照这个要求来定义的：正数不变，负数即用模减去绝对值。</p>
+<h4 id="Python位运算"><a href="#Python位运算" class="headerlink" title="Python位运算"></a>Python位运算</h4><p>数字在计算机中是以补码保存的，所以用Python位运算作用在补码上，每一位都参与运算：</p>
+<p>按位取反~：按位取反后得到二进制表示，把该二进制看成一个新的补码，返回该补码对应的数字结果。</p>
+<h4 id="按位与-amp"><a href="#按位与-amp" class="headerlink" title="按位与&amp;"></a>按位与&amp;</h4><p>相同位的两个数字都为1，则为1；若有一个不为1，则为0。</p>
+<p>可以用来判断一个整数的奇偶，二进制的最末位为0表示该数为偶数，最末位为1表示该数为奇数。</p>
+<h4 id="或"><a href="#或" class="headerlink" title="或|"></a>或|</h4><p>相同位只要一个为1即为1。</p>
+<p>or运算通常用于二进制特定位上的无条件赋值，例如一个数or 1的结果就是把二进制最末位强行变成1。</p>
+<h4 id="异或"><a href="#异或" class="headerlink" title="异或^"></a>异或^</h4><p>（^或者xor）如果某位不同则该位为1, 否则该位为0.</p>
+<h4 id="同取反"><a href="#同取反" class="headerlink" title="同取反~"></a>同取反~</h4><p>not运算（~）的定义是把内存中的0和1全部取反。</p>
+<h4 id="左移-lt-lt-和右移-gt-gt"><a href="#左移-lt-lt-和右移-gt-gt" class="headerlink" title="左移&lt;&lt;和右移&gt;&gt;"></a>左移&lt;&lt;和右移&gt;&gt;</h4><p>左移和右移N位等同于无溢出检查（忽略溢出）的N次幂运算2**N。对长整型来说，位操作符使用一种修改的二进制补码形式，使得符号位可以无限向左扩展。也就是说，向左移位不会溢出。</p>
+<h2 id="Incremental-Method"><a href="#Incremental-Method" class="headerlink" title="Incremental Method"></a>Incremental Method</h2><p>「递增法」是符合电脑运作特性的方法。电脑执行程式，一次只做一个动作，完成了一件事才做下一件事。当一个问题太大太多时，化整为零、一个一个解决吧！</p>
+<h4 id="selection-sort"><a href="#selection-sort" class="headerlink" title="selection sort"></a>selection sort</h4><pre><code>1 def selection(_l):
+2     for i in range(len(_l)):
+3         min = i
+4         for j in range(i+1,len(_l)):
+5             if _l[j] &lt; _l[min]:
+6                 min = j
+7         _l[i], _l[min] = _l[min], _l[i]
+8     print(_l)</code></pre><h2 id="Memoization"><a href="#Memoization" class="headerlink" title="Memoization"></a>Memoization</h2><p>「记忆法」是符合电脑运作特性的方法。电脑拥有大量储存空间。只要将计算过的数值，储存于记忆体，往后就能直接使用记忆体储存的资料，不必再浪费时间重复计算一遍。</p>
+<pre><code>array = [[0 for i in range(n)] for j in range(n)]
+#利用列表生成式快速创建多维数组</code></pre><h2 id="Enumeration"><a href="#Enumeration" class="headerlink" title="Enumeration"></a>Enumeration</h2><p>「枚举法」利用了电脑无与伦比的计算速度。找到不确定的变数，枚举所有可能性，逐一判断正确性。</p>
+<pre><code> 1 S = &quot;It&apos;s a pencil.&quot;
+ 2 s = &quot;a pen&quot;
+ 3
+ 4 for i in range(0, len(S)):
+ 5     flag = True
+ 6     for j in range(0, len(s)):
+ 7         if S[i+j] != s[j]:
+ 8             flag = False
+ 9     if flag:
+10         print(i, S[i])
+11         break</code></pre><h2 id="Straightforward-Method-Trial-and-Error"><a href="#Straightforward-Method-Trial-and-Error" class="headerlink" title="Straightforward Method / Trial and Error"></a>Straightforward Method / Trial and Error</h2><p>「直接法」，直接算出答案。直接法和试误法刚好相反。直接法是由题目本身下手，推导答案；试误法则是从答案下手，让答案迎合题目需求。</p>
+<h4 id="暴力攻击（-Brute-Force-Attack-）"><a href="#暴力攻击（-Brute-Force-Attack-）" class="headerlink" title="暴力攻击（ Brute Force Attack ）"></a>暴力攻击（ Brute Force Attack ）</h4><p>破解密码最简单的方法叫做「暴力攻击」。不知道密码规律的情况下，无法直接推导正确密码，只好以试误法一一检验所有可能的密码，从中找出正确密码。</p>
+<h4 id="单向函数（-One-way-Function-）"><a href="#单向函数（-One-way-Function-）" class="headerlink" title="单向函数（ One-way Function ）"></a>单向函数（ One-way Function ）</h4><p>「单向函数」是一种特别的函数，给定输入很容易算出输出，但是给定输出却很难算出输入。</p>
+<h2 id="Iterative-Method"><a href="#Iterative-Method" class="headerlink" title="Iterative Method"></a>Iterative Method</h2><p>叠代法，也叫递推法。不断利用目前求得的数值，再求得新数值。</p>
+<h4 id="数学归纳法（-Mathematical-Induction-）"><a href="#数学归纳法（-Mathematical-Induction-）" class="headerlink" title="数学归纳法（ Mathematical Induction ）"></a>数学归纳法（ Mathematical Induction ）</h4><pre><code>数学归纳法的第二步骤，就是证明可不可以递推！第二步骤的证明过程中一定会用到递推！
+1. 先证明n = 1 成立。（有时候不见得要从1开始。）
+2. 假设n = k 成立，证明n = k+1 也会成立。
+当1. 2. 得证，就表示n = 1 ... ∞ 全部都成立。</code></pre><h4 id="插入排序法（-Insertion-Sort-）"><a href="#插入排序法（-Insertion-Sort-）" class="headerlink" title="插入排序法（ Insertion Sort ）"></a>插入排序法（ Insertion Sort ）</h4><pre><code>从表面上来看是递增法与枚举法：第一层是递增法，逐一把每个数字插入到左方已排序的列表。第二层是枚举法，搜索插入位置；再将大量数字往右挪，以腾出空间插入数字。</code></pre><h2 id="Recursive-Method"><a href="#Recursive-Method" class="headerlink" title="Recursive Method"></a>Recursive Method</h2><p>递归法。重复运用相同手法，缩减问题范围，直到厘清细节。<br>递推法与递归法恰好颠倒：递推法是针对已知，逐步累积，直至周全；递归法是针对未知，反覆拆解，直至精确。</p>
+<h2 id="Greedy-Method"><a href="#Greedy-Method" class="headerlink" title="Greedy Method"></a>Greedy Method</h2><p>「贪心法」。以Incremental Method 或Iterative Method 制造答案的方法，大致上分为两类：</p>
+<pre><code>一、填答案：从没有答案开始，逐步填满答案。
+二、改答案：先随便弄个答案，逐步修饰答案。
+一、观察问题特征，拟定一个填答案、改答案的原则。
+二、随便挑几个特例，手算一下。
+  如果答案都对，就大胆假设此原则是正确的。
+  （也可以尝试证明此原则必定正确。）
+三、实作程式码，把答案算出来。</code></pre><h4 id="不重复组合（-Combination-）"><a href="#不重复组合（-Combination-）" class="headerlink" title="不重复组合（ Combination ）"></a>不重复组合（ Combination ）</h4><pre><code>从N 个人抓M 个人出来组团，有哪些组合方式呢？
+N 个人当中的其中一个人，叫做甲君好了，我们将原问题分割成两种情形：甲君在团中、甲君不在团中。甲君在团中，演变成剩下N-1个人要再抓M-1个人出来组团。
+甲君不在团中，演变成剩下N-1个人仍要抓M个人出来组团。
+
+综合这两个子问题的组合方式，就得到答案。从N 个人抓M 个人出来组团，有哪些组合方式呢？
+N 个人当中的其中一个人，叫做甲君好了，我们将原问题分割成两种情形：甲君在团中、甲君不在团中。甲君在团中，演变成剩下N-1个人要再抓M-1个人出来组团。
+甲君不在团中，演变成剩下N-1个人仍要抓M个人出来组团。
+
+综合这两个子问题的组合方式，就得到答案。</code></pre><h4 id="二分搜索法（-Binary-Search-）"><a href="#二分搜索法（-Binary-Search-）" class="headerlink" title="二分搜索法（ Binary Search ）"></a>二分搜索法（ Binary Search ）</h4><p>这是在已排序列表里面搜索数字的方法。列表由中央切成两边，一边数字较小、一边数字较大。这两边一定有一边不是我们所要的，可以去除，只需要继续寻找其中一边。</p>
+<h2 id="Sort"><a href="#Sort" class="headerlink" title="Sort"></a>Sort</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>best case average case worst case</th>
+<th>extra space</th>
+<th>stable</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>brute force</td>
+<td>O(NR) O(NR) O(NR)</td>
+<td>O(N)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>selection sort</td>
+<td>O(NN) O(NN) O(NN)</td>
+<td>O(1)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>bubble sort</td>
+<td>O(N) O(NN) O(NN)</td>
+<td>O(1)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>gnome sort</td>
+<td>O(N) O(NN) O(NN)</td>
+<td>O(1)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>insertion sort</td>
+<td>O(N) O(NN) O(NN)</td>
+<td>O(1)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>Shell sort</td>
+<td>O(NN) O(NN) O(NN)</td>
+<td>O(1)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>merge sort</td>
+<td>O(NlogN) O(NlogN) O(NlogN)</td>
+<td>O(N)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>Timsort</td>
+<td>O(NlogN) O(NlogN) O(NlogN)</td>
+<td>O(N)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>quicksort</td>
+<td>O(NlogN) O(NlogN) O(NN)</td>
+<td>O(N)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>heapsort</td>
+<td>O(NlogN) O(NlogN) O(NlogN)</td>
+<td>O(1)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>introsort</td>
+<td>O(NlogN) O(NlogN) O(NlogN)</td>
+<td>O(N)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>counting sort</td>
+<td>O(N+R) O(N+R) O(N+R)</td>
+<td>O(N+R)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>radix sort</td>
+<td>O(NlogR) O(NlogR) O(NlogR)</td>
+<td>O(N)</td>
+<td>O</td>
+</tr>
+<tr>
+<td>bucket sort</td>
+<td>O(N+R) O(N+R) O(NNR)</td>
+<td>O(NR)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>flashsort</td>
+<td>O(N+R) O(N+R) O(NN)</td>
+<td>O(N)</td>
+<td>X</td>
+</tr>
+<tr>
+<td>sleep sort</td>
+<td>O(N+R) O(N+R) O(N+R)</td>
+<td>O(N)</td>
+<td>X</td>
+</tr>
+</tbody></table>
+<h4 id="排序原理"><a href="#排序原理" class="headerlink" title="排序原理"></a>排序原理</h4><pre><code>排序的基本原理，当今只有两种，一是对调（数字是实数），二是放置（数字必须是整数）。
+
+纯粹透过对调来排序，已证明出数字两两比较的次数是Ω(NlogN) ，不可能更少了，当今也已经有了到达下限的排序演算法，例如merge sort 。同时透过对调与放置来排序，则可以打破方才的下限，例如flashsort 。
+
+纯粹透过放置来排序，需要额外的记忆体空间来放置数字。时间复杂度通常是数字数量加上记忆体用量，效率相当好，只可惜只能处理整数，例如counting sort 。</code></pre><h4 id="selection-sort-1"><a href="#selection-sort-1" class="headerlink" title="selection sort"></a>selection sort</h4><p>扫描一遍所有数字，找到最小值，挪至列表左端。递归处理尚未排序的N-1 个元素。复杂度: O(N2) — 实际上，这和冒泡排序很像。</p>
+<pre><code>1 def selection(_l):
+2     for i in range(len(_l)):
+3         min = i
+4         for j in range(i+1,len(_l)):
+5             if _l[j] &lt; _l[min]:
+6                 min = j
+7         _l[i], _l[min] = _l[min], _l[i]
+8     print(_l)</code></pre><h4 id="Bubble-Sort"><a href="#Bubble-Sort" class="headerlink" title="Bubble Sort"></a>Bubble Sort</h4><p>由左到右，相邻两两比较，较大者往右挪，最后最大值会出现在列表右端。递归处理尚未排序的N-1 个元素。冒泡排序实际上是低效的，它的 O(N^2) 时间复杂度。</p>
+<pre><code>1 def bubble(l):
+2     for i in range(0, len(l)):
+3         for j in range(0, len(l)-i-1):
+4             if l[j] &gt; l[j+1]:
+5                 l[j], l[j+1] = l[j+1], l[j]
+6     print(l)</code></pre><h4 id="Gnome-Sort"><a href="#Gnome-Sort" class="headerlink" title="Gnome Sort"></a>Gnome Sort</h4><p>原理和Bubble Sort 相同，但是两两比较的先后次序有所改变。特色是程式码只有一个loop，结构简单。</p>
+<pre><code>1 def gnome(l):
+2     i = 0
+3     while i &lt; len(l):
+4         if i == 0 or l[i-1] &lt; l[i]:
+5             i += 1
+6         else:
+7             l[i], l[i-1] = l[i-1], l[i]
+8             i -= 1
+9     print(l)</code></pre><h4 id="Insertion-Sort"><a href="#Insertion-Sort" class="headerlink" title="Insertion Sort"></a>Insertion Sort</h4><p>由左到右，逐一把数字插入到目前已排序的列表当中。需将大量数字往右挪，以腾出空间插入数字。最佳情况时间是O(N × 1) = O(N) ，最坏情况时间是O(N × N) = O(N2).</p>
+<pre><code>1 def insert(l):
+2     for i in range(1, len(l)):
+3         key = l[i]
+4         j = i - 1
+5         while j &gt;=0 and key &lt; l[j]:
+6             l[j+1] = l[j]
+7             j -= 1
+8         l[j+1] = key
+9     print(l)</code></pre><h4 id="Merge-Sort"><a href="#Merge-Sort" class="headerlink" title="Merge Sort"></a>Merge Sort</h4><p>归并排序是分而治之的排序算法。<br>划分步骤很简单：将当前数组分成两半（如果N是偶数，则将其完全平等，或者如果N是奇数，则一边稍大于一个元素），然后递归地对这两半进行排序。<br>归并子例程合并两个（排序的）半部分以形成一个有序数组。归并排序非常适合分类非常大量的输入，因为O（N log N）比前面讨论的O（N2）排序算法增长得慢得多。</p>
+<pre><code> 1 def mergeSort(arr):
+ 2     if len(arr) &gt;1:
+ 3         mid = len(arr)//2 #Finding the mid of the array
+ 4         L = arr[:mid] # Dividing the array elements
+ 5         R = arr[mid:] # into 2 halves
+ 6
+ 7         mergeSort(L) # Sorting the first half
+ 8         mergeSort(R) # Sorting the second half
+ 9
+10         i = j = k = 0
+11
+12         # Copy data to temp arrays L[] and R[]
+13         while i &lt; len(L) and j &lt; len(R):
+14             if L[i] &lt; R[j]:
+15                 arr[k] = L[i]
+16                 i+=1
+17             else:
+18                 arr[k] = R[j]
+19                 j+=1
+20             k+=1
+21
+22         # Checking if any element was left
+23         while i &lt; len(L):
+24             arr[k] = L[i]
+25             i+=1
+26             k+=1
+27
+28         while j &lt; len(R):
+29             arr[k] = R[j]
+30             j+=1
+31             k+=1</code></pre><h4 id="Quicksort"><a href="#Quicksort" class="headerlink" title="Quicksort"></a>Quicksort</h4><p>快速排序是另一个分而治之排序算法。选主元很重要，找头中尾3个数的中位数，例如8,12,3中位数为8，复杂点5个7个数选取中位数.Quicksort 演算法的陷阱相当多，须考虑数字全都相等、判断式是小于还是小于等于、分割点恰好选到最大值或者最小值、递归的区段范围、递归的区段很短、 ……等等问题。</p>
+<pre><code> 1 def sort(array=[12,4,5,6,7,3,1,15]):
+ 2     less = []
+ 3     equal = []
+ 4     greater = []
+ 5
+ 6     if len(array) &gt; 1:
+ 7         pivot = array[0] #can be better
+ 8         for x in array:
+ 9             if x &lt; pivot:
+10                 less.append(x)
+11             elif x == pivot:
+12                 equal.append(x)
+13             else x &gt; pivot:
+14                 greater.append(x)
+15         return sort(less)+equal+sort(greater)
+16     else:
+17         return array</code></pre><p> 使用列表生成式简写</p>
+<pre><code> 19  def qsort(arr):
+20     if len(arr) &gt; 1:
+21         pivot = arr[0]
+22         return qsort([ for x in arr if x &lt; pivot ]) + [pivot] + qsort([ for x in arr if x &gt;= pivot ])
+23     else:
+24         return arr</code></pre>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/algorithem/" rel="tag"><i class="fa fa-tag"></i> algorithem</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/04/14/life-2019-01-01-life-time-manage/" rel="next" title="时间和人生感悟">
+                  <i class="fa fa-chevron-left"></i> 时间和人生感悟
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/04/24/tool-2019-02-01-vim/" rel="prev" title="vim使用手册">
+                  vim使用手册 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据结构"><span class="nav-number">1.</span> <span class="nav-text">数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Data"><span class="nav-number">1.1.</span> <span class="nav-text">Data</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Array"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">Array</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-（-Linked-List-）"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">List （ Linked List ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊的List"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">特殊的List</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-里面放入Array"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">List 里面放入Array</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Array-里面放入List"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">Array 里面放入List</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binary-Tree-二叉树"><span class="nav-number">1.2.</span> <span class="nav-text">Binary Tree - 二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#遍历"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉查找树"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">二叉查找树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重建二叉树"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">重建二叉树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Queue"><span class="nav-number">1.3.</span> <span class="nav-text">Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Deque-（-Double-Ended-Queue-）"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">Deque （ Double Ended Queue ）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Heap-堆"><span class="nav-number">1.4.</span> <span class="nav-text">Heap - 堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特点"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">特点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack"><span class="nav-number">1.5.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Set"><span class="nav-number">1.6.</span> <span class="nav-text">Set</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Map"><span class="nav-number">1.7.</span> <span class="nav-text">Map</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hash-Table"><span class="nav-number">1.7.0.1.</span> <span class="nav-text">Hash Table</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph-图"><span class="nav-number">1.8.</span> <span class="nav-text">Graph - 图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#邻接矩阵"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">邻接矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#邻接表"><span class="nav-number">1.8.0.2.</span> <span class="nav-text">邻接表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Python位运算操作符"><span class="nav-number">1.9.</span> <span class="nav-text">Python位运算操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原码反码补码"><span class="nav-number">1.9.0.1.</span> <span class="nav-text">原码反码补码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Python位运算"><span class="nav-number">1.9.0.2.</span> <span class="nav-text">Python位运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#按位与-amp"><span class="nav-number">1.9.0.3.</span> <span class="nav-text">按位与&amp;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#或"><span class="nav-number">1.9.0.4.</span> <span class="nav-text">或|</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#异或"><span class="nav-number">1.9.0.5.</span> <span class="nav-text">异或^</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同取反"><span class="nav-number">1.9.0.6.</span> <span class="nav-text">同取反~</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#左移-lt-lt-和右移-gt-gt"><span class="nav-number">1.9.0.7.</span> <span class="nav-text">左移&lt;&lt;和右移&gt;&gt;</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Incremental-Method"><span class="nav-number">1.10.</span> <span class="nav-text">Incremental Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#selection-sort"><span class="nav-number">1.10.0.1.</span> <span class="nav-text">selection sort</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memoization"><span class="nav-number">1.11.</span> <span class="nav-text">Memoization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enumeration"><span class="nav-number">1.12.</span> <span class="nav-text">Enumeration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Straightforward-Method-Trial-and-Error"><span class="nav-number">1.13.</span> <span class="nav-text">Straightforward Method / Trial and Error</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#暴力攻击（-Brute-Force-Attack-）"><span class="nav-number">1.13.0.1.</span> <span class="nav-text">暴力攻击（ Brute Force Attack ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单向函数（-One-way-Function-）"><span class="nav-number">1.13.0.2.</span> <span class="nav-text">单向函数（ One-way Function ）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterative-Method"><span class="nav-number">1.14.</span> <span class="nav-text">Iterative Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数学归纳法（-Mathematical-Induction-）"><span class="nav-number">1.14.0.1.</span> <span class="nav-text">数学归纳法（ Mathematical Induction ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序法（-Insertion-Sort-）"><span class="nav-number">1.14.0.2.</span> <span class="nav-text">插入排序法（ Insertion Sort ）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Recursive-Method"><span class="nav-number">1.15.</span> <span class="nav-text">Recursive Method</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Greedy-Method"><span class="nav-number">1.16.</span> <span class="nav-text">Greedy Method</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不重复组合（-Combination-）"><span class="nav-number">1.16.0.1.</span> <span class="nav-text">不重复组合（ Combination ）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二分搜索法（-Binary-Search-）"><span class="nav-number">1.16.0.2.</span> <span class="nav-text">二分搜索法（ Binary Search ）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sort"><span class="nav-number">1.17.</span> <span class="nav-text">Sort</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#排序原理"><span class="nav-number">1.17.0.1.</span> <span class="nav-text">排序原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#selection-sort-1"><span class="nav-number">1.17.0.2.</span> <span class="nav-text">selection sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bubble-Sort"><span class="nav-number">1.17.0.3.</span> <span class="nav-text">Bubble Sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Gnome-Sort"><span class="nav-number">1.17.0.4.</span> <span class="nav-text">Gnome Sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Insertion-Sort"><span class="nav-number">1.17.0.5.</span> <span class="nav-text">Insertion Sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Merge-Sort"><span class="nav-number">1.17.0.6.</span> <span class="nav-text">Merge Sort</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Quicksort"><span class="nav-number">1.17.0.7.</span> <span class="nav-text">Quicksort</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="fankcoder">
+  <p class="site-author-name" itemprop="name">fankcoder</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/fankcoder" title="GitHub &rarr; https://github.com/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:fankcoder@gmail.com" title="E-Mail &rarr; mailto:fankcoder@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/u/2424646683" title="Weibo &rarr; https://weibo.com/u/2424646683" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.zhihu.com/people/si-xie-san-qiu/activities" title="Zhihu &rarr; https://www.zhihu.com/people/si-xie-san-qiu/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://space.bilibili.com/38307214" title="Bilibili &rarr; https://space.bilibili.com/38307214" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://steamcommunity.com/id/fankcoder" title="Steam &rarr; https://steamcommunity.com/id/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">coolshell</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://www.lining0806.com" title="http://www.lining0806.com" rel="noopener" target="_blank">lining0806</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fankcoder</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script>
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','msMtA93nEGFTkf4tckPn','2.0.0');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

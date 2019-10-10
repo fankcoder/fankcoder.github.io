@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/small.jpg?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="常用语法登录数据库mysql -h localhost -uroot -p 导出数据库mysqldump -uroot -p db &amp;gt; db.sql 导入数据库mysql -uroot -p db &amp;lt; db.sql // or mysql -uroot -p db -e “source /path/to/db.sql” 开启远程登录grant all privileges on ss.">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL常用语法">
+<meta property="og:url" content="http://fankcoder.com/2019/02/19/resource-2014-05-11-general-mysql-resources/index.html">
+<meta property="og:site_name" content="三秋">
+<meta property="og:description" content="常用语法登录数据库mysql -h localhost -uroot -p 导出数据库mysqldump -uroot -p db &amp;gt; db.sql 导入数据库mysql -uroot -p db &amp;lt; db.sql // or mysql -uroot -p db -e “source /path/to/db.sql” 开启远程登录grant all privileges on ss.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-09T04:25:28.753Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL常用语法">
+<meta name="twitter:description" content="常用语法登录数据库mysql -h localhost -uroot -p 导出数据库mysqldump -uroot -p db &amp;gt; db.sql 导入数据库mysql -uroot -p db &amp;lt; db.sql // or mysql -uroot -p db -e “source /path/to/db.sql” 开启远程登录grant all privileges on ss.">
+  <link rel="canonical" href="http://fankcoder.com/2019/02/19/resource-2014-05-11-general-mysql-resources/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>MySQL常用语法 | 三秋</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149748039-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-149748039-1');
+      }
+    </script>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">三秋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Think twice, code onece.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/fankcoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/02/19/resource-2014-05-11-general-mysql-resources/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">MySQL常用语法
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-02-19 16:07:56" itemprop="dateCreated datePublished" datetime="2019-02-19T16:07:56+08:00">2019-02-19</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-09 12:25:28" itemprop="dateModified" datetime="2019-10-09T12:25:28+08:00">2019-10-09</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/备忘/" itemprop="url" rel="index"><span itemprop="name">备忘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a>常用语法</h2><h3 id="登录数据库"><a href="#登录数据库" class="headerlink" title="登录数据库"></a>登录数据库</h3><p>mysql -h localhost -uroot -p</p>
+<h3 id="导出数据库"><a href="#导出数据库" class="headerlink" title="导出数据库"></a>导出数据库</h3><p>mysqldump -uroot -p db &gt; db.sql</p>
+<h3 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h3><p>mysql -uroot -p db &lt; db.sql</p>
+<p>// or</p>
+<p>mysql -uroot -p db -e “source /path/to/db.sql”</p>
+<h3 id="开启远程登录"><a href="#开启远程登录" class="headerlink" title="开启远程登录"></a>开启远程登录</h3><p>grant all privileges on ss.* to ‘root’@’%’ indentified by ‘passoword’ with grant option;</p>
+<p>// or</p>
+<p>update user set Host=”%” and User=”root”</p>
+<p>// 注意%是不包含localhost的</p>
+<p>flush privileges;</p>
+<h3 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h3><p>CREATE USER ‘test’@’localhost’ IDENTIFIED BY ‘password’;</p>
+<p>grant all privileges on <em>.</em> to test@’localhost’ identified by ‘test’;</p>
+<h3 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h3><p>CREATE SCHEMA testdb DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;</p>
+<h3 id="赋予数据库权限"><a href="#赋予数据库权限" class="headerlink" title="赋予数据库权限"></a>赋予数据库权限</h3><p>GRANT ALL ON testdb.* TO ‘test’@’localhost’;</p>
+<h3 id="查看表结构"><a href="#查看表结构" class="headerlink" title="查看表结构"></a>查看表结构</h3><p>desc 表名;</p>
+<h3 id="修改表名"><a href="#修改表名" class="headerlink" title="修改表名"></a>修改表名</h3><p>alter table t_book rename to bbb;</p>
+<h3 id="添加列："><a href="#添加列：" class="headerlink" title="添加列："></a>添加列：</h3><p>alter table 表名 add column 列名 varchar(30);</p>
+<h3 id="删除列："><a href="#删除列：" class="headerlink" title="删除列："></a>删除列：</h3><p>alter table 表名 drop column 列名;</p>
+<h3 id="清空mysql表中的记录有以下两种方法："><a href="#清空mysql表中的记录有以下两种方法：" class="headerlink" title="清空mysql表中的记录有以下两种方法："></a>清空mysql表中的记录有以下两种方法：</h3><p>delete from 表名; 不删除id?没实验</p>
+<p>truncate table 表名; 删除主键id</p>
+<h3 id="复制表结构"><a href="#复制表结构" class="headerlink" title="复制表结构"></a>复制表结构</h3><p>create table b select * from users where 0;</p>
+<p>create table a like users;</p>
+<p>create table b select * from users limit 0;</p>
+<h3 id="复制表"><a href="#复制表" class="headerlink" title="复制表"></a>复制表</h3><p>create table c select * from users;</p>
+<h3 id="删除表名为MyClass-的表"><a href="#删除表名为MyClass-的表" class="headerlink" title="删除表名为MyClass 的表"></a>删除表名为MyClass 的表</h3><p>drop table MyClass; //删除表名为MyClass 的表</p>
+<h3 id="SELECT"><a href="#SELECT" class="headerlink" title="SELECT"></a>SELECT</h3><p>SELECT * FROM table LIMIT 5;</p>
+<p>select * from issu_info limit 7,6; 从第8条开始取,取6条</p>
+<p>SELECT name,LENGTH(name)</p>
+<p>FROM world</p>
+<p>WHERE LENGTH(name)=5 AND region=’Europe’</p>
+<h3 id="between"><a href="#between" class="headerlink" title="between"></a>between</h3><p>SELECT name, population</p>
+<p>FROM world</p>
+<p>WHERE population BETWEEN 1000000 AND 1250000</p>
+<h3 id="like"><a href="#like" class="headerlink" title="like"></a>like</h3><p>SELECT name FROM world</p>
+<p>WHERE name LIKE ‘%a’ OR name LIKE ‘%l’</p>
+<h3 id="and"><a href="#and" class="headerlink" title="and"></a>and</h3><p>SELECT name, area, population</p>
+<p>FROM world</p>
+<p>WHERE area &gt; 50000 AND population &lt; 10000000</p>
+<h3 id="and-not"><a href="#and-not" class="headerlink" title="and not"></a>and not</h3><p>SELECT name,population,area FROM world</p>
+<p>WHERE (area&gt;3000000 or population&gt;250000000) and not (area&gt;3000000 and population&gt;250000000)</p>
+<h3 id="in"><a href="#in" class="headerlink" title="in"></a>in</h3><p>SELECT name, population/area</p>
+<p>FROM world</p>
+<p>WHERE name IN (‘China’, ‘Nigeria’, ‘France’, ‘Australia’)</p>
+<h3 id="case-when-…-then-…else…end"><a href="#case-when-…-then-…else…end" class="headerlink" title="case when … then …else…end"></a>case when … then …else…end</h3><p>SELECT name,</p>
+<p>CASE WHEN continent=’Oceania’ THEN ‘Australasia’</p>
+<p>ELSE continent END</p>
+<p>FROM world</p>
+<p>WHERE name LIKE ‘N%’</p>
+<h3 id="多个when"><a href="#多个when" class="headerlink" title="多个when"></a>多个when</h3><p>SELECT name,</p>
+<p>CASE WHEN continent in (“Europe”,”Asia”) THEN “Eurasia”</p>
+<p>WHEN continent in (“North America”,”South America”,”Caribbean”) THEN “America” ELSE continent END</p>
+<p>FROM world WHERE name LIKE “A%” OR name LIKE “b%”</p>
+<h3 id="ORDER-BY-DESC-由大到小排序"><a href="#ORDER-BY-DESC-由大到小排序" class="headerlink" title="ORDER BY .. DESC 由大到小排序"></a>ORDER BY .. DESC 由大到小排序</h3><p>SELECT winner,yr,subject FROM nobel</p>
+<p>where winner like ‘Sir%’ ORDER BY yr DESC, winner</p>
+<h3 id="复合查询"><a href="#复合查询" class="headerlink" title="复合查询"></a>复合查询</h3><p>SELECT DISTINCT yr</p>
+<p>FROM nobel</p>
+<p>WHERE subject=’Medicine’</p>
+<p>AND yr NOT IN(SELECT yr FROM nobel</p>
+<p>WHERE subject=’Literature’)</p>
+<p>AND yr NOT IN (SELECT yr FROM nobel</p>
+<p>WHERE subject=’Peace’)</p>
+<h3 id="Round"><a href="#Round" class="headerlink" title="Round"></a>Round</h3><p>ROUND(7253.86, 0) -&gt; 7254</p>
+<p>ROUND(7253.86, 1) -&gt; 7253.9</p>
+<p>ROUND(7253.86,-3) -&gt; 7000</p>
+<h3 id="CONCAT-将字符连在一起"><a href="#CONCAT-将字符连在一起" class="headerlink" title="CONCAT 将字符连在一起"></a>CONCAT 将字符连在一起</h3><p>SELECT CONCAT(region,name)</p>
+<p>FROM bbc</p>
+<p>select name,CONCAT(ROUND(100*population/(select population from world where name = ‘Germany’),0),’%’) from world</p>
+<p>where continent = ‘Europe’</p>
+<h3 id="ALL"><a href="#ALL" class="headerlink" title="ALL"></a>ALL</h3><p>SELECT name</p>
+<p>FROM world</p>
+<p>WHERE gdp &gt;ALL(SELECT gdp</p>
+<p>FROM world</p>
+<p>WHERE gdp&gt;0 and continent=’Europe’)</p>
+<p>每一个地区中面积最大的国家，引进x,y做对比</p>
+<p>SELECT continent, name, area FROM world x</p>
+<p>WHERE x.area &gt;= ALL</p>
+<p>(SELECT y.area FROM world y</p>
+<p>WHERE y.continent=x.continent</p>
+<p>AND area&gt;0)</p>
+<p>列出每个大洲和国家的名字第一个字母顺序排列。</p>
+<p>SELECT continent,name FROM world x</p>
+<p>WHERE x.name = (SELECT y.name FROM world y</p>
+<p>WHERE y.continent= x.continent order by name limit 1</p>
+<p>)</p>
+<h3 id="计算函数"><a href="#计算函数" class="headerlink" title="计算函数"></a>计算函数</h3><p>SUM, COUNT, MAX and AVG</p>
+<h3 id="distinct去重"><a href="#distinct去重" class="headerlink" title="distinct去重"></a>distinct去重</h3><p>SELECT DISTINCT region FROM bbc</p>
+<h3 id="ORDER-BY"><a href="#ORDER-BY" class="headerlink" title="ORDER BY"></a>ORDER BY</h3><p>ASC or DESC for ascending (smallest first, largest last) //小，大</p>
+<h3 id="GROUP-BY-相同分为一组"><a href="#GROUP-BY-相同分为一组" class="headerlink" title="GROUP BY 相同分为一组"></a>GROUP BY 相同分为一组</h3><p>SELECT continent, COUNT(name)</p>
+<p>FROM world</p>
+<p>GROUP BY continent</p>
+<h3 id="having"><a href="#having" class="headerlink" title="having"></a>having</h3><p>可以筛选成组后的各种数据，where字句在聚合前先筛选记录，也就是说作用在group by和having字句前。而 having子句在聚合后对组记录进行筛选。</p>
+<p>SELECT continent, SUM(population)</p>
+<p>FROM world</p>
+<p>GROUP BY continent</p>
+<p>HAVING SUM(population)&gt;500000000</p>
+<h3 id="JOIN-…-ON-多表关联查询"><a href="#JOIN-…-ON-多表关联查询" class="headerlink" title="JOIN … ON 多表关联查询"></a>JOIN … ON 多表关联查询</h3><p>SELECT games.yr, city.country</p>
+<p>FROM games JOIN city</p>
+<p>ON (games.city = city.name)</p>
+<p>SELECT goal.player,goal.teamid,game.stadium,game.mdate</p>
+<p>FROM game JOIN goal ON (game.id=goal.matchid) WHERE goal.teamid = ‘GER’</p>
+<h3 id="CASE-WHEN"><a href="#CASE-WHEN" class="headerlink" title="CASE WHEN"></a>CASE WHEN</h3><p>SELECT name, population</p>
+<p>,CASE WHEN population&lt;1000000</p>
+<p>THEN ‘small’</p>
+<p>WHEN population&lt;10000000</p>
+<p>THEN ‘medium’</p>
+<p>ELSE ‘large’</p>
+<p>END</p>
+<p>FROM bbc</p>
+<h3 id="LEFT-JOIN-…-ON-…-可以包含左表空值"><a href="#LEFT-JOIN-…-ON-…-可以包含左表空值" class="headerlink" title="LEFT JOIN … ON … 可以包含左表空值"></a>LEFT JOIN … ON … 可以包含左表空值</h3><p>SELECT games.yr, city.country</p>
+<p>FROM games LEFT JOIN city</p>
+<p>ON (games.city = city.name)</p>
+<h3 id="INSERT"><a href="#INSERT" class="headerlink" title="INSERT"></a>INSERT</h3><p>INSERT INTO games(yr,city)</p>
+<p>VALUES (2012,’London’);</p>
+<p>INSERT SELECT</p>
+<p>INSERT INTO games(yr,city)</p>
+<p>SELECT yr+12, city FROM games;</p>
+<h3 id="UPDATE-更新已经存在的"><a href="#UPDATE-更新已经存在的" class="headerlink" title="UPDATE 更新已经存在的"></a>UPDATE 更新已经存在的</h3><p>UPDATE games SET city=’Paris’ WHERE yr = 2004;</p>
+<h3 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h3><p>DELETE FROM games WHERE yr=2000;</p>
+<h3 id="CREATE并存入"><a href="#CREATE并存入" class="headerlink" title="CREATE并存入"></a>CREATE并存入</h3><p>CREATE TABLE games</p>
+<p>(yr INT NOT NULL PRIMARY KEY</p>
+<p>,city VARCHAR(20)</p>
+<p>);</p>
+<p>INSERT INTO games(yr,city) VALUES (2004,’Athens’);</p>
+<p>INSERT INTO games(yr,city) VALUES (2008,’Beijing’);</p>
+<p>INSERT INTO games(yr,city) VALUES (2012,’London’);</p>
+<p>SELECT * FROM games;</p>
+<h3 id="auto-increment-自动存入"><a href="#auto-increment-自动存入" class="headerlink" title="auto-increment 自动存入"></a>auto-increment 自动存入</h3><p>CREATE TABLE Persons</p>
+<p>(</p>
+<p>P_Id int NOT NULL AUTO_INCREMENT,</p>
+<p>LastName varchar(255) NOT NULL,</p>
+<p>FirstName varchar(255),</p>
+<p>Address varchar(255),</p>
+<p>City varchar(255),</p>
+<p>PRIMARY KEY (P_Id)</p>
+<p>)</p>
+<h3 id="PRIMARY-KEY"><a href="#PRIMARY-KEY" class="headerlink" title="PRIMARY KEY"></a>PRIMARY KEY</h3><p>CREATE TABLE Persons</p>
+<p>(</p>
+<p>Id_P int NOT NULL,</p>
+<p>LastName varchar(255) NOT NULL,</p>
+<p>FirstName varchar(255),</p>
+<p>Address varchar(255),</p>
+<p>City varchar(255),</p>
+<p>PRIMARY KEY (Id_P)</p>
+<p>)</p>
+<h3 id="FOREIGN-KEY"><a href="#FOREIGN-KEY" class="headerlink" title="FOREIGN KEY"></a>FOREIGN KEY</h3><p>CREATE TABLE Orders</p>
+<p>(</p>
+<p>Id_O int NOT NULL,</p>
+<p>OrderNo int NOT NULL,</p>
+<p>Id_P int,</p>
+<p>PRIMARY KEY (Id_O),</p>
+<p>FOREIGN KEY (Id_P) REFERENCES Persons(Id_P)</p>
+<p>)</p>
+<h3 id="CREATE-INDEX"><a href="#CREATE-INDEX" class="headerlink" title="CREATE INDEX"></a>CREATE INDEX</h3><p>CREATE INDEX index_name</p>
+<p>ON table_name (column_name)</p>
+<p>在表上创建一个唯一的索引。</p>
+<p>CREATE UNIQUE INDEX index_name</p>
+<p>ON table_name (column_name)</p>
+<h3 id="DROP-INDEX"><a href="#DROP-INDEX" class="headerlink" title="DROP INDEX"></a>DROP INDEX</h3><p>ALTER TABLE table_name DROP INDEX index_name</p>
+<h3 id="ALTER-修改，增加表的列"><a href="#ALTER-修改，增加表的列" class="headerlink" title="ALTER 修改，增加表的列"></a>ALTER 修改，增加表的列</h3><p>ALTER TABLE games ADD season VARCHAR(6);</p>
+<h3 id="UNIQUE约束"><a href="#UNIQUE约束" class="headerlink" title="UNIQUE约束"></a>UNIQUE约束</h3><p>CREATE TABLE Persons</p>
+<p>(</p>
+<p>Id_P int NOT NULL,</p>
+<p>LastName varchar(255) NOT NULL,</p>
+<p>FirstName varchar(255),</p>
+<p>Address varchar(255),</p>
+<p>City varchar(255),</p>
+<p>UNIQUE (Id_P)</p>
+<p>)</p>
+<hr>
+<h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><h3 id="清空表"><a href="#清空表" class="headerlink" title="清空表"></a>清空表</h3><p>清空mysql表中的记录有以下两种方法：</p>
+<p>delete from 表名; 不删除id?没实验</p>
+<p>truncate table 表名; 删除主键id</p>
+<h3 id="导出建表语句"><a href="#导出建表语句" class="headerlink" title="导出建表语句"></a>导出建表语句</h3><p>show create table tablename;</p>
+<h3 id="复制表结构-1"><a href="#复制表结构-1" class="headerlink" title="复制表结构"></a>复制表结构</h3><p>create table b select * from users where 0; //复制表结构</p>
+<p>create table a like users; //复制表结构</p>
+<p>create table b select * from users limit 0; //复制表结构</p>
+<p>create table c select * from users; //复制表的sql</p>
+<h3 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h3><p>ORDER BY .. DESC 由大到小排序</p>
+<p>SELECT winner,yr,subject FROM nobel</p>
+<p>where winner like ‘Sir%’ ORDER BY yr DESC, winner</p>
+<h3 id="复合查询-1"><a href="#复合查询-1" class="headerlink" title="复合查询"></a>复合查询</h3><p>SELECT DISTINCT yr</p>
+<p>FROM nobel</p>
+<p>WHERE subject=’Medicine’</p>
+<p>AND yr NOT IN(SELECT yr FROM nobel</p>
+<p>WHERE subject=’Literature’)</p>
+<p>AND yr NOT IN (SELECT yr FROM nobel</p>
+<p>WHERE subject=’Peace’)</p>
+<h3 id="Round-1"><a href="#Round-1" class="headerlink" title="Round"></a>Round</h3><p>ROUND(7253.86, 0) -&gt; 7254</p>
+<p>ROUND(7253.86, 1) -&gt; 7253.9</p>
+<p>ROUND(7253.86,-3) -&gt; 7000</p>
+<h3 id="CONCAT-将字符连在一起-1"><a href="#CONCAT-将字符连在一起-1" class="headerlink" title="CONCAT 将字符连在一起"></a>CONCAT 将字符连在一起</h3><p>SELECT CONCAT(region,name)</p>
+<p>FROM bbc</p>
+<p>select name,CONCAT(ROUND(100*population/(select population from world where name = ‘Germany’),0),’%’) from world</p>
+<p>where continent = ‘Europe’</p>
+<p>distinct去重</p>
+<p>SELECT DISTINCT region FROM bbc</p>
+<h3 id="having-1"><a href="#having-1" class="headerlink" title="having"></a>having</h3><p>having 可以让我们筛选成组后的各种数据，where字句在聚合前先筛选记录，也就是说作用在group by和having字句前。而 having子句在聚合后对组记录进行筛选。</p>
+<p>SELECT continent, SUM(population)</p>
+<p>FROM world</p>
+<p>GROUP BY continent</p>
+<p>HAVING SUM(population)&gt;500000000</p>
+<h3 id="JOIN-…-ON-多表关联查询-1"><a href="#JOIN-…-ON-多表关联查询-1" class="headerlink" title="JOIN … ON 多表关联查询"></a>JOIN … ON 多表关联查询</h3><p>SELECT games.yr, city.country</p>
+<p>FROM games JOIN city</p>
+<p>ON (games.city = city.name)</p>
+<h3 id="mysql设置权限命令"><a href="#mysql设置权限命令" class="headerlink" title="mysql设置权限命令"></a>mysql设置权限命令</h3><p>GRANT ALL PRIVILEGES ON <em>.</em> TO ‘root’@‘%’ IDENTIFIED BY ‘root’ WITH GRANT OPTION;</p>
+<h3 id="flush-privileges-刷新权限"><a href="#flush-privileges-刷新权限" class="headerlink" title="flush privileges;刷新权限"></a>flush privileges;刷新权限</h3><h3 id="创建聚合索引"><a href="#创建聚合索引" class="headerlink" title="创建聚合索引"></a>创建聚合索引</h3><p>CREATE INDEX index_name</p>
+<p>ON table_name ( column1, column2,…);</p>
+<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3><p>SHOW INDEX FROM table_name</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/02/19/resource-2019-01-15-general-javascript-resources/" rel="next" title="JavaScript 笔记">
+                  <i class="fa fa-chevron-left"></i> JavaScript 笔记
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/02/19/resource-2014-09-15-general-git-resources/" rel="prev" title="Git 常用命令">
+                  Git 常用命令 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用语法"><span class="nav-number">1.</span> <span class="nav-text">常用语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录数据库"><span class="nav-number">1.1.</span> <span class="nav-text">登录数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出数据库"><span class="nav-number">1.2.</span> <span class="nav-text">导出数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据库"><span class="nav-number">1.3.</span> <span class="nav-text">导入数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开启远程登录"><span class="nav-number">1.4.</span> <span class="nav-text">开启远程登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户"><span class="nav-number">1.5.</span> <span class="nav-text">创建用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建表"><span class="nav-number">1.6.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#赋予数据库权限"><span class="nav-number">1.7.</span> <span class="nav-text">赋予数据库权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查看表结构"><span class="nav-number">1.8.</span> <span class="nav-text">查看表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改表名"><span class="nav-number">1.9.</span> <span class="nav-text">修改表名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#添加列："><span class="nav-number">1.10.</span> <span class="nav-text">添加列：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除列："><span class="nav-number">1.11.</span> <span class="nav-text">删除列：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空mysql表中的记录有以下两种方法："><span class="nav-number">1.12.</span> <span class="nav-text">清空mysql表中的记录有以下两种方法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制表结构"><span class="nav-number">1.13.</span> <span class="nav-text">复制表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制表"><span class="nav-number">1.14.</span> <span class="nav-text">复制表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除表名为MyClass-的表"><span class="nav-number">1.15.</span> <span class="nav-text">删除表名为MyClass 的表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT"><span class="nav-number">1.16.</span> <span class="nav-text">SELECT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#between"><span class="nav-number">1.17.</span> <span class="nav-text">between</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#like"><span class="nav-number">1.18.</span> <span class="nav-text">like</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#and"><span class="nav-number">1.19.</span> <span class="nav-text">and</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#and-not"><span class="nav-number">1.20.</span> <span class="nav-text">and not</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in"><span class="nav-number">1.21.</span> <span class="nav-text">in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#case-when-…-then-…else…end"><span class="nav-number">1.22.</span> <span class="nav-text">case when … then …else…end</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个when"><span class="nav-number">1.23.</span> <span class="nav-text">多个when</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDER-BY-DESC-由大到小排序"><span class="nav-number">1.24.</span> <span class="nav-text">ORDER BY .. DESC 由大到小排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合查询"><span class="nav-number">1.25.</span> <span class="nav-text">复合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Round"><span class="nav-number">1.26.</span> <span class="nav-text">Round</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONCAT-将字符连在一起"><span class="nav-number">1.27.</span> <span class="nav-text">CONCAT 将字符连在一起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALL"><span class="nav-number">1.28.</span> <span class="nav-text">ALL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算函数"><span class="nav-number">1.29.</span> <span class="nav-text">计算函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#distinct去重"><span class="nav-number">1.30.</span> <span class="nav-text">distinct去重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORDER-BY"><span class="nav-number">1.31.</span> <span class="nav-text">ORDER BY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GROUP-BY-相同分为一组"><span class="nav-number">1.32.</span> <span class="nav-text">GROUP BY 相同分为一组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#having"><span class="nav-number">1.33.</span> <span class="nav-text">having</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JOIN-…-ON-多表关联查询"><span class="nav-number">1.34.</span> <span class="nav-text">JOIN … ON 多表关联查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CASE-WHEN"><span class="nav-number">1.35.</span> <span class="nav-text">CASE WHEN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LEFT-JOIN-…-ON-…-可以包含左表空值"><span class="nav-number">1.36.</span> <span class="nav-text">LEFT JOIN … ON … 可以包含左表空值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INSERT"><span class="nav-number">1.37.</span> <span class="nav-text">INSERT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPDATE-更新已经存在的"><span class="nav-number">1.38.</span> <span class="nav-text">UPDATE 更新已经存在的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE"><span class="nav-number">1.39.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CREATE并存入"><span class="nav-number">1.40.</span> <span class="nav-text">CREATE并存入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auto-increment-自动存入"><span class="nav-number">1.41.</span> <span class="nav-text">auto-increment 自动存入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PRIMARY-KEY"><span class="nav-number">1.42.</span> <span class="nav-text">PRIMARY KEY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FOREIGN-KEY"><span class="nav-number">1.43.</span> <span class="nav-text">FOREIGN KEY</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CREATE-INDEX"><span class="nav-number">1.44.</span> <span class="nav-text">CREATE INDEX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DROP-INDEX"><span class="nav-number">1.45.</span> <span class="nav-text">DROP INDEX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ALTER-修改，增加表的列"><span class="nav-number">1.46.</span> <span class="nav-text">ALTER 修改，增加表的列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UNIQUE约束"><span class="nav-number">1.47.</span> <span class="nav-text">UNIQUE约束</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#update"><span class="nav-number">1.48.</span> <span class="nav-text">update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#清空表"><span class="nav-number">1.49.</span> <span class="nav-text">清空表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导出建表语句"><span class="nav-number">1.50.</span> <span class="nav-text">导出建表语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制表结构-1"><span class="nav-number">1.51.</span> <span class="nav-text">复制表结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#排序"><span class="nav-number">1.52.</span> <span class="nav-text">排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合查询-1"><span class="nav-number">1.53.</span> <span class="nav-text">复合查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Round-1"><span class="nav-number">1.54.</span> <span class="nav-text">Round</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CONCAT-将字符连在一起-1"><span class="nav-number">1.55.</span> <span class="nav-text">CONCAT 将字符连在一起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#having-1"><span class="nav-number">1.56.</span> <span class="nav-text">having</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JOIN-…-ON-多表关联查询-1"><span class="nav-number">1.57.</span> <span class="nav-text">JOIN … ON 多表关联查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql设置权限命令"><span class="nav-number">1.58.</span> <span class="nav-text">mysql设置权限命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flush-privileges-刷新权限"><span class="nav-number">1.59.</span> <span class="nav-text">flush privileges;刷新权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建聚合索引"><span class="nav-number">1.60.</span> <span class="nav-text">创建聚合索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询索引"><span class="nav-number">1.61.</span> <span class="nav-text">查询索引</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="fankcoder">
+  <p class="site-author-name" itemprop="name">fankcoder</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/fankcoder" title="GitHub &rarr; https://github.com/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:fankcoder@gmail.com" title="E-Mail &rarr; mailto:fankcoder@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/u/2424646683" title="Weibo &rarr; https://weibo.com/u/2424646683" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.zhihu.com/people/si-xie-san-qiu/activities" title="Zhihu &rarr; https://www.zhihu.com/people/si-xie-san-qiu/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://space.bilibili.com/38307214" title="Bilibili &rarr; https://space.bilibili.com/38307214" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://steamcommunity.com/id/fankcoder" title="Steam &rarr; https://steamcommunity.com/id/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">coolshell</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://www.lining0806.com" title="http://www.lining0806.com" rel="noopener" target="_blank">lining0806</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fankcoder</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script>
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','msMtA93nEGFTkf4tckPn','2.0.0');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/small.jpg?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="查找最晚入职员工的所有信息">
+<meta name="keywords" content="SQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL练习">
+<meta property="og:url" content="http://fankcoder.com/2019/05/06/resource-2019-01-01-SQL-pratice/index.html">
+<meta property="og:site_name" content="三秋">
+<meta property="og:description" content="查找最晚入职员工的所有信息">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-10T10:57:23.895Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL练习">
+<meta name="twitter:description" content="查找最晚入职员工的所有信息">
+  <link rel="canonical" href="http://fankcoder.com/2019/05/06/resource-2019-01-01-SQL-pratice/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>SQL练习 | 三秋</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149748039-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-149748039-1');
+      }
+    </script>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">三秋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Think twice, code onece.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/fankcoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/05/06/resource-2019-01-01-SQL-pratice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">SQL练习
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-05-06 23:07:49" itemprop="dateCreated datePublished" datetime="2019-05-06T23:07:49+08:00">2019-05-06</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-10 18:57:23" itemprop="dateModified" datetime="2019-10-10T18:57:23+08:00">2019-10-10</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/备忘/" itemprop="url" rel="index"><span itemprop="name">备忘</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-description">查找最晚入职员工的所有信息</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="查找最晚入职员工的所有信息"><a href="#查找最晚入职员工的所有信息" class="headerlink" title="查找最晚入职员工的所有信息"></a>查找最晚入职员工的所有信息</h4><pre><code>SELECT * FROM employees ORDER BY hire_date DESC LIMIT 0,1;
+或
+SELECT * FROM employees WHERE hire_date = (SELECT       MAX(hire_date) FROM employees);</code></pre><p>区别在于当存在重复日期，下面会输出多个</p>
+<h4 id="两张表查找所有已经分配部门的员工的last-name和first-name"><a href="#两张表查找所有已经分配部门的员工的last-name和first-name" class="headerlink" title="两张表查找所有已经分配部门的员工的last_name和first_name"></a>两张表查找所有已经分配部门的员工的last_name和first_name</h4><pre><code>select e.last_name, e.first_name, d.dept_no from employees e join dept_emp d on e.emp_no = d.emp_no</code></pre><h4 id="查找所有员工的last-name和first-name以及对应部门编号dept-no，也包括展示没有分配具体部门的员工"><a href="#查找所有员工的last-name和first-name以及对应部门编号dept-no，也包括展示没有分配具体部门的员工" class="headerlink" title="查找所有员工的last_name和first_name以及对应部门编号dept_no，也包括展示没有分配具体部门的员工"></a>查找所有员工的last_name和first_name以及对应部门编号dept_no，也包括展示没有分配具体部门的员工</h4><pre><code>select e.last_name, e.first_name, d.dept_no from employees e left join dept_emp d on e.emp_no == d.emp_no;</code></pre><h4 id="Group和having"><a href="#Group和having" class="headerlink" title="Group和having"></a>Group和having</h4><pre><code>WHERE语句在GROUP BY语句之前；SQL会在分组之前计算WHERE语句。   
+HAVING语句在GROUP BY语句之后；SQL会在分组之后计算HAVING语句。
+
+如：找出所有员工当前(to_date=&apos;9999-01-01&apos;)具体的薪水salary情况，对于相同的薪水只显示一次,并按照逆序显示
+select salary from salaries where to_date=&apos;9999-01-01&apos; group by salary order by salary desc;</code></pre><h4 id="查找薪水涨幅超过15次的员工号emp-no以及其对应的涨幅次数t"><a href="#查找薪水涨幅超过15次的员工号emp-no以及其对应的涨幅次数t" class="headerlink" title="查找薪水涨幅超过15次的员工号emp_no以及其对应的涨幅次数t"></a>查找薪水涨幅超过15次的员工号emp_no以及其对应的涨幅次数t</h4><pre><code>select emp_no, count(salary) as t from salaries group by emp_no having t &gt;15</code></pre><h4 id="获取所有非manager的员工emp-no"><a href="#获取所有非manager的员工emp-no" class="headerlink" title="获取所有非manager的员工emp_no"></a>获取所有非manager的员工emp_no</h4><pre><code>select e.emp_no from employees e left join dept_manager d on e.emp_no = d.emp_no where d.emp_no is Null;</code></pre><h4 id="获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to-date-’9999-01-01’。"><a href="#获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to-date-’9999-01-01’。" class="headerlink" title="获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to_date=’9999-01-01’。"></a>获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to_date=’9999-01-01’。</h4><pre><code>select e.emp_no, m.emp_no as manager_no from dept_emp e 
+inner join dept_manager m on e.dept_no = m.dept_no
+where m.to_date=&apos;9999-01-01&apos; and e.to_date=&apos;9999-01-01&apos; and m.emp_no &lt;&gt; e.emp_no</code></pre><h4 id="distinct"><a href="#distinct" class="headerlink" title="distinct"></a>distinct</h4><p>MySQL发现第1个匹配行后，停止为当前的行组合搜索更多的行。</p>
+<pre><code>从titles表获取按照title进行分组，每组个数大于等于2，给出title以及对应的数目t。注意对于重复的emp_no进行忽略。
+
+select title, count(distinct emp_no) t from titles group by title having title &gt;2;</code></pre><h4 id="查找employees表所有emp-no为奇数，且last-name不为Mary的员工信息，并按照hire-date逆序排列"><a href="#查找employees表所有emp-no为奇数，且last-name不为Mary的员工信息，并按照hire-date逆序排列" class="headerlink" title="查找employees表所有emp_no为奇数，且last_name不为Mary的员工信息，并按照hire_date逆序排列"></a>查找employees表所有emp_no为奇数，且last_name不为Mary的员工信息，并按照hire_date逆序排列</h4><pre><code>select * from employees where emp_no %2 = 1 and last_name != &apos;Mary&apos; order by hire_date desc;</code></pre><h4 id="查找当前薪水-to-date-’9999-01-01’-排名第二多的员工编号emp-no、薪水salary、last-name以及first-name，不准使用order-by"><a href="#查找当前薪水-to-date-’9999-01-01’-排名第二多的员工编号emp-no、薪水salary、last-name以及first-name，不准使用order-by" class="headerlink" title="查找当前薪水(to_date=’9999-01-01’)排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，不准使用order by"></a>查找当前薪水(to_date=’9999-01-01’)排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，不准使用order by</h4><pre><code>select e.emp_no, max(s.salary), e.last_name, e.first_name 
+from employees e , salaries s 
+where e.emp_no = s.emp_no and s.to_date=&apos;9999-01-01&apos; and
+s.salary &lt; (select max(salary) from salaries)</code></pre><h4 id="三表左连接"><a href="#三表左连接" class="headerlink" title="三表左连接"></a>三表左连接</h4><pre><code>查找所有员工的last_name和first_name以及对应的dept_name，也包括暂时没有分配部门的员工
+
+select e.last_name, e.first_name, d.dept_name from employees e left join dept_emp de on e.emp_no = de.emp_no left join departments d on de.dept_no = d.dept_no</code></pre><h4 id="嵌套运算"><a href="#嵌套运算" class="headerlink" title="嵌套运算"></a>嵌套运算</h4><pre><code>查找员工编号emp_no为10001其自入职以来的薪水salary涨幅值growth
+
+select (
+(select salary from salaries where emp_no=10001 order by to_date desc limit 0,1) - (select salary from salaries where emp_no=10001 order by to_date asc limit 0,1)
+ )as growth</code></pre><h4 id="构建新表查询"><a href="#构建新表查询" class="headerlink" title="构建新表查询"></a>构建新表查询</h4><pre><code>查找所有员工自入职以来的薪水涨幅情况，给出员工编号emp_no以及其对应的薪水涨幅growth，并按照growth进行升序
+select now_s.emp_no, (now_s.salary - old_s.salary) as growth 
+from (select s.emp_no, s.salary  from employees e inner join salaries s on s.emp_no = e.emp_no where s.to_date=&apos;9999-01-01&apos;) as now_s
+inner join 
+(select s.emp_no, s.salary  from employees e inner join salaries s on s.emp_no = e.emp_no where s.from_date=e.hire_date) as old_s
+on now_s.emp_no = old_s.emp_no
+order by growth;</code></pre><h4 id="not-in-join-on-and"><a href="#not-in-join-on-and" class="headerlink" title="not in ; join on and"></a>not in ; join on and</h4><pre><code>对所有员工的当前(to_date=&apos;9999-01-01&apos;)薪水按照salary进行按照1-N的排名，相同salary并列且按照emp_no升序排列
+SELECT s1.emp_no, s1.salary, COUNT(DISTINCT s2.salary) AS rank FROM salaries AS s1, salaries AS s2 WHERE s1.to_date = &apos;9999-01-01&apos;  AND s2.to_date = &apos;9999-01-01&apos; AND s1.salary &lt;= s2.salary GROUP BY s1.emp_no ORDER BY s1.salary DESC, s1.emp_no ASC</code></pre><h4 id="获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to-date-’9999-01-01’"><a href="#获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to-date-’9999-01-01’" class="headerlink" title="获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to_date=’9999-01-01’,"></a>获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to_date=’9999-01-01’,</h4><pre><code>结果第一列给出员工的emp_no，
+第二列给出其manager的manager_no，
+第三列给出该员工当前的薪水emp_salary,
+第四列给该员工对应的manager当前的薪水manager_salary    
+
+select de_s.emp_no, dm_s.emp_no as manager_no, de_s.salary as emp_salary, dm_s.salary as manager_salary from
+(select de.emp_no,s.salary,de.dept_no from dept_emp de, salaries s where de.emp_no=s.emp_no and  s.to_date=&apos;9999-01-01&apos;) as de_s 
+inner join 
+(select dm.emp_no,s.salary,dm.dept_no from dept_manager dm, salaries s where dm.emp_no=s.emp_no and  s.to_date=&apos;9999-01-01&apos;) as dm_s on de_s.dept_no = dm_s.dept_no and de_s.salary &gt; dm_s.salary</code></pre><h4 id="inner-join-直接3表连接"><a href="#inner-join-直接3表连接" class="headerlink" title="inner join 直接3表连接"></a>inner join 直接3表连接</h4><pre><code>汇总各个部门当前员工的title类型的分配数目，结果给出部门编号dept_no、dept_name、其当前员工所有的title以及该类型title对应的数目count
+
+SELECT de.dept_no, dp.dept_name, t.title, COUNT(t.title) AS count
+FROM titles AS t INNER JOIN dept_emp AS de 
+ON t.emp_no = de.emp_no AND de.to_date = &apos;9999-01-01&apos; AND t.to_date = &apos;9999-01-01&apos;
+INNER JOIN departments AS dp 
+ON de.dept_no = dp.dept_no
+GROUP BY de.dept_no, t.title</code></pre><h4 id="给出每个员工每年薪水涨幅超过5000的员工编号emp-no、薪水变更开始日期from-date以及薪水涨幅值salary-growth，并按照salary-growth逆序排列。"><a href="#给出每个员工每年薪水涨幅超过5000的员工编号emp-no、薪水变更开始日期from-date以及薪水涨幅值salary-growth，并按照salary-growth逆序排列。" class="headerlink" title="给出每个员工每年薪水涨幅超过5000的员工编号emp_no、薪水变更开始日期from_date以及薪水涨幅值salary_growth，并按照salary_growth逆序排列。"></a>给出每个员工每年薪水涨幅超过5000的员工编号emp_no、薪水变更开始日期from_date以及薪水涨幅值salary_growth，并按照salary_growth逆序排列。</h4><pre><code>提示：在sqlite中获取datetime时间对应的年份函数为strftime(&apos;%Y&apos;, to_date)
+SELECT s2.emp_no, s2.from_date, (s2.salary - s1.salary) AS salary_growth
+FROM salaries AS s1, salaries AS s2
+WHERE s1.emp_no = s2.emp_no 
+AND salary_growth &gt; 5000
+AND (strftime(&quot;%Y&quot;,s2.to_date) - strftime(&quot;%Y&quot;,s1.to_date) = 1 
+     OR strftime(&quot;%Y&quot;,s2.from_date) - strftime(&quot;%Y&quot;,s1.from_date) = 1 )
+ORDER BY salary_growth DESC</code></pre><h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><pre><code>使用子查询的方式找出属于Action分类的所有电影对应的title,description
+select f.title,f.description from film f
+where f.film_id in (select film_id from film_category fc where fc.category_id = 
+(select category_id from category where `name`=&apos;Action&apos;))</code></pre><h4 id="获取执行计划"><a href="#获取执行计划" class="headerlink" title="获取执行计划"></a>获取执行计划</h4><pre><code>explain select * from employees;</code></pre><h4 id="字符串拼接"><a href="#字符串拼接" class="headerlink" title="字符串拼接"></a>字符串拼接</h4><pre><code>MySQL
+select concat(`last_name`,&apos; &apos;, first_name) Name from employees
+SQLlite
+SELECT last_name||&quot; &quot;||first_name AS Name FROM employees</code></pre><h4 id="创建表并给默认时间为当前"><a href="#创建表并给默认时间为当前" class="headerlink" title="创建表并给默认时间为当前"></a>创建表并给默认时间为当前</h4><pre><code>create table actor (
+actor_id smallint(5) not null,
+first_name varchar(45) not null,
+last_name varchar(45) not null,
+last_update timestamp not null default now(),
+primary key (actor_id)
+);</code></pre><h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><pre><code>insert into actor values (1,&apos;PENELOPE&apos;,&apos;GUINESS&apos;,&apos;2006-02-15 12:34:33&apos;);
+
+如果已存在则忽略
+
+insert IGNORE into actor values(3,&apos;ED&apos;,&apos;CHASE&apos;,&apos;2006-02-15 12:34:33&apos;);</code></pre><h4 id="创建表并从旧表插入"><a href="#创建表并从旧表插入" class="headerlink" title="创建表并从旧表插入"></a>创建表并从旧表插入</h4><pre><code>create table actor_name select first_name,last_name from actor;</code></pre><h4 id="创建索引和唯一索引"><a href="#创建索引和唯一索引" class="headerlink" title="创建索引和唯一索引"></a>创建索引和唯一索引</h4><pre><code>CREATE INDEX indexName ON mytable(username(length)); 
+
+CREATE UNIQUE INDEX indexName ON mytable(username(length)) 
+
+删除
+DROP INDEX [indexName] ON mytable; 
+
+显示
+SHOW INDEX FROM table_name
+
+联合索引
+ALTER TABLE `detect_res` ADD INDEX index_union_name_password(username,password)</code></pre><h4 id="创建视图"><a href="#创建视图" class="headerlink" title="创建视图"></a>创建视图</h4><pre><code>视图是一种虚拟的表,是从数据库中一个或者多个表中导出的表。数据库只存放了视图的定义,而并没有存放视图中的数据,这些数据存放在原来的表中
+
+CREATE OR REPLACE VIEW v3 AS SELECT * FROM t_book WHERE id =3;
+
+删除
+DROP VIEW IF EXISTS v4;</code></pre><h4 id="强制使用索引查询-FORCE-INDEX-name"><a href="#强制使用索引查询-FORCE-INDEX-name" class="headerlink" title="强制使用索引查询 FORCE INDEX name"></a>强制使用索引查询 FORCE INDEX name</h4><pre><code>SELECT * FROM salaries FORCE INDEX idx_emp_no WHERE emp_no = 10005</code></pre><h4 id="alter表结构命令"><a href="#alter表结构命令" class="headerlink" title="alter表结构命令"></a>alter表结构命令</h4><pre><code>ALTER TABLE testalter_tbl  DROP i;
+
+ALTER TABLE testalter_tbl ADD i INT;
+
+修改字段类型及名称
+ALTER TABLE testalter_tbl MODIFY c CHAR(10);
+
+ALTER TABLE testalter_tbl CHANGE i j BIGINT;
+
+修改字段默认值
+ALTER TABLE testalter_tbl ALTER i SET DEFAULT 1000;
+
+改表名
+alter table titles_test rename titles_2017</code></pre><h4 id="构造触发器"><a href="#构造触发器" class="headerlink" title="构造触发器"></a>构造触发器</h4><pre><code>触发器很耗费资源，尽量少用
+create trigger audit_log after insert on employees_test
+begin
+     insert into audit values(new.id,new.name);
+end;</code></pre><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><pre><code>删除emp_no重复的记录，只保留最小的id对应的记录。
+
+delete from titles_test where id not in (select min(id) from titles_test group by emp_no)</code></pre><h4 id="更新数据update"><a href="#更新数据update" class="headerlink" title="更新数据update"></a>更新数据update</h4><pre><code>update titles_test set to_date=null,from_date=&apos;2001-01-01&apos; where to_date=&apos;9999-01-01&apos;;</code></pre><h4 id="替换replace"><a href="#替换replace" class="headerlink" title="替换replace"></a>替换replace</h4><pre><code>REPLACE INTO titles_test VALUES (5, 10005, &apos;Senior Engineer&apos;, &apos;1986-06-26&apos;, &apos;9999-01-01&apos;)</code></pre><h4 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h4><pre><code>alter table audit add  foreign key(emp_no) references employees_test(id)</code></pre><h4 id="截取字符串"><a href="#截取字符串" class="headerlink" title="截取字符串"></a>截取字符串</h4><pre><code>select first_name from employees order by right(first_name,2);</code></pre><h4 id="聚合函数GROUP-CONCAT"><a href="#聚合函数GROUP-CONCAT" class="headerlink" title="聚合函数GROUP_CONCAT"></a>聚合函数GROUP_CONCAT</h4><pre><code>GROUP_CONCAT，这个函数很强大，直接可以吧group by后的结果拼接成一个长字符串，默认用“，”分割
+SELECT dept_no, group_concat(emp_no) as employees from dept_emp group by dept_no;</code></pre><h4 id="分页"><a href="#分页" class="headerlink" title="分页"></a>分页</h4><pre><code>第一条记录序号为0
+SELECT * FROM employees LIMIT 5 OFFSET 5
+
+方法二：只利用 LIMIT 关键字。注意：在 LIMIT X,Y 中，Y代表返回几条记录，X代表从第几条记录开始返回（第一条记录序号为0），切勿记反。
+SELECT * FROM employees LIMIT 5,5</code></pre><h4 id="exists"><a href="#exists" class="headerlink" title="exists"></a>exists</h4><pre><code>EXISTS用于检查子查询是否至少会返回一行数据，该子查询实际上并不返回任何数据，而是返回值True或False。
+SELECT * FROM employees WHERE NOT EXISTS (SELECT emp_no FROM dept_emp WHERE emp_no = employees.emp_no)</code></pre><h4 id="case条件表达式"><a href="#case条件表达式" class="headerlink" title="case条件表达式"></a>case条件表达式</h4><pre><code>SELECT e.emp_no, e.first_name, e.last_name, b.btype, s.salary, 
+(CASE b.btype 
+ WHEN 1 THEN s.salary * 0.1
+ WHEN 2 THEN s.salary * 0.2
+ ELSE s.salary * 0.3 END) AS bonus
+FROM employees AS e INNER JOIN emp_bonus AS b ON e.emp_no = b.emp_no
+INNER JOIN salaries AS s ON e.emp_no = s.emp_no AND s.to_date = &apos;9999-01-01&apos;</code></pre>
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/04/28/tool-2019-04-28-fix-chrome-darkmode/" rel="next" title="在mojave深色模式下，禁用chrome的深色主题">
+                  <i class="fa fa-chevron-left"></i> 在mojave深色模式下，禁用chrome的深色主题
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/05/21/technology-2019-05-21-MySQL-optimize/" rel="prev" title="MySQL亿级表优化">
+                  MySQL亿级表优化 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#查找最晚入职员工的所有信息"><span class="nav-number">1.</span> <span class="nav-text">查找最晚入职员工的所有信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两张表查找所有已经分配部门的员工的last-name和first-name"><span class="nav-number">2.</span> <span class="nav-text">两张表查找所有已经分配部门的员工的last_name和first_name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找所有员工的last-name和first-name以及对应部门编号dept-no，也包括展示没有分配具体部门的员工"><span class="nav-number">3.</span> <span class="nav-text">查找所有员工的last_name和first_name以及对应部门编号dept_no，也包括展示没有分配具体部门的员工</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Group和having"><span class="nav-number">4.</span> <span class="nav-text">Group和having</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找薪水涨幅超过15次的员工号emp-no以及其对应的涨幅次数t"><span class="nav-number">5.</span> <span class="nav-text">查找薪水涨幅超过15次的员工号emp_no以及其对应的涨幅次数t</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取所有非manager的员工emp-no"><span class="nav-number">6.</span> <span class="nav-text">获取所有非manager的员工emp_no</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to-date-’9999-01-01’。"><span class="nav-number">7.</span> <span class="nav-text">获取所有员工当前的manager，如果当前的manager是自己的话结果不显示，当前表示to_date=’9999-01-01’。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#distinct"><span class="nav-number">8.</span> <span class="nav-text">distinct</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找employees表所有emp-no为奇数，且last-name不为Mary的员工信息，并按照hire-date逆序排列"><span class="nav-number">9.</span> <span class="nav-text">查找employees表所有emp_no为奇数，且last_name不为Mary的员工信息，并按照hire_date逆序排列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查找当前薪水-to-date-’9999-01-01’-排名第二多的员工编号emp-no、薪水salary、last-name以及first-name，不准使用order-by"><span class="nav-number">10.</span> <span class="nav-text">查找当前薪水(to_date=’9999-01-01’)排名第二多的员工编号emp_no、薪水salary、last_name以及first_name，不准使用order by</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三表左连接"><span class="nav-number">11.</span> <span class="nav-text">三表左连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#嵌套运算"><span class="nav-number">12.</span> <span class="nav-text">嵌套运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建新表查询"><span class="nav-number">13.</span> <span class="nav-text">构建新表查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#not-in-join-on-and"><span class="nav-number">14.</span> <span class="nav-text">not in ; join on and</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to-date-’9999-01-01’"><span class="nav-number">15.</span> <span class="nav-text">获取员工其当前的薪水比其manager当前薪水还高的相关信息，当前表示to_date=’9999-01-01’,</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inner-join-直接3表连接"><span class="nav-number">16.</span> <span class="nav-text">inner join 直接3表连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#给出每个员工每年薪水涨幅超过5000的员工编号emp-no、薪水变更开始日期from-date以及薪水涨幅值salary-growth，并按照salary-growth逆序排列。"><span class="nav-number">17.</span> <span class="nav-text">给出每个员工每年薪水涨幅超过5000的员工编号emp_no、薪水变更开始日期from_date以及薪水涨幅值salary_growth，并按照salary_growth逆序排列。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子查询"><span class="nav-number">18.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取执行计划"><span class="nav-number">19.</span> <span class="nav-text">获取执行计划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#字符串拼接"><span class="nav-number">20.</span> <span class="nav-text">字符串拼接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表并给默认时间为当前"><span class="nav-number">21.</span> <span class="nav-text">创建表并给默认时间为当前</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插入"><span class="nav-number">22.</span> <span class="nav-text">插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建表并从旧表插入"><span class="nav-number">23.</span> <span class="nav-text">创建表并从旧表插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建索引和唯一索引"><span class="nav-number">24.</span> <span class="nav-text">创建索引和唯一索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建视图"><span class="nav-number">25.</span> <span class="nav-text">创建视图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#强制使用索引查询-FORCE-INDEX-name"><span class="nav-number">26.</span> <span class="nav-text">强制使用索引查询 FORCE INDEX name</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#alter表结构命令"><span class="nav-number">27.</span> <span class="nav-text">alter表结构命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造触发器"><span class="nav-number">28.</span> <span class="nav-text">构造触发器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除"><span class="nav-number">29.</span> <span class="nav-text">删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新数据update"><span class="nav-number">30.</span> <span class="nav-text">更新数据update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换replace"><span class="nav-number">31.</span> <span class="nav-text">替换replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外键"><span class="nav-number">32.</span> <span class="nav-text">外键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#截取字符串"><span class="nav-number">33.</span> <span class="nav-text">截取字符串</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚合函数GROUP-CONCAT"><span class="nav-number">34.</span> <span class="nav-text">聚合函数GROUP_CONCAT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页"><span class="nav-number">35.</span> <span class="nav-text">分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exists"><span class="nav-number">36.</span> <span class="nav-text">exists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#case条件表达式"><span class="nav-number">37.</span> <span class="nav-text">case条件表达式</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="fankcoder">
+  <p class="site-author-name" itemprop="name">fankcoder</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/fankcoder" title="GitHub &rarr; https://github.com/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:fankcoder@gmail.com" title="E-Mail &rarr; mailto:fankcoder@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/u/2424646683" title="Weibo &rarr; https://weibo.com/u/2424646683" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.zhihu.com/people/si-xie-san-qiu/activities" title="Zhihu &rarr; https://www.zhihu.com/people/si-xie-san-qiu/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://space.bilibili.com/38307214" title="Bilibili &rarr; https://space.bilibili.com/38307214" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://steamcommunity.com/id/fankcoder" title="Steam &rarr; https://steamcommunity.com/id/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">coolshell</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://www.lining0806.com" title="http://www.lining0806.com" rel="noopener" target="_blank">lining0806</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fankcoder</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script>
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','msMtA93nEGFTkf4tckPn','2.0.0');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

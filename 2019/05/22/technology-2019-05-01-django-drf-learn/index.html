@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/small.jpg?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Django rest framework学习笔记">
+<meta name="keywords" content="django">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django rest framework学习笔记">
+<meta property="og:url" content="http://fankcoder.com/2019/05/22/technology-2019-05-01-django-drf-learn/index.html">
+<meta property="og:site_name" content="三秋">
+<meta property="og:description" content="Django rest framework学习笔记">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-10T10:53:22.987Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Django rest framework学习笔记">
+<meta name="twitter:description" content="Django rest framework学习笔记">
+  <link rel="canonical" href="http://fankcoder.com/2019/05/22/technology-2019-05-01-django-drf-learn/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Django rest framework学习笔记 | 三秋</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-149748039-1"></script>
+    <script>
+      var host = window.location.hostname;
+      if (host !== "localhost" || !true) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-149748039-1');
+      }
+    </script>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">三秋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Think twice, code onece.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/fankcoder" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/05/22/technology-2019-05-01-django-drf-learn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Django rest framework学习笔记
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-05-22 21:48:37" itemprop="dateCreated datePublished" datetime="2019-05-22T21:48:37+08:00">2019-05-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-10 18:53:22" itemprop="dateModified" datetime="2019-10-10T18:53:22+08:00">2019-10-10</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <div class="post-description">Django rest framework学习笔记</div>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Django-REST-framework"><a href="#Django-REST-framework" class="headerlink" title="Django REST framework"></a>Django REST framework</h2><p>媒体文件序列化，文档生成，输入检测</p>
+<p>web browable API</p>
+<p>OAuth1,2   第三方登录</p>
+<p>serializaion 序列化ORMdata 类似django form</p>
+<h4 id="启用drf"><a href="#启用drf" class="headerlink" title="启用drf"></a>启用drf</h4><pre><code>INSTALLED_APPS = (
+...
+&apos;rest_framework&apos;,
+)</code></pre><h4 id="调试api"><a href="#调试api" class="headerlink" title="调试api"></a>调试api</h4><pre><code>from django.conf.urls import url, include
+urlpatterns = [
+    ...
+    url(r&apos;^api-auth/&apos;, include(&apos;rest_framework.urls&apos;))
+]</code></pre><h4 id="使用ModelSerializers"><a href="#使用ModelSerializers" class="headerlink" title="使用ModelSerializers"></a>使用ModelSerializers</h4><pre><code>class SnippetSerializer(serializers.ModelSerializer):
+#自定义序列化
+category = CategorySerializer()
+class Meta:
+    model = Snippet
+    fields = (&apos;id&apos;, &apos;title&apos;, &apos;code&apos;, &apos;linenos&apos;, &apos;language&apos;, &apos;style&apos;)
+    #将所有字段快速添加方法
+    fields = &quot;__all__&quot;</code></pre><h4 id="如何通过配置分页"><a href="#如何通过配置分页" class="headerlink" title="如何通过配置分页"></a>如何通过配置分页</h4><pre><code>drf源码-&gt; settings -&gt; default -&gt;DEFAULT_PAGINATION_CLASS
+REST_FRAMEWORK = {
+    &apos;PAGE_SIZE&apos;:10,
+}
+
+这时接口返回结果会有count，next，previous字段，方便前端分页使用</code></pre><h4 id="自定义分页"><a href="#自定义分页" class="headerlink" title="自定义分页"></a>自定义分页</h4><pre><code>from rest_framework.pageination import PageNumberPagination
+
+class GoodsPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_ param = &apos;page_size&apos; #每页大小
+    page_query_param = &apos;p&apos; #第几页p
+    max_page_size = 100</code></pre><h4 id="Viewsets"><a href="#Viewsets" class="headerlink" title="Viewsets"></a>Viewsets</h4><p>配合使用配置urls.py</p>
+<pre><code>snippet_list = SnippetViewSet.as_view({
+&apos;get&apos;: &apos;list&apos;,
+&apos;post&apos;: &apos;create&apos;</code></pre><p>})<br>    urlpatterns = format_suffix_patterns([<br>    path(‘snippets/‘, snippet_list, name=’snippet-list’),<br>    ])</p>
+<h4 id="Routers"><a href="#Routers" class="headerlink" title="Routers"></a>Routers</h4><p>注册routers urls.py</p>
+<pre><code>from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from snippets import views
+
+# Create a router and register our viewsets with it.
+router = DefaultRouter()
+router.register(r&apos;snippets&apos;, views.SnippetViewSet)
+router.register(r&apos;users&apos;, views.UserViewSet)
+
+# The API URLs are now determined automatically by the router.
+urlpatterns = [
+    path(&apos;&apos;, include(router.urls)),
+]</code></pre><h4 id="view层级关系"><a href="#view层级关系" class="headerlink" title="view层级关系"></a>view层级关系</h4><p>GenericViewSet(viewset)  -drf<br>    GenericAPIView  -drf<br>        APIView  -drf<br>            View  -django</p>
+<h4 id="mixin"><a href="#mixin" class="headerlink" title="mixin"></a>mixin</h4><pre><code>CreateModelMixin
+ListModelMixin
+RetrieveModelMixin
+UpdateModelMixin
+DestroyModelMixin</code></pre><h4 id="viewsets"><a href="#viewsets" class="headerlink" title="viewsets"></a>viewsets</h4><pre><code>ViewSetMixin
+ViewSet
+GenericViewSet
+ReadOnlyViewSet
+ModelViewSet</code></pre><h4 id="drf-request-amp-response"><a href="#drf-request-amp-response" class="headerlink" title="drf request &amp; response"></a>drf request &amp; response</h4><p>request拓展接收类型</p>
+<p>response根据前端需求类型返回</p>
+<h4 id="drf的过滤"><a href="#drf的过滤" class="headerlink" title="drf的过滤"></a>drf的过滤</h4><pre><code>serializer = GoodsSeriallzer
+
+def get_queryset(self):
+    return Goods.objects.filter(shop_price__gt=100)
+
+#用Filtering简化,自定义filter类需要看django-fiters文档
+
+from django_filters.rest_framework import FilterSet
+
+class ProductFilter(filters.FilterSet):
+min_price = filters.NumberFilter(field_name=&quot;price&quot;, lookup_expr=&apos;gte&apos;)
+max_price = filters.NumberFilter(field_name=&quot;price&quot;, lookup_expr=&apos;lte&apos;)
+
+class Meta:
+    model = Product
+    fields = [&apos;category&apos;, &apos;in_stock&apos;, &apos;min_price&apos;, &apos;max_price&apos;]</code></pre><h4 id="drf搜索过滤"><a href="#drf搜索过滤" class="headerlink" title="drf搜索过滤"></a>drf搜索过滤</h4><pre><code>#模糊查询，方法1
+manufacturer__name = django_filters.CharFilter(lookup_expr=&apos;icontains&apos;)
+
+#方法2，和like相似
+from rest_framework import filters
+
+class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = (&apos;username&apos;, &apos;email&apos;)
+
+#ps:真正的搜索要用到全文搜索引擎，表支持，elastic search</code></pre><h4 id="排序OrderFilter"><a href="#排序OrderFilter" class="headerlink" title="排序OrderFilter"></a>排序OrderFilter</h4><pre><code>class UserListView(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = (&apos;username&apos;, &apos;email&apos;)</code></pre><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p>db_tools    #数据库初始化脚本<br>extra_apps  #额外第三方库</p>
+<h4 id="拓展models-py"><a href="#拓展models-py" class="headerlink" title="拓展models.py"></a>拓展models.py</h4><p>from django.contrib.auth.models import AbstractUser </p>
+<h4 id="替换系统用户"><a href="#替换系统用户" class="headerlink" title="替换系统用户"></a>替换系统用户</h4><p>settings.py添加AUTH_USER_MODEL = ‘user.UserProfile’</p>
+<h4 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h4><p>djangoUeidtor   </p>
+<h4 id="返回usermodel"><a href="#返回usermodel" class="headerlink" title="返回usermodel"></a>返回usermodel</h4><p>from django.contrib.auth import get_user_mode   </p>
+<h4 id="makemigrations"><a href="#makemigrations" class="headerlink" title="makemigrations"></a>makemigrations</h4><p>当执行makemigrations时，会在对应app下创建migrations文件夹，并生产py文件</p>
+<h4 id="migrate"><a href="#migrate" class="headerlink" title="migrate"></a>migrate</h4><p>执行，可以加app name指定<br>migrate如何知道该运行哪个py文件，django会查询django_migrations表，如果执行过，则跳过。</p>
+<p>django的migration功能在多服务该表时非常好用</p>
+<p>修改表结构，尽量使用改代码方式，直接改表结构极易出错</p>
+<h3 id="xadmin"><a href="#xadmin" class="headerlink" title="xadmin"></a>xadmin</h3><pre><code>在installed_apps添加crispy_forms</code></pre><h4 id="创建超级用户"><a href="#创建超级用户" class="headerlink" title="创建超级用户"></a>创建超级用户</h4><pre><code>登录不了可能是密码设置太简单，就改密码
+python manage.py changepassword admin</code></pre><h3 id="前后端分离优缺点"><a href="#前后端分离优缺点" class="headerlink" title="前后端分离优缺点"></a>前后端分离优缺点</h3><ol>
+<li>pc, app, pad 多端</li>
+<li>SPA开发模式开始流行（单页面）</li>
+<li>template谁来写</li>
+<li>开发效率，互相等待</li>
+<li>前端一直配合后端</li>
+<li>开发语言耦合，换语言困难</li>
+</ol>
+<p>缺点</p>
+<ol>
+<li>前端学习门槛增加</li>
+<li>数据非常依赖文档，详细，及时更新</li>
+<li>前端工作量增大</li>
+<li>seo难度增大</li>
+</ol>
+<h4 id="drf跨域"><a href="#drf跨域" class="headerlink" title="drf跨域"></a>drf跨域</h4><ol>
+<li>npm跨域解决prox代理</li>
+<li>在服务器端设置django-cors-headers</li>
+</ol>
+<h4 id="前后端分离不需要csrf"><a href="#前后端分离不需要csrf" class="headerlink" title="前后端分离不需要csrf"></a>前后端分离不需要csrf</h4><p>csrf主要防止跨站攻击，这种模式已经进行跨站了。</p>
+<h3 id="token验证"><a href="#token验证" class="headerlink" title="token验证"></a>token验证</h3><p>注册时将token与user绑定，token创建</p>
+<pre><code>from rest_framework.authtoken.models import Token
+
+token = Token.objects.create(user=...)
+print(token.key)</code></pre><p>前端将token放入header中。</p>
+<p>验证api，将user &amp; passwd post到api获取token</p>
+<pre><code>from rest_framework.authtoken import views
+urlpatterns += [
+    url(r&apos;^api-token-auth/&apos;, views.obtain_auth_token)
+]</code></pre><h4 id="公开的接口"><a href="#公开的接口" class="headerlink" title="公开的接口"></a>公开的接口</h4><p>公共数据，不需要token的api。前端在写的时候可能会全局加token,如果过期公共接口返回401.从后端解决不在settings里配置auth,在每个view里配置。</p>
+<pre><code>form rest_framework.authentication import TokenAuthentication
+
+class ...:
+    authentication_classes = (TokenAuthentication, )</code></pre><h3 id="json-web-token-JWT"><a href="#json-web-token-JWT" class="headerlink" title="json web token, JWT"></a>json web token, JWT</h3><h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>后端生成token，和id存入session中，然后把token传给用户，存入浏览器cookie，但这样可能会导致xss漏洞</p>
+<p>如果将token保存在数据库中，每次需要根据token查询userid,增加了数据库查询和存储开销。</p>
+<p>使用对称加密算法来加密用户id形成token,服务端只要解密该token就可以知道用户的id了，但要以防加密算法泄漏。</p>
+<h4 id="JWT方式"><a href="#JWT方式" class="headerlink" title="JWT方式"></a>JWT方式</h4><p>特点：</p>
+<pre><code>1.简洁。可以通过url,post参数或http header发送，数据量小，传输速度快
+2.自包含。负载中包含了所有用户所需要的信息，避免多次查询数据库</code></pre><p>JWT组成</p>
+<pre><code>Header
+{
+  &quot;alg&quot;: &quot;HS256&quot;,  #加密算法
+  &quot;typ&quot;: &quot;JWT&quot;
+}
+
+Payload
+
+{
+  &quot;sub&quot;: &quot;1234567890&quot;,
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;admin&quot;: true
+}
+
+Signature</code></pre><p>JWT使用方式</p>
+<p>客户端每次与服务器通信，都要带上这个 JWT。你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求的头信息Authorization字段里面。</p>
+<h4 id="django-rest-framework-jwt"><a href="#django-rest-framework-jwt" class="headerlink" title="django-rest-framework-jwt"></a>django-rest-framework-jwt</h4><pre><code>pip install djangorestframework-jwt</code></pre><h4 id="自定义用户验证"><a href="#自定义用户验证" class="headerlink" title="自定义用户验证"></a>自定义用户验证</h4><pre><code>from django.contrib.auth.backends import ModelBackend
+
+class CoustomBackend(ModelBackend):
+    #重写authenticate
+    def authenticate(self, username, pw, **kwargs):
+        user = User.object.get(Q(username|Q(email)|Q(mobile))
+        if user.check_password(pw):
+            return user</code></pre><h3 id="djagno-signals"><a href="#djagno-signals" class="headerlink" title="djagno signals"></a>djagno signals</h3><p>信号，model signals 对model操作，发送全局信号，可以用于修改用户密码</p>
+<h3 id="Permissions"><a href="#Permissions" class="headerlink" title="Permissions"></a>Permissions</h3><p>drf权限判断</p>
+<pre><code>from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS
+class ExampleView(APIView):
+    permission_classes = (IsAuthenticated|ReadOnly,)</code></pre><h3 id="drf缓存设置"><a href="#drf缓存设置" class="headerlink" title="drf缓存设置"></a>drf缓存设置</h3><p>github drf-extensions 扩展drf缓存</p>
+<pre><code>from rest_framework_extensions.cache.mixins import CacheResponseMixin
+
+class UserViewSet(CacheResponseMixin, viewsets.ModelViewSet):
+serializer_class = UserSerializer</code></pre><p>如果数据被修改了，缓存就没用了，不能一直存在于内存中，所以要设置过期时间</p>
+<pre><code>REST_FRAMEWORK_EXTENSIONS = {
+&apos;DEFAULT_CACHE_RESPONSE_TIMEOUT&apos;: 60 * 15
+}</code></pre><h3 id="drf配置redis缓存"><a href="#drf配置redis缓存" class="headerlink" title="drf配置redis缓存"></a>drf配置redis缓存</h3><p>github django-redis</p>
+<pre><code>pip djagno-redis
+
+CACHES = {
+&quot;default&quot;: {
+    &quot;BACKEND&quot;: &quot;django_redis.cache.RedisCache&quot;,
+    &quot;LOCATION&quot;: &quot;redis://:password@127.0.0.1:6379/1&quot;,
+    &quot;OPTIONS&quot;: {
+        &quot;CLIENT_CLASS&quot;: &quot;django_redis.client.DefaultClient&quot;,
+    }
+}
+}</code></pre><h3 id="drf的throttle设置api的访问速度"><a href="#drf的throttle设置api的访问速度" class="headerlink" title="drf的throttle设置api的访问速度"></a>drf的throttle设置api的访问速度</h3><p>防止爬虫，AnonRate根据ip限制，UserRate根据token限制</p>
+<pre><code>REST_FRAMEWORK = {
+    &apos;DEFAULT_THROTTLE_CLASSES&apos;: (
+        &apos;rest_framework.throttling.AnonRateThrottle&apos;,
+        &apos;rest_framework.throttling.UserRateThrottle&apos;
+    ),
+    &apos;DEFAULT_THROTTLE_RATES&apos;: {
+        &apos;anon&apos;: &apos;100/day&apos;,
+        &apos;user&apos;: &apos;1000/day&apos;
+    }
+}</code></pre><h3 id="auth2-0第三方登录"><a href="#auth2-0第三方登录" class="headerlink" title="auth2.0第三方登录"></a>auth2.0第三方登录</h3><p>借助第三方开放平台，给用户注册新用户</p>
+<h3 id="第三方登录库"><a href="#第三方登录库" class="headerlink" title="第三方登录库"></a>第三方登录库</h3><pre><code>pip install social-auth-app-django
+
+doc http://python-social-auth.readthedocs.org/.</code></pre><h3 id="restful-api"><a href="#restful-api" class="headerlink" title="restful api"></a>restful api</h3><p>restful api目前是前后端分离最佳实践，是一套标准规范</p>
+<ol>
+<li>轻量、直接通过http,不需要额外协议， post/get/put/delete等</li>
+<li>面向资源，一目了然，具有自解释性</li>
+<li>数据描述简单，一般通过json或xml做数据通信</li>
+</ol>
+<p>HTTP是一个无状态协议。客户端想要操作服务器，需要通过 post/get/put/delete让服务器发生状态转移化</p>
+<ol>
+<li>每个URI代表一种资源</li>
+<li>客户端和服务器之间，传递这种资源的某种表现层</li>
+<li>客户端通过HTTP动词让服务器发生状态转移化</li>
+</ol>
+<p>例子</p>
+<pre><code>GET /zoos：列出所有动物园
+POST /zoos：新建一个动物园
+GET /zoos/ID：获取某个指定动物园的信息
+PUT /zoos/ID：更新某个指定动物园的信息（提供该动物园的全部信息）
+PATCH /zoos/ID：更新某个指定动物园的信息（提供该动物园的部分信息）
+DELETE /zoos/ID：删除某个动物园
+GET /zoos/ID/animals：列出某个指定动物园的所有动物
+DELETE /zoos/ID/animals/ID：删除某个指定动物园的指定动物</code></pre><p>过滤信息</p>
+<pre><code>?limit=10：指定返回记录的数量
+?offset=10：指定返回记录的开始位置。
+?page=2&amp;per_page=100：指定第几页，以及每页的记录数。
+?sortby=name&amp;order=asc：指定返回结果按照哪个属性排序，以及排序顺序。
+?animal_type_id=1：指定筛选条件</code></pre><p>状态码</p>
+<pre><code>200 OK - [GET]：服务器成功返回用户请求的数据，该操作是幂等的（Idempotent）。
+201 CREATED - [POST/PUT/PATCH]：用户新建或修改数据成功。
+202 Accepted - [*]：表示一个请求已经进入后台排队（异步任务）
+204 NO CONTENT - [DELETE]：用户删除数据成功。
+400 INVALID REQUEST - [POST/PUT/PATCH]：用户发出的请求有错误，服务器没有进行新建或修改数据的操作，该操作是幂等的。
+401 Unauthorized - [*]：表示用户没有权限（令牌、用户名、密码错误）。
+403 Forbidden - [*] 表示用户得到授权（与401错误相对），但是访问是被禁止的。
+404 NOT FOUND - [*]：用户发出的请求针对的是不存在的记录，服务器没有进行操作，该操作是幂等的。
+406 Not Acceptable - [GET]：用户请求的格式不可得（比如用户请求JSON格式，但是只有XML格式）。
+410 Gone -[GET]：用户请求的资源被永久删除，且不会再得到的。
+422 Unprocesable entity - [POST/PUT/PATCH] 当创建一个对象时，发生一个验证错误。
+500 INTERNAL SERVER ERROR - [*]：服务器发生错误，用户将无法判断发出的请求是否成功。</code></pre><h4 id="将model转为dict"><a href="#将model转为dict" class="headerlink" title="将model转为dict"></a>将model转为dict</h4><pre><code>from django.forms.models import model_to_dict
+for good in goods:
+    _dict.append(good)</code></pre><h4 id="seriallzers将imagefile和datetime快速序列化"><a href="#seriallzers将imagefile和datetime快速序列化" class="headerlink" title="seriallzers将imagefile和datetime快速序列化"></a>seriallzers将imagefile和datetime快速序列化</h4><pre><code>from django.core import seriallzers
+json_data = serializers.serialize(&quot;json&quot;, goods)
+json_data = json_data.loads(json_data)
+return json_data</code></pre><h4 id="JsonResponse"><a href="#JsonResponse" class="headerlink" title="JsonResponse"></a>JsonResponse</h4><p>简化httpresponse</p>
+<pre><code>from django.http import JsonResponse
+return JsonResponse(json_data, safe=False)</code></pre><h3 id="sentry日志"><a href="#sentry日志" class="headerlink" title="sentry日志"></a>sentry日志</h3><p>通过docker搭建sentry<br>集成jira，bug管理<br>sentry email 端口25  阿里云ssl465</p>
+<h3 id="sentry集成到django"><a href="#sentry集成到django" class="headerlink" title="sentry集成到django"></a>sentry集成到django</h3><p>查看sentry文档并添加配置</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Django-drf/" rel="tag"><i class="fa fa-tag"></i> Django drf</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/05/21/technology-2019-05-21-MySQL-optimize/" rel="next" title="MySQL亿级表优化">
+                  <i class="fa fa-chevron-left"></i> MySQL亿级表优化
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/06/13/resource-2019-01-03-internet/" rel="prev" title="计算机网络笔记">
+                  计算机网络笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Django-REST-framework"><span class="nav-number">1.</span> <span class="nav-text">Django REST framework</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#启用drf"><span class="nav-number">1.0.1.</span> <span class="nav-text">启用drf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调试api"><span class="nav-number">1.0.2.</span> <span class="nav-text">调试api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ModelSerializers"><span class="nav-number">1.0.3.</span> <span class="nav-text">使用ModelSerializers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何通过配置分页"><span class="nav-number">1.0.4.</span> <span class="nav-text">如何通过配置分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义分页"><span class="nav-number">1.0.5.</span> <span class="nav-text">自定义分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Viewsets"><span class="nav-number">1.0.6.</span> <span class="nav-text">Viewsets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Routers"><span class="nav-number">1.0.7.</span> <span class="nav-text">Routers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#view层级关系"><span class="nav-number">1.0.8.</span> <span class="nav-text">view层级关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mixin"><span class="nav-number">1.0.9.</span> <span class="nav-text">mixin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#viewsets"><span class="nav-number">1.0.10.</span> <span class="nav-text">viewsets</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#drf-request-amp-response"><span class="nav-number">1.0.11.</span> <span class="nav-text">drf request &amp; response</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#drf的过滤"><span class="nav-number">1.0.12.</span> <span class="nav-text">drf的过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#drf搜索过滤"><span class="nav-number">1.0.13.</span> <span class="nav-text">drf搜索过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#排序OrderFilter"><span class="nav-number">1.0.14.</span> <span class="nav-text">排序OrderFilter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目录结构"><span class="nav-number">1.0.15.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拓展models-py"><span class="nav-number">1.0.16.</span> <span class="nav-text">拓展models.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换系统用户"><span class="nav-number">1.0.17.</span> <span class="nav-text">替换系统用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑器"><span class="nav-number">1.0.18.</span> <span class="nav-text">编辑器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回usermodel"><span class="nav-number">1.0.19.</span> <span class="nav-text">返回usermodel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#makemigrations"><span class="nav-number">1.0.20.</span> <span class="nav-text">makemigrations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#migrate"><span class="nav-number">1.0.21.</span> <span class="nav-text">migrate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xadmin"><span class="nav-number">1.1.</span> <span class="nav-text">xadmin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建超级用户"><span class="nav-number">1.1.1.</span> <span class="nav-text">创建超级用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#前后端分离优缺点"><span class="nav-number">1.2.</span> <span class="nav-text">前后端分离优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#drf跨域"><span class="nav-number">1.2.1.</span> <span class="nav-text">drf跨域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前后端分离不需要csrf"><span class="nav-number">1.2.2.</span> <span class="nav-text">前后端分离不需要csrf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#token验证"><span class="nav-number">1.3.</span> <span class="nav-text">token验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公开的接口"><span class="nav-number">1.3.1.</span> <span class="nav-text">公开的接口</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json-web-token-JWT"><span class="nav-number">1.4.</span> <span class="nav-text">json web token, JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#传统方式"><span class="nav-number">1.4.1.</span> <span class="nav-text">传统方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JWT方式"><span class="nav-number">1.4.2.</span> <span class="nav-text">JWT方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#django-rest-framework-jwt"><span class="nav-number">1.4.3.</span> <span class="nav-text">django-rest-framework-jwt</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义用户验证"><span class="nav-number">1.4.4.</span> <span class="nav-text">自定义用户验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#djagno-signals"><span class="nav-number">1.5.</span> <span class="nav-text">djagno signals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Permissions"><span class="nav-number">1.6.</span> <span class="nav-text">Permissions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drf缓存设置"><span class="nav-number">1.7.</span> <span class="nav-text">drf缓存设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drf配置redis缓存"><span class="nav-number">1.8.</span> <span class="nav-text">drf配置redis缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drf的throttle设置api的访问速度"><span class="nav-number">1.9.</span> <span class="nav-text">drf的throttle设置api的访问速度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#auth2-0第三方登录"><span class="nav-number">1.10.</span> <span class="nav-text">auth2.0第三方登录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三方登录库"><span class="nav-number">1.11.</span> <span class="nav-text">第三方登录库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#restful-api"><span class="nav-number">1.12.</span> <span class="nav-text">restful api</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#将model转为dict"><span class="nav-number">1.12.1.</span> <span class="nav-text">将model转为dict</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#seriallzers将imagefile和datetime快速序列化"><span class="nav-number">1.12.2.</span> <span class="nav-text">seriallzers将imagefile和datetime快速序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JsonResponse"><span class="nav-number">1.12.3.</span> <span class="nav-text">JsonResponse</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sentry日志"><span class="nav-number">1.13.</span> <span class="nav-text">sentry日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sentry集成到django"><span class="nav-number">1.14.</span> <span class="nav-text">sentry集成到django</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="fankcoder">
+  <p class="site-author-name" itemprop="name">fankcoder</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/fankcoder" title="GitHub &rarr; https://github.com/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:fankcoder@gmail.com" title="E-Mail &rarr; mailto:fankcoder@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://weibo.com/u/2424646683" title="Weibo &rarr; https://weibo.com/u/2424646683" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://www.zhihu.com/people/si-xie-san-qiu/activities" title="Zhihu &rarr; https://www.zhihu.com/people/si-xie-san-qiu/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://space.bilibili.com/38307214" title="Bilibili &rarr; https://space.bilibili.com/38307214" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://steamcommunity.com/id/fankcoder" title="Steam &rarr; https://steamcommunity.com/id/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
+      </span>
+    
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://coolshell.cn/" title="https://coolshell.cn/" rel="noopener" target="_blank">coolshell</a>
+        </li>
+      
+        <li class="links-of-blogroll-item">
+          <a href="http://www.lining0806.com" title="http://www.lining0806.com" rel="noopener" target="_blank">lining0806</a>
+        </li>
+      
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">fankcoder</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v7.4.1</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+    
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script>
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','msMtA93nEGFTkf4tckPn','2.0.0');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
