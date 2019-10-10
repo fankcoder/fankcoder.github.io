@@ -5,7 +5,7 @@ category: 技术
 tags: python
 description:
 ---
-
+<!-- more-->
 这两个函数基本上都是在循环的时候用。 
 
 ```

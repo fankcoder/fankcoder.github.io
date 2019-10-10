@@ -13,7 +13,7 @@ keywords: MySQL
 ---
 
   
-
+<!-- more-->
 ## 常用语法
 
   

@@ -5,7 +5,7 @@ category: 备忘
 tags: django
 description: Django基本命令
 ---
-
+<!-- more-->
 ### 新建一个 django project
 
      django-admin.py startproject project-name

@@ -7,7 +7,7 @@ description:
 ---
 
 python密码处理(可用于生产模式)
-　　
+<!-- more-->　　
 ```
 import os
 from hashlib import sha256

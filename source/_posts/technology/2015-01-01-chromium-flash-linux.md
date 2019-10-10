@@ -6,7 +6,7 @@ tags: flash
 keywords: flash
 description: install flash
 ---
-
+<!-- more-->
 　Flash Player For Linux 自11.2 起已经停止更新，目前 Linux 平台下面的 Flash Player 只能依靠 Google Chrom 的 PPAPI （Pepper Flash Player）进行更新
  
  ```

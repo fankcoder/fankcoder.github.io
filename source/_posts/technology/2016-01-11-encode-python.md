@@ -5,7 +5,7 @@ category: 技术
 tags: python
 description:
 ---
-
+<!-- more-->
 
 在Python中，可以对String调用decode和encode方法来实现转码。
  

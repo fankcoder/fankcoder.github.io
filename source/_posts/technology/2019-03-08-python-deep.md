@@ -18,7 +18,7 @@ from collections import *
 
 from collections.abc import * #抽象基类
 ```
-
+<!-- more-->
 
 #### tuple功能
 1. 不可变(不绝对)

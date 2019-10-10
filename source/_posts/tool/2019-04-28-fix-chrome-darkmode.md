@@ -6,7 +6,7 @@ tags: mac chrome
 keywords: 
 
 ---
-
+<!-- more-->
 ## 背景
 
 最新的chrome默认跟随mojave系统更改主题模式。

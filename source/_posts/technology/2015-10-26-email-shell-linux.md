@@ -7,7 +7,7 @@ keywords: Shell
 description: Shell每日发邮件
 ---
 
-很是好奇运维工作，刚好有幸接触到，每日发邮件脚本，多用来发送服务器日志，
+脚本代码
 
 ```
 LOGFILE="$fank/"`date +"%Y%m%d"`"data"#每日文件

@@ -5,7 +5,7 @@ category: 技术
 tags: python
 description:
 ---
-
+<!-- more-->
 ### 首先安装xlrd\xlwt模块
 
 xlrd模块下载地址:

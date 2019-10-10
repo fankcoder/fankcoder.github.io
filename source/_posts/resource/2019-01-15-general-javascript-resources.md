@@ -6,7 +6,7 @@ tags: JavaScript
 keywords: JavaScript
 description: 
 ---
-
+<!-- more-->
 ## 常用代码
 
 ### 交互

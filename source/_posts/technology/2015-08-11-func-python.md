@@ -5,7 +5,7 @@ category: 技术
 tags: python
 description:
 ---
-
+<!-- more-->
 ### map
 
 map(...)

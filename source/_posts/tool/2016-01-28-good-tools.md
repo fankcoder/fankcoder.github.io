@@ -5,7 +5,7 @@ category: 工具
 tags: 神器
 description: 神器
 ---
-
+<!-- more-->
 ## 编辑器 & IDE
 
 * VIM

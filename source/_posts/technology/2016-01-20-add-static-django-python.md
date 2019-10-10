@@ -6,6 +6,7 @@ tags: python
 keywords: django
 description: django
 ---
+<!-- more-->
 最近做了一个todolist webapp,需要添加css时候忘记添加方法了,查看了以前的项目才想起来,所以记录一下.
 
 1. settings.py 将以下代码放到最下面

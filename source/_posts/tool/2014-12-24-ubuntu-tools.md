@@ -11,7 +11,7 @@ description: Ubuntu
 右侧Ctrl + F1
 
 再右侧Ctrl + F7
-
+<!-- more-->
 #### 常用命令
 
 查找软件

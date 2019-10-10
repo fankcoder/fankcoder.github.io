@@ -3,6 +3,7 @@ layout: post
 title: 关于我
 tags: me
 keywords: me
+comments: false
 ---
 
 ### 三秋
