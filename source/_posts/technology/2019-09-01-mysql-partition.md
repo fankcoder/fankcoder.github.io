@@ -4,13 +4,12 @@ title: MySQL分区
 category: 技术
 tags: SQL
 keywords: SQL
-description: MySQL从5.1版本添加了分区(Partition)支持。 
 ---
 
 MySQL从5.1版本添加了分区(Partition)支持。MySQL支持的分区为水平分区（将同一张表中的不同行记录分配到不同的物理文件中）
 
 **分区和手动分表对比**
-
+<!-- more-->
 |手动分表|分区|
 |:--------:| -------------:|
 | 多张数据表 | 一张数据表|
