@@ -239,6 +239,117 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/10/13/technology-2019-10-10-mysql-design/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/10/13/technology-2019-10-10-mysql-design/" class="post-title-link" itemprop="url">数据库设计</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-13 23:42:40 / Modified: 23:45:43" itemprop="dateCreated datePublished" datetime="2019-10-13T23:42:40+08:00">2019-10-13</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="设计步骤"><a href="#设计步骤" class="headerlink" title="设计步骤"></a>设计步骤</h2><ol>
+<li>需求分析</li>
+<li>逻辑设计 </li>
+<li>物理设计</li>
+<li>维护优化</li>
+</ol>
+<h3 id="需求分析"><a href="#需求分析" class="headerlink" title="需求分析"></a>需求分析</h3><ol>
+<li>数据是什么</li>
+<li>数据有哪些属性</li>
+<li>数据和属性各自的特点有哪些</li>
+</ol>
+<h4 id="为什么要进行需求分析"><a href="#为什么要进行需求分析" class="headerlink" title="为什么要进行需求分析"></a>为什么要进行需求分析</h4><ol>
+<li>了解系统中所要存储的数据</li>
+<li>了解数据的存储特点。如：时效性数据（过期清理）</li>
+<li>了解数据的生命周期。（数据量很大但不是核心数据，分库分表来存储）如：日志数据</li>
+</ol>
+<h4 id="确定需求"><a href="#确定需求" class="headerlink" title="确定需求"></a>确定需求</h4><ol>
+<li>实体和实体之间的关系（1对1，1对多，多对多）</li>
+<li>实体包含的属性?</li>
+<li>哪些属性或属性的组合可以唯一标识一个实体
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/10/13/technology-2019-10-10-mysql-design/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/09/24/technology-2019-09-01-mysql-partition/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1142,106 +1253,6 @@
   
 
     
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/04/24/tool-2019-02-01-vim/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fankcoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="三秋">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/04/24/tool-2019-02-01-vim/" class="post-title-link" itemprop="url">vim使用手册</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-04-24 16:52:16" itemprop="dateCreated datePublished" datetime="2019-04-24T16:52:16+08:00">2019-04-24</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-11 02:39:09" itemprop="dateModified" datetime="2019-10-11T02:39:09+08:00">2019-10-11</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="我爱Vim"><a href="#我爱Vim" class="headerlink" title="我爱Vim"></a>我爱Vim</h2><p>Vim极大的提高了我编码时的快感，使用了几年vim，已然是一名忠实用户了，不管切换什么编辑器第一时间就是找vim插件，当然chrome也不会放过，整理一下vim技巧。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/04/24/tool-2019-02-01-vim/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
   </div>
 
   
@@ -1294,7 +1305,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">43</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
