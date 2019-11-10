@@ -55,18 +55,18 @@
   };
 </script>
 
-  <meta name="description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等">
+  <meta name="description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，水平、垂直分表，表设计规范等">
 <meta name="keywords" content="SQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL亿级表优化">
 <meta property="og:url" content="http://fankcoder.com/2019/05/21/technology-2019-05-21-MySQL-optimize/index.html">
 <meta property="og:site_name" content="三秋">
-<meta property="og:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等">
+<meta property="og:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，水平、垂直分表，表设计规范等">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-10T18:34:17.622Z">
+<meta property="og:updated_time" content="2019-11-10T13:45:28.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL亿级表优化">
-<meta name="twitter:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等">
+<meta name="twitter:description" content="场景对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案 设计之初设计之初需要考虑的问题很多。设备，存储引擎，水平分区，水平、垂直分表，表设计规范等">
   <link rel="canonical" href="http://fankcoder.com/2019/05/21/technology-2019-05-21-MySQL-optimize/">
 
 
@@ -283,7 +283,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-11 02:34:17" itemprop="dateModified" datetime="2019-10-11T02:34:17+08:00">2019-10-11</time>
+                <time title="Modified: 2019-11-10 21:45:28" itemprop="dateModified" datetime="2019-11-10T21:45:28+08:00">2019-11-10</time>
               </span>
             
           
@@ -313,7 +313,7 @@
 
       
         <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案</p>
-<h2 id="设计之初"><a href="#设计之初" class="headerlink" title="设计之初"></a>设计之初</h2><p>设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等</p>
+<h2 id="设计之初"><a href="#设计之初" class="headerlink" title="设计之初"></a>设计之初</h2><p>设计之初需要考虑的问题很多。设备，存储引擎，水平分区，水平、垂直分表，表设计规范等</p>
 <a id="more"></a>
 
 <h2 id="SQL优化-amp-索引"><a href="#SQL优化-amp-索引" class="headerlink" title="SQL优化&amp;索引"></a>SQL优化&amp;索引</h2><h4 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h4><p>常见的SQL优化：</p>
@@ -329,7 +329,7 @@ OR改写成IN
 <p>值分布很稀少的字段不适合建索引，例如”性别”这种只有两三个值的字段</p>
 <h2 id="优化like"><a href="#优化like" class="headerlink" title="优化like"></a>优化like</h2><p>一般情况下不鼓励使用like操作，如果非使用不可，如何使用也是一个问题。like “%aaa%” 不会使用索引而like “aaa%”可以使用索引。 新增一列，存储该字段的反转。比如原字段是abcd，取反存储为dcba，查询%bcd改成查dcb%。</p>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>只能从头尾匹配，不能从中间匹配</p>
-<h2 id="创建view"><a href="#创建view" class="headerlink" title="创建view"></a>创建view</h2><p>根据业务情况，比如我的场景需要，每2s查询最近插入的5条数据，基于最近被插入或者经常被查询的数据创建view，通过做view来读写分离，写在table上，读在view表上</p>
+<h2 id="创建view"><a href="#创建view" class="headerlink" title="创建view"></a>创建view</h2><p>根据业务情况，基于一段时间或者经常被查询的数据创建view，通过做view来读写分离，写在table上，读在view表上</p>
 <h4 id="时间上的坑"><a href="#时间上的坑" class="headerlink" title="时间上的坑"></a>时间上的坑</h4><p>这里有个坑，如果按照当天时间创建视图表</p>
 <pre><code>time &gt;= DATE_FORMAT(CURDATE(),&apos;%Y-%m-%d %H:%i:%s&apos;);</code></pre><p>那么在当天的24点时刻，视图表就是一张空表。</p>
 <p>解决办法，将时间范围延长，改为昨天的23点</p>
@@ -459,7 +459,7 @@ delete from table_name where id &lt; maxId limit 10000;</code></pre><p>使用pyt
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -535,28 +535,6 @@ delete from table_name where id &lt; maxId limit 10000;</code></pre><p>使用pyt
         
       
         <a href="https://www.zhihu.com/people/si-xie-san-qiu/activities" title="Zhihu &rarr; https://www.zhihu.com/people/si-xie-san-qiu/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://space.bilibili.com/38307214" title="Bilibili &rarr; https://space.bilibili.com/38307214" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://steamcommunity.com/id/fankcoder" title="Steam &rarr; https://steamcommunity.com/id/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
       </span>
     
   </div>

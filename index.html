@@ -239,6 +239,145 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/11/10/technology-2019-11-10-mysql-sync/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="fankcoder">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="三秋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/10/technology-2019-11-10-mysql-sync/" class="post-title-link" itemprop="url">MySQL主从备份实战</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-10 21:45:50 / Modified: 22:26:09" itemprop="dateCreated datePublished" datetime="2019-11-10T21:45:50+08:00">2019-11-10</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术/" itemprop="url" rel="index"><span itemprop="name">技术</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="测试平台"><a href="#测试平台" class="headerlink" title="测试平台"></a>测试平台</h2><p>主：mysql  Ver 8.0.13 for osx10.14 on x86_64 (Homebrew)<br>从：mysql Ver 8.0.17 for windows10</p>
+<h2 id="两台机器分别安装"><a href="#两台机器分别安装" class="headerlink" title="两台机器分别安装"></a>两台机器分别安装</h2><p>mysql-server mysql-client</p>
+<h2 id="先保证两台机器能互相连接到对方数据库"><a href="#先保证两台机器能互相连接到对方数据库" class="headerlink" title="先保证两台机器能互相连接到对方数据库"></a>先保证两台机器能互相连接到对方数据库</h2><p>通过命令或者图形工具测试。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u USERNAME -p PASSWORD -h HOSTNAMEORIP DATABASENAME</span><br></pre></td></tr></table></figure>
+
+<p>如果不能直接连接，最好添加除root之外的用户，然后授予权限，添加和授权方法在”给从库授权”处。<br>需要说明的是windows用户记得关闭防火墙。</p>
+<h2 id="配置主数据库"><a href="#配置主数据库" class="headerlink" title="配置主数据库"></a>配置主数据库</h2><h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/mysql/my.cnf</span><br></pre></td></tr></table></figure>
+
+<p>ip地址自行更换</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bind-address            = 192.168.X.X</span><br><span class="line">server-id               = 1 </span><br><span class="line">log_bin                 = /var/log/mysql/mysql-bin.log</span><br><span class="line">binlog_do_db            = testshop</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启MySQL服务"><a href="#重启MySQL服务" class="headerlink" title="重启MySQL服务"></a>重启MySQL服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="给从库授权"><a href="#给从库授权" class="headerlink" title="给从库授权"></a>给从库授权</h4><p>自行替换user,password</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION SLAVE ON *.* TO &apos;slave_user&apos;@&apos;%&apos; IDENTIFIED BY &apos;password&apos;;</span><br></pre></td></tr></table></figure>
+
+<p>如果授权失败，输入以下命令，添加用户，之后再授权，记得用户名密码要统一</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; CREATE USER &apos;monty&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;some_pass&apos;;</span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;monty&apos;@&apos;localhost&apos; WITH GRANT OPTION;</span><br><span class="line">mysql&gt; CREATE USER &apos;monty&apos;@&apos;%&apos; IDENTIFIED BY &apos;some_pass&apos;;</span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;monty&apos;@&apos;%&apos; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+
+<h4 id="更新权限"><a href="#更新权限" class="headerlink" title="更新权限"></a>更新权限</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<h4 id="表加锁"><a href="#表加锁" class="headerlink" title="表加锁"></a>表加锁</h4><p>如果不能保证在配置过程中表不会被修改，建议给表加锁，防止同步出现错误。</p>
+<p><strong>加锁</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">USE newdatabase;</span><br><span class="line">FLUSH TABLES WITH READ LOCK;</span><br></pre></td></tr></table></figure>
+
+<p><strong>记录主库二进制日志文件</strong><br>记录File名和Positiion位置，从库配置需要用到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; SHOW MASTER STATUS;</span><br><span class="line">+------------------+----------+--------------+------------------+</span><br><span class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB |</span><br><span class="line">+------------------+----------+--------------+------------------+</span><br><span class="line">| mysql-bin.000001 |      107 | newdatabase  |                  |</span><br><span class="line">+------------------+----------+--------------+------------------+</span><br><span class="line">1 row in set (0.00 sec)</span><br></pre></td></tr></table></figure>
+
+<p><strong>导出主库数据</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -u root -p --opt newdatabase &gt; newdatabase.sql</span><br></pre></td></tr></table></figure>
+
+<p><strong>解锁</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UNLOCK TABLES;</span><br><span class="line">QUIT;</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置从数据库"><a href="#配置从数据库" class="headerlink" title="配置从数据库"></a>配置从数据库</h2><h4 id="创建数据库，并导入数据文件"><a href="#创建数据库，并导入数据文件" class="headerlink" title="创建数据库，并导入数据文件"></a>创建数据库，并导入数据文件</h4><p>使用命令行或者图形工具导入都可以，需要注意在创建库时，最好将字符编码统一。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE newdatabase;</span><br><span class="line">EXIT;</span><br></pre></td></tr></table></figure>
+
+<p><strong>导入</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p newdatabase &lt; /path/to/newdatabase.sql</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改配置文件-1"><a href="#修改配置文件-1" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>打开</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/mysql/my.cnf</span><br></pre></td></tr></table></figure>
+
+<p>windows下自行找到MySQL安装位置，在安装位置根目录下创建my.ini文件修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server-id               = 2</span><br><span class="line">relay-log               = /var/log/mysql/mysql-relay-bin.log</span><br><span class="line">log_bin                 = /var/log/mysql/mysql-bin.log</span><br><span class="line">binlog_do_db            = testshop</span><br></pre></td></tr></table></figure>
+
+<h4 id="重启从库服务"><a href="#重启从库服务" class="headerlink" title="重启从库服务"></a>重启从库服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="从库配置同步"><a href="#从库配置同步" class="headerlink" title="从库配置同步"></a>从库配置同步</h4><p>用户密码为主库的，二进制日志文件和日志位置，由主库输入”””SHOW MASTER STATUS;”””得到。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CHANGE MASTER TO MASTER_HOST=&apos;192.168.x.x&apos;,MASTER_USER=&apos;master_user!&apos;, MASTER_PASSWORD=&apos;password&apos;, MASTER_LOG_FILE=&apos;mysql-bin.000001&apos;, MASTER_LOG_POS=  107;</span><br></pre></td></tr></table></figure>
+
+<h4 id="开启从库同步"><a href="#开启从库同步" class="headerlink" title="开启从库同步"></a>开启从库同步</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">START SLAVE;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看从库状态-是否连接成功等信息"><a href="#查看从库状态-是否连接成功等信息" class="headerlink" title="查看从库状态,是否连接成功等信息"></a>查看从库状态,是否连接成功等信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW SLAVE STATUS;</span><br></pre></td></tr></table></figure>
+
+<p>至此，主从同步配置完成，修改主库数据试试吧，如果从库数据已经同步成功，恭喜你~</p>
+
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
     <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/10/13/technology-2019-10-10-mysql-design/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -991,7 +1130,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-11 02:34:17" itemprop="dateModified" datetime="2019-10-11T02:34:17+08:00">2019-10-11</time>
+                <time title="Modified: 2019-11-10 21:45:28" itemprop="dateModified" datetime="2019-11-10T21:45:28+08:00">2019-11-10</time>
               </span>
             
           
@@ -1021,7 +1160,7 @@
 
       
           <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>对单表2亿数据进行查询优化，测试几种常见的优化方式，给出解决方案</p>
-<h2 id="设计之初"><a href="#设计之初" class="headerlink" title="设计之初"></a>设计之初</h2><p>设计之初需要考虑的问题很多。设备，存储引擎，水平分区，表设计规范等</p>
+<h2 id="设计之初"><a href="#设计之初" class="headerlink" title="设计之初"></a>设计之初</h2><p>设计之初需要考虑的问题很多。设备，存储引擎，水平分区，水平、垂直分表，表设计规范等</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -1148,111 +1287,6 @@
   
 
     
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://fankcoder.com/2019/04/28/tool-2019-04-28-fix-chrome-darkmode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="fankcoder">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="三秋">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/04/28/tool-2019-04-28-fix-chrome-darkmode/" class="post-title-link" itemprop="url">在mojave深色模式下，禁用chrome的深色主题</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              
-                
-              
-
-              <time title="Created: 2019-04-28 10:50:27" itemprop="dateCreated datePublished" datetime="2019-04-28T10:50:27+08:00">2019-04-28</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-11 02:40:23" itemprop="dateModified" datetime="2019-10-11T02:40:23+08:00">2019-10-11</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <a id="more"></a>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最新的chrome默认跟随mojave系统更改主题模式。</p>
-<p>然而chrome的深色主题实在是丑到我了，大部分网页底色都是白色，加上黑色的标题栏，黑色的书签栏，简直酸爽。。</p>
-<h2 id="禁用方法"><a href="#禁用方法" class="headerlink" title="禁用方法"></a>禁用方法</h2><ol>
-<li><p>打开终端，输入</p>
-<p>osascript -e ‘id of app “Google Chrome”‘</p>
-</li>
-<li><p>看到返回<strong>com.google.Chrome</strong> ， 继续输入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.google.Chrome NSRequiresAquaSystemAppearance -bool yes</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>重启chrome</p>
-</li>
-</ol>
-<h4 id="恢复成默认设置"><a href="#恢复成默认设置" class="headerlink" title="恢复成默认设置"></a>恢复成默认设置</h4><p>​    defaults delete com.google.Chrome NSRequiresAquaSystemAppearance</p>
-
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
   </div>
 
   
@@ -1305,7 +1339,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1381,28 +1415,6 @@
         
       
         <a href="https://www.zhihu.com/people/si-xie-san-qiu/activities" title="Zhihu &rarr; https://www.zhihu.com/people/si-xie-san-qiu/activities" rel="noopener" target="_blank"><i class="fa fa-fw fa-globe"></i>Zhihu</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://space.bilibili.com/38307214" title="Bilibili &rarr; https://space.bilibili.com/38307214" rel="noopener" target="_blank"><i class="fa fa-fw fa-tv"></i>Bilibili</a>
-      </span>
-    
-      <span class="links-of-author-item">
-      
-      
-        
-      
-      
-        
-      
-        <a href="https://steamcommunity.com/id/fankcoder" title="Steam &rarr; https://steamcommunity.com/id/fankcoder" rel="noopener" target="_blank"><i class="fa fa-fw fa-steam"></i>Steam</a>
       </span>
     
   </div>
